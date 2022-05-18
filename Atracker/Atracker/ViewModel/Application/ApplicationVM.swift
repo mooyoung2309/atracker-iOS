@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ApplicationViewModel: ViewModel {
+class ApplicationVM: ViewModel {
     var disposeBag = DisposeBag()
     
     var input = Input()
@@ -28,7 +28,7 @@ class ApplicationViewModel: ViewModel {
     }
 }
 
-extension ApplicationViewModel {
+extension ApplicationVM {
     func setBind() {
         
     }

@@ -10,7 +10,7 @@ import Then
 
 class ApplicationProgressTableViewCell: UITableViewCell {
     static let identifier = "ProgressApplicationTableViewCell"
-    var applicationProgress: ApplicationProgress!
+    var applicationProgress: Application!
     
     var companyLabel = UILabel().then {
         $0.textColor = Const.Color.black
@@ -34,7 +34,7 @@ class ApplicationProgressTableViewCell: UITableViewCell {
         setView()
     }
     
-    func update(applicationProgress: ApplicationProgress) {
+    func update(applicationProgress: Application) {
         self.applicationProgress = applicationProgress
         companyLabel.text = self.applicationProgress.company
         positionLabel.text = self.applicationProgress.position
