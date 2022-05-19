@@ -28,9 +28,11 @@ class ApplicationVC: UIViewController {
         $0.textColor = Const.Color.black
         $0.numberOfLines = 0
     }
-    var summaryView = SummaryApplicationView().then {
-        $0.backgroundColor = Const.Color.mint
+    var summaryView = UIView().then {
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = Const.Color.red.cgColor
     }
+    
     var progressTableView = UITableView().then {
         $0.register(ApplicationProgressTableViewCell.self, forCellReuseIdentifier: ApplicationProgressTableViewCell.identifier)
         $0.showsVerticalScrollIndicator = false
@@ -39,8 +41,10 @@ class ApplicationVC: UIViewController {
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.rowHeight = 80
     }
-    var progressTableViewAdaptor: ApplicationProgressTableViewAdaptor!
     var progressTableViewHeightConstraint = NSLayoutConstraint()
+    
+    var progressTableViewAdaptor: ApplicationProgressTableViewAdaptor!
+    var pieChartView: PieChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,18 +72,22 @@ extension ApplicationVC {
         progressTableView.dataSource = progressTableViewAdaptor
         progressTableView.layer.masksToBounds = true
         progressTableView.layer.borderWidth = 0.33
-        progressTableView.layer.borderColor = Const.Color.darkGray.cgColor
+        
+        pieChartView = PieChartView()
+        pieChartView.backgroundColor = Const.Color.white
         
         view.addSubview(scrollView)
         scrollView.addSubview(positionLabel)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(summaryView)
+        scrollView.addSubview(pieChartView)
         scrollView.addSubview(progressTableView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         positionLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         summaryView.translatesAutoresizingMaskIntoConstraints = false
+        pieChartView.translatesAutoresizingMaskIntoConstraints = false
         progressTableView.translatesAutoresizingMaskIntoConstraints = false
         
         progressTableViewHeightConstraint = progressTableView.heightAnchor.constraint(equalToConstant: 0)
@@ -102,8 +110,14 @@ extension ApplicationVC {
             summaryView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             summaryView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             summaryView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            summaryView.heightAnchor.constraint(equalToConstant: 100),
             
-            progressTableView.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 20),
+            pieChartView.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 10),
+            pieChartView.heightAnchor.constraint(equalToConstant: 90),
+            pieChartView.widthAnchor.constraint(equalToConstant: 90),
+            pieChartView.centerYAnchor.constraint(equalTo: summaryView.centerYAnchor),
+            
+            progressTableView.topAnchor.constraint(equalTo: pieChartView.bottomAnchor, constant: 20),
             progressTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             progressTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             progressTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),

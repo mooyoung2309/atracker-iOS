@@ -14,6 +14,7 @@
 		7005BD1F28355FA1008E380A /* ApplicationReviewEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD1E28355FA1008E380A /* ApplicationReviewEditVC.swift */; };
 		7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */; };
 		7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */; };
+		70884143283623890024135D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70884142283623890024135D /* PieChartView.swift */; };
 		70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */; };
 		70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */; };
 		70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6822834BFCB00E6B95B /* ViewController.swift */; };
@@ -69,6 +70,7 @@
 		7005BD1E28355FA1008E380A /* ApplicationReviewEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewEditVC.swift; sourceTree = "<group>"; };
 		7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewAdaptor.swift; sourceTree = "<group>"; };
+		70884142283623890024135D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		70A2F67B2834BFCB00E6B95B /* Atracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,22 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		70884140283623780024135D /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				708841412836237E0024135D /* Chart */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		708841412836237E0024135D /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				70884142283623890024135D /* PieChartView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		70A2F6722834BFCB00E6B95B = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +259,7 @@
 		70A2F6B22834C51B00E6B95B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				70884140283623780024135D /* Reusable */,
 				70A2F6CD2834CEF100E6B95B /* Application */,
 				7088413A2835F5ED0024135D /* Calendar */,
 			);
@@ -630,6 +649,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70884143283623890024135D /* PieChartView.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
 				70A2F6D92834D35D00E6B95B /* ApplicationVM.swift in Sources */,
 				7005BD17283549B3008E380A /* ApplicationReviewVC.swift in Sources */,
