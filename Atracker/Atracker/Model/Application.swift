@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ApplicationProgress {
-    var company = ""
-    var position = ""
+struct Application {
+    var company: String = ""
+    var position: String = ""
 }

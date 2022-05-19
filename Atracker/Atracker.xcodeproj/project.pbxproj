@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7005BD17283549B3008E380A /* ApplicationReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD16283549B3008E380A /* ApplicationReviewVC.swift */; };
+		7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */; };
+		7005BD1B283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD1A283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift */; };
+		7005BD1D283557A7008E380A /* ApplicationProgressDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD1C283557A7008E380A /* ApplicationProgressDetailViewModel.swift */; };
+		7005BD1F28355FA1008E380A /* ApplicationReviewEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD1E28355FA1008E380A /* ApplicationReviewEditVC.swift */; };
+		7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */; };
+		7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */; };
 		70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */; };
 		70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */; };
 		70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6822834BFCB00E6B95B /* ViewController.swift */; };
@@ -17,15 +24,15 @@
 		70A2F6A22834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */; };
 		70A2F6AF2834BFF100E6B95B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6AE2834BFF100E6B95B /* MainViewController.swift */; };
 		70A2F6BF2834C5CC00E6B95B /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6BE2834C5CC00E6B95B /* Const.swift */; };
-		70A2F6C52834C75700E6B95B /* ApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C42834C75700E6B95B /* ApplicationViewController.swift */; };
-		70A2F6C72834C7C300E6B95B /* ScheduleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C62834C7C300E6B95B /* ScheduleCalendarViewController.swift */; };
+		70A2F6C52834C75700E6B95B /* ApplicationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C42834C75700E6B95B /* ApplicationVC.swift */; };
+		70A2F6C72834C7C300E6B95B /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C62834C7C300E6B95B /* CalendarVC.swift */; };
 		70A2F6CA2834C8C500E6B95B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C92834C8C500E6B95B /* LoginViewController.swift */; };
 		70A2F6CC2834C8E900E6B95B /* BlogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6CB2834C8E900E6B95B /* BlogViewController.swift */; };
 		70A2F6CF2834CF1900E6B95B /* SummaryApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6CE2834CF1900E6B95B /* SummaryApplicationView.swift */; };
 		70A2F6D22834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D12834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift */; };
 		70A2F6D42834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D32834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift */; };
-		70A2F6D62834D23200E6B95B /* ApplicationProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D52834D23200E6B95B /* ApplicationProgress.swift */; };
-		70A2F6D92834D35D00E6B95B /* ApplicationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D82834D35D00E6B95B /* ApplicationViewModel.swift */; };
+		70A2F6D62834D23200E6B95B /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D52834D23200E6B95B /* Application.swift */; };
+		70A2F6D92834D35D00E6B95B /* ApplicationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D82834D35D00E6B95B /* ApplicationVM.swift */; };
 		70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DA2834D37800E6B95B /* ViewModel.swift */; };
 		70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DC2834D6B100E6B95B /* Log.swift */; };
 		D86DE302DE205C50D6289701 /* Pods_Atracker_AtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3456FE524DC5474A933E50B /* Pods_Atracker_AtrackerUITests.framework */; };
@@ -55,6 +62,13 @@
 		15045AB85262770F23C13DEA /* Pods-Atracker-AtrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atracker-AtrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Atracker-AtrackerUITests/Pods-Atracker-AtrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		34E8D58785D85D33DD385143 /* Pods_Atracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D90E19A63F1D70C4B22491 /* Pods_AtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7005BD16283549B3008E380A /* ApplicationReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewVC.swift; sourceTree = "<group>"; };
+		7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewTableViewCell.swift; sourceTree = "<group>"; };
+		7005BD1A283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewTableViewAdaptor.swift; sourceTree = "<group>"; };
+		7005BD1C283557A7008E380A /* ApplicationProgressDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationProgressDetailViewModel.swift; sourceTree = "<group>"; };
+		7005BD1E28355FA1008E380A /* ApplicationReviewEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewEditVC.swift; sourceTree = "<group>"; };
+		7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewAdaptor.swift; sourceTree = "<group>"; };
 		70A2F67B2834BFCB00E6B95B /* Atracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,15 +83,15 @@
 		70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		70A2F6AE2834BFF100E6B95B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		70A2F6BE2834C5CC00E6B95B /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
-		70A2F6C42834C75700E6B95B /* ApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewController.swift; sourceTree = "<group>"; };
-		70A2F6C62834C7C300E6B95B /* ScheduleCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCalendarViewController.swift; sourceTree = "<group>"; };
+		70A2F6C42834C75700E6B95B /* ApplicationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVC.swift; sourceTree = "<group>"; };
+		70A2F6C62834C7C300E6B95B /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		70A2F6C92834C8C500E6B95B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		70A2F6CB2834C8E900E6B95B /* BlogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogViewController.swift; sourceTree = "<group>"; };
 		70A2F6CE2834CF1900E6B95B /* SummaryApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryApplicationView.swift; sourceTree = "<group>"; };
 		70A2F6D12834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationProgressTableViewCell.swift; sourceTree = "<group>"; };
 		70A2F6D32834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationProgressTableViewAdaptor.swift; sourceTree = "<group>"; };
-		70A2F6D52834D23200E6B95B /* ApplicationProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationProgress.swift; sourceTree = "<group>"; };
-		70A2F6D82834D35D00E6B95B /* ApplicationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewModel.swift; sourceTree = "<group>"; };
+		70A2F6D52834D23200E6B95B /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		70A2F6D82834D35D00E6B95B /* ApplicationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationVM.swift; sourceTree = "<group>"; };
 		70A2F6DA2834D37800E6B95B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		70A2F6DC2834D6B100E6B95B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		958AD23A31274AE479F1A34C /* Pods-AtrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AtrackerTests.release.xcconfig"; path = "Target Support Files/Pods-AtrackerTests/Pods-AtrackerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +137,23 @@
 				39D90E19A63F1D70C4B22491 /* Pods_AtrackerTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7088413A2835F5ED0024135D /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				7088413D2835F68F0024135D /* Cell */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		7088413D2835F68F0024135D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */,
+				7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		70A2F6722834BFCB00E6B95B = {
@@ -193,7 +224,7 @@
 				70A2F6C02834C62D00E6B95B /* Login */,
 				70A2F6C82834C89E00E6B95B /* Blog */,
 				70A2F6C12834C64F00E6B95B /* Application */,
-				70A2F6C32834C66100E6B95B /* ScheduleCalendar */,
+				70A2F6C32834C66100E6B95B /* Calendar */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -211,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				70A2F6CD2834CEF100E6B95B /* Application */,
+				7088413A2835F5ED0024135D /* Calendar */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,7 +250,7 @@
 		70A2F6B32834C51F00E6B95B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				70A2F6D52834D23200E6B95B /* ApplicationProgress.swift */,
+				70A2F6D52834D23200E6B95B /* Application.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,17 +327,19 @@
 		70A2F6C12834C64F00E6B95B /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				70A2F6C42834C75700E6B95B /* ApplicationViewController.swift */,
+				70A2F6C42834C75700E6B95B /* ApplicationVC.swift */,
+				7005BD16283549B3008E380A /* ApplicationReviewVC.swift */,
+				7005BD1E28355FA1008E380A /* ApplicationReviewEditVC.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
 		};
-		70A2F6C32834C66100E6B95B /* ScheduleCalendar */ = {
+		70A2F6C32834C66100E6B95B /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				70A2F6C62834C7C300E6B95B /* ScheduleCalendarViewController.swift */,
+				70A2F6C62834C7C300E6B95B /* CalendarVC.swift */,
 			);
-			path = ScheduleCalendar;
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		70A2F6C82834C89E00E6B95B /* Blog */ = {
@@ -330,6 +364,8 @@
 			children = (
 				70A2F6D12834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift */,
 				70A2F6D32834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift */,
+				7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */,
+				7005BD1A283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -337,7 +373,8 @@
 		70A2F6D72834D2A000E6B95B /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				70A2F6D82834D35D00E6B95B /* ApplicationViewModel.swift */,
+				70A2F6D82834D35D00E6B95B /* ApplicationVM.swift */,
+				7005BD1C283557A7008E380A /* ApplicationProgressDetailViewModel.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -594,19 +631,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
-				70A2F6D92834D35D00E6B95B /* ApplicationViewModel.swift in Sources */,
-				70A2F6C72834C7C300E6B95B /* ScheduleCalendarViewController.swift in Sources */,
+				70A2F6D92834D35D00E6B95B /* ApplicationVM.swift in Sources */,
+				7005BD17283549B3008E380A /* ApplicationReviewVC.swift in Sources */,
+				70A2F6C72834C7C300E6B95B /* CalendarVC.swift in Sources */,
 				70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */,
 				70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */,
-				70A2F6D62834D23200E6B95B /* ApplicationProgress.swift in Sources */,
+				70A2F6D62834D23200E6B95B /* Application.swift in Sources */,
+				7005BD1B283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift in Sources */,
+				7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */,
 				70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */,
 				70A2F6CA2834C8C500E6B95B /* LoginViewController.swift in Sources */,
 				70A2F6CC2834C8E900E6B95B /* BlogViewController.swift in Sources */,
+				7005BD1D283557A7008E380A /* ApplicationProgressDetailViewModel.swift in Sources */,
 				70A2F6CF2834CF1900E6B95B /* SummaryApplicationView.swift in Sources */,
 				70A2F6D42834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift in Sources */,
+				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
 				70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */,
+				7005BD1F28355FA1008E380A /* ApplicationReviewEditVC.swift in Sources */,
 				70A2F6D22834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift in Sources */,
-				70A2F6C52834C75700E6B95B /* ApplicationViewController.swift in Sources */,
+				7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */,
+				70A2F6C52834C75700E6B95B /* ApplicationVC.swift in Sources */,
 				70A2F6AF2834BFF100E6B95B /* MainViewController.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* Const.swift in Sources */,
 			);

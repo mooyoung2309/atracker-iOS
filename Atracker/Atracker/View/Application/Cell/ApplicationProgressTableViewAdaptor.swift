@@ -8,14 +8,20 @@
 import UIKit
 
 class ApplicationProgressTableViewAdaptor: NSObject, UITableViewDelegate, UITableViewDataSource {
-    var applicationProgresses: [ApplicationProgress] = []
+    weak var superVC: UIViewController!
+    var applications: [Application] = []
     
-    func update(applicationProgress: [ApplicationProgress]) {
-        self.applicationProgresses = applicationProgress
+    init(_ superVC: UIViewController) {
+        super.init()
+        self.superVC = superVC
+    }
+    
+    func update(applicationProgress: [Application]) {
+        self.applications = applicationProgress
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return applicationProgresses.count
+        return applications.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -25,12 +31,12 @@ class ApplicationProgressTableViewAdaptor: NSObject, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationProgressTableViewCell.identifier, for: indexPath) as! ApplicationProgressTableViewCell
         
-        cell.update(applicationProgress: applicationProgresses[indexPath.section])
+        cell.update(applicationProgress: applications[indexPath.section])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Log(indexPath)
+        superVC.navigationController?.pushViewController(ApplicationReviewVC(application: applications[indexPath.section]), animated: true)
     }
 }

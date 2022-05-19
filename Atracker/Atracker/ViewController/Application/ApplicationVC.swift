@@ -10,8 +10,8 @@ import Then
 import RxSwift
 import RxCocoa
 
-class ApplicationViewController: UIViewController {
-    let viewModel = ApplicationViewModel()
+class ApplicationVC: UIViewController {
+    let viewModel = ApplicationVM()
     var disposeBag = DisposeBag()
     
     var scrollView = UIScrollView().then {
@@ -39,7 +39,7 @@ class ApplicationViewController: UIViewController {
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.rowHeight = 80
     }
-    var progressTableViewAdaptor = ApplicationProgressTableViewAdaptor()
+    var progressTableViewAdaptor: ApplicationProgressTableViewAdaptor!
     var progressTableViewHeightConstraint = NSLayoutConstraint()
     
     override func viewDidLoad() {
@@ -56,13 +56,14 @@ class ApplicationViewController: UIViewController {
     }
 }
 
-extension ApplicationViewController {
-    func updateProgressTableView(applicationProgresses: [ApplicationProgress]) {
+extension ApplicationVC {
+    func updateProgressTableView(applicationProgresses: [Application]) {
         progressTableViewAdaptor.update(applicationProgress: applicationProgresses)
         progressTableView.reloadData()
     }
     
     func setView() {
+        progressTableViewAdaptor = ApplicationProgressTableViewAdaptor(self)
         progressTableView.delegate = progressTableViewAdaptor
         progressTableView.dataSource = progressTableViewAdaptor
         progressTableView.layer.masksToBounds = true

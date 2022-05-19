@@ -37,17 +37,31 @@ struct Const {
 extension Const {
     struct Test {
         static let ApplicationProgressTests = [
-            ApplicationProgress(company: "카카오프렌즈", position: "UI/UX디자이너"),
-            ApplicationProgress(company: "네이버파이낸셜", position: "웹 디자이너"),
-            ApplicationProgress(company: "오늘의 집", position: "웹 디자이너"),
-            ApplicationProgress(company: "우아한 형제들", position: "SNS 컨텐츠 디자이너"),
-            ApplicationProgress(company: "쿠팡 플레이", position: "UI/UX디자이너"),
-            ApplicationProgress(company: "어트래커1", position: "UI 디자이너"),
-            ApplicationProgress(company: "어트래커2", position: "UI 디자이너"),
-            ApplicationProgress(company: "어트래커3", position: "UI 디자이너"),
-            ApplicationProgress(company: "어트래커4", position: "UI 디자이너"),
-            ApplicationProgress(company: "어트래커5", position: "UI 디자이너"),
-            ApplicationProgress(company: "어트래커6", position: "UI 디자이너"),
+            Application(company: "카카오프렌즈", position: "UI/UX디자이너"),
+            Application(company: "네이버파이낸셜", position: "웹 디자이너"),
+            Application(company: "오늘의 집", position: "웹 디자이너"),
+            Application(company: "우아한 형제들", position: "SNS 컨텐츠 디자이너"),
+            Application(company: "쿠팡 플레이", position: "UI/UX디자이너"),
+            Application(company: "어트래커1", position: "UI 디자이너"),
+            Application(company: "어트래커2", position: "UI 디자이너"),
+            Application(company: "어트래커3", position: "UI 디자이너"),
+            Application(company: "어트래커4", position: "UI 디자이너"),
+            Application(company: "어트래커5", position: "UI 디자이너"),
+            Application(company: "어트래커6", position: "UI 디자이너"),
+        ]
+        
+        static let applicationTypeMockUps: [String] = [
+            "종합 의견",
+            "서류",
+            "1차 면접",
+            "2차 면접",
+        ]
+        
+        static let applicationContextMockUps: [[String]] = [
+            ["다양한 이유가 있겠지만 아마 세일즈 준비를 못한게 컸을거라고 생각한다. '인성/직무 면접, 인사이트 면접' 이라 되어있어서 일반 PT랑 인성 면접이지 않을까 생각했는데 아니였다. 은행을 가본지 10년은 됐니 은행원이 고객서비스를 어떻게 하는지 모르니 세일즈가 진행이 안됐다."],
+            ["우리은행이 기업금융에 강점을 가진 은행이라 지원했다고 했다. 신용분석사와 투자자산운용사 취득한 내용도 자소서에 넣었고 기업분석대회, 경영시뮬레이션에 참여한 경험도 녹였다. 또한, 부동산에서 중개 아르바이트했던 것을 고객 서비스 경험으로 어필했다."],
+            ["Q. 금리가 오르게 되면 은행에 미치는 장단점을 설명해라", "A. PT는 의외였던 것이 종이에다가 유의미한 자료들을 적어서 가지고 들어간후 면접관에게 해당 종이를 어디다 붙여놓고 설명하는 것이 아니라 그냥 들어가자마자 PT내용을 나만 보면서 설명하는것이였다", "Q. 금리가 오르게 되면 은행에 미치는 장단점을 설명해라", "A. PT는 의외였던 것이 종이에다가 유의미한 자료들을 적어서 가지고 들어간후 면접관에게 해당 종이를 어디다 붙여놓고 설명하는 것이 아니라 그냥 들어가자마자 PT내용을 나만 보면서 설명하는것이였다"],
+            ["세일즈 준비를 못한게 컸을거라고 생각한다. '인성/직무 면접, 인사이트 면접' 이라 되어있어서 일반 인성 면접이지 않을까 생각했는데 아니였다. 은행을 가본지 10년은 됐니 고객서비스를 어떻게 하는지 모르니 세일즈가 진행이 안됐다."],
         ]
     }
 }
