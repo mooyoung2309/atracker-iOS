@@ -20,9 +20,7 @@ class ApplicationProgressTableViewCell: UITableViewCell {
         $0.textColor = Const.Color.darkGray
         $0.font = .systemFont(ofSize: 13, weight: .regular)
     }
-    var progressBarView = UIView().then {
-        $0.backgroundColor = Const.Color.orange
-    }
+    var progressBarView = HorizontalBarChartView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
