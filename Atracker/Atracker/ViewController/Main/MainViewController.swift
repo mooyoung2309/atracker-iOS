@@ -22,7 +22,7 @@ class MainViewController: UITabBarController {
         let applicationStatusTap = UINavigationController(rootViewController: ApplicationVC())
         let applicationStatusTapBarItem = UITabBarItem(title: "지원 현황", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))
         
-        let scheduleCalendarTap = UINavigationController(rootViewController: ScheduleCalendarViewController())
+        let scheduleCalendarTap = UINavigationController(rootViewController: CalendarVC())
         let scheduleCalendarTapBarItem = UITabBarItem(title: "일정", image: UIImage(systemName: "calendar"), selectedImage: UIImage(named: "calendar"))
         
         
@@ -32,6 +32,6 @@ class MainViewController: UITabBarController {
 
         
         self.viewControllers = [blogTap, applicationStatusTap, scheduleCalendarTap]
-        self.selectedIndex = 1
+        self.selectedIndex = 2
     }
 }
