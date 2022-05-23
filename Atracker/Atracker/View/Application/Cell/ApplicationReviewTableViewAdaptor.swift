@@ -34,6 +34,7 @@ class ApplicationReviewTableViewAdaptor: NSObject, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationReviewTableViewCell.identifier, for: indexPath) as! ApplicationReviewTableViewCell
         
         cell.update(type: typeMockUps[indexPath.section], contexts: contextMockUps[indexPath.section])
+        cell.selectionStyle = .none
         
         return cell
     }

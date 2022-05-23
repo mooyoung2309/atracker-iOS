@@ -9,7 +9,9 @@ target 'Atracker' do
   pod 'Then'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxGesture'
   pod 'Alamofire'
+  pod 'SnapKit'
 
   target 'AtrackerTests' do
     inherit! :search_paths
