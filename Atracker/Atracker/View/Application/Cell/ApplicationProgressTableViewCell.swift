@@ -13,11 +13,11 @@ class ApplicationProgressTableViewCell: UITableViewCell {
     var applicationProgress: Application!
     
     var companyLabel = UILabel().then {
-        $0.textColor = Const.Color.black
+        $0.textColor = .white
         $0.font = .systemFont(ofSize: 15, weight: .bold)
     }
     var positionLabel = UILabel().then {
-        $0.textColor = Const.Color.darkGray
+        $0.textColor = .contentGray
         $0.font = .systemFont(ofSize: 13, weight: .regular)
     }
     var progressBarView = HorizontalBarChartView()
@@ -45,6 +45,8 @@ extension ApplicationProgressTableViewCell {
 //        layer.borderColor = Const.Color.darkGray.cgColor
 //        layer.borderWidth = 1
         
+        backgroundColor = .mainViewColor
+        
         addSubview(companyLabel)
         addSubview(positionLabel)
         addSubview(progressBarView)
@@ -60,10 +62,10 @@ extension ApplicationProgressTableViewCell {
             positionLabel.topAnchor.constraint(equalTo: companyLabel.topAnchor),
             positionLabel.leadingAnchor.constraint(equalTo: companyLabel.trailingAnchor, constant: 8),
             
-            progressBarView.topAnchor.constraint(equalTo: companyLabel.bottomAnchor, constant: 10),
+            progressBarView.topAnchor.constraint(equalTo: companyLabel.bottomAnchor, constant: 11),
             progressBarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             progressBarView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            progressBarView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            progressBarView.heightAnchor.constraint(equalToConstant: 10),
         ])
     }
 }

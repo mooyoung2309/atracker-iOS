@@ -11,6 +11,7 @@ class PieChartView: UIView {
     let colors = [Const.Color.pink, Const.Color.mint, Const.Color.purple, Const.Color.indigo]
     
     override func draw(_ rect: CGRect) {
+        backgroundColor = .mainViewColor
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let values: [CGFloat] = [10.0, 20.0, 70.0]
         let total = values.reduce(0, +)
@@ -32,7 +33,7 @@ class PieChartView: UIView {
         
         let path = UIBezierPath()
         path.addArc(withCenter: center, radius: 30, startAngle: 0, endAngle: .pi * 180, clockwise: true)
-        Const.Color.white.set()
+        UIColor.mainViewColor.set()
         path.fill()
     }
 }

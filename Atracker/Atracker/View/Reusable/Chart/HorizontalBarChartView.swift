@@ -9,10 +9,11 @@ import UIKit
 import Then
 
 class HorizontalBarChartView: UIView {
-    let colors: [UIColor] = [Const.Color.orange, Const.Color.purple, Const.Color.mint, Const.Color.indigo, Const.Color.green, Const.Color.darkGray]
+    let colors: [UIColor] = [.successProgressColor1, .successProgressColor2, .successProgressColor3, .successProgressColor4, .successProgressColor5]
     
     var barStackView = UIStackView().then {
         $0.distribution = .fillEqually
+        $0.backgroundColor = UIColor(hex: 0x353745)
     }
     var barViews: [UIView] = []
     
@@ -32,18 +33,19 @@ class HorizontalBarChartView: UIView {
 
 extension HorizontalBarChartView {
     func setBarStackView() {
-        for i in 0..<5 {
+        for i in 0..<4 {
             let barView = UIView()
             barView.backgroundColor = colors[i]
             barViews.append(barView)
             barStackView.addArrangedSubview(barView)
         }
-        
     }
     func setView() {
         addSubview(barStackView)
         
         barStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        barStackView.layer.cornerRadius = frame.width / 2
         
         NSLayoutConstraint.activate([
             barStackView.topAnchor.constraint(equalTo: topAnchor),

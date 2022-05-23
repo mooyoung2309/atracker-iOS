@@ -19,25 +19,32 @@ class ApplicationVC: UIViewController {
     }
     var positionLabel = UILabel().then {
         $0.text = "신입 UX/UI 디자이너"
-        $0.font = .systemFont(ofSize: 15, weight: .bold)
+        $0.font = .systemFont(ofSize: 17, weight: .bold)
         $0.textColor = Const.Color.darkGray
     }
     var titleLabel = UILabel().then {
         $0.text = "제시카님의\n지원현황입니다!"
-        $0.font = .systemFont(ofSize: 30, weight: .bold)
-        $0.textColor = Const.Color.black
-        $0.numberOfLines = 0
+        $0.font = .mainTitle
+        $0.textColor = .white
+        $0.numberOfLines = 2
     }
     var summaryView = SummaryApplicationView().then {
-        $0.backgroundColor = Const.Color.white
+        $0.backgroundColor = .mainViewColor
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 12
     }
     var progressTableView = UITableView().then {
         $0.register(ApplicationProgressTableViewCell.self, forCellReuseIdentifier: ApplicationProgressTableViewCell.identifier)
         $0.showsVerticalScrollIndicator = false
-        $0.backgroundColor = .white
+        $0.backgroundColor = .mainViewColor
         $0.separatorStyle = .singleLine
         $0.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        $0.separatorColor = UIColor(hex: 0x292C3F)
         $0.rowHeight = 80
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 12
+        $0.layer.borderWidth = 0
+        $0.layer.borderColor = UIColor.mainViewColor.cgColor
     }
     var progressTableViewHeightConstraint = NSLayoutConstraint()
     
@@ -46,7 +53,7 @@ class ApplicationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Const.Color.white
+        view.backgroundColor = .mainBackGroundColor
         navigationController?.setNavigationBarHidden(true, animated: false)
         setView()
         setBind()

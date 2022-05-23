@@ -9,19 +9,18 @@ import UIKit
 import Then
 
 class SummaryApplicationView: UIView {
-    var pieChartView = PieChartView().then {
-        $0.backgroundColor = Const.Color.white
+    let pieChartView = PieChartView().then {
+        $0.backgroundColor = .mainViewColor
     }
-    var firstTitleLabel = UILabel().then {
-        $0.text = "1차 면접"
-        $0.font = .systemFont(ofSize: 12, weight: .semibold)
-        $0.textColor = Const.Color.black
+    let boxStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.spacing = 5
     }
-    var firstValueLabel = UILabel().then {
-        $0.text = "89.0%"
-        $0.font = .systemFont(ofSize: 30, weight: .bold)
-        $0.textColor = Const.Color.black
-    }
+    let firstBox = SummaryBoxView(title: "서류", content: "82.5%")
+    let secondBox = SummaryBoxView(title: "1차 면접", content: "36.2%")
+    let thirdBox = SummaryBoxView(title: "2차 면접", content: "19%")
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setView()
@@ -35,13 +34,17 @@ class SummaryApplicationView: UIView {
 
 extension SummaryApplicationView {
     func setView() {
+        
+        
         addSubview(pieChartView)
-        addSubview(firstTitleLabel)
-        addSubview(firstValueLabel)
+        addSubview(boxStackView)
         
         pieChartView.translatesAutoresizingMaskIntoConstraints = false
-        firstTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        firstValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        boxStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        boxStackView.addArrangedSubview(firstBox)
+        boxStackView.addArrangedSubview(secondBox)
+        boxStackView.addArrangedSubview(thirdBox)
         
         NSLayoutConstraint.activate([
             pieChartView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
@@ -49,12 +52,10 @@ extension SummaryApplicationView {
             pieChartView.heightAnchor.constraint(equalToConstant: 100),
             pieChartView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-//            firstTitleLabel.topAnchor.constraint(equalTo: pieChartView.topAnchor, constant: 30),
-            firstTitleLabel.leadingAnchor.constraint(equalTo: pieChartView.trailingAnchor),
-            firstTitleLabel.bottomAnchor.constraint(equalTo: firstValueLabel.topAnchor),
-            
-            firstValueLabel.leadingAnchor.constraint(equalTo: firstTitleLabel.leadingAnchor),
-            firstValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            boxStackView.topAnchor.constraint(equalTo: topAnchor, constant: 28),
+            boxStackView.leadingAnchor.constraint(equalTo: pieChartView.trailingAnchor, constant: 0),
+            boxStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            boxStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
         ])
     }
 }

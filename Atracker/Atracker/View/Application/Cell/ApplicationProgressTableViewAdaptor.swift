@@ -32,7 +32,7 @@ class ApplicationProgressTableViewAdaptor: NSObject, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationProgressTableViewCell.identifier, for: indexPath) as! ApplicationProgressTableViewCell
         
         cell.update(applicationProgress: applications[indexPath.section])
-        
+        cell.selectionStyle = .none
         return cell
     }
     
