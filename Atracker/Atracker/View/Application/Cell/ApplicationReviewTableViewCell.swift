@@ -12,14 +12,19 @@ class ApplicationReviewTableViewCell: UITableViewCell {
     var type: String!
     var contexts: [String]!
     
+    var circleView = UIView().then {
+        $0.backgroundColor = .orange
+        $0.layer.cornerRadius = 4.5
+    }
     var typeLabel = UILabel().then {
-        $0.textColor = Const.Color.black
+        $0.textColor = .white
         $0.font = .systemFont(ofSize: 15, weight: .bold)
     }
     var contextLabel = UILabel().then {
-        $0.textColor = Const.Color.darkGray
+        $0.textColor = .white
         $0.font = .systemFont(ofSize: 13, weight: .regular)
-        $0.numberOfLines = 10
+        $0.lineBreakMode = .byWordWrapping
+        $0.numberOfLines = 0
     }
     
     required init?(coder: NSCoder) {
@@ -42,17 +47,26 @@ class ApplicationReviewTableViewCell: UITableViewCell {
 
 extension ApplicationReviewTableViewCell {
     func setView() {
+        backgroundColor = .mainViewColor
+        
+        addSubview(circleView)
         addSubview(typeLabel)
         addSubview(contextLabel)
         
+        circleView.translatesAutoresizingMaskIntoConstraints = false
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         contextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            typeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            typeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            circleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            circleView.centerYAnchor.constraint(equalTo: typeLabel.centerYAnchor),
+            circleView.widthAnchor.constraint(equalToConstant: 9),
+            circleView.heightAnchor.constraint(equalToConstant: 9),
             
-            contextLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 8),
+            typeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            typeLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 5),
+            
+            contextLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 15),
             contextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             contextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             contextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),

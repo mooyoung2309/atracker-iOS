@@ -55,8 +55,15 @@ class ApplicationVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .mainBackGroundColor
         navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.isNavigationBarHidden = true
+        
         setView()
         setBind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        tabBarController?.showTabBar()
     }
     
     override func viewWillLayoutSubviews() {
