@@ -23,10 +23,15 @@
 		7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D4283B59BF0048C068 /* UIStackView+Ext.swift */; };
 		7046E3D7283B59F90048C068 /* CustomItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D6283B59F90048C068 /* CustomItemView.swift */; };
 		7046E3DA283B62F00048C068 /* UITabBarController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D9283B62F00048C068 /* UITabBarController+Ext.swift */; };
+		707CD24E283C8C03000E7EE7 /* ReviewTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ReviewTypeCVC.swift */; };
+		707CD250283C9B17000E7EE7 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* RoundButton.swift */; };
+		707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD253283CAAA5000E7EE7 /* TextButton.swift */; };
+		707CD256283CADB2000E7EE7 /* ReviewContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD255283CADB2000E7EE7 /* ReviewContentTVC.swift */; };
 		7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */; };
 		7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */; };
 		70884143283623890024135D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70884142283623890024135D /* PieChartView.swift */; };
 		708841452836350E0024135D /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708841442836350E0024135D /* HorizontalBarChartView.swift */; };
+		70970021283D27A6000F4B89 /* BoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970020283D27A6000F4B89 /* BoxButton.swift */; };
 		70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */; };
 		70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */; };
 		70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6822834BFCB00E6B95B /* ViewController.swift */; };
@@ -91,10 +96,15 @@
 		7046E3D4283B59BF0048C068 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		7046E3D6283B59F90048C068 /* CustomItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomItemView.swift; sourceTree = "<group>"; };
 		7046E3D9283B62F00048C068 /* UITabBarController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Ext.swift"; sourceTree = "<group>"; };
+		707CD24D283C8C03000E7EE7 /* ReviewTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTypeCVC.swift; sourceTree = "<group>"; };
+		707CD24F283C9B17000E7EE7 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		707CD253283CAAA5000E7EE7 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		707CD255283CADB2000E7EE7 /* ReviewContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewContentTVC.swift; sourceTree = "<group>"; };
 		7088413B2835F6150024135D /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		7088413E2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewAdaptor.swift; sourceTree = "<group>"; };
 		70884142283623890024135D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		708841442836350E0024135D /* HorizontalBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalBarChartView.swift; sourceTree = "<group>"; };
+		70970020283D27A6000F4B89 /* BoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxButton.swift; sourceTree = "<group>"; };
 		70A2F67B2834BFCB00E6B95B /* Atracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +213,9 @@
 			isa = PBXGroup;
 			children = (
 				708841412836237E0024135D /* Chart */,
+				707CD24F283C9B17000E7EE7 /* RoundButton.swift */,
+				707CD253283CAAA5000E7EE7 /* TextButton.swift */,
+				70970020283D27A6000F4B89 /* BoxButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -437,6 +450,8 @@
 				70A2F6D32834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift */,
 				7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */,
 				7005BD1A283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift */,
+				707CD24D283C8C03000E7EE7 /* ReviewTypeCVC.swift */,
+				707CD255283CADB2000E7EE7 /* ReviewContentTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -704,7 +719,9 @@
 				7046E3CD283B57CA0048C068 /* CustomTabBarViewController.swift in Sources */,
 				70884143283623890024135D /* PieChartView.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
+				707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */,
 				70A2F6D92834D35D00E6B95B /* ApplicationVM.swift in Sources */,
+				707CD250283C9B17000E7EE7 /* RoundButton.swift in Sources */,
 				7005BD17283549B3008E380A /* ApplicationReviewVC.swift in Sources */,
 				70A2F6C72834C7C300E6B95B /* CalendarVC.swift in Sources */,
 				7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */,
@@ -718,6 +735,7 @@
 				7005BD1B283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */,
 				70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */,
+				707CD256283CADB2000E7EE7 /* ReviewContentTVC.swift in Sources */,
 				70A2F6CA2834C8C500E6B95B /* LoginViewController.swift in Sources */,
 				70A2F6CC2834C8E900E6B95B /* BlogViewController.swift in Sources */,
 				7005BD1D283557A7008E380A /* ApplicationProgressDetailViewModel.swift in Sources */,
@@ -728,8 +746,10 @@
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
 				70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */,
+				707CD24E283C8C03000E7EE7 /* ReviewTypeCVC.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
 				7005BD1F28355FA1008E380A /* ApplicationReviewEditVC.swift in Sources */,
+				70970021283D27A6000F4B89 /* BoxButton.swift in Sources */,
 				70A2F6D22834D0FD00E6B95B /* ApplicationProgressTableViewCell.swift in Sources */,
 				7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */,
 				70A2F6C52834C75700E6B95B /* ApplicationVC.swift in Sources */,

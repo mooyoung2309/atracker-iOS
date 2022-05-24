@@ -55,7 +55,7 @@ extension SummaryBoxView {
             titleLabel.leadingAnchor.constraint(equalTo: circleView.trailingAnchor, constant: 6),
             titleLabel.bottomAnchor.constraint(equalTo: contentLabel.topAnchor, constant: -10),
             
-            contentLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
