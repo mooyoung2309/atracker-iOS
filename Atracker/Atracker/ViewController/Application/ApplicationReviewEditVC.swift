@@ -7,10 +7,13 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 import Then
 
 class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
-    let mockupContents = ["1", "2", "3", "4", "5", "6"]
+    var disposeBag = DisposeBag()
+    var mockupContents = ["1", "2", "3", "4", "5", "6"]
     let mockupTypes = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성"]
     
     let scrollView = UIScrollView().then {
@@ -58,6 +61,7 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
         setupHierarchy()
         setupLayout()
         setupProperty()
+        setBind()
     }
     
     override func viewWillLayoutSubviews() {
@@ -127,6 +131,24 @@ extension ApplicationReviewEditVC {
         contentTypeButtonStackView.addArrangedSubviews([awiatButton, failButton, passButton])
         plusButtonStackView.addArrangedSubviews([plusQandAButton, plusSumReviewButton])
     }
+    
+    func setBind() {
+        // !! HARD-CODING !!
+        plusQandAButton.rx.tap
+            .withUnretained(self)
+            .bind { owner, _ in
+                owner.mockupContents.append("1")
+                owner.reviewContentTableView.insertRows(at: [IndexPath(row: owner.mockupContents.count - 1,
+                                                             section: 0)],
+                                              with: .automatic)
+                owner.reviewContentTableView.beginUpdates()
+                owner.reviewContentTableView.snp.updateConstraints {
+                    $0.height.equalTo(owner.reviewContentTableView.contentSize.height)
+                }
+                owner.reviewContentTableView.endUpdates()
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 extension ApplicationReviewEditVC {
@@ -164,6 +186,15 @@ extension ApplicationReviewEditVC {
             cell.selectionStyle = .none
             cell.update()
             
+            if let reflectWriteView = cell.writeView as? ReflectWriteView {
+                reflectWriteView.textChanged { [weak tableView] (_) in
+                    self.reviewContentTableView.snp.updateConstraints {
+                        $0.height.equalTo(self.reviewContentTableView.contentSize.height)
+                    }
+                    tableView?.beginUpdates()
+                    tableView?.endUpdates()
+                }
+            }
             return cell
         default:
             return UITableViewCell()
