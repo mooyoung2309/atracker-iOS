@@ -12,8 +12,9 @@ import RxCocoa
 import Then
 
 class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+    let viewModel = ApplicationReviewEditVM()
     var disposeBag = DisposeBag()
-    var mockupContents = ["1", "2", "3", "4", "5", "6"]
+    var mockupContents = ["1", "1", "1", "0", "0", "0"]
     let mockupTypes = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성"]
     
     let scrollView = UIScrollView().then {
@@ -68,6 +69,18 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
         super.viewWillLayoutSubviews()
         reviewContentTableView.snp.updateConstraints {
             $0.height.equalTo(reviewContentTableView.contentSize.height)
+        }
+    }
+    
+    func isClickedEditButton(_ bool: Bool) {
+        let cells = reviewContentTableView.visibleCells
+        
+        if cells.count > 0 {
+            for cell in cells {
+                guard let reviewContentTVC = cell as? ReviewContentTVC else { return }
+                reviewContentTVC.showCheckButton(bool)
+            }
+            reviewContentTableView.performBatchUpdates(nil)
         }
     }
 }
@@ -148,6 +161,18 @@ extension ApplicationReviewEditVC {
                 owner.reviewContentTableView.endUpdates()
             }
             .disposed(by: disposeBag)
+        
+        editButton.rx.tap
+            .map { true }
+            .bind(to: viewModel.input.isClickEditButton)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.isClickedEditButton
+            .withUnretained(self)
+            .bind { owner, bool in
+                owner.isClickedEditButton(bool)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -184,6 +209,7 @@ extension ApplicationReviewEditVC {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewContentTVC.id, for: indexPath) as? ReviewContentTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
+            
             cell.update()
             
             if let reflectWriteView = cell.writeView as? ReflectWriteView {
@@ -195,6 +221,7 @@ extension ApplicationReviewEditVC {
                     tableView?.endUpdates()
                 }
             }
+            
             return cell
         default:
             return UITableViewCell()

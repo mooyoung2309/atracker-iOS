@@ -56,6 +56,7 @@
 		70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DA2834D37800E6B95B /* ViewModel.swift */; };
 		70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DC2834D6B100E6B95B /* Log.swift */; };
 		70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */; };
+		70EE86CF283F23C900DBC592 /* ApplicationReviewEditVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EE86CE283F23C900DBC592 /* ApplicationReviewEditVM.swift */; };
 		D86DE302DE205C50D6289701 /* Pods_Atracker_AtrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3456FE524DC5474A933E50B /* Pods_Atracker_AtrackerUITests.framework */; };
 		DA4183E072CFF77909A1F22B /* Pods_AtrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D90E19A63F1D70C4B22491 /* Pods_AtrackerTests.framework */; };
 		FCD9308EE28DB1CED3011137 /* Pods_Atracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E8D58785D85D33DD385143 /* Pods_Atracker.framework */; };
@@ -136,6 +137,7 @@
 		70A2F6DA2834D37800E6B95B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		70A2F6DC2834D6B100E6B95B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
+		70EE86CE283F23C900DBC592 /* ApplicationReviewEditVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewEditVM.swift; sourceTree = "<group>"; };
 		958AD23A31274AE479F1A34C /* Pods-AtrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AtrackerTests.release.xcconfig"; path = "Target Support Files/Pods-AtrackerTests/Pods-AtrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		ACCC4C6F8EDDD24CC5BCDC23 /* Pods-Atracker-AtrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atracker-AtrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-Atracker-AtrackerUITests/Pods-Atracker-AtrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E3456FE524DC5474A933E50B /* Pods_Atracker_AtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker_AtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -470,6 +472,7 @@
 			children = (
 				70A2F6D82834D35D00E6B95B /* ApplicationVM.swift */,
 				7005BD1C283557A7008E380A /* ApplicationProgressDetailViewModel.swift */,
+				70EE86CE283F23C900DBC592 /* ApplicationReviewEditVM.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				70A2F6C52834C75700E6B95B /* ApplicationVC.swift in Sources */,
 				70A2F6AF2834BFF100E6B95B /* MainViewController.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* Const.swift in Sources */,
+				70EE86CF283F23C900DBC592 /* ApplicationReviewEditVM.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				7046E3D7283B59F90048C068 /* CustomItemView.swift in Sources */,
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
