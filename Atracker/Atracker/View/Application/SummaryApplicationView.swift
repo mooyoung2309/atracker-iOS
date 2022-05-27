@@ -17,8 +17,8 @@ class SummaryApplicationView: UIView {
         $0.distribution = .fillEqually
         $0.spacing = 5
     }
-    let firstBox = SummaryBoxView(title: "서류", content: "82.5%")
-    let secondBox = SummaryBoxView(title: "1차 면접", content: "36.2%")
+    let firstBox = SummaryBoxView(title: "서류", content: "82%")
+    let secondBox = SummaryBoxView(title: "1차 면접", content: "36%")
     let thirdBox = SummaryBoxView(title: "2차 면접", content: "19%")
     
     required init?(coder: NSCoder) {

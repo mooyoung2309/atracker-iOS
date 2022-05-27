@@ -35,5 +35,12 @@ extension UIView {
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 7
     }
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
 }
 

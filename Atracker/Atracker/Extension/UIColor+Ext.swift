@@ -29,4 +29,23 @@ extension UIColor {
     class var successProgressColor3: UIColor { UIColor(hex: 0x3FAEFF) }
     class var successProgressColor4: UIColor { UIColor(hex: 0x07D2FF) }
     class var successProgressColor5: UIColor { UIColor(hex: 0x37FFDB) }
+    
+    class var backgroundLightGray: UIColor { UIColor(hex: 0x40475C) }
+    class var backgroundGray: UIColor { UIColor(hex: 0x1F2129) }
+    class var neonGreen: UIColor { UIColor(hex: 0x37FFDB) }
+    class var blue2: UIColor { UIColor(hex: 0x16E9F6) }
+    class var blue3: UIColor { UIColor(hex: 0x0ED3FE) }
+    class var blue4: UIColor { UIColor(hex: 0x33A9FF) }
+    class var blue5: UIColor { UIColor(hex: 0x3C8AFF) }
+    class var blue6: UIColor { UIColor(hex: 0x3153FF) }
+    class var blue7: UIColor { UIColor(hex: 0x374FEB) }
+    class var line: UIColor { UIColor(hex: 0xE9E9E9) }
+    class var gray1: UIColor { UIColor(hex: 0xB9BFD3) }
+    class var gray2: UIColor { UIColor(hex: 0xA5ABBF) }
+    class var gray3: UIColor { UIColor(hex: 0x969CB1) }
+    class var gray4: UIColor { UIColor(hex: 0x888EA3) }
+    class var gray5: UIColor { UIColor(hex: 0x797F94) }
+    class var gray6: UIColor { UIColor(hex: 0x555B70) }
+    class var gray7: UIColor { UIColor(hex: 0x40475C) }
+    
 }

@@ -9,6 +9,7 @@ import UIKit
 import Then
 import RxSwift
 import RxCocoa
+import SnapKit
 
 class ApplicationVC: UIViewController {
     let viewModel = ApplicationVM()
@@ -46,6 +47,20 @@ class ApplicationVC: UIViewController {
         $0.layer.borderWidth = 0
         $0.layer.borderColor = UIColor.mainViewColor.cgColor
     }
+    let plusButton = UIButton().then {
+        $0.backgroundColor = .gray7
+        $0.contentHorizontalAlignment = .fill
+        $0.contentVerticalAlignment = .fill
+        $0.setImage(UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        $0.tintColor = .neonGreen
+        $0.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOpacity = 0.3
+        $0.layer.shadowOffset = CGSize(width: 3, height: 3)
+        $0.layer.shadowRadius = 3
+        $0.layer.cornerRadius = 20
+    }
+    
     var progressTableViewHeightConstraint = NSLayoutConstraint()
     
     var progressTableViewAdaptor: ApplicationProgressTableViewAdaptor!
@@ -58,6 +73,7 @@ class ApplicationVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
         
         setView()
+        setLayout()
         setBind()
     }
     
@@ -76,6 +92,16 @@ extension ApplicationVC {
     func updateProgressTableView(applicationProgresses: [Application]) {
         progressTableViewAdaptor.update(applicationProgress: applicationProgresses)
         progressTableView.reloadData()
+    }
+    
+    func setLayout() {
+        view.addSubview(plusButton)
+        
+        plusButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(12)
+            $0.right.equalToSuperview().inset(36)
+            $0.width.height.equalTo(40)
+        }
     }
     
     func setView() {
@@ -111,17 +137,17 @@ extension ApplicationVC {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             
-            positionLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25),
-            positionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            positionLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            positionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 28),
             positionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             titleLabel.topAnchor.constraint(equalTo: positionLabel.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 28),
             titleLabel.widthAnchor.constraint(equalToConstant: 300),
             
             summaryView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            summaryView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            summaryView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            summaryView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            summaryView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             summaryView.heightAnchor.constraint(equalToConstant: 100),
 //
 //            pieChartView.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 10),
@@ -130,14 +156,22 @@ extension ApplicationVC {
 //            pieChartView.centerYAnchor.constraint(equalTo: summaryView.centerYAnchor),
             
             progressTableView.topAnchor.constraint(equalTo: summaryView.bottomAnchor, constant: 20),
-            progressTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            progressTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            progressTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            progressTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             progressTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             progressTableViewHeightConstraint,
         ])
     }
     
     func setBind() {
+        plusButton.rx.tap
+            .withUnretained(self)
+            .bind { owner, _ in
+                let applicationReviewEditVC = ApplicationReviewEditVC()
+                owner.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.output.applicationProgresses
             .withUnretained(self)
             .bind { owner, applicationProgresses in

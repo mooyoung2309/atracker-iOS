@@ -21,7 +21,7 @@ extension CustomTabItem {
         case .application:
             return UINavigationController(rootViewController: ApplicationVC())
         case .calendar:
-            return UINavigationController(rootViewController: CalendarVC())
+            return UINavigationController(rootViewController: ScheduleVC())
         }
     }
     
