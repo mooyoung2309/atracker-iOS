@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Then
 
 class CalendarCollectionViewCell: UICollectionViewCell {
@@ -14,26 +15,21 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     var circleStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 2
-        $0.alignment = .center
+        $0.distribution = .fillProportionally
     }
-    var buyCircleView = UIView() .then {
-        $0.backgroundColor = Const.Color.pink
-        $0.layer.cornerRadius = 3
+    var circleView1 = CircleView(color: .blue5)
+    var circleView2 = CircleView(color: .neonGreen)
+    var lineView = UIView().then {
+        $0.backgroundColor = .neonGreen
     }
-    var sellCircleView = UIView().then {
-        $0.backgroundColor = Const.Color.mint
-        $0.layer.cornerRadius = 3
-    }
-    var memoCirlceView = UIView().then {
-        $0.backgroundColor = .black
-        $0.layer.cornerRadius = 3
-    }
-    var divider = UIView().then {
-        $0.backgroundColor = .lightGray
+    var lineBackgroundView = UIView().then {
+        $0.backgroundColor = .white
+        $0.alpha = 0.05
     }
     
     var dateLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 10, weight: .regular)
+        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.textColor = .white
         $0.textAlignment = .center
         $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
@@ -43,12 +39,16 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setView()
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setView()
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
     }
     
     override func prepareForReuse() {
@@ -58,34 +58,98 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     func update(date: Int) {
         dateLabel.text = String(date)
     }
+    
+    func showCircle(_ bool: Bool) {
+        if bool {
+            circleStackView.isHidden = false
+        } else {
+            circleStackView.isHidden = true
+        }
+    }
+    
+    func showLine(_ bool: Bool, edge: UIRectEdge? = nil) {
+        if bool {
+            lineView.isHidden = false
+        } else {
+            lineView.isHidden = true
+        }
+        guard let edge = edge else { return }
+        
+        switch edge {
+        case .left:
+            lineView.clipsToBounds = true
+            lineView.layer.cornerRadius = 2
+            lineView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            return
+        case .right:
+            lineView.clipsToBounds = true
+            lineView.layer.cornerRadius = 2
+            lineView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+            return
+        default:
+            return
+        }
+    }
+    
+    func showLineBackground(_ bool: Bool, edge: UIRectEdge? = nil) {
+        if bool {
+            lineBackgroundView.isHidden = false
+        } else {
+            lineBackgroundView.isHidden = true
+        }
+        guard let edge = edge else { return }
+        
+        switch edge {
+        case .left:
+            lineBackgroundView.clipsToBounds = true
+            lineBackgroundView.layer.cornerRadius = 15
+            lineBackgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+            return
+        case .right:
+            lineBackgroundView.clipsToBounds = true
+            lineBackgroundView.layer.cornerRadius = 15
+            lineBackgroundView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+            return
+        default:
+            return
+        }
+    }
 }
 
 extension CalendarCollectionViewCell {
-    func setView() {
-        backgroundColor = Const.Color.white
+    func setupProperty() {
+        backgroundColor = .clear
         
-        addSubview(divider)
-        addSubview(dateLabel)
-        addSubview(circleStackView)
+        circleStackView.addArrangedSubviews([circleView1, circleView2])
+    }
+    
+    func setupHierarchy() {
+        contentView.addSubview(lineBackgroundView)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(circleStackView)
+        contentView.addSubview(lineView)
+    }
+    
+    func setupLayout() {
+        dateLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(5)
+            $0.centerX.equalToSuperview()
+        }
         
-        divider.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        circleStackView.translatesAutoresizingMaskIntoConstraints = false
+        circleStackView.snp.makeConstraints {
+            $0.top.equalTo(dateLabel.snp.bottom)
+            $0.centerX.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            divider.topAnchor.constraint(equalTo: topAnchor),
-            divider.leadingAnchor.constraint(equalTo: leadingAnchor),
-            divider.trailingAnchor.constraint(equalTo: trailingAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 0.18),
-            
-            dateLabel.topAnchor.constraint(equalTo: divider.bottomAnchor),
-            dateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dateLabel.widthAnchor.constraint(equalToConstant: 20),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20),
-            
-            circleStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
-            circleStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            circleStackView.heightAnchor.constraint(equalToConstant: 10),
-        ])
+        lineView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(5)
+            $0.height.equalTo(4)
+        }
+        
+        lineBackgroundView.snp.makeConstraints {
+            $0.top.bottom.equalTo(dateLabel).inset(-5)
+            $0.leading.trailing.equalToSuperview()
+        }
     }
 }

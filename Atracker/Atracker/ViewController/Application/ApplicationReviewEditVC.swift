@@ -58,11 +58,10 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .backgroundGray
         setupHierarchy()
         setupLayout()
         setupProperty()
-        setBind()
+        setupBind()
     }
     
     override func viewWillLayoutSubviews() {
@@ -133,6 +132,7 @@ extension ApplicationReviewEditVC {
     }
     
     func setupProperty() {
+        view.backgroundColor = .backgroundGray
         title = "카카오뱅크"
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -145,7 +145,7 @@ extension ApplicationReviewEditVC {
         plusButtonStackView.addArrangedSubviews([plusQandAButton, plusSumReviewButton])
     }
     
-    func setBind() {
+    func setupBind() {
         // !! HARD-CODING !!
         plusQandAButton.rx.tap
             .withUnretained(self)
