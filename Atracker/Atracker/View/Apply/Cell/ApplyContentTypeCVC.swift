@@ -7,7 +7,7 @@
 
 import UIKit
 import Then
-class ReviewTypeCVC: UICollectionViewCell {
+class ApplyContentTypeCVC: UICollectionViewCell {
     static let id = "ReviewTypeCVC"
     
     let titleLabel = UILabel().then {
@@ -41,7 +41,7 @@ class ReviewTypeCVC: UICollectionViewCell {
     }
 }
 
-extension ReviewTypeCVC {
+extension ApplyContentTypeCVC {
     func setupHierarchy() {
         addSubview(titleLabel)
         addSubview(bottomBarView)

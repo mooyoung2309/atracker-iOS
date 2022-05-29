@@ -8,7 +8,7 @@
 import UIKit
 import Then
 
-class ApplicationProgressTableViewCell: UITableViewCell {
+class ApplySummaryTVC: UITableViewCell {
     static let identifier = "ProgressApplicationTableViewCell"
     var applicationProgress: Application!
     
@@ -39,7 +39,7 @@ class ApplicationProgressTableViewCell: UITableViewCell {
     }
 }
 
-extension ApplicationProgressTableViewCell {
+extension ApplySummaryTVC {
     func setView() {
 //        layer.masksToBounds = true
 //        layer.borderColor = Const.Color.darkGray.cgColor

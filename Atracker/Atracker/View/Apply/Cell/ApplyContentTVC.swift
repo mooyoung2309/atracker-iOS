@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ReviewContentTVC: UITableViewCell {
+class ApplyContentTVC: UITableViewCell {
     static let id = "ReviewContentTVC"
     
     var stackView = UIStackView().then {
@@ -48,7 +48,7 @@ class ReviewContentTVC: UITableViewCell {
     }
 }
 
-extension ReviewContentTVC {
+extension ApplyContentTVC {
     func setupHierarchy() {
         contentView.addSubview(stackView)
     }

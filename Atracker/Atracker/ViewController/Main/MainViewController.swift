@@ -19,7 +19,7 @@ class MainViewController: UITabBarController {
         let blogTap = UINavigationController(rootViewController: BlogViewController())
         let blogTapBarItem = UITabBarItem(title: "블로그", image: UIImage(systemName: "doc"), selectedImage: UIImage(named: "doc"))
         
-        let applicationStatusTap = UINavigationController(rootViewController: ApplicationVC())
+        let applicationStatusTap = UINavigationController(rootViewController: ApplyVC())
         let applicationStatusTapBarItem = UITabBarItem(title: "지원 현황", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))
         
         let scheduleCalendarTap = UINavigationController(rootViewController: ScheduleVC())

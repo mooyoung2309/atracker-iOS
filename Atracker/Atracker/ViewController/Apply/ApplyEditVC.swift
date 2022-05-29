@@ -11,8 +11,8 @@ import RxSwift
 import RxCocoa
 import Then
 
-class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
-    let viewModel = ApplicationReviewEditVM()
+class ApplyEditVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+    let viewModel = ApplyEditVM()
     var disposeBag = DisposeBag()
     var mockupContents = ["1", "1", "1", "0", "0", "0"]
     let mockupTypes = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성"]
@@ -24,7 +24,7 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         $0.collectionViewLayout = layout
-        $0.register(ReviewTypeCVC.self, forCellWithReuseIdentifier: ReviewTypeCVC.id)
+        $0.register(ApplyContentTypeCVC.self, forCellWithReuseIdentifier: ApplyContentTypeCVC.id)
         $0.backgroundColor = .backgroundGray
         $0.showsHorizontalScrollIndicator = false
     }
@@ -32,7 +32,7 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
         $0.spacing = 8
     }
     let reviewContentTableView = UITableView().then {
-        $0.register(ReviewContentTVC.self, forCellReuseIdentifier: ReviewContentTVC.id)
+        $0.register(ApplyContentTVC.self, forCellReuseIdentifier: ApplyContentTVC.id)
         $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .backgroundGray
         $0.rowHeight = UITableView.automaticDimension
@@ -76,7 +76,7 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
         
         if cells.count > 0 {
             for cell in cells {
-                guard let reviewContentTVC = cell as? ReviewContentTVC else { return }
+                guard let reviewContentTVC = cell as? ApplyContentTVC else { return }
                 reviewContentTVC.showCheckButton(bool)
             }
             reviewContentTableView.performBatchUpdates(nil)
@@ -84,7 +84,7 @@ class ApplicationReviewEditVC: UIViewController, UICollectionViewDelegate, UICol
     }
 }
 
-extension ApplicationReviewEditVC {
+extension ApplyEditVC {
     func setupHierarchy() {
         view.addSubview(reviewTypeCollectionView)
         view.addSubview(scrollView)
@@ -176,7 +176,7 @@ extension ApplicationReviewEditVC {
     }
 }
 
-extension ApplicationReviewEditVC {
+extension ApplyEditVC {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mockupTypes.count
     }
@@ -184,7 +184,7 @@ extension ApplicationReviewEditVC {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case reviewTypeCollectionView:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewTypeCVC.id, for: indexPath) as? ReviewTypeCVC else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApplyContentTypeCVC.id, for: indexPath) as? ApplyContentTypeCVC else { return UICollectionViewCell() }
 
             cell.update(title: mockupTypes[indexPath.row])
             return cell
@@ -198,7 +198,7 @@ extension ApplicationReviewEditVC {
     }
 }
 
-extension ApplicationReviewEditVC {
+extension ApplyEditVC {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mockupContents.count
     }
@@ -206,7 +206,7 @@ extension ApplicationReviewEditVC {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case reviewContentTableView:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewContentTVC.id, for: indexPath) as? ReviewContentTVC else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyContentTVC.id, for: indexPath) as? ApplyContentTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
             

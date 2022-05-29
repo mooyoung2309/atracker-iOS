@@ -19,7 +19,7 @@ extension CustomTabItem {
         case .blog:
             return UINavigationController(rootViewController: BlogViewController())
         case .application:
-            return UINavigationController(rootViewController: ApplicationVC())
+            return UINavigationController(rootViewController: ApplyVC())
         case .calendar:
             return UINavigationController(rootViewController: ScheduleVC())
         }

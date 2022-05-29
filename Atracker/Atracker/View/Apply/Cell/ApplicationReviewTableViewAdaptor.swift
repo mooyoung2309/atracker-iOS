@@ -41,7 +41,7 @@ class ApplicationReviewTableViewAdaptor: NSObject, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Log(indexPath)
-        let applicationReviewEditVC = ApplicationReviewEditVC()
+        let applicationReviewEditVC = ApplyEditVC()
         applicationReviewEditVC.title = "우리은행 인턴"
         superVC.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
     }

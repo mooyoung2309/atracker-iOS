@@ -11,8 +11,8 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class ApplicationVC: UIViewController {
-    let viewModel = ApplicationVM()
+class ApplyVC: UIViewController {
+    let viewModel = ApplyVM()
     var disposeBag = DisposeBag()
     
     var scrollView = UIScrollView().then {
@@ -35,7 +35,7 @@ class ApplicationVC: UIViewController {
         $0.layer.cornerRadius = 12
     }
     var progressTableView = UITableView().then {
-        $0.register(ApplicationProgressTableViewCell.self, forCellReuseIdentifier: ApplicationProgressTableViewCell.identifier)
+        $0.register(ApplySummaryTVC.self, forCellReuseIdentifier: ApplySummaryTVC.identifier)
         $0.showsVerticalScrollIndicator = false
         $0.backgroundColor = .mainViewColor
         $0.separatorStyle = .singleLine
@@ -88,7 +88,7 @@ class ApplicationVC: UIViewController {
     }
 }
 
-extension ApplicationVC {
+extension ApplyVC {
     func updateProgressTableView(applicationProgresses: [Application]) {
         progressTableViewAdaptor.update(applicationProgress: applicationProgresses)
         progressTableView.reloadData()
@@ -167,7 +167,7 @@ extension ApplicationVC {
         plusButton.rx.tap
             .withUnretained(self)
             .bind { owner, _ in
-                let applicationReviewEditVC = ApplicationReviewEditVC()
+                let applicationReviewEditVC = ApplyEditVC()
                 owner.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
             }
             .disposed(by: disposeBag)

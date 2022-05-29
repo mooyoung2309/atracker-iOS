@@ -29,7 +29,7 @@ class ApplicationProgressTableViewAdaptor: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ApplicationProgressTableViewCell.identifier, for: indexPath) as! ApplicationProgressTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ApplySummaryTVC.identifier, for: indexPath) as! ApplySummaryTVC
         
         cell.update(applicationProgress: applications[indexPath.section])
         cell.selectionStyle = .none
@@ -37,6 +37,6 @@ class ApplicationProgressTableViewAdaptor: NSObject, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        superVC.navigationController?.pushViewController(ApplicationReviewVC(application: applications[indexPath.section]), animated: true)
+        superVC.navigationController?.pushViewController(ApplyDetailVC(application: applications[indexPath.section]), animated: true)
     }
 }

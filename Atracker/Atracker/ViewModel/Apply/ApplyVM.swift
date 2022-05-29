@@ -1,5 +1,5 @@
 //
-//  ApplicationViewModel.swift
+//  ApplyVM.swift
 //  Atracker
 //
 //  Created by 송영모 on 2022/05/18.
@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ApplicationVM: ViewModel {
+class ApplyVM: ViewModel {
     var disposeBag = DisposeBag()
     
     var input = Input()
@@ -28,7 +28,7 @@ class ApplicationVM: ViewModel {
     }
 }
 
-extension ApplicationVM {
+extension ApplyVM {
     func setBind() {
         
     }

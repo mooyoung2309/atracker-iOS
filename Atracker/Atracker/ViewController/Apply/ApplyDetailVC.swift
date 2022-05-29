@@ -8,7 +8,7 @@
 import UIKit
 import Then
 
-class ApplicationReviewVC: UIViewController {
+class ApplyDetailVC: UIViewController {
     var application: Application!
     var scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -60,7 +60,7 @@ class ApplicationReviewVC: UIViewController {
     }
 }
 
-extension ApplicationReviewVC {
+extension ApplyDetailVC {
     func updateTableView() {
 //        progressTextTableViewAdaptor.update(applicationProgress: <#T##[Application]#>)
     }
