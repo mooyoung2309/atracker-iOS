@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 import Then
 
 class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
+    var disposeBag = DisposeBag()
     static let id = "ApplyContentTVC"
     
     var stackView = UIStackView().then {
@@ -24,6 +27,7 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
     var writeView: UIView!
     
     var textChanged: ((String) -> Void)?
+    var isChecked: ((Bool) -> Void)?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -34,7 +38,7 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
         setupProperty()
         setupHierarchy()
         setupLayout()
-        showCheckButton(false)
+        setupBind()
     }
     
     override func prepareForReuse() {
@@ -42,6 +46,7 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
     }
     
     func update(apply: Apply) {
+        stackView.addArrangedSubview(checkView)
         if apply.type == "QA" {
             writeView = QAWriteView()
             guard let qaWriteView = writeView as? QAWriteView else { return }
@@ -63,18 +68,29 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
             reviewWriteView.reflectTextField.delegate = self
             stackView.addArrangedSubview(reviewWriteView)
         }
-    }
-    
-    func showCheckButton(_ bool: Bool) {
-        if bool {
+        
+        if apply.isEditing {
             checkView.isHidden = false
         } else {
             checkView.isHidden = true
+        }
+        
+        if apply.isChecked {
+            checkButton.backgroundColor = .red
+            checkButton.isSelected = true
+        } else {
+            checkButton.backgroundColor = .blue
+            checkButton.isSelected = false
         }
     }
 }
 
 extension ApplyContentTVC {
+    func setupProperty() {
+        backgroundColor = .backgroundGray
+        checkView.addSubview(checkButton)
+    }
+    
     func setupHierarchy() {
         contentView.addSubview(stackView)
     }
@@ -95,17 +111,13 @@ extension ApplyContentTVC {
         }
     }
     
-    func setupProperty() {
-        backgroundColor = .backgroundGray
-        
-        if Bool.random() {
-            writeView = QAWriteView()
-        } else {
-            writeView = ReviewWriteView()
-        }
-        
-        stackView.addArrangedSubview(checkView)
-        checkView.addSubview(checkButton)
+    func setupBind() {
+        checkButton.rx.tap
+            .withUnretained(self)
+            .bind { owner, _ in
+                owner.isChecked?(true)
+            }
+            .disposed(by: disposeBag)
     }
     
     func textChanged(action: @escaping (String) -> Void) {
@@ -114,5 +126,9 @@ extension ApplyContentTVC {
     
     func textViewDidChange(_ textView: UITextView) {
         textChanged?(textView.text)
+    }
+    
+    func isChecked(completion: @escaping (Bool) -> Void) {
+        self.isChecked = completion
     }
 }

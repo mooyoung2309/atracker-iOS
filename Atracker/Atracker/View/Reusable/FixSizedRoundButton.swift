@@ -14,7 +14,7 @@ class FixSizedRoundButton: UIButton {
         super.init(coder: coder)
     }
     
-    init(size: CGSize, title: String? = nil, image: UIImage? = nil, backgroundColor: UIColor, tintColor: UIColor, selectedColor: UIColor) {
+    init(size: CGSize, round: CGFloat, title: String? = nil, image: UIImage? = nil, backgroundColor: UIColor, tintColor: UIColor, selectedColor: UIColor) {
         super.init(frame: .zero)
         self.title = title
         setTitle(title, for: .normal)
@@ -25,7 +25,7 @@ class FixSizedRoundButton: UIButton {
         imageView?.tintColor = tintColor
         
         self.backgroundColor = backgroundColor
-        self.layer.cornerRadius = 13
+        self.layer.cornerRadius = round
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.clear.cgColor
         
