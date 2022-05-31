@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-class ApplyContentTVC: UITableViewCell {
-    static let id = "ReviewContentTVC"
+class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
+    static let id = "ApplyContentTVC"
     
     var stackView = UIStackView().then {
         $0.spacing = 0
@@ -22,6 +22,8 @@ class ApplyContentTVC: UITableViewCell {
         $0.setImage(UIImage(systemName: "checkmark"), for: .normal)
     }
     var writeView: UIView!
+    
+    var textChanged: ((String) -> Void)?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -35,8 +37,32 @@ class ApplyContentTVC: UITableViewCell {
         showCheckButton(false)
     }
     
-    func update() {
-        
+    override func prepareForReuse() {
+        stackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+    func update(apply: Apply) {
+        if apply.type == "QA" {
+            writeView = QAWriteView()
+            guard let qaWriteView = writeView as? QAWriteView else { return }
+            
+            qaWriteView.questionTextField.text = apply.content
+            qaWriteView.answerTextField.text = apply.content
+            qaWriteView.reflectTextField.text = apply.content
+            
+            qaWriteView.questionTextField.delegate = self
+            qaWriteView.answerTextField.delegate = self
+            qaWriteView.reflectTextField.delegate = self
+            
+            stackView.addArrangedSubview(qaWriteView)
+        } else if apply.type == "REVIEW" {
+            writeView = ReviewWriteView()
+            guard let reviewWriteView = writeView as? ReviewWriteView else { return }
+            
+            reviewWriteView.reflectTextField.text = apply.content
+            reviewWriteView.reflectTextField.delegate = self
+            stackView.addArrangedSubview(reviewWriteView)
+        }
     }
     
     func showCheckButton(_ bool: Bool) {
@@ -67,22 +93,26 @@ extension ApplyContentTVC {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(15)
         }
-//
-//        writeView.snp.makeConstraints {
-//            $0.top.leading.trailing.bottom.equalToSuperview()
-//        }
     }
     
     func setupProperty() {
         backgroundColor = .backgroundGray
         
         if Bool.random() {
-            writeView = QuestionWriteView()
+            writeView = QAWriteView()
         } else {
-            writeView = ReflectWriteView()
+            writeView = ReviewWriteView()
         }
         
-        stackView.addArrangedSubviews([checkView, writeView])
+        stackView.addArrangedSubview(checkView)
         checkView.addSubview(checkButton)
+    }
+    
+    func textChanged(action: @escaping (String) -> Void) {
+            self.textChanged = action
+        }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        textChanged?(textView.text)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import Then
 class ApplyContentTypeCVC: UICollectionViewCell {
-    static let id = "ReviewTypeCVC"
+    static let id = "ApplyContentTypeCVC"
     
     let titleLabel = UILabel().then {
         $0.text = "서류"

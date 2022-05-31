@@ -36,6 +36,64 @@ struct Const {
 
 extension Const {
     struct Test {
+        static let applyZips = [
+            ApplyZip(applyType: "서류", applies: [
+                Apply(isChecked: false, type: "QA", content: "서류 QA 테스트 1"),
+                Apply(isChecked: false, type: "REVIEW", content: "서류 REVIEW 테스트 1"),
+                Apply(isChecked: false, type: "QA", content: "서류 QA 테스트 2"),
+                Apply(isChecked: false, type: "REVIEW", content: "서류 REVIEW 테스트 2"),
+                Apply(isChecked: false, type: "QA", content: "서류 QA 테스트 3"),
+                Apply(isChecked: false, type: "REVIEW", content: "서류 REVIEW 테스트 3"),
+                Apply(isChecked: false, type: "QA", content: "서류 QA 테스트 4"),
+            ]),
+            ApplyZip(applyType: "사전과제", applies: [
+                Apply(isChecked: false, type: "QA", content: "사전과제 QA 테스트 1"),
+                Apply(isChecked: false, type: "REVIEW", content: "사전과제 REVIEW 테스트 1"),
+                Apply(isChecked: false, type: "QA", content: "사전과제 QA 테스트 2"),
+                Apply(isChecked: false, type: "REVIEW", content: "사전과제 REVIEW 테스트 2"),
+                Apply(isChecked: false, type: "QA", content: "사전과제 QA 테스트 3"),
+                Apply(isChecked: false, type: "REVIEW", content: "사전과제 REVIEW 테스트 3"),
+                Apply(isChecked: false, type: "QA", content: "사전과제 QA 테스트 4"),
+            ]),
+            ApplyZip(applyType: "1차 면접", applies: [
+                Apply(isChecked: false, type: "QA", content: "1차 면접 QA 테스트 1"),
+                Apply(isChecked: false, type: "REVIEW", content: "1차 면접 REVIEW 테스트 1"),
+                Apply(isChecked: false, type: "QA", content: "1차 면접 QA 테스트 2"),
+                Apply(isChecked: false, type: "REVIEW", content: "1차 면접 REVIEW 테스트 2"),
+                Apply(isChecked: false, type: "QA", content: "1차 면접 QA 테스트 3"),
+                Apply(isChecked: false, type: "REVIEW", content: "1차 면접 REVIEW 테스트 3"),
+                Apply(isChecked: false, type: "QA", content: "1차 면접 QA 테스트 4"),
+            ]),
+            ApplyZip(applyType: "2차 면접", applies: [
+                Apply(isChecked: false, type: "QA", content: "2차 면접 QA 테스트 1"),
+                Apply(isChecked: false, type: "REVIEW", content: "2차 면접 REVIEW 테스트 1"),
+                Apply(isChecked: false, type: "QA", content: "2차 면접 QA 테스트 2"),
+                Apply(isChecked: false, type: "REVIEW", content: "2차 면접 REVIEW 테스트 2"),
+                Apply(isChecked: false, type: "QA", content: "2차 면접 QA 테스트 3"),
+                Apply(isChecked: false, type: "REVIEW", content: "2차 면접 REVIEW 테스트 3"),
+                Apply(isChecked: false, type: "QA", content: "2차 면접 QA 테스트 4"),
+            ]),
+            ApplyZip(applyType: "인적성", applies: [
+                Apply(isChecked: false, type: "QA", content: "인적성 QA 테스트 1"),
+                Apply(isChecked: false, type: "REVIEW", content: "인적성 REVIEW 테스트 1"),
+                Apply(isChecked: false, type: "QA", content: "인적성 QA 테스트 2"),
+                Apply(isChecked: false, type: "REVIEW", content: "인적성 REVIEW 테스트 2"),
+                Apply(isChecked: false, type: "QA", content: "인적성 QA 테스트 3"),
+                Apply(isChecked: false, type: "REVIEW", content: "인적성 REVIEW 테스트 3"),
+                Apply(isChecked: false, type: "QA", content: "인적성 QA 테스트 4"),
+            ]),
+        ]
+        
+        static let Applys = [
+            Apply(isChecked: false, type: "QA", content: "QA 테스트 1"),
+            Apply(isChecked: false, type: "REVIEW", content: "REVIEW 테스트 1"),
+            Apply(isChecked: false, type: "QA", content: "QA 테스트 2"),
+            Apply(isChecked: false, type: "REVIEW", content: "REVIEW 테스트 2"),
+            Apply(isChecked: false, type: "QA", content: "QA 테스트 3"),
+            Apply(isChecked: false, type: "REVIEW", content: "REVIEW 테스트 3"),
+            Apply(isChecked: false, type: "QA", content: "QA 테스트 4"),
+        ]
+        
         static let ApplicationProgressTests = [
             Application(company: "카카오프렌즈", position: "UI/UX디자이너"),
             Application(company: "네이버파이낸셜", position: "웹 디자이너"),

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ReflectWriteView: UIView, UITextViewDelegate {
+class ReviewWriteView: UIView, UITextViewDelegate {
     let reflectView = UIView().then {
         $0.backgroundColor = .backgroundLightGray
         $0.layer.cornerRadius = 5
@@ -42,7 +42,7 @@ class ReflectWriteView: UIView, UITextViewDelegate {
     }
 }
 
-extension ReflectWriteView {
+extension ReviewWriteView {
     func setupHierarchy() {
         addSubview(reflectView)
         reflectView.addSubview(reflectLabel)

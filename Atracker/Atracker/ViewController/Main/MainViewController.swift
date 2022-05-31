@@ -32,6 +32,6 @@ class MainViewController: UITabBarController {
 
         
         self.viewControllers = [blogTap, applicationStatusTap, scheduleCalendarTap]
-        self.selectedIndex = 2
+        self.selectedIndex = 1
     }
 }

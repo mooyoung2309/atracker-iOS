@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class QuestionWriteView: UIView {
-    
+class QAWriteView: UIView, UITextViewDelegate {
     let questionView = UIView().then {
         $0.backgroundColor = .backgroundLightGray
         $0.layer.cornerRadius = 5
@@ -21,10 +20,12 @@ class QuestionWriteView: UIView {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.sizeToFit()
     }
-    let questionTextField = UITextField().then {
+    let questionTextField = UITextView().then {
         $0.text = "질문"
         $0.textColor = .white
-        $0.font = .systemFont(ofSize: 13, weight: .bold)
+        $0.font = .systemFont(ofSize: 13, weight: .regular)
+        $0.backgroundColor = .backgroundLightGray
+        $0.isScrollEnabled = false
     }
     let answerView = UIView().then {
         $0.backgroundColor = .backgroundLightGray
@@ -36,10 +37,12 @@ class QuestionWriteView: UIView {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.sizeToFit()
     }
-    let answerTextField = UITextField().then {
-        $0.text = "답변"
+    let answerTextField = UITextView().then {
+        $0.text = "대답"
         $0.textColor = .white
         $0.font = .systemFont(ofSize: 13, weight: .regular)
+        $0.backgroundColor = .backgroundLightGray
+        $0.isScrollEnabled = false
     }
     let reflectView = UIView().then {
         $0.backgroundColor = .backgroundLightGray
@@ -51,11 +54,14 @@ class QuestionWriteView: UIView {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.sizeToFit()
     }
-    let reflectTextField = UITextField().then {
-        $0.text = "후기 및 반성"
+    let reflectTextField = UITextView().then {
+        $0.text = ""
         $0.textColor = .white
         $0.font = .systemFont(ofSize: 13, weight: .regular)
+        $0.backgroundColor = .backgroundLightGray
+        $0.isScrollEnabled = false
     }
+    var textChanged: ((String) -> Void)?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -69,7 +75,7 @@ class QuestionWriteView: UIView {
     }
 }
 
-extension QuestionWriteView {
+extension QAWriteView {
     func setupHierarchy() {
         addSubview(questionView)
         questionView.addSubview(questionLabel)
@@ -95,7 +101,7 @@ extension QuestionWriteView {
         }
         
         questionTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(4.5)
             $0.bottom.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(36)
             $0.trailing.equalTo(snp.trailing).inset(11)
@@ -113,7 +119,7 @@ extension QuestionWriteView {
         }
         
         answerTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(4.5)
             $0.bottom.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(36)
             $0.trailing.equalTo(snp.trailing).inset(11)
@@ -132,7 +138,7 @@ extension QuestionWriteView {
         }
         
         reflectTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(4.5)
             $0.bottom.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(36)
             $0.trailing.equalTo(snp.trailing).inset(11)
@@ -141,5 +147,16 @@ extension QuestionWriteView {
     
     func setupProperty() {
         backgroundColor = .backgroundGray
+        questionTextField.delegate = self
+        answerTextField.delegate = self
+        reflectTextField.delegate = self
+    }
+    
+    func textChanged(action: @escaping (String) -> Void) {
+            self.textChanged = action
+        }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        textChanged?(textView.text)
     }
 }

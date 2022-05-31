@@ -7,27 +7,31 @@
 
 import UIKit
 
-class RoundButton: UIButton {
-    var title: String!
+class FixSizedRoundButton: UIButton {
+    var title: String?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    init(_ title: String, selectedColor: UIColor) {
+    init(size: CGSize, title: String? = nil, image: UIImage? = nil, backgroundColor: UIColor, tintColor: UIColor, selectedColor: UIColor) {
         super.init(frame: .zero)
         self.title = title
         setTitle(title, for: .normal)
-        backgroundColor = .backgroundLightGray
         setTitleColor(.gray3, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        layer.cornerRadius = 13
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.backgroundLightGray.cgColor
+        
+        setImage(image, for: .normal)
+        imageView?.tintColor = tintColor
+        
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = 13
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.clear.cgColor
         
         snp.makeConstraints {
-            $0.width.equalTo(65)
-            $0.height.equalTo(26)
+            $0.width.equalTo(size.width)
+            $0.height.equalTo(size.height)
         }
     }
     
