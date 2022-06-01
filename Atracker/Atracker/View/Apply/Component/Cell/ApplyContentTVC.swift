@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxGesture
 import Then
 
 class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
@@ -16,13 +17,16 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
     static let id = "ApplyContentTVC"
     
     var stackView = UIStackView().then {
-        $0.spacing = 0
+        $0.spacing = 10
     }
     var checkView = UIView().then {
         $0.backgroundColor = .clear
     }
-    var checkButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "checkmark"), for: .normal)
+    var checkButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: ImageName.check), for: .normal)
+        $0.layer.borderColor = UIColor.gray3.cgColor
+        $0.layer.cornerRadius = 3
+        $0.layer.borderWidth = 1
     }
     var writeView: UIView!
     
@@ -76,11 +80,11 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
         }
         
         if apply.isChecked {
-            checkButton.backgroundColor = .red
-            checkButton.isSelected = true
+            checkButton.tintColor = .neonGreen
+//            checkButton.isSelected = true
         } else {
-            checkButton.backgroundColor = .blue
-            checkButton.isSelected = false
+            checkButton.tintColor = .clear
+//            checkButton.isSelected = false
         }
     }
 }
@@ -105,7 +109,7 @@ extension ApplyContentTVC {
         }
         
         checkButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(13)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(15)
         }

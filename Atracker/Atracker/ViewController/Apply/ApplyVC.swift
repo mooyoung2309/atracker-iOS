@@ -68,9 +68,10 @@ class ApplyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainBackGroundColor
+        view.backgroundColor = .backgroundGray
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.isNavigationBarHidden = true
+        tabBarController?.tabBar.backgroundColor = .backgroundGray
+//        navigationController?.isNavigationBarHidden = true
         
         setView()
         setLayout()

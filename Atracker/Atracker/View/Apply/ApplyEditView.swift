@@ -32,9 +32,9 @@ class ApplyEditView: BaseView {
         $0.isScrollEnabled = false
     }
     
-    let awiatButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "대기중", backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
-    let failButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "불합격", backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
-    let passButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "합격", backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
+    let awiatButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "대기중", backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3, selectedColor: .white)
+    let failButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "불합격", backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3,selectedColor: .white)
+    let passButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "합격", backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3,selectedColor: .neonGreen)
     let editButton = TextButton("편집", selectedColor: .white)
     
     let plusButtonStackView = UIStackView().then {
@@ -42,9 +42,9 @@ class ApplyEditView: BaseView {
         $0.spacing = 14
     }
     
-    let deleteButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "삭제", backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
-    let upButton = FixSizedRoundButton(size: CGSize(width: 26, height: 26), round: 13, image: UIImage(systemName: "chevron.up"), backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
-    let downButton = FixSizedRoundButton(size: CGSize(width: 26, height: 26), round: 13, image: UIImage(systemName: "chevron.down"), backgroundColor: .backgroundGray, tintColor: .gray3, selectedColor: .red)
+    let deleteButton = FixSizedRoundButton(size: CGSize(width: 65, height: 26), round: 13, title: "삭제", backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3, selectedColor: .red)
+    let upButton = FixSizedRoundButton(size: CGSize(width: 26, height: 26), round: 13, image: UIImage(systemName: "chevron.up"), backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3, selectedColor: .red)
+    let downButton = FixSizedRoundButton(size: CGSize(width: 26, height: 26), round: 13, image: UIImage(systemName: "chevron.down"), backgroundColor: .backgroundGray, tintColor: .gray3, borderColor: .gray3, selectedColor: .red)
     let deleteButtonStackView = UIStackView().then {
         $0.spacing = 8
     }

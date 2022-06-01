@@ -13,6 +13,7 @@
 		7005BD1F28355FA1008E380A /* ApplyEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD1E28355FA1008E380A /* ApplyEditVC.swift */; };
 		7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C88D28449B550091B225 /* ApplyEditView.swift */; };
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
+		7009C0F62847433A00140CB5 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F52847433A00140CB5 /* ImageName.swift */; };
 		70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */; };
 		70223C5028434C69009B7F0A /* ApplyDeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4F28434C69009B7F0A /* ApplyDeleteAlertVC.swift */; };
 		70223C5428434F28009B7F0A /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5328434F28009B7F0A /* AlertVC.swift */; };
@@ -97,6 +98,7 @@
 		7005BD1E28355FA1008E380A /* ApplyEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditVC.swift; sourceTree = "<group>"; };
 		7005C88D28449B550091B225 /* ApplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditView.swift; sourceTree = "<group>"; };
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		7009C0F52847433A00140CB5 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedRoundButton.swift; sourceTree = "<group>"; };
 		70223C4F28434C69009B7F0A /* ApplyDeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDeleteAlertVC.swift; sourceTree = "<group>"; };
 		70223C5328434F28009B7F0A /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				7046E3D4283B59BF0048C068 /* UIStackView+Ext.swift */,
 				7046E3D9283B62F00048C068 /* UITabBarController+Ext.swift */,
 				70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */,
+				7009C0F52847433A00140CB5 /* ImageName.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				7046E3C4283B39930048C068 /* UIFont+Ext.swift in Sources */,
 				7046E3CB283B567D0048C068 /* CustomTabItem.swift in Sources */,
 				70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */,
+				7009C0F62847433A00140CB5 /* ImageName.swift in Sources */,
 				70A2F6D62834D23200E6B95B /* Application.swift in Sources */,
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
 				7046E3DA283B62F00048C068 /* UITabBarController+Ext.swift in Sources */,

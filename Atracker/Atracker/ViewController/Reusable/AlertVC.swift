@@ -15,6 +15,10 @@ class AlertViewController: BaseVC {
         $0.backgroundColor = .backgroundLightGray
         $0.layer.cornerRadius = 10
     }
+    var titleImageViewBackgroundView = UIView().then {
+        $0.backgroundColor = .backgroundGray
+        $0.layer.cornerRadius = 20
+    }
     var titleImageView = UIImageView().then {
         $0.image = UIImage(systemName: "star")
     }
@@ -74,7 +78,7 @@ class AlertViewController: BaseVC {
         titleLabel.attributedText = titleAttributeString
         
         for buttonTitle in buttonTitles {
-            let button = FixSizedRoundButton(size: CGSize(width: 120, height: 36), round: 5, title: buttonTitle, backgroundColor: .backgroundGray, tintColor: .white, selectedColor: .red)
+            let button = FixSizedRoundButton(size: CGSize(width: 120, height: 36), round: 5, title: buttonTitle, backgroundColor: .backgroundGray, tintColor: .white, borderColor: .backgroundGray, selectedColor: .red)
             buttons.append(button)
         }
         
@@ -83,10 +87,11 @@ class AlertViewController: BaseVC {
     
     override func setupHierarchy() {
         view.addSubview(contentView)
-        contentView.addSubview(titleImageView)
+        contentView.addSubview(titleImageViewBackgroundView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         contentView.addSubview(buttonStackView)
+        titleImageViewBackgroundView.addSubview(titleImageView)
     }
     
     override func setupLayout() {
@@ -95,14 +100,20 @@ class AlertViewController: BaseVC {
             $0.centerY.equalToSuperview()
         }
         
-        titleImageView.snp.makeConstraints {
+        titleImageViewBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(40)
         }
         
+        titleImageView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.width.equalTo(4)
+            $0.height.equalTo(20)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleImageView.snp.bottom).inset(-20)
+            $0.top.equalTo(titleImageViewBackgroundView.snp.bottom).inset(-20)
             $0.centerX.equalToSuperview()
         }
         

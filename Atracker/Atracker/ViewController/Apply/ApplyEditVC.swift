@@ -89,7 +89,7 @@ class ApplyEditVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource,
         viewModel.output.isClickedDeleteButton
             .withUnretained(self)
             .bind { owner, bool in
-                let deleteAlertVC = AlertViewController(titleImage: UIImage(systemName: "star"), defaultTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기를 정말 삭제하시겠습니까?", highlightTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기", subTitle: "이 작업은 취소하실 수 없습니다.", buttonTitles: ["취소", "삭제"])
+                let deleteAlertVC = AlertViewController(titleImage: UIImage(named: ImageName.warning), defaultTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기를 정말 삭제하시겠습니까?", highlightTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기", subTitle: "이 작업은 취소하실 수 없습니다.", buttonTitles: ["취소", "삭제"])
                 deleteAlertVC.modalPresentationStyle = .overFullScreen
                 // 취소
                 deleteAlertVC.isBack { _ in
