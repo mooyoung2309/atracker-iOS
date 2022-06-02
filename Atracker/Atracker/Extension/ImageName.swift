@@ -10,4 +10,6 @@ import Foundation
 struct ImageName {
     static let check = "Check"
     static let warning = "Warning"
+    static let user = "User"
+    static let notification = "Notification"
 }
