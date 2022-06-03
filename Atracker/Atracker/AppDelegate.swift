@@ -11,6 +11,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if #available(iOS 15.0, *) {
+                let appearance = UITabBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                
+                //바꾸고 싶은 색으로 backgroundColor를 설정
+            UITabBar.appearance().backgroundColor = .backgroundGray
+                }
+                return true
         return true
     }
 
