@@ -132,22 +132,21 @@ class AlertViewController: BaseVC {
     override func setupBind() {
         super.setupBind()
         for (index, button) in buttons.enumerated() {
-            if index == 0 {
-                button.rx.tap
-                    .withUnretained(self)
-                    .bind { owner, _ in
-                        owner.isBack?(true)
-                    }
-                    .disposed(by: disposeBag)
-            } else if index == 1 {
-                button.rx.tap
-                    .withUnretained(self)
-                    .bind { owner, _ in
-                        owner.isOk?(true)
-                    }
-                    .disposed(by: disposeBag)
-            }
-            
+//            if index == 0 {
+//                button.rx.tap
+//                    .withUnretained(self)
+//                    .bind { owner, _ in
+//                        owner.isBack?(true)
+//                    }
+//                    .disposed(by: disposeBag)
+//            } else if index == 1 {
+//                button.rx.tap
+//                    .withUnretained(self)
+//                    .bind { owner, _ in
+//                        owner.isOk?(true)
+//                    }
+//                    .disposed(by: disposeBag)
+//            } 
         }
     }
     

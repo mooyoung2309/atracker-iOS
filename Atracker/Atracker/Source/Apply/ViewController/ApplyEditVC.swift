@@ -72,38 +72,38 @@ class ApplyEditVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource,
             .bind(to: viewModel.input.isClickDeleteButton)
             .disposed(by: disposeBag)
         
-        viewModel.output.applyZip
-            .withUnretained(self)
-            .bind { owner, _ in
-                owner.refreshTableView(tableView: owner.selfView.tableView)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.isClickedEditButton
-            .withUnretained(self)
-            .bind { owner, bool in
-                owner.isClickedEditButton(bool)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.output.isClickedDeleteButton
-            .withUnretained(self)
-            .bind { owner, bool in
-                let deleteAlertVC = AlertViewController(titleImage: UIImage(named: ImageName.warning), defaultTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기를 정말 삭제하시겠습니까?", highlightTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기", subTitle: "이 작업은 취소하실 수 없습니다.", buttonTitles: ["취소", "삭제"])
-                deleteAlertVC.modalPresentationStyle = .overFullScreen
-                // 취소
-                deleteAlertVC.isBack { _ in
-                    owner.navigationController?.dismiss(animated: false, completion: nil)
-                }
-                // 삭제
-                deleteAlertVC.isOk { _ in
-                    owner.viewModel.deleteCheckedApply()
-                    owner.navigationController?.dismiss(animated: false, completion: nil)
-                    owner.viewModel.input.isClickEditButton.onNext(true)
-                }
-                owner.navigationController?.present(deleteAlertVC, animated: false, completion: nil)
-            }
-            .disposed(by: disposeBag)
+//        viewModel.output.applyZip
+//            .withUnretained(self)
+//            .bind { owner, _ in
+//                owner.refreshTableView(tableView: owner.selfView.tableView)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.isClickedEditButton
+//            .withUnretained(self)
+//            .bind { owner, bool in
+//                owner.isClickedEditButton(bool)
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.output.isClickedDeleteButton
+//            .withUnretained(self)
+//            .bind { owner, bool in
+//                let deleteAlertVC = AlertViewController(titleImage: UIImage(named: ImageName.warning), defaultTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기를 정말 삭제하시겠습니까?", highlightTitle: "\(owner.viewModel.getCheckedApplyCount())개의 후기", subTitle: "이 작업은 취소하실 수 없습니다.", buttonTitles: ["취소", "삭제"])
+//                deleteAlertVC.modalPresentationStyle = .overFullScreen
+//                // 취소
+//                deleteAlertVC.isBack { _ in
+//                    owner.navigationController?.dismiss(animated: false, completion: nil)
+//                }
+//                // 삭제
+//                deleteAlertVC.isOk { _ in
+//                    owner.viewModel.deleteCheckedApply()
+//                    owner.navigationController?.dismiss(animated: false, completion: nil)
+//                    owner.viewModel.input.isClickEditButton.onNext(true)
+//                }
+//                owner.navigationController?.present(deleteAlertVC, animated: false, completion: nil)
+//            }
+//            .disposed(by: disposeBag)
     }
 }
 

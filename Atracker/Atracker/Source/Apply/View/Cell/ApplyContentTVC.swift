@@ -116,12 +116,12 @@ extension ApplyContentTVC {
     }
     
     func setupBind() {
-        checkButton.rx.tap
-            .withUnretained(self)
-            .bind { owner, _ in
-                owner.isChecked?(true)
-            }
-            .disposed(by: disposeBag)
+//        checkButton.rx.tap
+//            .withUnretained(self)
+//            .bind { owner, _ in
+//                owner.isChecked?(true)
+//            }
+//            .disposed(by: disposeBag)
     }
     
     func textChanged(action: @escaping (String) -> Void) {

@@ -41,19 +41,19 @@ class ApplyEditVM: ViewModel {
 
 extension ApplyEditVM {
     func setupBind() {
-        input.isClickEditButton
-            .withUnretained(self)
-            .map { owner, _ in
-                if owner.output.isClickedEditButton.value {
-                    owner.updateIsEditingInApplyZip(bool: false)
-                    return false
-                } else {
-                    owner.updateIsEditingInApplyZip(bool: true)
-                    return true
-                }
-            }
-            .bind(to: output.isClickedEditButton)
-            .disposed(by: disposeBag)
+//        input.isClickEditButton
+//            .withUnretained(self)
+//            .map { owner, _ in
+//                if owner.output.isClickedEditButton.value {
+//                    owner.updateIsEditingInApplyZip(bool: false)
+//                    return false
+//                } else {
+//                    owner.updateIsEditingInApplyZip(bool: true)
+//                    return true
+//                }
+//            }
+//            .bind(to: output.isClickedEditButton)
+//            .disposed(by: disposeBag)
         
         input.isClickPlusQAButton
             .bind(to: output.isClickedPlusQAButton)
@@ -71,39 +71,35 @@ extension ApplyEditVM {
             .bind(to: output.selectedTypeIndex)
             .disposed(by: disposeBag)
         
-        output.isClickedPlusQAButton
-            .withUnretained(self)
-            .bind { owner, _ in
-                var applyZip = owner.output.applyZip.value
-                applyZip.applies.append(Apply(isChecked: false, type: "QA", content: "새로운 거"))
-                owner.output.applyZip.accept(applyZip)
-            }
-            .disposed(by: disposeBag)
-        
-        output.isClickedPlusReviewButton
-            .withUnretained(self)
-            .bind { owner, _ in
-                var applyZip = owner.output.applyZip.value
-                applyZip.applies.append(Apply(isChecked: false, type: "REVIEW", content: "새로운 거"))
-                owner.output.applyZip.accept(applyZip)
-            }
-            .disposed(by: disposeBag)
-        
-        output.isClickedDeleteButton
-            .withUnretained(self)
-            .bind { owner, _ in
-                for apply in owner.output.applyZip.value.applies.filter({ $0.isChecked == true }) {
-                    Log(apply)
-                }
-            }
-            .disposed(by: disposeBag)
+//        output.isClickedPlusQAButton
+//            .withUnretained(self)
+//            .bind { owner, _ in
+//                var applyZip = owner.output.applyZip.value
+//                applyZip.applies.append(Apply(isChecked: false, type: "QA", content: "새로운 거"))
+//                owner.output.applyZip.accept(applyZip)
+//            }
+//            .disposed(by: disposeBag)
+//
+//        output.isClickedPlusReviewButton
+//            .withUnretained(self)
+//            .bind { owner, _ in
+//                var applyZip = owner.output.applyZip.value
+//                applyZip.applies.append(Apply(isChecked: false, type: "REVIEW", content: "새로운 거"))
+//                owner.output.applyZip.accept(applyZip)
+//            }
+//            .disposed(by: disposeBag)
+//
+//        output.isClickedDeleteButton
+//            .bind { owner, _ in
+//                for apply in owner.output.applyZip.value.applies.filter({ $0.isChecked == true }) {
+//                    Log(apply)
+//                }
+//            }
+//            .disposed(by: disposeBag)
         
         Observable.combineLatest(output.applyZips, output.selectedTypeIndex)
-            .withUnretained(self)
-            .bind { owner, data in
-                let applyZips = data.0
-                let index = data.1
-                owner.output.applyZip.accept(applyZips[index])
+            .bind { [weak self] applyZips, index in
+                self?.output.applyZip.accept(applyZips[index])
             }
             .disposed(by: disposeBag)
     }

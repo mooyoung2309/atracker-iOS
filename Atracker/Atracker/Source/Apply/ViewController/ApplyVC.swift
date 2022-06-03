@@ -46,10 +46,9 @@ class ApplyVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
     override func setupBind() {
         super.setupBind()
         selfView.plusButton.rx.tap
-        .withUnretained(self)
-        .bind { owner, _ in
+        .bind { [weak self] _ in
             let applicationReviewEditVC = ApplyEditVC()
-            owner.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
+            self?.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
         }
         .disposed(by: disposeBag)
     }
