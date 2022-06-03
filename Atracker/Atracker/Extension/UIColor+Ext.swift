@@ -47,5 +47,4 @@ extension UIColor {
     class var gray5: UIColor { UIColor(hex: 0x797F94) }
     class var gray6: UIColor { UIColor(hex: 0x555B70) }
     class var gray7: UIColor { UIColor(hex: 0x40475C) }
-    
 }

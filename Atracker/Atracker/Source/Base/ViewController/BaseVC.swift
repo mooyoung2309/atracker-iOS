@@ -22,6 +22,13 @@ class BaseVC: UIViewController {
         setupBind()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupReload()
+    }
+    
+    func setupReload() { }
+    
     func setupProperty() { }
     
     func setupHierarchy() { }
