@@ -15,7 +15,6 @@ class ApplyVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
     let viewModel = ApplyVM()
     let selfView = ApplyView()
     let mockUps = ["이소진 1", "이소진 2", "이소진 3", "이소진 4", "이소진 5", "이소진 6", "이소진 7", "이소진 8"]
-    
     override func setupReload() {
         view.backgroundColor = .backgroundGray
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -51,6 +50,7 @@ class ApplyVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
             self?.navigationController?.pushViewController(applicationReviewEditVC, animated: true)
         }
         .disposed(by: disposeBag)
+        
     }
 }
 extension ApplyVC {

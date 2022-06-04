@@ -22,6 +22,21 @@
 		701CE2202849C197009230CE /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21C2849C197009230CE /* ApplyViewController.swift */; };
 		701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21D2849C197009230CE /* ApplyBuilder.swift */; };
 		701CE2222849C197009230CE /* ApplyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21E2849C197009230CE /* ApplyInteractor.swift */; };
+		701CE2262849D0C5009230CE /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2252849D0C5009230CE /* AppComponent.swift */; };
+		701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2282849D0F2009230CE /* RootRouter.swift */; };
+		701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2292849D0F2009230CE /* RootViewController.swift */; };
+		701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE22A2849D0F2009230CE /* RootBuilder.swift */; };
+		701CE22F2849D0F2009230CE /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE22B2849D0F2009230CE /* RootInteractor.swift */; };
+		701CE2362849D3B9009230CE /* LoggedOutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2322849D3B9009230CE /* LoggedOutRouter.swift */; };
+		701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2332849D3B9009230CE /* LoggedOutViewController.swift */; };
+		701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */; };
+		701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */; };
+		701CE23E2849D87D009230CE /* LoggedInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE23A2849D87D009230CE /* LoggedInRouter.swift */; };
+		701CE23F2849D87D009230CE /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE23B2849D87D009230CE /* LoggedInViewController.swift */; };
+		701CE2402849D87D009230CE /* LoggedInBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE23C2849D87D009230CE /* LoggedInBuilder.swift */; };
+		701CE2412849D87D009230CE /* LoggedInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE23D2849D87D009230CE /* LoggedInInteractor.swift */; };
+		701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */; };
+		701CE2452849E1D0009230CE /* RootComponent+LoggedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */; };
 		70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */; };
 		70223C5428434F28009B7F0A /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5328434F28009B7F0A /* AlertVC.swift */; };
 		70223C5628434F89009B7F0A /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5528434F89009B7F0A /* BaseVC.swift */; };
@@ -105,6 +120,21 @@
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
 		701CE21D2849C197009230CE /* ApplyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyBuilder.swift; sourceTree = "<group>"; };
 		701CE21E2849C197009230CE /* ApplyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyInteractor.swift; sourceTree = "<group>"; };
+		701CE2252849D0C5009230CE /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
+		701CE2282849D0F2009230CE /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		701CE2292849D0F2009230CE /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		701CE22A2849D0F2009230CE /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
+		701CE22B2849D0F2009230CE /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootInteractor.swift; sourceTree = "<group>"; };
+		701CE2322849D3B9009230CE /* LoggedOutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutRouter.swift; sourceTree = "<group>"; };
+		701CE2332849D3B9009230CE /* LoggedOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutViewController.swift; sourceTree = "<group>"; };
+		701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutBuilder.swift; sourceTree = "<group>"; };
+		701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutInteractor.swift; sourceTree = "<group>"; };
+		701CE23A2849D87D009230CE /* LoggedInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInRouter.swift; sourceTree = "<group>"; };
+		701CE23B2849D87D009230CE /* LoggedInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
+		701CE23C2849D87D009230CE /* LoggedInBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInBuilder.swift; sourceTree = "<group>"; };
+		701CE23D2849D87D009230CE /* LoggedInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInInteractor.swift; sourceTree = "<group>"; };
+		701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
+		701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedOut.swift"; sourceTree = "<group>"; };
 		70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedRoundButton.swift; sourceTree = "<group>"; };
 		70223C5328434F28009B7F0A /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		70223C5528434F89009B7F0A /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
@@ -217,6 +247,9 @@
 		701CE2232849CC24009230CE /* RIBs */ = {
 			isa = PBXGroup;
 			children = (
+				701CE2272849D0E7009230CE /* Root */,
+				701CE2302849D383009230CE /* LoggedOut */,
+				701CE2312849D38F009230CE /* LoggedIn */,
 				701CE21A2849C129009230CE /* Apply */,
 			);
 			path = RIBs;
@@ -226,8 +259,44 @@
 			isa = PBXGroup;
 			children = (
 				70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */,
+				701CE2252849D0C5009230CE /* AppComponent.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		701CE2272849D0E7009230CE /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				701CE2282849D0F2009230CE /* RootRouter.swift */,
+				701CE2292849D0F2009230CE /* RootViewController.swift */,
+				701CE22A2849D0F2009230CE /* RootBuilder.swift */,
+				701CE22B2849D0F2009230CE /* RootInteractor.swift */,
+				701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */,
+				701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		701CE2302849D383009230CE /* LoggedOut */ = {
+			isa = PBXGroup;
+			children = (
+				701CE2322849D3B9009230CE /* LoggedOutRouter.swift */,
+				701CE2332849D3B9009230CE /* LoggedOutViewController.swift */,
+				701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */,
+				701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */,
+			);
+			path = LoggedOut;
+			sourceTree = "<group>";
+		};
+		701CE2312849D38F009230CE /* LoggedIn */ = {
+			isa = PBXGroup;
+			children = (
+				701CE23A2849D87D009230CE /* LoggedInRouter.swift */,
+				701CE23B2849D87D009230CE /* LoggedInViewController.swift */,
+				701CE23C2849D87D009230CE /* LoggedInBuilder.swift */,
+				701CE23D2849D87D009230CE /* LoggedInInteractor.swift */,
+			);
+			path = LoggedIn;
 			sourceTree = "<group>";
 		};
 		70223C5228434F19009B7F0A /* Reusable */ = {
@@ -846,7 +915,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				701CE2452849E1D0009230CE /* RootComponent+LoggedOut.swift in Sources */,
 				70884143283623890024135D /* PieChartView.swift in Sources */,
+				701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
 				707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */,
 				70A2F6D92834D35D00E6B95B /* ApplyVM.swift in Sources */,
@@ -855,39 +926,51 @@
 				701CE2222849C197009230CE /* ApplyInteractor.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
 				70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */,
+				701CE2262849D0C5009230CE /* AppComponent.swift in Sources */,
 				70A2F6C72834C7C300E6B95B /* ScheduleVC.swift in Sources */,
+				701CE2362849D3B9009230CE /* LoggedOutRouter.swift in Sources */,
 				7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */,
 				70223C5428434F28009B7F0A /* AlertVC.swift in Sources */,
 				70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */,
 				7046E3C4283B39930048C068 /* UIFont+Ext.swift in Sources */,
 				70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */,
+				701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */,
 				7009C0F62847433A00140CB5 /* ImageName.swift in Sources */,
 				70A2F6D62834D23200E6B95B /* Application.swift in Sources */,
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
 				70223C5828437354009B7F0A /* Apply.swift in Sources */,
 				7005BD1B283554F2008E380A /* ApplicationReviewTableViewAdaptor.swift in Sources */,
+				701CE2412849D87D009230CE /* LoggedInInteractor.swift in Sources */,
 				70223C5628434F89009B7F0A /* BaseVC.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCollectionViewCell.swift in Sources */,
+				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
 				70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */,
 				707CD256283CADB2000E7EE7 /* ApplyContentTVC.swift in Sources */,
 				70A2F6CA2834C8C500E6B95B /* LoginViewController.swift in Sources */,
 				701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */,
 				70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
+				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
+				701CE23F2849D87D009230CE /* LoggedInViewController.swift in Sources */,
 				70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */,
 				70A2F6CC2834C8E900E6B95B /* BlogViewController.swift in Sources */,
 				7005C89128449C8C0091B225 /* BaseView.swift in Sources */,
+				701CE23E2849D87D009230CE /* LoggedInRouter.swift in Sources */,
 				70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */,
 				7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */,
+				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
 				708841452836350E0024135D /* HorizontalBarChartView.swift in Sources */,
 				70A2F6D42834D1A200E6B95B /* ApplicationProgressTableViewAdaptor.swift in Sources */,
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
 				70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */,
+				701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */,
 				703FB04128486CD900BF4E32 /* ApplySummaryView.swift in Sources */,
+				701CE2402849D87D009230CE /* LoggedInBuilder.swift in Sources */,
 				7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */,
 				70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */,
+				701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
 				7005BD1F28355FA1008E380A /* ApplyEditVC.swift in Sources */,
@@ -896,6 +979,7 @@
 				7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */,
 				70970023283D363B000F4B89 /* QAWriteView.swift in Sources */,
 				70A2F6C52834C75700E6B95B /* ApplyVC.swift in Sources */,
+				701CE22F2849D0F2009230CE /* RootInteractor.swift in Sources */,
 				70A2F6AF2834BFF100E6B95B /* MainViewController.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* Const.swift in Sources */,
 				70EE86CF283F23C900DBC592 /* ApplyEditVM.swift in Sources */,
