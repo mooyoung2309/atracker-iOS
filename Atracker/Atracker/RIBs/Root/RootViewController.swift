@@ -19,18 +19,23 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
 
     weak var listener: RootPresentableListener?
 
-    func present(viewController: ViewControllable) {
+    func presentModal(viewController: ViewControllable) {
         present(viewController.uiviewController, animated: true, completion: nil)
+    }
+    
+    func present(viewController: ViewControllable) {
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
+        present(viewController.uiviewController, animated: false, completion: nil)
     }
 
     func dismiss(viewController: ViewControllable) {
         if presentedViewController === viewController.uiviewController {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: false, completion: nil)
         }
     }
     
     override func viewDidLoad() {
-        view.backgroundColor = .orange
+        view.backgroundColor = .backgroundGray
     }
 }
 

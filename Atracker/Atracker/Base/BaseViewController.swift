@@ -2,7 +2,7 @@
 //  BaseViewController.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/05/29.
+//  Created by 송영모 on 2022/06/09.
 //
 
 import UIKit
@@ -11,8 +11,12 @@ import Then
 import RxSwift
 import RxCocoa
 
-class BaseVC: UIViewController {
+class BaseViewController: UIViewController {
     var disposeBag = DisposeBag()
+    
+    var navigationView = UIView()
+    var mainView = UIView()
+    var tabView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +39,30 @@ class BaseVC: UIViewController {
     
     func setupProperty() { }
     
-    func setupHierarchy() { }
+    func setupHierarchy() {
+        view.addSubview(navigationView)
+        view.addSubview(mainView)
+        view.addSubview(tabView)
+    }
     
-    func setupLayout() { }
+    func setupLayout() {
+        
+        navigationView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(44)
+        }
+        
+        mainView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(44)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(50)
+        }
+        
+        tabView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+    }
     
     func setupBind() { }
     

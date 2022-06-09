@@ -13,24 +13,34 @@ protocol RootInteractable: Interactable, LoggedOutListener, LoggedInListener {
 }
 
 protocol RootViewControllable: ViewControllable {
+    func presentModal(viewController: ViewControllable)
     func present(viewController: ViewControllable)
     func dismiss(viewController: ViewControllable)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
     
+    private let loggedOutBuilder: LoggedOutBuildable
+    private let loggedInBuilder: LoggedInBuildable
+    
+    private var loggedOut: ViewableRouting?
+    
     init(interactor: RootInteractable,
          viewController: RootViewControllable,
          loggedOutBuilder: LoggedOutBuilder,
          loggedInBuilder: LoggedInBuilder) {
+        
         self.loggedOutBuilder = loggedOutBuilder
         self.loggedInBuilder = loggedInBuilder
+        
         super.init(interactor: interactor, viewController: viewController)
+        
         interactor.router = self
     }
     
     override func didLoad() {
         super.didLoad()
+        
         routeToLoggedOut()
     }
     
@@ -38,24 +48,24 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
         if let loggedOut = loggedOut {
             detachChild(loggedOut)
             viewController.dismiss(viewController: loggedOut.viewControllable)
+            
             self.loggedOut = nil
         }
-        let loggedIn = loggedInBuilder.build(withListener: interactor)
+        
+        let loggedIn = loggedInBuilder.build(withListener: interactor, email: email, password: password)
+        
         attachChild(loggedIn)
     }
     
-    // MARK: - Private
-    
-    private let loggedOutBuilder: LoggedOutBuildable
-    private let loggedInBuilder: LoggedInBuildable
-    
-    private var loggedOut: ViewableRouting?
-    
     private func routeToLoggedOut() {
         let loggedOut = loggedOutBuilder.build(withListener: interactor)
+        
         self.loggedOut = loggedOut
+        
         attachChild(loggedOut)
-        loggedOut.viewControllable.uiviewController.modalPresentationStyle = .fullScreen
+        
+//        loggedOut.viewControllable.uiviewController.modalPresentationStyle = .fullScreen
+        
         viewController.present(viewController: loggedOut.viewControllable)
     }
 }

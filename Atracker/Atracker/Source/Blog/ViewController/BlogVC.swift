@@ -1,5 +1,5 @@
 //
-//  BlogViewController.swift
+//  BlogVC.swift
 //  Atracker
 //
 //  Created by 송영모 on 2022/05/18.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlogViewController: UIViewController {
+class BlogVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,7 @@ class BlogViewController: UIViewController {
     }
 }
 
-extension BlogViewController {
+extension BlogVC {
     func setView() {
         
     }

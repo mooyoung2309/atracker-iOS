@@ -16,7 +16,7 @@ class MainViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         
-        let blogTap = UINavigationController(rootViewController: BlogViewController())
+        let blogTap = UINavigationController(rootViewController: BlogVC())
         let blogTapBarItem = UITabBarItem(title: "블로그", image: UIImage(systemName: "doc"), selectedImage: UIImage(named: "doc"))
         
         let applicationStatusTap = UINavigationController(rootViewController: ApplyVC())
