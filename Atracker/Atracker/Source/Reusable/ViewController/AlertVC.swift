@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class AlertViewController: BaseVC {
+class AlertViewController: BaseViewController {
     
     var contentView = UIView().then {
         $0.backgroundColor = .backgroundLightGray

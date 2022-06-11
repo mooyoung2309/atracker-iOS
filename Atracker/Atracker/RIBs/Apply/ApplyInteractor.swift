@@ -9,37 +9,64 @@ import RIBs
 import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToSelf()
+    func routeToApplyEdit()
+    func routeToApplyDetail(apply: Apply)
 }
 
 protocol ApplyPresentable: Presentable {
     var listener: ApplyPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showApplyList(_ applyList: [Apply])
 }
 
 protocol ApplyListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func routeToApply()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
 
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
+    
+    private let service: ApplyServiceProtocol
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: ApplyPresentable) {
+    init(presenter: ApplyPresentable, service: ApplyServiceProtocol) {
+        self.service = service
         super.init(presenter: presenter)
         presenter.listener = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
+        reloadApplyList()
     }
 
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
     }
+    
+    func didTabApplyEdit() {
+        router?.routeToApplyEdit()
+    }
+    
+    func didTabCell(apply: Apply) {
+        router?.routeToApplyDetail(apply: apply)
+    }
+    
+    func back() {
+        router?.routeToSelf()
+        listener?.routeToApply()
+    }
+    
+    func reloadApplyList() {
+        service.getApplyList { [weak self] (response) in
+            guard let this = self else { return }
+            this.presenter.showApplyList(response)
+        }
+    }
+
 }

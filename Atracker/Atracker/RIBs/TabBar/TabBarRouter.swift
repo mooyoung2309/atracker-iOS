@@ -73,6 +73,16 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         viewController.replace(rib: plan)
     }
     
+    func attachApplyRIB() {
+        if let current = current {
+            detachChild(current)
+        }
+        let apply = applyBuilder.build(withListener: interactor)
+        self.apply = apply
+        attachChild(apply)
+        viewController.replace(rib: apply)
+    }
+    
 //    func routeToBlog() {
 //        var blogRouting: BlogRouting!
 //

@@ -22,4 +22,11 @@ extension ContainerViewControllable {
         contentView.addSubview(vc.view)
     }
     
+    func replace(viewController: UIViewController) {
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        let vc = viewController
+        vc.view.frame = contentView.bounds
+        contentView.addSubview(vc.view)
+    }
+    
 }

@@ -21,9 +21,9 @@ class ApplyProgressTVC: BaseTVC {
     var progressBarView = HorizontalBarChartView()
     var barChartView = BarChatView()
     
-    func update(mokUp: String) {
-        companyLabel.text = mokUp
-        positionLabel.text = mokUp
+    func update(apply: Apply) {
+        companyLabel.text = apply.companyName
+        positionLabel.text = apply.jobPosition
     }
     
     override func setupProperty() {

@@ -11,12 +11,12 @@ import RxSwift
 import RxCocoa
 import Then
 
-class ApplyEditVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+class ApplyEditVC: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
     let viewModel = ApplyEditVM()
     let selfView = ApplyEditView()
     var mockupContents = Const.Test.Applys
     let mockupTypes = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성"]
-    var applies: [Apply] = []
+    var applies: [ApplyISOLDCODE] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +110,7 @@ class ApplyEditVC: BaseVC, UICollectionViewDelegate, UICollectionViewDataSource,
 
 // MARK: 커스텀 메소드
 extension ApplyEditVC {
-    func addApplyContent(apply: Apply) {
+    func addApplyContent(apply: ApplyISOLDCODE) {
         selfView.tableView.insertRows(at: [IndexPath(row: applies.count - 1, section: 0)], with: .automatic)
         refreshTableView(tableView: selfView.tableView)
     }

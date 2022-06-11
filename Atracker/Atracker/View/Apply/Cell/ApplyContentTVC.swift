@@ -49,7 +49,7 @@ class ApplyContentTVC: UITableViewCell, UITextViewDelegate {
         stackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
     }
     
-    func update(apply: Apply) {
+    func update(apply: ApplyISOLDCODE) {
         stackView.addArrangedSubview(checkView)
         if apply.type == "QA" {
             writeView = QAWriteView()

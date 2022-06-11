@@ -2,31 +2,27 @@
 //  Apply.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/05/29.
+//  Created by 송영모 on 2022/06/10.
 //
 
-import Foundation
+struct Apply: Codable {
+    let applyID, companyID: Int
+    let companyName, jobPosition: String
+    let stageProgress: [StageProgress]
 
-struct ApplyZip {
-    var applyType: String
-    var applies: [Apply]
-    
-    mutating func updateIsEditing(bool: Bool) {
-        for i in 0..<applies.count {
-            self.applies[i].isEditing = bool
-        }
-    }
-    
-    mutating func updateIsChecked(bool: Bool) {
-        for i in 0..<applies.count {
-            self.applies[i].isChecked = bool
-        }
+    enum CodingKeys: String, CodingKey {
+        case applyID = "apply_id"
+        case companyID = "company_id"
+        case companyName = "company_name"
+        case jobPosition = "job_position"
+        case stageProgress = "stage_progress"
     }
 }
 
-struct Apply {
-    var isEditing: Bool = false
-    var isChecked: Bool = false
-    var type: String
-    var content: String
+struct StageProgress: Codable {
+    let content: String
+    let id: Int
+    let status: String
 }
+
+typealias Applies = [Apply]

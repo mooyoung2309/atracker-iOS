@@ -15,7 +15,7 @@ protocol PlanPresentableListener: AnyObject {
     // interactor class.
 }
 
-final class PlanViewController: BaseVC, PlanPresentable, PlanViewControllable {
+final class PlanViewController: BaseViewController, PlanPresentable, PlanViewControllable {
 
     weak var listener: PlanPresentableListener?
     

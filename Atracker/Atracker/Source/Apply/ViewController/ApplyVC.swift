@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class ApplyVC: BaseVC, UITableViewDelegate, UITableViewDataSource {
+class ApplyVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     let viewModel = ApplyVM()
     let selfView = ApplyView()
     let mockUps = ["이소진 1", "이소진 2", "이소진 3", "이소진 4", "이소진 5", "이소진 6", "이소진 7", "이소진 8"]
@@ -57,14 +57,14 @@ extension ApplyVC {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mockUps.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case selfView.tableView:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyProgressTVC.id, for: indexPath) as? ApplyProgressTVC else { return UITableViewCell() }
-            
+
             cell.selectionStyle = .none
-            cell.update(mokUp: mockUps[indexPath.row])
+//            cell.update(mokUp: mockUps[indexPath.row])
             return cell
         default:
             return UITableViewCell()

@@ -2,7 +2,7 @@
 //  BaseViewController.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/09.
+//  Created by 송영모 on 2022/05/29.
 //
 
 import UIKit
@@ -11,17 +11,21 @@ import Then
 import RxSwift
 import RxCocoa
 
-class BaseViewController: UIViewController {
+protocol BaseViewControllerProtocol: AnyObject {
+    func setupProperty()
+    func setupHierarchy()
+    func setupLayout()
+    func setupBind()
+    func refreshTableView(tableView: UITableView)
+}
+
+class BaseViewController: UIViewController, BaseViewControllerProtocol {
     var disposeBag = DisposeBag()
-    
-    var navigationView = UIView()
-    var mainView = UIView()
-    var tabView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .clear
+        view.backgroundColor = .backgroundGray
         
         setupProperty()
         setupHierarchy()
@@ -39,30 +43,9 @@ class BaseViewController: UIViewController {
     
     func setupProperty() { }
     
-    func setupHierarchy() {
-        view.addSubview(navigationView)
-        view.addSubview(mainView)
-        view.addSubview(tabView)
-    }
+    func setupHierarchy() { }
     
-    func setupLayout() {
-        
-        navigationView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
-        }
-        
-        mainView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(44)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(50)
-        }
-        
-        tabView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(100)
-        }
-    }
+    func setupLayout() { }
     
     func setupBind() { }
     

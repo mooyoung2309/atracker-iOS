@@ -30,10 +30,19 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
     }
 
     func build(withListener listener: ApplyListener) -> ApplyRouting {
-        let component = ApplyComponent(dependency: dependency)
-        let viewController = ApplyViewController()
-        let interactor = ApplyInteractor(presenter: viewController)
+        
+        let component           = ApplyComponent(dependency: dependency)
+        let viewController      = ApplyViewController()
+        let service             = ApplyService()
+        let interactor          = ApplyInteractor(presenter: viewController, service: service)
+        let applyEditBuilder    = ApplyEditBuilder(dependency: component)
+        let applyDetailBuilder  = ApplyDetailBuilder(dependency: component)
+        
         interactor.listener = listener
-        return ApplyRouter(interactor: interactor, viewController: viewController)
+        
+        return ApplyRouter(interactor: interactor,
+                           viewController: viewController,
+                           applyEditBuilder: applyEditBuilder,
+                           applyDetailBuilder: applyDetailBuilder)
     }
 }

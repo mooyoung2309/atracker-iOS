@@ -15,7 +15,7 @@ protocol LoggedOutPresentableListener: AnyObject {
     func login(withEmail: String?, _ password: String?)
 }
 
-final class LoggedOutViewController: BaseVC, LoggedOutPresentable, LoggedOutViewControllable {
+final class LoggedOutViewController: BaseViewController, LoggedOutPresentable, LoggedOutViewControllable {
     weak var listener: LoggedOutPresentableListener?
     
     let yesButton = UIButton(type: .system).then {

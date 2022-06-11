@@ -31,7 +31,7 @@ class ApplyEditVM: ViewModel {
         let selectedTypeIndex = BehaviorRelay(value: 0)
         let applicationProgresses = BehaviorRelay(value: Const.Test.ApplicationProgressTests)
         let applyZips = BehaviorRelay(value: Const.Test.applyZips)
-        let applyZip = BehaviorRelay(value: ApplyZip(applyType: "", applies: []))
+        let applyZip = BehaviorRelay(value: ApplyZipISOLDCODE(applyType: "", applies: []))
     }
     
     init() {
