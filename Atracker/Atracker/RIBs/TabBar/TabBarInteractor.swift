@@ -55,7 +55,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     }
     
     func routeToApply() {
+        Log("")
         router?.attachApplyRIB()
-        print("routeToApply")
     }
 }

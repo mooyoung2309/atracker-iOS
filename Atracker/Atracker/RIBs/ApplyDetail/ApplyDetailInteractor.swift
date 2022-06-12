@@ -15,7 +15,7 @@ protocol ApplyDetailRouting: ViewableRouting {
 protocol ApplyDetailPresentable: Presentable {
     var listener: ApplyDetailPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
-    func setTitle(_ text: String)
+    func setNavigaionBarTitle(_ text: String)
 }
 
 protocol ApplyDetailListener: AnyObject {
@@ -35,6 +35,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     let apply: Apply
     
     init(presenter: ApplyDetailPresentable, apply: Apply) {
+        Log(apply)
         self.apply = apply
         super.init(presenter: presenter)
         presenter.listener = self
@@ -52,6 +53,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     func setNavigaionTitle() {
-        presenter.setTitle(apply.companyName)
+        Log(apply)
+        presenter.setNavigaionBarTitle(apply.companyName)
     }
 }

@@ -12,8 +12,9 @@ import RxSwift
 import RxCocoa
 
 class NavigationBar: UIView {
-    var title = UILabel()
-    var backButton = UIButton()
+    var title           = UILabel()
+    var backButton      = UIButton()
+    var trailingButton  = UIButton()
 }
 
 protocol BaseNavigationViewControllerProtocol: AnyObject {
@@ -22,56 +23,78 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
     var mainView: UIView { get }
     func setupNavigaionBar()
     func showNavigaionBar(_ bool: Bool)
-    func setTitle(_ text: String)
-    func showBackButton(_ bool: Bool)
+    func setNavigaionBarTitle(_ text: String)
+    func showNavigaionBarBackButton(_ bool: Bool)
+    func showNavigaionBarTrailingButton(_ bool: Bool)
+    func setNavigaionBarTrailingButtonTitle(_ text: String)
 }
 
 class BaseNavigationViewController: BaseViewController, BaseNavigationViewControllerProtocol {
+    
     var statusBar       = UIView()
     var navigaionBar    = NavigationBar()
     var mainView        = UIView()
+    var mainContentView = UIView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigaionBar()
+    }
     
     override func setupProperty() {
         super.setupProperty()
         
-        navigaionBar.backgroundColor = .backgroundGray
-        
         showNavigaionBar(false)
+        showNavigaionBarBackButton(false)
+        showNavigaionBarTrailingButton(false)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(statusBar)
         view.addSubview(mainView)
+        mainView.addSubview(statusBar)
+        mainView.addSubview(mainContentView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        statusBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(Size.statusBarHeight)
+        mainView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
-        mainView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Size.statusBarHeight)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
+        statusBar.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
+        }
+        
+        mainContentView.snp.makeConstraints {
+            $0.top.equalTo(statusBar.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
     func setupNavigaionBar() {
+        navigaionBar.backgroundColor = .backgroundGray
         navigaionBar.title.textColor = .white
         navigaionBar.title.font = .systemFont(ofSize: 16, weight: .regular)
         
         navigaionBar.backButton.setImage(UIImage(named: ImageName.back), for: .normal)
-        view.addSubview(navigaionBar)
+        
+        navigaionBar.trailingButton.setTitle("", for: .normal)
+        navigaionBar.trailingButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        
+        mainView.addSubview(navigaionBar)
         navigaionBar.addSubview(navigaionBar.title)
         navigaionBar.addSubview(navigaionBar.backButton)
+        navigaionBar.addSubview(navigaionBar.trailingButton)
         
         navigaionBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalTo(statusBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(Size.navigationBarHeight)
         }
         
@@ -81,9 +104,14 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         }
         
         navigaionBar.backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(23)
+            $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24)
+        }
+        
+        navigaionBar.trailingButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
         }
     }
     
@@ -91,12 +119,20 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         navigaionBar.alpha = bool ? 1 : 0
     }
     
-    func setTitle(_ text: String) {
+    func setNavigaionBarTitle(_ text: String) {
         navigaionBar.title.text = text
     }
     
-    func showBackButton(_ bool: Bool) {
+    func showNavigaionBarBackButton(_ bool: Bool) {
         navigaionBar.backButton.alpha = bool ? 1 : 0
+    }
+    
+    func showNavigaionBarTrailingButton(_ bool: Bool) {
+        navigaionBar.trailingButton.alpha = bool ? 1 : 0
+    }
+    
+    func setNavigaionBarTrailingButtonTitle(_ text: String) {
+        navigaionBar.trailingButton.setTitle(text, for: .normal)
     }
 }
 

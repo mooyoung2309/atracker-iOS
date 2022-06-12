@@ -10,23 +10,45 @@ import RxSwift
 import UIKit
 
 protocol ApplyDetailPresentableListener: AnyObject {
-    func setNavigaionTitle()
     func didBackButton()
 }
 
 final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetailPresentable, ApplyDetailViewControllable {
+    var contentView: UIView {
+        return mainView
+    }
+    
 
     weak var listener: ApplyDetailPresentableListener?
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupNavigaionBar()
+    let selfView = ApplyDetailView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         showNavigaionBar(true)
-        showBackButton(true)
+        showNavigaionBarBackButton(true)
+        showNavigaionBarTrailingButton(true)
+        setNavigaionBarTrailingButtonTitle("저장")
     }
     
     override func setupProperty() {
         super.setupProperty()
+    }
+    
+    override func setupHierarchy() {
+        super.setupHierarchy()
+        
+        mainContentView.addSubview(selfView)
+    }
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        selfView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
     override func setupBind() {

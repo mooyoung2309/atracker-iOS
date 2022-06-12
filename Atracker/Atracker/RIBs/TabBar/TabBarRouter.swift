@@ -74,6 +74,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     }
     
     func attachApplyRIB() {
+        Log("")
         if let current = current {
             detachChild(current)
         }

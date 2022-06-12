@@ -54,10 +54,12 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func didTabCell(apply: Apply) {
+        Log(apply)
         router?.routeToApplyDetail(apply: apply)
     }
     
     func back() {
+        Log("")
         router?.routeToSelf()
         listener?.routeToApply()
     }

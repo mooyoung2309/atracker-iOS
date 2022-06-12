@@ -12,7 +12,7 @@ protocol ApplyDetailInteractable: Interactable {
     var listener: ApplyDetailListener? { get set }
 }
 
-protocol ApplyDetailViewControllable: ViewControllable {
+protocol ApplyDetailViewControllable: ContainerViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 

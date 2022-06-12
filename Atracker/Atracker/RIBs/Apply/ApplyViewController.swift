@@ -17,7 +17,7 @@ protocol ApplyPresentableListener: AnyObject {
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
     
     var contentView: UIView {
-        return self.view
+        return self.mainView
     }
     weak var listener: ApplyPresentableListener?
     
@@ -37,9 +37,9 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         refreshTableView(tableView: selfView.tableView)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupNavigaionBar()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        showNavigaionBarBackButton(false)
     }
     
     override func setupReload() {
@@ -57,16 +57,18 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         selfView.tableView.dataSource = self
         selfView.scrollView.delegate = self
         
-        setTitle("지원 현황")
+        setNavigaionBarTitle("지원 현황")
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        view.addSubview(selfView)
+        
+        mainContentView.addSubview(selfView)
     }
     
     override func setupLayout() {
         super.setupLayout()
+        
         selfView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
@@ -101,6 +103,7 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Log(applyList[indexPath.row])
         self.listener?.didTabCell(apply: applyList[indexPath.row])
     }
 }

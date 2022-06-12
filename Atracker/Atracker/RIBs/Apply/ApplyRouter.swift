@@ -55,6 +55,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     }
     
     func routeToApplyDetail(apply: Apply) {
+        Log(apply)
         if let current = current {
             detachChild(current)
         }
