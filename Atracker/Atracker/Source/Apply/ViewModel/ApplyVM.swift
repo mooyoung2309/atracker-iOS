@@ -22,6 +22,8 @@ class ApplyVM: ViewModel {
     struct Output {
         let applyMockups = BehaviorRelay(value: ["1", "2", "3", "4"])
         let applicationProgresses = BehaviorRelay(value: Const.Test.ApplicationProgressTests)
+        
+        let region = PublishSubject<String>()
     }
     
     init() {
