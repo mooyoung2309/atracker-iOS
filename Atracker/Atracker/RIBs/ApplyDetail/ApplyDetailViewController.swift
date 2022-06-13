@@ -7,13 +7,16 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 import UIKit
 
 protocol ApplyDetailPresentableListener: AnyObject {
     func didBackButton()
+    func didEditButton()
 }
 
 final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetailPresentable, ApplyDetailViewControllable {
+    
     var contentView: UIView {
         return mainView
     }
@@ -21,7 +24,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     weak var listener: ApplyDetailPresentableListener?
     
     let selfView = ApplyDetailView()
-    let mockUps = ["테스트 글 1", "테스트 글 2", "테스트 글 3"]
+    let mockUps = 0...30
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,12 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         showNavigaionBar(true)
         showNavigaionBarBackButton(true)
         showNavigaionBarTrailingButton(true)
-        setNavigaionBarTrailingButtonTitle("저장")
+    }
+    
+    override func setupReload() {
+        super.setupReload()
+        
+        refreshTableView(tableView: selfView.tableView)
     }
     
     override func setupProperty() {
@@ -62,6 +70,12 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
                 self?.listener?.didBackButton()
             }
             .disposed(by: disposeBag)
+        
+        selfView.editButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.didEditButton()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -74,7 +88,7 @@ extension ApplyDetailViewController: UITableViewDelegate, UITableViewDataSource 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyDetailTVC.id, for: indexPath) as? ApplyDetailTVC else { return UITableViewCell() }
         
         cell.update()
-        
+        cell.selectionStyle = .none
         return cell
     }
     

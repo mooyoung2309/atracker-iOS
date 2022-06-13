@@ -118,6 +118,7 @@
 		70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */; };
 		70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */; };
 		70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */; };
+		70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -253,6 +254,7 @@
 		70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailBuilder.swift; sourceTree = "<group>"; };
 		70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailInteractor.swift; sourceTree = "<group>"; };
 		70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailTVC.swift; sourceTree = "<group>"; };
+		70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+ApplyEdit.swift"; sourceTree = "<group>"; };
 		71C1F406B5B563EF89E70B6C /* Pods_AtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823922B5C40C72978266EF0B /* Pods_Atracker_AtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker_AtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		875AD423A55E3481C085DAD0 /* Pods_Atracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,16 +521,8 @@
 			isa = PBXGroup;
 			children = (
 				70A2F6B92834C54500E6B95B /* Secret */,
-				70A2F6B82834C53A00E6B95B /* Const */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		70A2F6B82834C53A00E6B95B /* Const */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Const;
 			sourceTree = "<group>";
 		};
 		70A2F6B92834C54500E6B95B /* Secret */ = {
@@ -591,13 +585,6 @@
 			path = Blog;
 			sourceTree = "<group>";
 		};
-		70A2F6D02834D0AF00E6B95B /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		70A2F6D72834D2A000E6B95B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,20 +644,10 @@
 		70CF5B8A2847A7DC0098C742 /* Apply */ = {
 			isa = PBXGroup;
 			children = (
-				70CF5B8B2847A9110098C742 /* View */,
 				70CF5B8C2847A9390098C742 /* ViewController */,
 				70A2F6D72834D2A000E6B95B /* ViewModel */,
 			);
 			path = Apply;
-			sourceTree = "<group>";
-		};
-		70CF5B8B2847A9110098C742 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B9A2847AE5A0098C742 /* Component */,
-				70A2F6D02834D0AF00E6B95B /* Cell */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		70CF5B8C2847A9390098C742 /* ViewController */ = {
@@ -725,25 +702,9 @@
 		70CF5B922847AA0D0098C742 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				70CF5B932847AA1E0098C742 /* View */,
-				70CF5B942847AA250098C742 /* ViewController */,
 				70CF5B972847AAE30098C742 /* ViewModel */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		70CF5B932847AA1E0098C742 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		70CF5B942847AA250098C742 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		70CF5B952847AA490098C742 /* Button */ = {
@@ -790,18 +751,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		70CF5B9A2847AE5A0098C742 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
 		70FBE5102852E3DD00455A4B /* View */ = {
 			isa = PBXGroup;
 			children = (
 				70FBE5132852E68400455A4B /* Apply */,
 				70322DEF2854E2A500EA0EF7 /* ApplyDetail */,
+				70FD6DD328577FDE0050ADB8 /* ApplyEdit */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -839,8 +794,16 @@
 				70FBE52628537A8000455A4B /* ApplyDetailRouter.swift */,
 				70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */,
 				70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */,
+				70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */,
 			);
 			path = ApplyDetail;
+			sourceTree = "<group>";
+		};
+		70FD6DD328577FDE0050ADB8 /* ApplyEdit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ApplyEdit;
 			sourceTree = "<group>";
 		};
 		7A544D46B65CB50D8A063A7E /* Pods */ = {
@@ -1168,6 +1131,7 @@
 				703FB04128486CD900BF4E32 /* ApplySummaryView.swift in Sources */,
 				7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */,
 				70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */,
+				70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */,
 				70A88E852851BBE80027D673 /* PlanBuilder.swift in Sources */,
 				701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,

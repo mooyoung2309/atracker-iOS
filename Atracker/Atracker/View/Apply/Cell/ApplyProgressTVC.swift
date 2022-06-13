@@ -19,7 +19,7 @@ class ApplyProgressTVC: BaseTVC {
         $0.font = .systemFont(ofSize: 13, weight: .regular)
     }
     var progressBarView = HorizontalBarChartView()
-    var barChartView = BarChatView()
+    var barChartView = BarChatView(.horizontal)
     
     func update(apply: Apply) {
         companyLabel.text = apply.companyName

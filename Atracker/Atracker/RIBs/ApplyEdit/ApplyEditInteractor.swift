@@ -19,6 +19,7 @@ protocol ApplyEditPresentable: Presentable {
 
 protocol ApplyEditListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func goBackToApplyDetailRIB()
 }
 
 final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, ApplyEditInteractable, ApplyEditPresentableListener {
@@ -26,10 +27,13 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     weak var router: ApplyEditRouting?
     weak var listener: ApplyEditListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: ApplyEditPresentable) {
+    let apply: Apply
+    
+    init(presenter: ApplyEditPresentable, apply: Apply) {
+        self.apply = apply
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -41,5 +45,10 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func didTapBackButton() {
+        Log("")
+        listener?.goBackToApplyDetailRIB()
     }
 }

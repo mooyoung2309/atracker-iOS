@@ -10,7 +10,6 @@ import RxSwift
 import UIKit
 
 protocol ApplyPresentableListener: AnyObject {
-    func didTabApplyEdit()
     func didTabCell(apply: Apply)
 }
 
@@ -44,10 +43,7 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     override func setupReload() {
         view.backgroundColor = .backgroundGray
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        tabBarController?.tabBar.barTintColor = .backgroundGray
-        tabBarController?.tabBar.isTranslucent = false
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         refreshTableView(tableView: selfView.tableView)
     }
     
@@ -76,11 +72,11 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     override func setupBind() {
         super.setupBind()
-        selfView.plusButton.rx.tap
-        .bind { [weak self] _ in
-            self?.listener?.didTabApplyEdit()
-        }
-        .disposed(by: disposeBag)
+//        selfView.plusButton.rx.tap
+//        .bind { [weak self] _ in
+//            self?.listener?.didTabApplyEdit()
+//        }
+//        .disposed(by: disposeBag)
     }
 }
 

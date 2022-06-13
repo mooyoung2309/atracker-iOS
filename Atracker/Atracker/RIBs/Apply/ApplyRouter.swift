@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ApplyInteractable: Interactable, ApplyEditListener, ApplyDetailListener {
+protocol ApplyInteractable: Interactable, ApplyDetailListener {
     var router: ApplyRouting? { get set }
     var listener: ApplyListener? { get set }
 }
@@ -24,6 +24,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private var child: ViewableRouting?
     private var applyEdit: ViewableRouting?
     private var applyDetail: ViewableRouting?
+    private var apply: Apply?
     
     init(interactor: ApplyInteractable,
          viewController: ApplyViewControllable,
@@ -38,16 +39,8 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         interactor.router = self
     }
     
-    func routeToApplyEdit() {
-        let applyEdit = applyEditBuilder.build(withListener: interactor)
-        self.applyEdit = applyEdit
-        
-        detachChildRIB()
-        attachChild(applyEdit)
-        viewController.replace(rib: applyEdit)
-    }
-    
     func attachApplyDetailRIB(apply: Apply) {
+        self.apply = apply
         let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
         self.applyDetail = applyDetail
         
@@ -55,11 +48,26 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         attachChild(applyDetail)
         viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
                                transitionSubType: .fromRight)
+        
+        child = applyDetail
+    }
+    
+    func reAttachApplyDetailRIB() {
+        guard let apply = apply else { return }
+        let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
+        self.applyDetail = applyDetail
+        
+        detachChildRIB()
+        attachChild(applyDetail)
+        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
+                               transitionSubType: .fromLeft)
+        
+        child = applyDetail
+        child = applyDetail
     }
     
     func detachChildRIB() {
         guard let child = child else { return }
-        
         detachChild(child)
     }
 }

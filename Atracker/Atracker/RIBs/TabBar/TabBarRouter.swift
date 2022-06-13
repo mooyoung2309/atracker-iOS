@@ -22,7 +22,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     private let applyBuilder: ApplyBuildable
     private let planBuilder: PlanBuildable
     
-    private var current: Routing?
+    private var child: Routing?
     private var blog: ViewableRouting
     private var apply: ViewableRouting
     private var plan: ViewableRouting
@@ -46,41 +46,45 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         interactor.router = self
     }
     
+    func detachChildRIB() {
+        guard let child = child else { return }
+        
+        detachChild(child)
+    }
+    
     func attachBlogRIB() {
-        if let current = current {
-            detachChild(current)
-        }
-        current = blog
+        detachChildRIB()
         attachChild(blog)
         viewController.replace(viewController: blog.viewControllable.uiviewController)
+        
+        child = blog
     }
     
     func attachApplyRIB() {
-        if let current = current {
-            detachChild(current)
-        }
-        current = apply
+        detachChildRIB()
         attachChild(apply)
         viewController.replace(viewController: apply.viewControllable.uiviewController)
+        
+        child = apply
     }
     
     func attachPlanRIB() {
-        if let current = current {
-            detachChild(current)
-        }
-        current = plan
+        detachChildRIB()
         attachChild(plan)
         viewController.replace(viewController: plan.viewControllable.uiviewController)
+        
+        child = plan
     }
     
     func attachApplyRIBfromOtherRIB() {
-        if let current = current {
-            detachChild(current)
-        }
         let apply = applyBuilder.build(withListener: interactor)
         self.apply = apply
+        
+        detachChildRIB()
         attachChild(apply)
         viewController.replace(viewController: apply.viewControllable.uiviewController,
                                transitionSubType: .fromLeft)
+        
+        child = apply
     }
 }

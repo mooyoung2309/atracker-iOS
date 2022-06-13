@@ -9,6 +9,7 @@ import RIBs
 import RxSwift
 
 protocol TabBarRouting: ViewableRouting {
+    func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
     func attachPlanRIB()
