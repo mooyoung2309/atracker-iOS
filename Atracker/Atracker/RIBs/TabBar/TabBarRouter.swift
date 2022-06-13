@@ -46,85 +46,41 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         interactor.router = self
     }
     
-    func routeToBlog() {
+    func attachBlogRIB() {
         if let current = current {
             detachChild(current)
         }
         current = blog
         attachChild(blog)
-        viewController.replace(rib: blog)
+        viewController.replace(viewController: blog.viewControllable.uiviewController)
     }
     
-    func routeToApply() {
+    func attachApplyRIB() {
         if let current = current {
             detachChild(current)
         }
         current = apply
         attachChild(apply)
-        viewController.replace(rib: apply)
+        viewController.replace(viewController: apply.viewControllable.uiviewController)
     }
     
-    func routeToPlan() {
+    func attachPlanRIB() {
         if let current = current {
             detachChild(current)
         }
         current = plan
         attachChild(plan)
-        viewController.replace(rib: plan)
+        viewController.replace(viewController: plan.viewControllable.uiviewController)
     }
     
-    func attachApplyRIB() {
-        Log("")
+    func attachApplyRIBfromOtherRIB() {
         if let current = current {
             detachChild(current)
         }
         let apply = applyBuilder.build(withListener: interactor)
         self.apply = apply
         attachChild(apply)
-        viewController.replace(rib: apply)
+        viewController.replace(viewController: apply.viewControllable.uiviewController,
+                               transitionSubType: .fromLeft)
     }
-    
-//    func routeToBlog() {
-//        var blogRouting: BlogRouting!
-//
-//        if let blog = self.blog as? BlogRouting {
-//            blogRouting = blog
-//        } else {
-//            blogRouting = blogBuilder.build(withListener: interactor)
-//            blog = blogRouting
-//        }
-//        detachChild(<#T##child: Routing##Routing#>)
-//        attachChild(blogRouting)
-//        viewController.replace(rib: blogRouting)
-//    }
-//
-//    func routeToApply() {
-//        var applyRouting: ApplyRouting!
-//
-//        if let apply = self.apply as? ApplyRouting {
-//            applyRouting = apply
-//        } else {
-//            applyRouting = applyBuilder.build(withListener: interactor)
-//            apply = applyRouting
-//        }
-//
-//        attachChild(applyRouting)
-//        viewController.replace(rib: applyRouting)
-////        viewController.present(viewController: applyRouting.viewControllable)
-//    }
-//
-//    func routeToPlan() {
-//        var planRouting: PlanRouting!
-//
-//        if let plan = self.plan as? PlanRouting {
-//            planRouting = plan
-//        } else {
-//            planRouting = planBuilder.build(withListener: interactor)
-//            plan = planRouting
-//        }
-//
-//        attachChild(planRouting)
-//        viewController.replace(rib: planRouting)
-////        viewController.present(viewController: planRouting.viewControllable)
-//    }
 }

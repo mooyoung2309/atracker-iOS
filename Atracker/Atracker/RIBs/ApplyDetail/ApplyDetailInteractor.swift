@@ -20,15 +20,11 @@ protocol ApplyDetailPresentable: Presentable {
 
 protocol ApplyDetailListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func back()
+    func goBackToApplyRIB()
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
-    func didBackButton() {
-        listener?.back()
-    }
     
-
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
@@ -53,7 +49,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     func setNavigaionTitle() {
-        Log(apply)
         presenter.setNavigaionBarTitle(apply.companyName)
+    }
+    
+    func didBackButton() {
+        listener?.goBackToApplyRIB()
     }
 }

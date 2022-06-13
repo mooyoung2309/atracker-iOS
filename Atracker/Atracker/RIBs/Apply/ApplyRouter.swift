@@ -21,7 +21,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private let applyEditBuilder: ApplyEditBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
     
-    private var current: Routing?
+    private var child: ViewableRouting?
     private var applyEdit: ViewableRouting?
     private var applyDetail: ViewableRouting?
     
@@ -38,30 +38,28 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         interactor.router = self
     }
     
-    func routeToSelf() {
-        if let current = current {
-            detachChild(current)
-        }
-    }
-    
     func routeToApplyEdit() {
-        if let current = current {
-            detachChild(current)
-        }
         let applyEdit = applyEditBuilder.build(withListener: interactor)
         self.applyEdit = applyEdit
+        
+        detachChildRIB()
         attachChild(applyEdit)
         viewController.replace(rib: applyEdit)
     }
     
-    func routeToApplyDetail(apply: Apply) {
-        Log(apply)
-        if let current = current {
-            detachChild(current)
-        }
+    func attachApplyDetailRIB(apply: Apply) {
         let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
         self.applyDetail = applyDetail
+        
+        detachChildRIB()
         attachChild(applyDetail)
-        viewController.replace(rib: applyDetail)
+        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
+                               transitionSubType: .fromRight)
+    }
+    
+    func detachChildRIB() {
+        guard let child = child else { return }
+        
+        detachChild(child)
     }
 }

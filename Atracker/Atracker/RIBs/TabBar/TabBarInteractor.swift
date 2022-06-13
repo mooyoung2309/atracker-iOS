@@ -9,10 +9,10 @@ import RIBs
 import RxSwift
 
 protocol TabBarRouting: ViewableRouting {
-    func routeToBlog()
-    func routeToApply()
-    func routeToPlan()
+    func attachBlogRIB()
     func attachApplyRIB()
+    func attachPlanRIB()
+    func attachApplyRIBfromOtherRIB()
 }
 
 protocol TabBarPresentable: Presentable {
@@ -43,19 +43,18 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     }
     
     func didTabBlog() {
-        router?.routeToBlog()
+        router?.attachBlogRIB()
     }
     
     func didTabApply() {
-        router?.routeToApply()
+        router?.attachApplyRIB()
     }
     
     func didTabPlan() {
-        router?.routeToPlan()
+        router?.attachPlanRIB()
     }
     
-    func routeToApply() {
-        Log("")
-        router?.attachApplyRIB()
+    func goBackToApplyRIB() {
+        router?.attachApplyRIBfromOtherRIB()
     }
 }

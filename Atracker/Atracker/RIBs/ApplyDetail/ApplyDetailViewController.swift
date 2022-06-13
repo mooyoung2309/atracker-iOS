@@ -17,11 +17,11 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     var contentView: UIView {
         return mainView
     }
-    
 
     weak var listener: ApplyDetailPresentableListener?
     
     let selfView = ApplyDetailView()
+    let mockUps = ["테스트 글 1", "테스트 글 2", "테스트 글 3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,9 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     
     override func setupProperty() {
         super.setupProperty()
+        
+        selfView.tableView.delegate     = self
+        selfView.tableView.dataSource   = self
     }
     
     override func setupHierarchy() {
@@ -59,5 +62,23 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
                 self?.listener?.didBackButton()
             }
             .disposed(by: disposeBag)
+    }
+}
+
+extension ApplyDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mockUps.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyDetailTVC.id, for: indexPath) as? ApplyDetailTVC else { return UITableViewCell() }
+        
+        cell.update()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Log(indexPath.row)
     }
 }
