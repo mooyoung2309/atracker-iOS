@@ -29,8 +29,8 @@ class ApplyEditVM: ViewModel {
         let isClickedPlusReviewButton = PublishRelay<Bool>()
         let isClickedDeleteButton = PublishRelay<Bool>()
         let selectedTypeIndex = BehaviorRelay(value: 0)
-        let applicationProgresses = BehaviorRelay(value: Const.Test.ApplicationProgressTests)
-        let applyZips = BehaviorRelay(value: Const.Test.applyZips)
+        let applicationProgresses = BehaviorRelay(value: ConstISOLDCODE.Test.ApplicationProgressTests)
+        let applyZips = BehaviorRelay(value: ConstISOLDCODE.Test.applyZips)
         let applyZip = BehaviorRelay(value: ApplyZipISOLDCODE(applyType: "", applies: []))
     }
     

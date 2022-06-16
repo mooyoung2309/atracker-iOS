@@ -14,23 +14,29 @@ protocol ApplyEditRouting: ViewableRouting {
 
 protocol ApplyEditPresentable: Presentable {
     var listener: ApplyEditPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    
+    func setNavigaionBarTitle(_ text: String)
+    func highlightStageStatusButton(status: StageProgressStatus)
+    func showStageStatusButtonBar()
+    func showDeleteButtonBar()
+    func showStageContentList(_ stageContentList: [StageContent])
 }
 
 protocol ApplyEditListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func goBackToApplyDetailRIB()
 }
 
 final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, ApplyEditInteractable, ApplyEditPresentableListener {
-
+    
     weak var router: ApplyEditRouting?
     weak var listener: ApplyEditListener?
 
     let apply: Apply
+    var edittedApply: Apply
     
     init(presenter: ApplyEditPresentable, apply: Apply) {
-        self.apply = apply
+        self.apply          = apply
+        self.edittedApply   = apply
         
         super.init(presenter: presenter)
         
@@ -39,7 +45,9 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
+        presenter.setNavigaionBarTitle(apply.companyName)
+        reloadTableView(stageProgressTitle: "전형 0")
     }
 
     override func willResignActive() {
@@ -48,7 +56,36 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     }
     
     func didTapBackButton() {
-        Log("")
         listener?.goBackToApplyDetailRIB()
+    }
+    
+    func reloadTableView(stageProgressTitle: String) {
+        guard let stageProgress = edittedApply.stageProgress.first(where: { $0.title == stageProgressTitle}) else {
+            return
+        }
+        
+        presenter.showStageContentList([stageProgress.stageContent])
+    }
+    
+    func tapStageStatusButton(status: StageProgressStatus) {
+        switch status {
+        case .notStarted:
+            presenter.highlightStageStatusButton(status: .notStarted)
+            return
+        case .fail:
+            presenter.highlightStageStatusButton(status: .fail)
+            return
+        case .pass:
+            presenter.highlightStageStatusButton(status: .pass)
+            return
+        }
+    }
+    
+    func tapEditButton() {
+        presenter.showDeleteButtonBar()
+    }
+    
+    func tapEditCompleteButton() {
+        presenter.showStageStatusButtonBar()
     }
 }

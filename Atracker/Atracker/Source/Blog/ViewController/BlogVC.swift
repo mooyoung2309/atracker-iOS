@@ -11,7 +11,7 @@ class BlogVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Const.Color.mint
+        view.backgroundColor = ConstISOLDCODE.Color.mint
         setView()
     }
 }

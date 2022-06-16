@@ -99,7 +99,6 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Log(applyList[indexPath.row])
         self.listener?.didTabCell(apply: applyList[indexPath.row])
     }
 }

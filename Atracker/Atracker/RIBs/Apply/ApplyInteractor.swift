@@ -66,7 +66,6 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func goBackToApplyDetailRIB() {
-        Log("")
         router?.reAttachApplyDetailRIB()
     }
 

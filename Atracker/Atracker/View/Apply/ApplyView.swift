@@ -125,8 +125,4 @@ class ApplyView: BaseView {
             $0.bottom.equalToSuperview()
         }
     }
-    
-    override func setupBind() {
-        super.setupBind()
-    }
 }

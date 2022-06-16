@@ -26,6 +26,8 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     let selfView = ApplyDetailView()
     let mockUps = 0...30
     
+    private var apply: Apply?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

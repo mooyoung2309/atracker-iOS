@@ -5,6 +5,19 @@
 //  Created by 송영모 on 2022/06/10.
 //
 
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let apply = try? newJSONDecoder().decode(Apply.self, from: jsonData)
+
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let apply = try? newJSONDecoder().decode(Apply.self, from: jsonData)
+
+import Foundation
+
+// MARK: - Apply
 struct Apply: Codable {
     let applyID, companyID: Int
     let companyName, jobPosition: String
@@ -19,10 +32,28 @@ struct Apply: Codable {
     }
 }
 
+// MARK: - StageProgress
 struct StageProgress: Codable {
-    let content: String
     let id: Int
+    let title: String
+    let stageContent: StageContent
     let status: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case stageContent = "stage_content"
+        case status
+    }
 }
 
-typealias Applies = [Apply]
+// MARK: - StageContent
+struct StageContent: Codable {
+    let contentType: String
+    var content: String
+
+    enum CodingKeys: String, CodingKey {
+        case content
+        case contentType = "content_type"
+    }
+}

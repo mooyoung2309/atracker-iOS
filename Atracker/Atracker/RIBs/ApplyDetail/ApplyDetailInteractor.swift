@@ -41,16 +41,12 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        setNavigaionTitle()
+        presenter.setNavigaionBarTitle(apply.companyName)
     }
 
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
-    }
-    
-    func setNavigaionTitle() {
-        presenter.setNavigaionBarTitle(apply.companyName)
     }
     
     func didBackButton() {
