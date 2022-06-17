@@ -9,7 +9,8 @@ import RIBs
 import RxSwift
 
 protocol ApplyDetailRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func detachChildRIB()
+    func attachApplyEditRIB(apply: Apply)
 }
 
 protocol ApplyDetailPresentable: Presentable {
@@ -21,6 +22,7 @@ protocol ApplyDetailPresentable: Presentable {
 protocol ApplyDetailListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func goBackToApplyRIB()
+    func goBackToApplyDetailRIB()
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
@@ -31,7 +33,6 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     let apply: Apply
     
     init(presenter: ApplyDetailPresentable, apply: Apply) {
-        Log(apply)
         self.apply = apply
         super.init(presenter: presenter)
         presenter.listener = self
@@ -40,7 +41,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        setNavigaionTitle()
+        presenter.setNavigaionBarTitle(apply.companyName)
     }
 
     override func willResignActive() {
@@ -48,11 +49,16 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         // TODO: Pause any business logic.
     }
     
-    func setNavigaionTitle() {
-        presenter.setNavigaionBarTitle(apply.companyName)
-    }
-    
     func didBackButton() {
         listener?.goBackToApplyRIB()
+    }
+    
+    func didEditButton() {
+        router?.attachApplyEditRIB(apply: apply)
+    }
+    
+    func goBackToApplyDetailRIB() {
+        router?.detachChildRIB()
+        listener?.goBackToApplyDetailRIB()
     }
 }

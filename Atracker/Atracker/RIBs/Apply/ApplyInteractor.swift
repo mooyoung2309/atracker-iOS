@@ -9,8 +9,8 @@ import RIBs
 import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
-    func routeToApplyEdit()
     func attachApplyDetailRIB(apply: Apply)
+    func reAttachApplyDetailRIB()
     func detachChildRIB()
 }
 
@@ -49,10 +49,6 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         // TODO: Pause any business logic.
     }
     
-    func didTabApplyEdit() {
-        router?.routeToApplyEdit()
-    }
-    
     func didTabCell(apply: Apply) {
         router?.attachApplyDetailRIB(apply: apply)
     }
@@ -67,6 +63,10 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     func goBackToApplyRIB() {
         router?.detachChildRIB()
         listener?.goBackToApplyRIB()
+    }
+    
+    func goBackToApplyDetailRIB() {
+        router?.reAttachApplyDetailRIB()
     }
 
 }

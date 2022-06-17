@@ -24,8 +24,39 @@ class ApplyService: ApplyServiceProtocol {
     private func makeStageProgressList(count: Int) -> [StageProgress] {
         var stageProgressList: [StageProgress] = []
         
+        
         for i in 0..<count {
-            let stageProgress = StageProgress(content: "테스트 컨텐츠 \(i)", id: i, status: "테스트 상태 \(i)")
+            var stageContent: StageContent
+            var stageProgressStatus: String
+            
+            if Bool.random() {
+                stageContent = StageContent(contentType: StageContentType.qna.code,
+                                            content: "QNA 테스트")
+            } else {
+                stageContent = StageContent(contentType: StageContentType.free.code,
+                                            content: "FREE 테스트")
+            }
+            
+            switch Int.random(in: 0...2) {
+            case 0:
+                stageProgressStatus = StageProgressStatus.notStarted.code
+                break
+            case 1:
+                stageProgressStatus = StageProgressStatus.pass.code
+                break
+            case 2:
+                stageProgressStatus = StageProgressStatus.fail.code
+                break
+            default:
+                stageProgressStatus = StageProgressStatus.notStarted.code
+                break
+            }
+            
+            let stageProgress = StageProgress(id: i,
+                                              title: "전형 \(i)",
+                                              stageContent: stageContent,
+                                              status: stageProgressStatus)
+
             stageProgressList.append(stageProgress)
         }
         
@@ -37,7 +68,11 @@ class ApplyService: ApplyServiceProtocol {
         
         for i in 0..<count {
             let stageProgressList = makeStageProgressList(count: Int.random(in: 2...10))
-            let apply = Apply(applyID: i, companyID: i, companyName: "테스트 회사이름 \(i)", jobPosition: "테스트 잡포지션 \(i)", stageProgress: stageProgressList)
+            let apply = Apply(applyID: i,
+                              companyID: i,
+                              companyName: "테스트 회사이름 \(i)",
+                              jobPosition: "테스트 잡포지션 \(i)",
+                              stageProgress: stageProgressList)
             
             applyList.append(apply)
         }

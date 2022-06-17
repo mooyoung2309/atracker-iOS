@@ -21,7 +21,7 @@ class ApplySummaryTVC: UITableViewCell {
         $0.font = .systemFont(ofSize: 13, weight: .regular)
     }
     var progressBarView = HorizontalBarChartView()
-    var barView = BarChatView()
+    var barView = BarChatView(.horizontal)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

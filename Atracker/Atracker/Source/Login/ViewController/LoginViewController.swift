@@ -11,7 +11,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Const.Color.white
+        view.backgroundColor = ConstISOLDCODE.Color.white
         setView()
     }
 }

@@ -36,14 +36,15 @@ final class ApplyDetailBuilder: Builder<ApplyDetailDependency>, ApplyDetailBuild
     }
 
     func build(withListener listener: ApplyDetailListener, apply: Apply) -> ApplyDetailRouting {
-        let component       = ApplyDetailComponent(dependency: dependency, apply: apply)
-        let viewController  = ApplyDetailViewController()
-        let interactor      = ApplyDetailInteractor(presenter: viewController,
-                                                    apply: apply)
+        let component           = ApplyDetailComponent(dependency: dependency, apply: apply)
+        let viewController      = ApplyDetailViewController()
+        let interactor          = ApplyDetailInteractor(presenter: viewController, apply: apply)
+        let applyEditBuilder    = ApplyEditBuilder(dependency: component)
         
-        interactor.listener = listener
+        interactor.listener     = listener
         
         return ApplyDetailRouter(interactor: interactor,
-                                 viewController: viewController)
+                                 viewController: viewController,
+                                 applyEditBuilder: applyEditBuilder)
     }
 }

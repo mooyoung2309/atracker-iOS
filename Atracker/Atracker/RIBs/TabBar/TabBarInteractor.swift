@@ -9,6 +9,7 @@ import RIBs
 import RxSwift
 
 protocol TabBarRouting: ViewableRouting {
+    func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
     func attachPlanRIB()
@@ -35,6 +36,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     override func didBecomeActive() {
         super.didBecomeActive()
         
+//        router?.attachApplyRIB()
     }
 
     override func willResignActive() {

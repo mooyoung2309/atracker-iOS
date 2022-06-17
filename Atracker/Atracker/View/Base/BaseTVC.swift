@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BaseTVC: UITableViewCell {
+class BaseTVC: UITableViewCell, BaseViewProtocol {
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
     }
@@ -19,7 +19,6 @@ class BaseTVC: UITableViewCell {
         setupProperty()
         setupHierarchy()
         setupLayout()
-        setupBind()
     }
     
     func update() { }
@@ -29,6 +28,4 @@ class BaseTVC: UITableViewCell {
     func setupHierarchy() { }
     
     func setupLayout() { }
-    
-    func setupBind() { }
 }
