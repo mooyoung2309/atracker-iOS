@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum TabBarItem: String {
     case blog   = "블로그"
@@ -43,4 +44,3 @@ enum StageContentType: String {
         }
     }
 }
-
