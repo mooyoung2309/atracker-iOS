@@ -19,17 +19,22 @@ protocol ApplyEditPresentableListener: AnyObject {
     func tapStageStatusButton(status: StageProgressStatus)
     func tapEditButton()
     func tapEditCompleteButton()
+    func tapDeleteButton()
+    func tapAlertBackButton()
+    func tapAlertNextButton()
 }
 
 final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPresentable, ApplyEditViewControllable {
     
     weak var listener: ApplyEditPresentableListener?
     
-    let selfView = ApplyEditView()
-    let collectionMockUps = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성 검사", "최종 면접"]
-    let tableMockUps = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let selfView            = ApplyEditView()
+    var alertView           = AlertView(style: .delete, i: 0)
+    let collectionMockUps   = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성 검사", "최종 면접"]
+    let tableMockUps        = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     
-    private var stageContentList: [StageContent] = []
+    private var stageContentList: [StageContent]    = []
+    private var isEditButtonClicked                 = false
     
     func highlightStageStatusButton(status: StageProgressStatus) {
         selfView.stageStatusButtonBar.notStartedButton.isSelected   = false
@@ -65,6 +70,40 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
         selfView.reviewDeleteButtonBar.isHidden = false
     }
     
+    func showCheckButton() {
+        self.isEditButtonClicked = false
+        selfView.tableView.reloadData()
+        refreshTableView(tableView: selfView.tableView)
+    }
+    
+    func hideCheckButton() {
+        self.isEditButtonClicked = true
+        selfView.tableView.reloadData()
+        refreshTableView(tableView: selfView.tableView)
+    }
+    
+    func showAlertView(i: Int) {
+        alertView = AlertView(style: .delete, i: i)
+        mainContentView.addSubview(alertView)
+        
+        alertView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        alertView.isAlertBack { [weak self] _ in
+            self?.listener?.tapAlertBackButton()
+        }
+        
+        alertView.isAlertNext { [weak self] _ in
+            self?.listener?.tapAlertNextButton()
+        }
+    }
+    
+    func hideAlertView() {
+        alertView.removeFromSuperview()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +125,7 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
         selfView.tableView.dataSource       = self
         selfView.collectionView.delegate    = self
         selfView.collectionView.dataSource  = self
+        
     }
     
     override func setupHierarchy() {
@@ -136,8 +176,13 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
         
         selfView.reviewDeleteButtonBar.editCompleteButton.rx.tap
             .bind { [weak self] _ in
-                Log("")
                 self?.listener?.tapEditCompleteButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.reviewDeleteButtonBar.deleteButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapDeleteButton()
             }
             .disposed(by: disposeBag)
     }
@@ -192,7 +237,15 @@ extension ApplyEditViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewEditTVC.id, for: indexPath) as? ReviewEditTVC else {
             return UITableViewCell()
         }
+        
         cell.update(stageContent: stageContentList[indexPath.item])
+        
+        if isEditButtonClicked {
+            cell.hideCheckButton()
+        } else {
+            cell.showCheckButton()
+            
+        }
         
         cell.selectionStyle = .none
         cell.textChanged {

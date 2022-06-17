@@ -8,10 +8,12 @@
 import Foundation
 
 struct ImageName {
-    static let check        = "Check"
-    static let warning      = "Warning"
-    static let user         = "User"
-    static let notification = "Notification"
-    static let home         = "Home"
-    static let back         = "Back"
+    static let check            = "Check"
+    static let warning          = "Warning"
+    static let user             = "User"
+    static let notification     = "Notification"
+    static let home             = "Home"
+    static let back             = "Back"
+    static let checkBox         = "CheckBox"
+    static let selectedCheckBox = "SelectedCheckBox"
 }
