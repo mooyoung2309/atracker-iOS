@@ -20,10 +20,6 @@ protocol ApplyEditPresentable: Presentable {
     func showStageStatusButtonBar()
     func showDeleteButtonBar()
     func showStageContentList(_ stageContentList: [StageContent])
-    func showCheckButton()
-    func hideCheckButton()
-    func showAlertView(i: Int)
-    func hideAlertView()
 }
 
 protocol ApplyEditListener: AnyObject {
@@ -35,9 +31,8 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     weak var router: ApplyEditRouting?
     weak var listener: ApplyEditListener?
 
-    private let apply: Apply
-    private var edittedApply: Apply
-    private var isEditting: Bool = false
+    let apply: Apply
+    var edittedApply: Apply
     
     init(presenter: ApplyEditPresentable, apply: Apply) {
         self.apply          = apply
@@ -53,7 +48,6 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
         
         presenter.setNavigaionBarTitle(apply.companyName)
         reloadTableView(stageProgressTitle: "전형 0")
-        presenter.hideCheckButton()
     }
 
     override func willResignActive() {
@@ -89,24 +83,9 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     
     func tapEditButton() {
         presenter.showDeleteButtonBar()
-        presenter.showCheckButton()
     }
     
     func tapEditCompleteButton() {
         presenter.showStageStatusButtonBar()
-        presenter.hideCheckButton()
-    }
-    
-    func tapDeleteButton() {
-        Log("")
-        presenter.showAlertView(i: 78)
-    }
-    
-    func tapAlertBackButton() {
-        presenter.hideAlertView()
-    }
-    
-    func tapAlertNextButton() {
-        Log("")
     }
 }

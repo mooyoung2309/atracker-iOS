@@ -15,7 +15,6 @@
 		7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C88D28449B550091B225 /* ApplyEditView.swift */; };
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
-		700F34FD285C523600F16DA6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F34FC285C523600F16DA6 /* AlertView.swift */; };
 		701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21B2849C197009230CE /* ApplyRouter.swift */; };
 		701CE2202849C197009230CE /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21C2849C197009230CE /* ApplyViewController.swift */; };
 		701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21D2849C197009230CE /* ApplyBuilder.swift */; };
@@ -54,7 +53,6 @@
 		7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D0283B59900048C068 /* UILabel+Ext.swift */; };
 		7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D2283B59A60048C068 /* UIView+Ext.swift */; };
 		7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7046E3D4283B59BF0048C068 /* UIStackView+Ext.swift */; };
-		705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705CCCFE285C5B3700E79540 /* AlertStyle.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
 		707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */; };
 		707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD253283CAAA5000E7EE7 /* TextButton.swift */; };
@@ -156,7 +154,6 @@
 		7005C88D28449B550091B225 /* ApplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditView.swift; sourceTree = "<group>"; };
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
-		700F34FC285C523600F16DA6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		701CE21B2849C197009230CE /* ApplyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRouter.swift; sourceTree = "<group>"; };
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
 		701CE21D2849C197009230CE /* ApplyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyBuilder.swift; sourceTree = "<group>"; };
@@ -195,7 +192,6 @@
 		7046E3D0283B59900048C068 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		7046E3D2283B59A60048C068 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		7046E3D4283B59BF0048C068 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
-		705CCCFE285C5B3700E79540 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
 		707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSizedRoundButton.swift; sourceTree = "<group>"; };
 		707CD253283CAAA5000E7EE7 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
@@ -427,17 +423,8 @@
 			isa = PBXGroup;
 			children = (
 				70443B2D285899A3009EE223 /* RoundButton.swift */,
-				700F34FC285C523600F16DA6 /* AlertView.swift */,
 			);
 			path = Reusable;
-			sourceTree = "<group>";
-		};
-		705CCD00285C5B4500E79540 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				705CCCFE285C5B3700E79540 /* AlertStyle.swift */,
-			);
-			path = Enum;
 			sourceTree = "<group>";
 		};
 		7088413D2835F68F0024135D /* Cell */ = {
@@ -554,7 +541,6 @@
 		70A2F6BB2834C56900E6B95B /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				705CCD00285C5B4500E79540 /* Enum */,
 				70A2F6DC2834D6B100E6B95B /* Log.swift */,
 				70FBE5112852E58B00455A4B /* Size.swift */,
 				70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */,
@@ -1090,7 +1076,6 @@
 				7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */,
 				70A88E6E2851A4A90027D673 /* BlogInteractor.swift in Sources */,
 				707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */,
-				705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */,
 				70A2F6D92834D35D00E6B95B /* ApplyVM.swift in Sources */,
 				707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */,
 				7005BD17283549B3008E380A /* ApplyDetailVC.swift in Sources */,
@@ -1170,7 +1155,6 @@
 				70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				70A88E832851BBE80027D673 /* PlanRouter.swift in Sources */,
-				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
 				7088413F2835F6AC0024135D /* CalendarCollectionViewAdaptor.swift in Sources */,
 				70970023283D363B000F4B89 /* QAWriteView.swift in Sources */,
 				70A2F6C52834C75700E6B95B /* ApplyVC.swift in Sources */,

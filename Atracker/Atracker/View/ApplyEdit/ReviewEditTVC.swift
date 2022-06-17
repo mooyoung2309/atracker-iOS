@@ -15,7 +15,6 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
     let checkButton                 = UIButton(type: .system)
     let qnaStageContentEditView     = QnaStageContentEditView()
     let freeStageContentEditView    = FreeStageContentEditView()
-    var editView                    = UIView()
     
     var textChanged: ((String) -> Void)?
     var isChecked: ((Bool) -> Void)?
@@ -26,6 +25,8 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
     
     func update(stageContent: StageContent) {
         super.update()
+        
+        var editView: UIView
         
         switch stageContent.contentType {
         case StageContentType.qna.code:
@@ -51,28 +52,17 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
         stackView.addArrangedSubviews([checkButtonView, editView])
     }
     
-    func showCheckButton() {
-        stackView.subviews.forEach({ $0.removeFromSuperview() })
-        stackView.addArrangedSubviews([checkButtonView, editView])
-    }
-    
-    func hideCheckButton() {
-        stackView.subviews.forEach({ $0.removeFromSuperview() })
-        stackView.addArrangedSubviews([editView])
-    }
-    
     override func setupProperty() {
         backgroundColor = .backgroundGray
         
         stackView.spacing = 0
         
-        let selectedImage   = UIImage(named: ImageName.selectedCheckBox)?.withTintColor(.neonGreen, renderingMode: .alwaysOriginal)
-        
-        checkButton.setImage(UIImage(named: ImageName.checkBox), for: .normal)
-        checkButton.setImage(selectedImage, for: .highlighted)
-        checkButton.setImage(selectedImage, for: .selected)
+        checkButton.setImage(UIImage(named: ImageName.check), for: .normal)
+        checkButton.setImage(UIImage(named: ImageName.check), for: .normal)
         checkButton.layer.borderColor   = UIColor.gray3.cgColor
-        checkButton.contentEdgeInsets   = UIEdgeInsets(top: 13, left: 0, bottom: 13, right: 13)
+        checkButton.layer.cornerRadius  = 3
+        checkButton.layer.borderWidth   = 1
+        checkButton.contentEdgeInsets   = UIEdgeInsets(top: 13, left: 13, bottom: 13, right: 13)
     }
     
     override func setupHierarchy() {
@@ -86,8 +76,7 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
         checkButton.snp.makeConstraints {
