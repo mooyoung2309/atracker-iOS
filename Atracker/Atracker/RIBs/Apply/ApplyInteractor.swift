@@ -10,6 +10,7 @@ import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
+    func attachApplyWriteRIB()
     func reAttachApplyDetailRIB()
     func detachChildRIB()
 }
@@ -21,6 +22,7 @@ protocol ApplyPresentable: Presentable {
 
 protocol ApplyListener: AnyObject {
     func goBackToApplyRIB()
+    func goToApplyWriteRIB()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
@@ -51,6 +53,11 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     
     func didTabCell(apply: Apply) {
         router?.attachApplyDetailRIB(apply: apply)
+    }
+    
+    func tapPlusButton() {
+        router?.detachChildRIB()
+        listener?.goToApplyWriteRIB()
     }
     
     func reloadApplyList() {

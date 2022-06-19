@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, PlanListener {
+protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, ApplyWriteListener, PlanListener {
     var router: TabBarRouting? { get set }
     var listener: TabBarListener? { get set }
 }
@@ -20,22 +20,26 @@ protocol TabBarViewControllable: ContainerViewControllable {
 final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControllable>, TabBarRouting {
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
+    private let applyWriteBuilder: ApplyWriteBuildable
     private let planBuilder: PlanBuildable
     
     private var child: Routing?
     private var blog: ViewableRouting
     private var apply: ViewableRouting
+    private var applyWrite: ViewableRouting?
     private var plan: ViewableRouting
     
     init(interactor: TabBarInteractable,
-                  viewController: TabBarViewControllable,
-                  blogBuilder: BlogBuildable,
-                  applyBuilder: ApplyBuildable,
-                  planBuilder: PlanBuildable) {
+         viewController: TabBarViewControllable,
+         blogBuilder: BlogBuildable,
+         applyBuilder: ApplyBuildable,
+         applyWriteBuilder: ApplyWriteBuildable,
+         planBuilder: PlanBuildable) {
         
-        self.blogBuilder    = blogBuilder
-        self.applyBuilder   = applyBuilder
-        self.planBuilder    = planBuilder
+        self.blogBuilder        = blogBuilder
+        self.applyBuilder       = applyBuilder
+        self.applyWriteBuilder  = applyWriteBuilder
+        self.planBuilder        = planBuilder
         
         self.blog = blogBuilder.build(withListener: interactor)
         self.apply = applyBuilder.build(withListener: interactor)
@@ -76,12 +80,29 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         child = plan
     }
     
+    func attachApplyWriteRIB() {
+        let applyWrite = applyWriteBuilder.build(withListener: interactor)
+        
+        self.applyWrite = applyWrite
+        
+        detachChildRIB()
+        attachChild(applyWrite)
+        viewController.present(viewController: applyWrite.viewControllable)
+        
+        child = applyWrite
+    }
+    
     func attachApplyRIBfromOtherRIB() {
+        if let applyWrite = applyWrite {
+            viewController.dismiss(viewController: applyWrite.viewControllable)
+        }
+        
         let apply = applyBuilder.build(withListener: interactor)
         self.apply = apply
         
         detachChildRIB()
         attachChild(apply)
+        
         viewController.replace(viewController: apply.viewControllable.uiviewController,
                                transitionSubType: .fromLeft)
         

@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ApplyInteractable: Interactable, ApplyDetailListener {
+protocol ApplyInteractable: Interactable, ApplyDetailListener, ApplyWriteListener {
     var router: ApplyRouting? { get set }
     var listener: ApplyListener? { get set }
 }
@@ -18,20 +18,20 @@ protocol ApplyViewControllable: ContainerViewControllable {
 
 final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable>, ApplyRouting {
     
-    private let applyEditBuilder: ApplyEditBuildable
+    private let applyWriteBuilder: ApplyWriteBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
     
     private var child: ViewableRouting?
-    private var applyEdit: ViewableRouting?
+    private var applyWrite: ViewableRouting?
     private var applyDetail: ViewableRouting?
     private var apply: Apply?
     
     init(interactor: ApplyInteractable,
          viewController: ApplyViewControllable,
-         applyEditBuilder: ApplyEditBuildable,
+         applyWriteBuilder: ApplyWriteBuildable,
          applyDetailBuilder: ApplyDetailBuildable) {
         
-        self.applyEditBuilder = applyEditBuilder
+        self.applyWriteBuilder  = applyWriteBuilder
         self.applyDetailBuilder = applyDetailBuilder
         
         super.init(interactor: interactor, viewController: viewController)
@@ -50,6 +50,19 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
                                transitionSubType: .fromRight)
         
         child = applyDetail
+    }
+    
+    func attachApplyWriteRIB() {
+        let applyWrite = applyWriteBuilder.build(withListener: interactor)
+        self.applyWrite = applyWrite
+        
+        detachChildRIB()
+        attachChild(applyWrite)
+        
+        viewController.replace(viewController: applyWrite.viewControllable.uiviewController,
+                               transitionSubType: .fromRight)
+
+        child = applyWrite
     }
     
     func reAttachApplyDetailRIB() {

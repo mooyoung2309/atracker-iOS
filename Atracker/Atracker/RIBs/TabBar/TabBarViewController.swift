@@ -25,12 +25,13 @@ final class TabBarViewController: BaseTabViewController, UITabBarControllerDeleg
     weak var listener: TabBarPresentableListener?
     
     func present(viewController: ViewControllable) {
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
         present(viewController.uiviewController, animated: true, completion: nil)
     }
 
     func dismiss(viewController: ViewControllable) {
         if presentedViewController === viewController.uiviewController {
-            dismiss(animated: false, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
 

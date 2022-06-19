@@ -19,8 +19,11 @@ extension ContainerViewControllable {
         contentView.subviews.forEach { $0.removeFromSuperview() }
         let vc = rib.viewControllable.uiviewController
         vc.view.frame = contentView.bounds
-        
-        
+    }
+    
+    func replaceFull(viewController: UIViewController, transitionSubType: CATransitionSubtype? = nil) {
+        uiviewController.view.addSubview(viewController.view)
+//        uiviewController.present(viewController, animated: true, completion: nil)
     }
     
     func replace(viewController: UIViewController, transitionSubType: CATransitionSubtype? = nil) {

@@ -11,12 +11,13 @@ import UIKit
 
 protocol ApplyPresentableListener: AnyObject {
     func didTabCell(apply: Apply)
+    func tapPlusButton()
 }
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
     
     var contentView: UIView {
-        return self.mainView
+        return mainView
     }
     weak var listener: ApplyPresentableListener?
     
@@ -72,11 +73,11 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     override func setupBind() {
         super.setupBind()
-//        selfView.plusButton.rx.tap
-//        .bind { [weak self] _ in
-//            self?.listener?.didTabApplyEdit()
-//        }
-//        .disposed(by: disposeBag)
+        selfView.plusButton.rx.tap
+        .bind { [weak self] _ in
+            self?.listener?.tapPlusButton()
+        }
+        .disposed(by: disposeBag)
     }
 }
 

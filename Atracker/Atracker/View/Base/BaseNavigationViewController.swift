@@ -79,6 +79,7 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func setupNavigaionBar() {
         navigaionBar.backgroundColor = .backgroundGray
+        navigaionBar.addShadow(.bottom)
         navigaionBar.title.textColor = .white
         navigaionBar.title.font = .systemFont(ofSize: 16, weight: .regular)
         

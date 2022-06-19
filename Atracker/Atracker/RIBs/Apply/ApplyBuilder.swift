@@ -35,14 +35,14 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
         let viewController      = ApplyViewController()
         let service             = ApplyService()
         let interactor          = ApplyInteractor(presenter: viewController, service: service)
-        let applyEditBuilder    = ApplyEditBuilder(dependency: component)
+        let applyWriteBuilder   = ApplyWriteBuilder(dependency: component)
         let applyDetailBuilder  = ApplyDetailBuilder(dependency: component)
         
         interactor.listener = listener
         
         return ApplyRouter(interactor: interactor,
                            viewController: viewController,
-                           applyEditBuilder: applyEditBuilder,
+                           applyWriteBuilder: applyWriteBuilder,
                            applyDetailBuilder: applyDetailBuilder)
     }
 }

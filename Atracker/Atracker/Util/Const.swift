@@ -16,4 +16,5 @@ struct ImageName {
     static let back             = "Back"
     static let checkBox         = "CheckBox"
     static let selectedCheckBox = "SelectedCheckBox"
+    static let search           = "Search"
 }

@@ -12,6 +12,7 @@ protocol TabBarRouting: ViewableRouting {
     func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
+    func attachApplyWriteRIB()
     func attachPlanRIB()
     func attachApplyRIBfromOtherRIB()
 }
@@ -57,6 +58,11 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     }
     
     func goBackToApplyRIB() {
+        Log("")
         router?.attachApplyRIBfromOtherRIB()
+    }
+    
+    func goToApplyWriteRIB() {
+        router?.attachApplyWriteRIB()
     }
 }

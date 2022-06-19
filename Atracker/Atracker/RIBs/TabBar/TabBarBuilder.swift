@@ -31,12 +31,13 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
 
     func build(withListener listener: TabBarListener) -> TabBarRouting {
         
-        let component       = TabBarComponent(dependency: dependency)
-        let viewController  = TabBarViewController()
-        let interactor      = TabBarInteractor(presenter: viewController)
-        let blogBuilder     = BlogBuilder(dependency: component)
-        let applyBuilder    = ApplyBuilder(dependency: component)
-        let planBuilder     = PlanBuilder(dependency: component)
+        let component           = TabBarComponent(dependency: dependency)
+        let viewController      = TabBarViewController()
+        let interactor          = TabBarInteractor(presenter: viewController)
+        let blogBuilder         = BlogBuilder(dependency: component)
+        let applyBuilder        = ApplyBuilder(dependency: component)
+        let applyWriteBuilder   = ApplyWriteBuilder(dependency: component)
+        let planBuilder         = PlanBuilder(dependency: component)
         
         interactor.listener = listener
         
@@ -44,6 +45,7 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
                             viewController: viewController,
                             blogBuilder: blogBuilder,
                             applyBuilder: applyBuilder,
+                            applyWriteBuilder: applyWriteBuilder,
                             planBuilder: planBuilder)
     }
 }
