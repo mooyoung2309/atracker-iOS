@@ -30,9 +30,9 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
-        showNavigaionBarTrailingButton(true)
+        showNavigationBar()
+        showNavigationBarBackButton()
+        showNavigationBarTrailingButton()
     }
     
     override func setupReload() {

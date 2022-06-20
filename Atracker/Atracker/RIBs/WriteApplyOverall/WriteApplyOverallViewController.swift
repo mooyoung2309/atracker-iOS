@@ -25,15 +25,17 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     let selfView = ApplyWriteView()
     
-    func showNavigationBar() {
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
-        setNavigaionBarTitle("지원 현황 추가")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigaionBar()
+    }
+    
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
         showNavigationBar()
+        showNavigationBarBackButton()
+        setNavigaionBarTitle("지원 현황 추가")
     }
     
     override func setupProperty() {

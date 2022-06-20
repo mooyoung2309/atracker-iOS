@@ -9,15 +9,15 @@ import RIBs
 import RxSwift
 
 protocol WriteApplyOverallRouting: ViewableRouting {
-    func detachChildRIB()
     func attachWriteApplyScheduleRIB()
-    func testTMP()
+    func detachWriteApplyScheduleRIB()
+    
 }
 
 protocol WriteApplyOverallPresentable: Presentable {
     var listener: WriteApplyOverallPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
-    func showNavigationBar()
+    func setupNavigaionBar()
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -56,14 +56,9 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         router?.attachWriteApplyScheduleRIB()
     }
     
-    
     // MARK: From Other RIBs
     func goBackToWriteApplyOverallRIB() {
-        router?.testTMP()
-        presenter.showNavigationBar()
-//        router?.detachChildRIB()
-//        listener?.goBackToWriteApplyOverallRIB()
-        
-//        Log("1")
+        router?.detachWriteApplyScheduleRIB()
+        presenter.setupNavigaionBar()
     }
 }

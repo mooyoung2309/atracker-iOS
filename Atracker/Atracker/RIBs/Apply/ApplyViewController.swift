@@ -38,9 +38,11 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         refreshTableView(tableView: selfView.tableView)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        showNavigaionBarBackButton(false)
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        
+        setNavigaionBarTitle("지원 현황")
+        hideNavigationBarBackButton()
     }
     
     override func setupReload() {
@@ -54,8 +56,6 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.scrollView.delegate = self
-        
-        setNavigaionBarTitle("지원 현황")
     }
     
     override func setupHierarchy() {
@@ -108,9 +108,9 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
 extension ApplyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= Size.navigationBarHeight {
-            showNavigaionBar(true)
+            showNavigationBar()
         } else {
-            showNavigaionBar(false)
+            hideNavigationBar()
         }
     }
 }

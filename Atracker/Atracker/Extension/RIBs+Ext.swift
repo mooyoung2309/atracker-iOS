@@ -12,14 +12,53 @@ import SnapKit
 protocol NavigationContainerViewControllable: ViewControllable {
     var thisView: UIView { get }
     var mainView: UIView { get }
-    func replace(viewController: UIViewController, transitionSubType: CATransitionSubtype?)
-    func dismiss()
+    func pushView(_ viewController: UIViewController, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func pushView(_ rib: ViewableRouting, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func pushView(_ viewcontrollable: ViewControllable, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func popView(animation: Bool, transitionSubType: CATransitionSubtype?)
 }
 
 extension NavigationContainerViewControllable {
-    func dismiss() {
+    func pushView(_ viewController: UIViewController, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+        thisView.subviews.forEach { $0.removeFromSuperview() }
+        let vc = viewController
+        vc.view.frame = thisView.bounds
+        
+        if animation {
+            let transition = CATransition()
+            transition.type = .push
+            transition.subtype = transitionSubType
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            
+            transition.duration = 0.25
+            thisView.layer.add(transition, forKey: nil)
+        }
+        
+        thisView.addSubview(vc.view)
+    }
+    
+    func pushView(_ rib: ViewableRouting, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+        self.pushView(rib.viewControllable.uiviewController, animation: animation, transitionSubType: transitionSubType)
+    }
+    
+    func pushView(_ viewcontrollable: ViewControllable, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+        self.pushView(viewcontrollable.uiviewController, animation: animation, transitionSubType: transitionSubType)
+    }
+    
+    func popView(animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromLeft) {
         thisView.subviews.forEach { $0.removeFromSuperview() }
         mainView.frame = thisView.bounds
+        
+        if animation {
+            let transition = CATransition()
+            transition.type = .push
+            transition.subtype = transitionSubType
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            
+            transition.duration = 0.25
+            thisView.layer.add(transition, forKey: nil)
+        }
+        
         thisView.addSubview(mainView)
         
         mainView.snp.makeConstraints {
@@ -27,62 +66,11 @@ extension NavigationContainerViewControllable {
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
-    
-    func replace(viewController: UIViewController, transitionSubType: CATransitionSubtype? = nil) {
-        thisView.subviews.forEach { $0.removeFromSuperview() }
-        let vc = viewController
-        vc.view.frame = thisView.bounds
-        
-        if let transitionSubType = transitionSubType {
-            let transition = CATransition()
-            transition.type = .push
-            transition.subtype = transitionSubType
-            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            
-            transition.duration = 0.25
-            thisView.layer.add(transition, forKey: nil)
-            thisView.addSubview(vc.view)
-        } else {
-            thisView.addSubview(vc.view)
-        }
-    }
 }
 
-protocol ContainerViewControllable: ViewControllable {
-    var thisView: UIView { get }
-    func replace(rib: ViewableRouting)
-}
-
-extension ContainerViewControllable {
-    
-    
-    func replace(rib: ViewableRouting) {
-        thisView.subviews.forEach { $0.removeFromSuperview() }
-        let vc = rib.viewControllable.uiviewController
-        vc.view.frame = thisView.bounds
-    }
-    
-    func replaceFull(viewController: UIViewController, transitionSubType: CATransitionSubtype? = nil) {
-        uiviewController.view.addSubview(viewController.view)
-//        uiviewController.present(viewController, animated: true, completion: nil)
-    }
-    
-    func replace(viewController: UIViewController, transitionSubType: CATransitionSubtype? = nil) {
-        thisView.subviews.forEach { $0.removeFromSuperview() }
-        let vc = viewController
-        vc.view.frame = thisView.bounds
-        
-        if let transitionSubType = transitionSubType {
-            let transition = CATransition()
-            transition.type = .push
-            transition.subtype = transitionSubType
-            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            
-            transition.duration = 0.25
-            thisView.layer.add(transition, forKey: nil)
-            thisView.addSubview(vc.view)
-        } else {
-            thisView.addSubview(vc.view)
-        }
+extension ViewableRouter {
+    func detachChildRIB(_ child: Routing?) {
+        guard let child = child else { return }
+        detachChild(child)
     }
 }

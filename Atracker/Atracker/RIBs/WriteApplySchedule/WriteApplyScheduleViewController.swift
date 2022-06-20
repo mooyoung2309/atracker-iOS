@@ -17,12 +17,12 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
 
     weak var listener: WriteApplySchedulePresentableListener?
     
-    let selfView = ApplyWriteDateView()
+    let selfView = WriteApplyScheduleView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
+        showNavigationBar()
+        showNavigationBarBackButton()
         setNavigaionBarTitle("일정 등록")
     }
     

@@ -12,8 +12,8 @@ protocol ApplyInteractable: Interactable, ApplyDetailListener {
     var listener: ApplyListener? { get set }
 }
 
-protocol ApplyViewControllable: ContainerViewControllable {
-    func present(viewController: ViewControllable)
+protocol ApplyViewControllable: NavigationContainerViewControllable {
+
 }
 
 final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable>, ApplyRouting {
@@ -26,11 +26,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private var applyDetail: ViewableRouting?
     private var apply: Apply?
     
-    init(interactor: ApplyInteractable,
-         viewController: ApplyViewControllable,
-         applyWriteBuilder: WriteApplyOverallBuildable,
-         applyDetailBuilder: ApplyDetailBuildable) {
-        
+    init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable) {
         self.applyWriteBuilder  = applyWriteBuilder
         self.applyDetailBuilder = applyDetailBuilder
         
@@ -46,8 +42,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
-                               transitionSubType: .fromRight)
+        viewController.pushView(applyDetail, animation: true, transitionSubType: .fromRight)
         
         child = applyDetail
     }
@@ -72,8 +67,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
-                               transitionSubType: .fromLeft)
+        viewController.pushView(applyDetail, transitionSubType: .fromLeft)
         
         child = applyDetail
     }

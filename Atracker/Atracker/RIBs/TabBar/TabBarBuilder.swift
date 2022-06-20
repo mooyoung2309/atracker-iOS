@@ -37,7 +37,7 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
         let blogBuilder                 = BlogBuilder(dependency: component)
         let applyBuilder                = ApplyBuilder(dependency: component)
         let writeApplyOverallBuilder    = WriteApplyOverallBuilder(dependency: component)
-        let planBuilder                 = PlanBuilder(dependency: component)
+        let scheduleBuilder             = ScheduleBuilder(dependency: component)
         
         interactor.listener = listener
         
@@ -46,6 +46,6 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
                             blogBuilder: blogBuilder,
                             applyBuilder: applyBuilder,
                             writeApplyOverallBuilder: writeApplyOverallBuilder,
-                            planBuilder: planBuilder)
+                            scheduleBuilder: scheduleBuilder)
     }
 }

@@ -27,7 +27,6 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
     init(interactor: WriteApplyOverallInteractable,
                   viewController: WriteApplyOverallViewControllable,
                   writeApplyScheduleBuilder: WriteApplyScheduleBuildable) {
-        
         self.origin = viewController
         self.writeApplyScheduleBuilder = writeApplyScheduleBuilder
         super.init(interactor: interactor, viewController: viewController)
@@ -35,26 +34,19 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
         interactor.router = self
     }
     
-    func detachChildRIB() {
-        guard let child = child else { return }
-        detachChild(child)
-    }
-    
     func attachWriteApplyScheduleRIB() {
-        
         let writeApplySchedule = writeApplyScheduleBuilder.build(withListener: interactor)
         self.writeApplySchedule = writeApplySchedule
 
-        detachChildRIB()
+        detachChildRIB(child)
         attachChild(writeApplySchedule)
-        viewController.replace(viewController: writeApplySchedule.viewControllable.uiviewController,
-                               transitionSubType: .fromRight)
+        viewController.pushView(writeApplySchedule, transitionSubType: .fromRight)
 
         child = writeApplySchedule
     }
     
-    func testTMP() {
-        detachChildRIB()
-        viewController.dismiss()
+    func detachWriteApplyScheduleRIB() {
+        detachChildRIB(child)
+        viewController.popView(animation: true)
     }
 }

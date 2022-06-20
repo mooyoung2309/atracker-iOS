@@ -107,9 +107,9 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
-        showNavigaionBarTrailingButton(true)
+        showNavigationBar()
+        showNavigationBarBackButton()
+        showNavigationBarTrailingButton()
     }
     
     override func setupReload() {

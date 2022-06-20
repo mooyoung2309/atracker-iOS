@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ApplyWriteDateView: BaseView {
+class WriteApplyScheduleView: BaseView {
     
     let dateLabel       = UILabel()
     let weekStackView   = UIStackView()
@@ -27,9 +27,7 @@ class ApplyWriteDateView: BaseView {
             label.textColor     = .white
             label.textAlignment = .center
             weekStackView.addArrangedSubview(label)
-            
         }
-        
     }
     
     override func setupHierarchy() {
