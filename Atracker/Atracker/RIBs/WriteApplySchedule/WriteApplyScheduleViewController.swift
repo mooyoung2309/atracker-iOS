@@ -1,32 +1,29 @@
 //
-//  ApplyWriteViewController.swift
+//  WriteApplyScheduleViewController.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/19.
+//  Created by 송영모 on 2022/06/20.
 //
 
 import RIBs
 import RxSwift
 import UIKit
-import SnapKit
 
-protocol ApplyWritePresentableListener: AnyObject {
+protocol WriteApplySchedulePresentableListener: AnyObject {
     func tapBackButton()
 }
 
-final class ApplyWriteViewController: BaseNavigationViewController, ApplyWritePresentable, ApplyWriteViewControllable {
-    var contentView: UIView {
-        return mainView
-    }
-    weak var listener: ApplyWritePresentableListener?
+final class WriteApplyScheduleViewController: BaseNavigationViewController, WriteApplySchedulePresentable, WriteApplyScheduleViewControllable {
+
+    weak var listener: WriteApplySchedulePresentableListener?
     
-    let selfView = ApplyWriteView()
+    let selfView = ApplyWriteDateView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         showNavigaionBar(true)
         showNavigaionBarBackButton(true)
-        setNavigaionBarTitle("지원 현황 추가")
+        setNavigaionBarTitle("일정 등록")
     }
     
     override func setupProperty() {
@@ -37,7 +34,7 @@ final class ApplyWriteViewController: BaseNavigationViewController, ApplyWritePr
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        mainContentView.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {

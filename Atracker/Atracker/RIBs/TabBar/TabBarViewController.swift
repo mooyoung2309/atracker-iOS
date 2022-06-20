@@ -18,7 +18,7 @@ protocol TabBarPresentableListener: AnyObject {
 }
 
 final class TabBarViewController: BaseTabViewController, UITabBarControllerDelegate, TabBarPresentable, TabBarViewControllable {
-    var contentView: UIView {
+    var thisView: UIView {
         return mainView
     }
     
@@ -26,12 +26,12 @@ final class TabBarViewController: BaseTabViewController, UITabBarControllerDeleg
     
     func present(viewController: ViewControllable) {
         viewController.uiviewController.modalPresentationStyle = .fullScreen
-        present(viewController.uiviewController, animated: true, completion: nil)
+        present(viewController.uiviewController, animated: false, completion: nil)
     }
 
     func dismiss(viewController: ViewControllable) {
         if presentedViewController === viewController.uiviewController {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: false, completion: nil)
         }
     }
 

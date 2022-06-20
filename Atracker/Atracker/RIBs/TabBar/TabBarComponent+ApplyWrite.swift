@@ -14,7 +14,7 @@ protocol TabBarDependencyApplyWrite: Dependency {
     // for the ApplyWrite scope.
 }
 
-extension TabBarComponent: ApplyWriteDependency {
+extension TabBarComponent: WriteApplyOverallDependency {
 
     // TODO: Implement properties to provide for ApplyWrite scope.
 }

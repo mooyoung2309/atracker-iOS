@@ -10,7 +10,7 @@ import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
-    func attachApplyWriteRIB()
+//    func attachApplyWriteRIB()
     func reAttachApplyDetailRIB()
     func detachChildRIB()
 }
@@ -75,5 +75,8 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     func goBackToApplyDetailRIB() {
         router?.reAttachApplyDetailRIB()
     }
-
+    
+//    func goBackToWriteApplyOverallRIB() {
+//        router?.attachApplyWriteRIB()
+//    }
 }

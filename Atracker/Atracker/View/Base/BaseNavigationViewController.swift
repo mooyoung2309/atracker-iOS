@@ -20,7 +20,9 @@ class NavigationBar: UIView {
 protocol BaseNavigationViewControllerProtocol: AnyObject {
     var statusBar: UIView { get }
     var navigaionBar: NavigationBar { get }
+    var containerView: UIView { get }
     var mainView: UIView { get }
+    var contentView: UIView { get }
     func setupNavigaionBar()
     func showNavigaionBar(_ bool: Bool)
     func setNavigaionBarTitle(_ text: String)
@@ -33,8 +35,9 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     var statusBar       = UIView()
     var navigaionBar    = NavigationBar()
+    var containerView   = UIView()
     var mainView        = UIView()
-    var mainContentView = UIView()
+    var contentView     = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,18 +55,21 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(mainView)
+        view.addSubview(containerView)
+        containerView.addSubview(mainView)
         mainView.addSubview(statusBar)
-        mainView.addSubview(mainContentView)
+        mainView.addSubview(contentView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        containerView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
         mainView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
         statusBar.snp.makeConstraints {
@@ -71,7 +77,7 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
-        mainContentView.snp.makeConstraints {
+        contentView.snp.makeConstraints {
             $0.top.equalTo(statusBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }

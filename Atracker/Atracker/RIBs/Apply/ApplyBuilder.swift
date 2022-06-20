@@ -35,7 +35,7 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
         let viewController      = ApplyViewController()
         let service             = ApplyService()
         let interactor          = ApplyInteractor(presenter: viewController, service: service)
-        let applyWriteBuilder   = ApplyWriteBuilder(dependency: component)
+        let applyWriteBuilder   = WriteApplyOverallBuilder(dependency: component)
         let applyDetailBuilder  = ApplyDetailBuilder(dependency: component)
         
         interactor.listener = listener

@@ -16,9 +16,10 @@ protocol ApplyPresentableListener: AnyObject {
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
     
-    var contentView: UIView {
-        return mainView
+    var thisView: UIView {
+        return containerView
     }
+
     weak var listener: ApplyPresentableListener?
     
     let selfView = ApplyView()
@@ -60,7 +61,7 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        mainContentView.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {

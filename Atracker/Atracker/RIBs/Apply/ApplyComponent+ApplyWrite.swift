@@ -14,7 +14,7 @@ protocol ApplyDependencyApplyWrite: Dependency {
     // for the ApplyWrite scope.
 }
 
-extension ApplyComponent: ApplyWriteDependency {
+extension ApplyComponent: WriteApplyOverallDependency {
 
     // TODO: Implement properties to provide for ApplyWrite scope.
 }

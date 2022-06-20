@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, ApplyWriteListener, PlanListener {
+protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, WriteApplyOverallListener, PlanListener {
     var router: TabBarRouting? { get set }
     var listener: TabBarListener? { get set }
 }
@@ -20,30 +20,30 @@ protocol TabBarViewControllable: ContainerViewControllable {
 final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControllable>, TabBarRouting {
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
-    private let applyWriteBuilder: ApplyWriteBuildable
+    private let writeApplyOverallBuilder: WriteApplyOverallBuildable
     private let planBuilder: PlanBuildable
     
     private var child: Routing?
     private var blog: ViewableRouting
     private var apply: ViewableRouting
-    private var applyWrite: ViewableRouting?
+    private var writeApplyOverall: ViewableRouting?
     private var plan: ViewableRouting
     
     init(interactor: TabBarInteractable,
          viewController: TabBarViewControllable,
          blogBuilder: BlogBuildable,
          applyBuilder: ApplyBuildable,
-         applyWriteBuilder: ApplyWriteBuildable,
+         writeApplyOverallBuilder: WriteApplyOverallBuildable,
          planBuilder: PlanBuildable) {
         
-        self.blogBuilder        = blogBuilder
-        self.applyBuilder       = applyBuilder
-        self.applyWriteBuilder  = applyWriteBuilder
-        self.planBuilder        = planBuilder
+        self.blogBuilder                = blogBuilder
+        self.applyBuilder               = applyBuilder
+        self.writeApplyOverallBuilder   = writeApplyOverallBuilder
+        self.planBuilder                = planBuilder
         
-        self.blog = blogBuilder.build(withListener: interactor)
-        self.apply = applyBuilder.build(withListener: interactor)
-        self.plan = planBuilder.build(withListener: interactor)
+        self.blog   = blogBuilder.build(withListener: interactor)
+        self.apply  = applyBuilder.build(withListener: interactor)
+        self.plan   = planBuilder.build(withListener: interactor)
         
         super.init(interactor: interactor, viewController: viewController)
         
@@ -81,9 +81,9 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     }
     
     func attachApplyWriteRIB() {
-        let applyWrite = applyWriteBuilder.build(withListener: interactor)
+        let applyWrite = writeApplyOverallBuilder.build(withListener: interactor)
         
-        self.applyWrite = applyWrite
+        self.writeApplyOverall = applyWrite
         
         detachChildRIB()
         attachChild(applyWrite)
@@ -93,7 +93,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     }
     
     func attachApplyRIBfromOtherRIB() {
-        if let applyWrite = applyWrite {
+        if let applyWrite = writeApplyOverall {
             viewController.dismiss(viewController: applyWrite.viewControllable)
         }
         
@@ -107,5 +107,24 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
                                transitionSubType: .fromLeft)
         
         child = apply
+    }
+    
+    func attachWriteApplyOverallRIBfromOtherRIB() {
+        if let applyWrite = writeApplyOverall {
+            viewController.dismiss(viewController: applyWrite.viewControllable)
+        }
+        let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
+        
+        self.writeApplyOverall = writeApplyOverall
+        
+        detachChildRIB()
+        attachChild(writeApplyOverall)
+        
+        viewController.present(viewController: writeApplyOverall.viewControllable)
+        viewController.uiviewController.view.layoutIfNeeded()
+        
+        child = writeApplyOverall
+        
+        Log("2")
     }
 }
