@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ApplyWriteView: BaseView {
+class WriteApplyOverallView: BaseView {
     
     let companyLabel            = UILabel()
     let companyTextField        = UITextField()

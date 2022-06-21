@@ -42,7 +42,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.pushView(applyDetail, animation: true, transitionSubType: .fromRight)
+        viewController.presentView(applyDetail, animation: true, transitionSubType: .fromRight)
         
         child = applyDetail
     }
@@ -67,7 +67,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.pushView(applyDetail, transitionSubType: .fromLeft)
+        viewController.presentView(applyDetail, transitionSubType: .fromLeft)
         
         child = applyDetail
     }

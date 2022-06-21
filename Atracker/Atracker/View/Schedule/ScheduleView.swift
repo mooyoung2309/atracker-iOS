@@ -10,6 +10,7 @@ import SnapKit
 
 class ScheduleView: BaseView {
     
+    let calendarView            = UIView()
     let dateLabel               = UILabel()
     let topDivider              = Divider(.line)
     let weekStackView           = UIStackView()
@@ -65,18 +66,17 @@ class ScheduleView: BaseView {
         
         rightCollectionView.register(CalendarCVC.self, forCellWithReuseIdentifier: CalendarCVC.id)
         rightCollectionView.backgroundColor = .clear
-        
-        
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(dateLabel)
-        addSubview(topDivider)
-        addSubview(weekStackView)
-        addSubview(bottomDivider)
-        addSubview(scrollView)
+        addSubview(calendarView)
+        calendarView.addSubview(dateLabel)
+        calendarView.addSubview(topDivider)
+        calendarView.addSubview(weekStackView)
+        calendarView.addSubview(bottomDivider)
+        calendarView.addSubview(scrollView)
 
         scrollView.addSubview(prevView)
         scrollView.addSubview(nowView)
@@ -89,6 +89,10 @@ class ScheduleView: BaseView {
     
     override func setupLayout() {
         super.setupLayout()
+        
+        calendarView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
         
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)

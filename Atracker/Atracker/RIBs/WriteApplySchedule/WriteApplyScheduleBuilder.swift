@@ -30,10 +30,13 @@ final class WriteApplyScheduleBuilder: Builder<WriteApplyScheduleDependency>, Wr
     }
 
     func build(withListener listener: WriteApplyScheduleListener) -> WriteApplyScheduleRouting {
-        let component = WriteApplyScheduleComponent(dependency: dependency)
-        let viewController = WriteApplyScheduleViewController()
-        let interactor = WriteApplyScheduleInteractor(presenter: viewController)
+        let component       = WriteApplyScheduleComponent(dependency: dependency)
+        let viewController  = WriteApplyScheduleViewController()
+        let interactor      = WriteApplyScheduleInteractor(presenter: viewController)
+        let scheduleBuilder = ScheduleBuilder(dependency: component)
+        
         interactor.listener = listener
-        return WriteApplyScheduleRouter(interactor: interactor, viewController: viewController)
+        
+        return WriteApplyScheduleRouter(interactor: interactor, viewController: viewController, scheduleBuilder: scheduleBuilder)
     }
 }

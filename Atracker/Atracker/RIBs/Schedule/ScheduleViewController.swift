@@ -32,6 +32,8 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     }
     
     override func setupReload() {
+        super.setupReload()
+
         selfView.leftCollectionView.reloadData()
         selfView.centerCollectionView.reloadData()
         selfView.rightCollectionView.reloadData()

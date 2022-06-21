@@ -10,6 +10,7 @@ import RxSwift
 
 protocol WriteApplyScheduleRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachScheduleRIB()
 }
 
 protocol WriteApplySchedulePresentable: Presentable {
@@ -35,15 +36,18 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
     
     func tapBackButton() {
         listener?.goBackToWriteApplyOverallRIB()
+    }
+    
+    func didLoad() {
+        router?.attachScheduleRIB()
     }
 }

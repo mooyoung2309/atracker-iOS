@@ -59,7 +59,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     func attachBlogRIB() {
         detachChildRIB()
         attachChild(blog)
-        viewController.pushView(blog, animation: false)
+        viewController.presentView(blog, animation: false)
         
         child = blog
     }
@@ -67,7 +67,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     func attachApplyRIB() {
         detachChildRIB()
         attachChild(apply)
-        viewController.pushView(apply, animation: false)
+        viewController.presentView(apply, animation: false)
         
         child = apply
     }
@@ -75,7 +75,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     func attachPlanRIB() {
         detachChildRIB()
         attachChild(schedule)
-        viewController.pushView(schedule, animation: false)
+        viewController.presentView(schedule, animation: false)
         
         child = schedule
     }
@@ -103,7 +103,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         detachChildRIB()
         attachChild(apply)
         
-        viewController.pushView(apply, transitionSubType: .fromLeft)
+        viewController.presentView(apply, transitionSubType: .fromLeft)
         
         child = apply
     }

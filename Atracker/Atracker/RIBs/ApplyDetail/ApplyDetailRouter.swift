@@ -47,7 +47,7 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         detachChildRIB()
         attachChild(applyEdit)
         
-        viewController.pushView(applyEdit, transitionSubType: .fromRight)
+        viewController.presentView(applyEdit, transitionSubType: .fromRight)
         
         child = applyEdit
     }

@@ -23,7 +23,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     weak var listener: WriteApplyOverallPresentableListener?
     
-    let selfView = ApplyWriteView()
+    let selfView = WriteApplyOverallView()
     
     
     override func viewDidLoad() {

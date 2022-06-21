@@ -244,7 +244,6 @@ extension ApplyEditViewController: UITableViewDelegate, UITableViewDataSource {
             cell.hideCheckButton()
         } else {
             cell.showCheckButton()
-            
         }
         
         cell.selectionStyle = .none

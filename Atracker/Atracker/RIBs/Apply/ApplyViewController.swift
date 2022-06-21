@@ -46,13 +46,15 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     }
     
     override func setupReload() {
-        view.backgroundColor = .backgroundGray
+        super.setupReload()
         
+        view.backgroundColor = .backgroundGray
         refreshTableView(tableView: selfView.tableView)
     }
     
     override func setupProperty() {
         super.setupProperty()
+        
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.scrollView.delegate = self

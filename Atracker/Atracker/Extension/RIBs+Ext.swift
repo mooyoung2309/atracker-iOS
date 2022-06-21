@@ -12,14 +12,14 @@ import SnapKit
 protocol NavigationContainerViewControllable: ViewControllable {
     var thisView: UIView { get }
     var mainView: UIView { get }
-    func pushView(_ viewController: UIViewController, animation: Bool, transitionSubType: CATransitionSubtype?)
-    func pushView(_ rib: ViewableRouting, animation: Bool, transitionSubType: CATransitionSubtype?)
-    func pushView(_ viewcontrollable: ViewControllable, animation: Bool, transitionSubType: CATransitionSubtype?)
-    func popView(animation: Bool, transitionSubType: CATransitionSubtype?)
+    func presentView(_ viewController: UIViewController, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func presentView(_ rib: ViewableRouting, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func presentView(_ viewcontrollable: ViewControllable, animation: Bool, transitionSubType: CATransitionSubtype?)
+    func dismissView(animation: Bool, transitionSubType: CATransitionSubtype?)
 }
 
 extension NavigationContainerViewControllable {
-    func pushView(_ viewController: UIViewController, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+    func presentView(_ viewController: UIViewController, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
         thisView.subviews.forEach { $0.removeFromSuperview() }
         let vc = viewController
         vc.view.frame = thisView.bounds
@@ -37,15 +37,15 @@ extension NavigationContainerViewControllable {
         thisView.addSubview(vc.view)
     }
     
-    func pushView(_ rib: ViewableRouting, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
-        self.pushView(rib.viewControllable.uiviewController, animation: animation, transitionSubType: transitionSubType)
+    func presentView(_ rib: ViewableRouting, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+        self.presentView(rib.viewControllable.uiviewController, animation: animation, transitionSubType: transitionSubType)
     }
     
-    func pushView(_ viewcontrollable: ViewControllable, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
-        self.pushView(viewcontrollable.uiviewController, animation: animation, transitionSubType: transitionSubType)
+    func presentView(_ viewcontrollable: ViewControllable, animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromRight) {
+        self.presentView(viewcontrollable.uiviewController, animation: animation, transitionSubType: transitionSubType)
     }
     
-    func popView(animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromLeft) {
+    func dismissView(animation: Bool = true, transitionSubType: CATransitionSubtype? = .fromLeft) {
         thisView.subviews.forEach { $0.removeFromSuperview() }
         mainView.frame = thisView.bounds
         
