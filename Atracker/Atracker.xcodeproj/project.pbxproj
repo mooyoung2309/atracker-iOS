@@ -36,6 +36,7 @@
 		70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5528434F89009B7F0A /* BaseViewController.swift */; };
 		70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */; };
 		7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027070928407DEC00BC8E41 /* CircleView.swift */; };
+		7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */; };
 		702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */; };
 		702B5A36285B1C8D00E94A6E /* FreeStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */; };
 		70322DF12854E2C800EA0EF7 /* ApplyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */; };
@@ -193,6 +194,7 @@
 		70223C5528434F89009B7F0A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyISOLDCODE.swift; sourceTree = "<group>"; };
 		7027070928407DEC00BC8E41 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallCVC.swift; sourceTree = "<group>"; };
 		702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaStageContentEditView.swift; sourceTree = "<group>"; };
 		702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeStageContentEditView.swift; sourceTree = "<group>"; };
 		70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailView.swift; sourceTree = "<group>"; };
@@ -423,6 +425,15 @@
 				70CF5B8F2847A9C70098C742 /* ViewController */,
 			);
 			path = Reusable;
+			sourceTree = "<group>";
+		};
+		7027D392286191F400F9C913 /* WriteApplySchedule */ = {
+			isa = PBXGroup;
+			children = (
+				70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */,
+				7040965728616FF9003EBCE4 /* WriteApplyScheduleTVC.swift */,
+			);
+			path = WriteApplySchedule;
 			sourceTree = "<group>";
 		};
 		70322DEF2854E2A500EA0EF7 /* ApplyDetail */ = {
@@ -709,14 +720,13 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		70BDD356285F12A100E09821 /* WriteApply */ = {
+		70BDD356285F12A100E09821 /* WriteApplyOverall */ = {
 			isa = PBXGroup;
 			children = (
 				70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */,
-				70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */,
-				7040965728616FF9003EBCE4 /* WriteApplyScheduleTVC.swift */,
+				7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */,
 			);
-			path = WriteApply;
+			path = WriteApplyOverall;
 			sourceTree = "<group>";
 		};
 		70CB068C285EF6C800BE89B7 /* WriteApplyOverall */ = {
@@ -848,7 +858,8 @@
 				70FBE5132852E68400455A4B /* Apply */,
 				70322DEF2854E2A500EA0EF7 /* ApplyDetail */,
 				70FD6DD328577FDE0050ADB8 /* ApplyEdit */,
-				70BDD356285F12A100E09821 /* WriteApply */,
+				7027D392286191F400F9C913 /* WriteApplySchedule */,
+				70BDD356285F12A100E09821 /* WriteApplyOverall */,
 				70409645286038F4003EBCE4 /* Schedule */,
 			);
 			path = View;
@@ -1277,6 +1288,7 @@
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
 				70EE86CF283F23C900DBC592 /* ApplyEditVM.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,
+				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
 				70CB0696285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift in Sources */,

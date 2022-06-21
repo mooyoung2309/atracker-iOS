@@ -18,6 +18,7 @@ protocol WriteApplyOverallPresentable: Presentable {
     var listener: WriteApplyOverallPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func setupNavigaionBar()
+    func resetCollectionView()
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -54,6 +55,10 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     func tapNextButton() {
         router?.attachWriteApplyScheduleRIB()
+    }
+    
+    func tapResetButton() {
+        presenter.resetCollectionView()
     }
     
     // MARK: From Other RIBs

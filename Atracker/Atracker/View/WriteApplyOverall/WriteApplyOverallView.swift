@@ -23,6 +23,8 @@ class WriteApplyOverallView: BaseView {
     let positionTextField       = UITextField()
     let positionDivider         = Divider(.gray6)
     let progressLabel           = UILabel()
+    let resetButton             = UIButton(type: .system)
+    let collectionView          = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let nextButton              = UIButton(type: .system)
     
     override func setupProperty() {
@@ -59,6 +61,12 @@ class WriteApplyOverallView: BaseView {
         progressLabel.font                      = .systemFont(ofSize: 14, weight: .medium)
         progressLabel.textColor                 = .gray3
         
+        resetButton.setImage(UIImage(named: ImageName.undo), for: .normal)
+        resetButton.tintColor = .white
+        
+        collectionView.register(WriteApplyOverallCVC.self, forCellWithReuseIdentifier: WriteApplyOverallCVC.id)
+        collectionView.backgroundColor = .clear
+        
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.titleLabel?.font     = .systemFont(ofSize: 16, weight: .regular)
@@ -82,6 +90,8 @@ class WriteApplyOverallView: BaseView {
         addSubview(positionTextField)
         addSubview(positionDivider)
         addSubview(progressLabel)
+        addSubview(resetButton)
+        addSubview(collectionView)
         addSubview(nextButton)
     }
     
@@ -153,6 +163,19 @@ class WriteApplyOverallView: BaseView {
         progressLabel.snp.makeConstraints {
             $0.top.equalTo(positionTextField.snp.bottom).inset(-39)
             $0.leading.equalToSuperview().inset(39)
+        }
+        
+        resetButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(28)
+            $0.centerY.equalTo(progressLabel)
+            $0.width.height.equalTo(13)
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(progressLabel.snp.bottom).inset(-25)
+            $0.leading.equalToSuperview().inset(40)
+            $0.trailing.equalToSuperview().inset(28)
+            $0.bottom.equalTo(nextButton.snp.top)
         }
         
         nextButton.snp.makeConstraints {

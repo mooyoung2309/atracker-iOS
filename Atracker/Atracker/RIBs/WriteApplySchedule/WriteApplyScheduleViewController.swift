@@ -131,7 +131,7 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedCellIndexPath = selectedCellIndexPath {
             if selectedCellIndexPath == indexPath {
-                return 300
+                return 200
             }
         }
         return 44
@@ -139,8 +139,6 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: WriteApplyScheduleTVC.id, for: indexPath) as? WriteApplyScheduleTVC else { return  }
-        
         if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
             selectedCellIndexPath = nil
         } else {
@@ -151,5 +149,4 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
             tableView.reloadData()
         })
     }
-    
 }

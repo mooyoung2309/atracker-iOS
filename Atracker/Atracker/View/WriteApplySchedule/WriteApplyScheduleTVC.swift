@@ -21,7 +21,7 @@ class WriteApplyScheduleTVC: BaseTVC {
     func showDatePicker() {
         datePicker.isHidden = false
         datePicker.snp.updateConstraints {
-            $0.height.equalTo(216)
+            $0.height.equalTo(132)
         }
     }
     
@@ -64,7 +64,7 @@ class WriteApplyScheduleTVC: BaseTVC {
         divisionLabel.text      = "오후"
         timeLabel.text          = "12 : 00"
         datePicker.isHidden     = true
-        datePicker.backgroundColor = .blue7
+        datePicker.backgroundColor = .backgroundLightGray
     }
     
     override func setupHierarchy() {

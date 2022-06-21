@@ -7,6 +7,7 @@
 
 import UIKit
 import Then
+
 class ApplyContentTypeCVC: UICollectionViewCell {
     static let id = "ApplyContentTypeCVC"
     
@@ -30,11 +31,6 @@ class ApplyContentTypeCVC: UICollectionViewCell {
         setupLayout()
         setupProperty()
     }
-    
-    //    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    //        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-    //    }
     
     func update(title: String) {
         titleLabel.text = title
