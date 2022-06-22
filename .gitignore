@@ -9,6 +9,7 @@
 
 Pods/
 Secret/
+Secret/*
 Key.swift
 
 ## User settings
