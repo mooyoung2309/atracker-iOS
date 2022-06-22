@@ -84,7 +84,7 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     
     func showAlertView(i: Int) {
         alertView = AlertView(style: .delete, i: i)
-        mainContentView.addSubview(alertView)
+        contentView.addSubview(alertView)
         
         alertView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Size.navigationBarHeight)
@@ -107,9 +107,9 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
-        showNavigaionBarTrailingButton(true)
+        showNavigationBar()
+        showNavigationBarBackButton()
+        showNavigationBarTrailingButton()
     }
     
     override func setupReload() {
@@ -131,7 +131,7 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        mainContentView.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {
@@ -244,7 +244,6 @@ extension ApplyEditViewController: UITableViewDelegate, UITableViewDataSource {
             cell.hideCheckButton()
         } else {
             cell.showCheckButton()
-            
         }
         
         cell.selectionStyle = .none

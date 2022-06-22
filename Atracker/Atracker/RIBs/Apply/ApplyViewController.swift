@@ -11,13 +11,15 @@ import UIKit
 
 protocol ApplyPresentableListener: AnyObject {
     func didTabCell(apply: Apply)
+    func tapPlusButton()
 }
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
     
-    var contentView: UIView {
-        return self.mainView
+    var thisView: UIView {
+        return containerView
     }
+
     weak var listener: ApplyPresentableListener?
     
     let selfView = ApplyView()
@@ -36,30 +38,32 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         refreshTableView(tableView: selfView.tableView)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        showNavigaionBarBackButton(false)
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        
+        setNavigaionBarTitle("지원 현황")
+        hideNavigationBarBackButton()
     }
     
     override func setupReload() {
-        view.backgroundColor = .backgroundGray
+        super.setupReload()
         
+        view.backgroundColor = .backgroundGray
         refreshTableView(tableView: selfView.tableView)
     }
     
     override func setupProperty() {
         super.setupProperty()
+        
         selfView.tableView.delegate = self
         selfView.tableView.dataSource = self
         selfView.scrollView.delegate = self
-        
-        setNavigaionBarTitle("지원 현황")
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        mainContentView.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {
@@ -72,11 +76,11 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     override func setupBind() {
         super.setupBind()
-//        selfView.plusButton.rx.tap
-//        .bind { [weak self] _ in
-//            self?.listener?.didTabApplyEdit()
-//        }
-//        .disposed(by: disposeBag)
+        selfView.plusButton.rx.tap
+        .bind { [weak self] _ in
+            self?.listener?.tapPlusButton()
+        }
+        .disposed(by: disposeBag)
     }
 }
 
@@ -106,9 +110,9 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
 extension ApplyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= Size.navigationBarHeight {
-            showNavigaionBar(true)
+            showNavigationBar()
         } else {
-            showNavigaionBar(false)
+            hideNavigationBar()
         }
     }
 }

@@ -18,14 +18,15 @@ protocol TabBarPresentableListener: AnyObject {
 }
 
 final class TabBarViewController: BaseTabViewController, UITabBarControllerDelegate, TabBarPresentable, TabBarViewControllable {
-    var contentView: UIView {
+    var thisView: UIView {
         return mainView
     }
     
     weak var listener: TabBarPresentableListener?
     
     func present(viewController: ViewControllable) {
-        present(viewController.uiviewController, animated: true, completion: nil)
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
+        present(viewController.uiviewController, animated: false, completion: nil)
     }
 
     func dismiss(viewController: ViewControllable) {

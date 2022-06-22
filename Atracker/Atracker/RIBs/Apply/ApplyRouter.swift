@@ -12,26 +12,22 @@ protocol ApplyInteractable: Interactable, ApplyDetailListener {
     var listener: ApplyListener? { get set }
 }
 
-protocol ApplyViewControllable: ContainerViewControllable {
-    func present(viewController: ViewControllable)
+protocol ApplyViewControllable: NavigationContainerViewControllable {
+
 }
 
 final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable>, ApplyRouting {
     
-    private let applyEditBuilder: ApplyEditBuildable
+    private let applyWriteBuilder: WriteApplyOverallBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
     
     private var child: ViewableRouting?
-    private var applyEdit: ViewableRouting?
+    private var applyWrite: ViewableRouting?
     private var applyDetail: ViewableRouting?
     private var apply: Apply?
     
-    init(interactor: ApplyInteractable,
-         viewController: ApplyViewControllable,
-         applyEditBuilder: ApplyEditBuildable,
-         applyDetailBuilder: ApplyDetailBuildable) {
-        
-        self.applyEditBuilder = applyEditBuilder
+    init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable) {
+        self.applyWriteBuilder  = applyWriteBuilder
         self.applyDetailBuilder = applyDetailBuilder
         
         super.init(interactor: interactor, viewController: viewController)
@@ -46,11 +42,23 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
-                               transitionSubType: .fromRight)
+        viewController.presentView(applyDetail, animation: true, transitionSubType: .fromRight)
         
         child = applyDetail
     }
+    
+//    func attachApplyWriteRIB() {
+//        let applyWrite = applyWriteBuilder.build(withListener: interactor)
+//        self.applyWrite = applyWrite
+//        
+//        detachChildRIB()
+//        attachChild(applyWrite)
+//        
+//        viewController.replace(viewController: applyWrite.viewControllable.uiviewController,
+//                               transitionSubType: .fromRight)
+//
+//        child = applyWrite
+//    }
     
     func reAttachApplyDetailRIB() {
         guard let apply = apply else { return }
@@ -59,10 +67,8 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB()
         attachChild(applyDetail)
-        viewController.replace(viewController: applyDetail.viewControllable.uiviewController,
-                               transitionSubType: .fromLeft)
+        viewController.presentView(applyDetail, transitionSubType: .fromLeft)
         
-        child = applyDetail
         child = applyDetail
     }
     

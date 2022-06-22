@@ -22,7 +22,7 @@ class MainViewController: UITabBarController {
         let applicationStatusTap = UINavigationController(rootViewController: ApplyVC())
         let applicationStatusTapBarItem = UITabBarItem(title: "지원 현황", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))
         
-        let scheduleCalendarTap = UINavigationController(rootViewController: ScheduleVC())
+        let scheduleCalendarTap = UINavigationController(rootViewController: ApplyVC())
         let scheduleCalendarTapBarItem = UITabBarItem(title: "일정", image: UIImage(systemName: "calendar"), selectedImage: UIImage(named: "calendar"))
         
         

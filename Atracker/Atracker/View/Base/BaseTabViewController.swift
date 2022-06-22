@@ -33,6 +33,7 @@ class BaseTabViewController: BaseViewController, BaseTabViewControllerProtocol {
         
         tabBar.backgroundColor = .backgroundGray
         tabBar.distribution = .fillEqually
+        tabBar.addShadow(.top)
         tabBar.blogTab.setImage(UIImage(named: ImageName.user), for: .normal)
         tabBar.applyTab.setImage(UIImage(named: ImageName.home), for: .normal)
         tabBar.planTab.setImage(UIImage(named: ImageName.user), for: .normal)

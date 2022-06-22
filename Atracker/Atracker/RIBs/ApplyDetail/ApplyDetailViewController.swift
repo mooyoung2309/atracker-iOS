@@ -16,9 +16,8 @@ protocol ApplyDetailPresentableListener: AnyObject {
 }
 
 final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetailPresentable, ApplyDetailViewControllable {
-    
-    var contentView: UIView {
-        return mainView
+    var thisView: UIView {
+        return containerView
     }
 
     weak var listener: ApplyDetailPresentableListener?
@@ -31,9 +30,9 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showNavigaionBar(true)
-        showNavigaionBarBackButton(true)
-        showNavigaionBarTrailingButton(true)
+        showNavigationBar()
+        showNavigationBarBackButton()
+        showNavigationBarTrailingButton()
     }
     
     override func setupReload() {
@@ -52,7 +51,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        mainContentView.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {

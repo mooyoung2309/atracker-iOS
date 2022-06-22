@@ -12,8 +12,10 @@ protocol TabBarRouting: ViewableRouting {
     func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
+    func attachApplyWriteRIB()
     func attachPlanRIB()
     func attachApplyRIBfromOtherRIB()
+    func attachWriteApplyOverallRIBfromOtherRIB()
 }
 
 protocol TabBarPresentable: Presentable {
@@ -25,6 +27,7 @@ protocol TabBarListener: AnyObject {
 }
 
 final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarInteractable, TabBarPresentableListener {
+    
     weak var router: TabBarRouting?
     weak var listener: TabBarListener?
 
@@ -57,6 +60,16 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     }
     
     func goBackToApplyRIB() {
+        Log("")
         router?.attachApplyRIBfromOtherRIB()
+    }
+    
+    func goToApplyWriteRIB() {
+        router?.attachApplyWriteRIB()
+    }
+    
+    // MARK: From Other RIBs
+    func goBackToWriteApplyOverallRIB() {
+        router?.attachWriteApplyOverallRIBfromOtherRIB()
     }
 }

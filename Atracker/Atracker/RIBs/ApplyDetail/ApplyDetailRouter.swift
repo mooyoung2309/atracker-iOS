@@ -12,7 +12,7 @@ protocol ApplyDetailInteractable: Interactable, ApplyEditListener {
     var listener: ApplyDetailListener? { get set }
 }
 
-protocol ApplyDetailViewControllable: ContainerViewControllable {
+protocol ApplyDetailViewControllable: NavigationContainerViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
@@ -47,8 +47,7 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         detachChildRIB()
         attachChild(applyEdit)
         
-        viewController.replace(viewController: applyEdit.viewControllable.uiviewController,
-                               transitionSubType: .fromRight)
+        viewController.presentView(applyEdit, transitionSubType: .fromRight)
         
         child = applyEdit
     }
