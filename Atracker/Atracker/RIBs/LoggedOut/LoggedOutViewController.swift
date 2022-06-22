@@ -15,14 +15,16 @@ protocol LoggedOutPresentableListener: AnyObject {
     func login(withEmail: String?, _ password: String?)
 }
 
-final class LoggedOutViewController: BaseViewController, LoggedOutPresentable, LoggedOutViewControllable {
+final class LoggedOutViewController: BaseNavigationViewController, LoggedOutPresentable, LoggedOutViewControllable {
+    
     weak var listener: LoggedOutPresentableListener?
     
-    let yesButton = UIButton(type: .system).then {
-        $0.setTitle("로그인 성공", for: .normal)
-    }
-    let noButton = UIButton(type: .system).then {
-        $0.setTitle("로그인 실패", for: .normal)
+    let selfView = LoggedOutView()
+    
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        
+        hideNavigationBar()
     }
     
     override func setupProperty() {
@@ -34,30 +36,23 @@ final class LoggedOutViewController: BaseViewController, LoggedOutPresentable, L
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(yesButton)
-        view.addSubview(noButton)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        yesButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(100)
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(100)
-        }
-        
-        noButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(100)
-            $0.width.height.equalTo(100)
+        selfView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
         }
     }
     
     override func setupBind() {
         super.setupBind()
         
-        yesButton.rx.tap
+        selfView.testLoginButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.listener?.login(withEmail: "ddd", "ddd")
             })

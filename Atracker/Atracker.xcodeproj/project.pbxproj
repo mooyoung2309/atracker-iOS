@@ -38,10 +38,21 @@
 		7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027070928407DEC00BC8E41 /* CircleView.swift */; };
 		7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */; };
 		7027D3962862B2A400F9C913 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3952862B2A400F9C913 /* AuthService.swift */; };
-		7027D3982862B33600F9C913 /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3972862B33600F9C913 /* Sign.swift */; };
+		7027D3982862B33600F9C913 /* SignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3972862B33600F9C913 /* SignResponse.swift */; };
 		7027D39A2862B44800F9C913 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3992862B44800F9C913 /* Gender.swift */; };
 		7027D39C2862B4C200F9C913 /* Sso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39B2862B4C200F9C913 /* Sso.swift */; };
-		7027D3A02862D0C000F9C913 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39F2862D0C000F9C913 /* Key.swift */; };
+		7027D3A02862D0C000F9C913 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39F2862D0C000F9C913 /* ApiRouter.swift */; };
+		7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3A22862DEA300F9C913 /* TestUserRegistrationRequest.swift */; };
+		7027D3A62862E02A00F9C913 /* LoggedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3A52862E02A00F9C913 /* LoggedOutView.swift */; };
+		7027D3A9286320A300F9C913 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3A8286320A300F9C913 /* AuthRepository.swift */; };
+		7027D3AC2863242A00F9C913 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3AB2863242A00F9C913 /* AuthRouter.swift */; };
+		7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3AD2863255C00F9C913 /* Encodable+Ext.swift */; };
+		7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3AF286325C300F9C913 /* BaseURLRequestConvertible.swift */; };
+		7027D3B32863274300F9C913 /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3B22863274300F9C913 /* HTTPHeaderField.swift */; };
+		7027D3B52863278800F9C913 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3B42863278800F9C913 /* ContentType.swift */; };
+		7027D3B728632B6600F9C913 /* UserRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3B628632B6600F9C913 /* UserRegistrationRequest.swift */; };
+		7027D3B928632C0100F9C913 /* TokenRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3B828632C0100F9C913 /* TokenRefreshResponse.swift */; };
+		7027D3BB28632D4D00F9C913 /* TokenRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3BA28632D4D00F9C913 /* TokenRefreshRequest.swift */; };
 		702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */; };
 		702B5A36285B1C8D00E94A6E /* FreeStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */; };
 		70322DF12854E2C800EA0EF7 /* ApplyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */; };
@@ -201,10 +212,21 @@
 		7027070928407DEC00BC8E41 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallCVC.swift; sourceTree = "<group>"; };
 		7027D3952862B2A400F9C913 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		7027D3972862B33600F9C913 /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
+		7027D3972862B33600F9C913 /* SignResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignResponse.swift; sourceTree = "<group>"; };
 		7027D3992862B44800F9C913 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		7027D39B2862B4C200F9C913 /* Sso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sso.swift; sourceTree = "<group>"; };
-		7027D39F2862D0C000F9C913 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		7027D39F2862D0C000F9C913 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		7027D3A22862DEA300F9C913 /* TestUserRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserRegistrationRequest.swift; sourceTree = "<group>"; };
+		7027D3A52862E02A00F9C913 /* LoggedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutView.swift; sourceTree = "<group>"; };
+		7027D3A8286320A300F9C913 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		7027D3AB2863242A00F9C913 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		7027D3AD2863255C00F9C913 /* Encodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Ext.swift"; sourceTree = "<group>"; };
+		7027D3AF286325C300F9C913 /* BaseURLRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLRequestConvertible.swift; sourceTree = "<group>"; };
+		7027D3B22863274300F9C913 /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
+		7027D3B42863278800F9C913 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
+		7027D3B628632B6600F9C913 /* UserRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationRequest.swift; sourceTree = "<group>"; };
+		7027D3B828632C0100F9C913 /* TokenRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshResponse.swift; sourceTree = "<group>"; };
+		7027D3BA28632D4D00F9C913 /* TokenRefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshRequest.swift; sourceTree = "<group>"; };
 		702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaStageContentEditView.swift; sourceTree = "<group>"; };
 		702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeStageContentEditView.swift; sourceTree = "<group>"; };
 		70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailView.swift; sourceTree = "<group>"; };
@@ -449,7 +471,11 @@
 		7027D39D2862D08600F9C913 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				7027D3972862B33600F9C913 /* Sign.swift */,
+				7027D3972862B33600F9C913 /* SignResponse.swift */,
+				7027D3A22862DEA300F9C913 /* TestUserRegistrationRequest.swift */,
+				7027D3B628632B6600F9C913 /* UserRegistrationRequest.swift */,
+				7027D3B828632C0100F9C913 /* TokenRefreshResponse.swift */,
+				7027D3BA28632D4D00F9C913 /* TokenRefreshRequest.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -457,9 +483,45 @@
 		7027D3A12862D22C00F9C913 /* Secret */ = {
 			isa = PBXGroup;
 			children = (
-				7027D39F2862D0C000F9C913 /* Key.swift */,
+				7027D39F2862D0C000F9C913 /* ApiRouter.swift */,
 			);
 			path = Secret;
+			sourceTree = "<group>";
+		};
+		7027D3A42862E00F00F9C913 /* LoggedOut */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3A52862E02A00F9C913 /* LoggedOutView.swift */,
+			);
+			path = LoggedOut;
+			sourceTree = "<group>";
+		};
+		7027D3A72863208B00F9C913 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3AA2863241800F9C913 /* Router */,
+				7027D3A8286320A300F9C913 /* AuthRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		7027D3AA2863241800F9C913 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3B12863269700F9C913 /* Base */,
+				7027D3AB2863242A00F9C913 /* AuthRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7027D3B12863269700F9C913 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3AF286325C300F9C913 /* BaseURLRequestConvertible.swift */,
+				7027D3B22863274300F9C913 /* HTTPHeaderField.swift */,
+				7027D3B42863278800F9C913 /* ContentType.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		70322DEF2854E2A500EA0EF7 /* ApplyDetail */ = {
@@ -594,6 +656,7 @@
 				70A2F6B72834C53200E6B95B /* Extension */,
 				70A2F6BB2834C56900E6B95B /* Util */,
 				70A2F6B32834C51F00E6B95B /* Model */,
+				7027D3A72863208B00F9C913 /* Repository */,
 				70A2F6B52834C52700E6B95B /* Service */,
 				701CE2232849CC24009230CE /* RIBs */,
 				70FBE5102852E3DD00455A4B /* View */,
@@ -655,6 +718,7 @@
 				70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */,
 				703DC43628546D5B0085F955 /* UIButton+Ext.swift */,
 				703F4A362852124C00C8BEC0 /* RIBs+Ext.swift */,
+				7027D3AD2863255C00F9C913 /* Encodable+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -886,6 +950,7 @@
 			children = (
 				70443B2C28589996009EE223 /* Reusable */,
 				703F4A3828521B8500C8BEC0 /* Base */,
+				7027D3A42862E00F00F9C913 /* LoggedOut */,
 				70FBE5132852E68400455A4B /* Apply */,
 				70322DEF2854E2A500EA0EF7 /* ApplyDetail */,
 				70FD6DD328577FDE0050ADB8 /* ApplyEdit */,
@@ -1209,7 +1274,7 @@
 				70CB0691285EF70000BE89B7 /* WriteApplyOverallRouter.swift in Sources */,
 				7027D3962862B2A400F9C913 /* AuthService.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
-				7027D3A02862D0C000F9C913 /* Key.swift in Sources */,
+				7027D3A02862D0C000F9C913 /* ApiRouter.swift in Sources */,
 				70A88E6C2851A4A90027D673 /* BlogViewController.swift in Sources */,
 				70A88E7D2851B94A0027D673 /* TabBarComponent+Apply.swift in Sources */,
 				7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */,
@@ -1227,6 +1292,7 @@
 				7092C89F2858C8A900C57AD1 /* Const.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
 				70A88E762851A6880027D673 /* TabBarBuilder.swift in Sources */,
+				7027D3BB28632D4D00F9C913 /* TokenRefreshRequest.swift in Sources */,
 				70A88E752851A6880027D673 /* TabBarViewController.swift in Sources */,
 				7040964F2860409A003EBCE4 /* ScheduleRouter.swift in Sources */,
 				70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */,
@@ -1236,6 +1302,7 @@
 				70A2F6C72834C7C300E6B95B /* ScheduleVC.swift in Sources */,
 				701CE2362849D3B9009230CE /* LoggedOutRouter.swift in Sources */,
 				7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */,
+				7027D3AC2863242A00F9C913 /* AuthRouter.swift in Sources */,
 				70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */,
 				70223C5428434F28009B7F0A /* AlertVC.swift in Sources */,
 				704096402860071D003EBCE4 /* WriteApplyScheduleViewController.swift in Sources */,
@@ -1255,6 +1322,7 @@
 				7088413C2835F6150024135D /* CalendarCVC.swift in Sources */,
 				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
 				7027D39A2862B44800F9C913 /* Gender.swift in Sources */,
+				7027D3A9286320A300F9C913 /* AuthRepository.swift in Sources */,
 				704096492860391D003EBCE4 /* ScheduleView.swift in Sources */,
 				70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */,
 				70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */,
@@ -1270,7 +1338,9 @@
 				703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */,
 				70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */,
 				70A88E6D2851A4A90027D673 /* BlogBuilder.swift in Sources */,
+				7027D3B928632C0100F9C913 /* TokenRefreshResponse.swift in Sources */,
 				70A2F6CC2834C8E900E6B95B /* BlogVC.swift in Sources */,
+				7027D3B728632B6600F9C913 /* UserRegistrationRequest.swift in Sources */,
 				7005C89128449C8C0091B225 /* BaseView.swift in Sources */,
 				703DC43728546D5B0085F955 /* UIButton+Ext.swift in Sources */,
 				70FD6DD52857808B0050ADB8 /* ReviewEditTVC.swift in Sources */,
@@ -1283,14 +1353,17 @@
 				70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */,
 				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
 				70BDD35A285F237D00E09821 /* Divider.swift in Sources */,
-				7027D3982862B33600F9C913 /* Sign.swift in Sources */,
+				7027D3982862B33600F9C913 /* SignResponse.swift in Sources */,
 				708841452836350E0024135D /* HorizontalBarChartView.swift in Sources */,
 				70443B2B28588FE8009EE223 /* StageStatusButtonBar.swift in Sources */,
+				7027D3B52863278800F9C913 /* ContentType.swift in Sources */,
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				70FBE51E2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
 				7092C89D2858C88400C57AD1 /* Enum.swift in Sources */,
+				7027D3B32863274300F9C913 /* HTTPHeaderField.swift in Sources */,
+				7027D3A62862E02A00F9C913 /* LoggedOutView.swift in Sources */,
 				70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */,
 				702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */,
 				701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */,
@@ -1305,11 +1378,13 @@
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
 				70FBE524285312A300455A4B /* ApplyService.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
+				7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */,
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
 				70970021283D27A6000F4B89 /* BoxButton.swift in Sources */,
 				70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
+				7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */,
 				70970023283D363B000F4B89 /* QAWriteView.swift in Sources */,
 				70A2F6C52834C75700E6B95B /* ApplyVC.swift in Sources */,
 				7040965828616FF9003EBCE4 /* WriteApplyScheduleTVC.swift in Sources */,
@@ -1321,6 +1396,7 @@
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
 				70BDD355285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift in Sources */,
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
+				7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */,
 				70EE86CF283F23C900DBC592 /* ApplyEditVM.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,

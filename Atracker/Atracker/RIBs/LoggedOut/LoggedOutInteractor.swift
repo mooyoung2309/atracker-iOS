@@ -24,9 +24,14 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, Lo
 
     weak var router: LoggedOutRouting?
     weak var listener: LoggedOutListener?
+    
+    private let authService: AuthServiceProtocol
 
-    override init(presenter: LoggedOutPresentable) {
+    init(presenter: LoggedOutPresentable, authService: AuthServiceProtocol) {
+        self.authService = authService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -40,6 +45,8 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, Lo
     }
     
     func login(withEmail: String?, _ password: String?) {
-        listener?.didLogin(withEmail: withEmail, password)
+        authService.testSignUp(email: "test01@gmail.com", gender: Gender.male.code, jobPosition: "개발자", nickName: "안나포", sso: Sso.google.code) { result in
+            Log("[D]\(result)")
+        }
     }
 }

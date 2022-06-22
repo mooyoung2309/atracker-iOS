@@ -39,7 +39,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     override func didBecomeActive() {
         super.didBecomeActive()
         
-//        router?.attachApplyRIB()
+        router?.attachApplyRIB()
     }
 
     override func willResignActive() {
