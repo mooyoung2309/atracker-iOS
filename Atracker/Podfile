@@ -12,6 +12,7 @@ target 'Atracker' do
   pod 'RxGesture'
   pod 'SnapKit'
   pod 'Then'
+  pod 'Alamofire'
   target 'AtrackerTests' do
     inherit! :search_paths
     # Pods for testing

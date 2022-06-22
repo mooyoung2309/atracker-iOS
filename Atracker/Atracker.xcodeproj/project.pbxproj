@@ -37,6 +37,11 @@
 		70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */; };
 		7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027070928407DEC00BC8E41 /* CircleView.swift */; };
 		7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */; };
+		7027D3962862B2A400F9C913 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3952862B2A400F9C913 /* AuthService.swift */; };
+		7027D3982862B33600F9C913 /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3972862B33600F9C913 /* Sign.swift */; };
+		7027D39A2862B44800F9C913 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3992862B44800F9C913 /* Gender.swift */; };
+		7027D39C2862B4C200F9C913 /* Sso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39B2862B4C200F9C913 /* Sso.swift */; };
+		7027D3A02862D0C000F9C913 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39F2862D0C000F9C913 /* Key.swift */; };
 		702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */; };
 		702B5A36285B1C8D00E94A6E /* FreeStageContentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */; };
 		70322DF12854E2C800EA0EF7 /* ApplyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */; };
@@ -195,6 +200,11 @@
 		70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyISOLDCODE.swift; sourceTree = "<group>"; };
 		7027070928407DEC00BC8E41 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallCVC.swift; sourceTree = "<group>"; };
+		7027D3952862B2A400F9C913 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		7027D3972862B33600F9C913 /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
+		7027D3992862B44800F9C913 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		7027D39B2862B4C200F9C913 /* Sso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sso.swift; sourceTree = "<group>"; };
+		7027D39F2862D0C000F9C913 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaStageContentEditView.swift; sourceTree = "<group>"; };
 		702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeStageContentEditView.swift; sourceTree = "<group>"; };
 		70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailView.swift; sourceTree = "<group>"; };
@@ -436,6 +446,22 @@
 			path = WriteApplySchedule;
 			sourceTree = "<group>";
 		};
+		7027D39D2862D08600F9C913 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3972862B33600F9C913 /* Sign.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7027D3A12862D22C00F9C913 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				7027D39F2862D0C000F9C913 /* Key.swift */,
+			);
+			path = Secret;
+			sourceTree = "<group>";
+		};
 		70322DEF2854E2A500EA0EF7 /* ApplyDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +541,8 @@
 			isa = PBXGroup;
 			children = (
 				705CCCFE285C5B3700E79540 /* AlertStyle.swift */,
+				7027D3992862B44800F9C913 /* Gender.swift */,
+				7027D39B2862B4C200F9C913 /* Sso.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -561,6 +589,7 @@
 		70A2F67D2834BFCB00E6B95B /* Atracker */ = {
 			isa = PBXGroup;
 			children = (
+				7027D3A12862D22C00F9C913 /* Secret */,
 				701CE2242849CC36009230CE /* App */,
 				70A2F6B72834C53200E6B95B /* Extension */,
 				70A2F6BB2834C56900E6B95B /* Util */,
@@ -598,6 +627,7 @@
 		70A2F6B32834C51F00E6B95B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7027D39D2862D08600F9C913 /* Auth */,
 				70A2F6D52834D23200E6B95B /* Application.swift */,
 				70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */,
 				70FBE52128530FFB00455A4B /* Apply.swift */,
@@ -609,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				70FBE523285312A300455A4B /* ApplyService.swift */,
+				7027D3952862B2A400F9C913 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1176,7 +1207,9 @@
 				701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */,
 				70FBE52A28537A8000455A4B /* ApplyDetailRouter.swift in Sources */,
 				70CB0691285EF70000BE89B7 /* WriteApplyOverallRouter.swift in Sources */,
+				7027D3962862B2A400F9C913 /* AuthService.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
+				7027D3A02862D0C000F9C913 /* Key.swift in Sources */,
 				70A88E6C2851A4A90027D673 /* BlogViewController.swift in Sources */,
 				70A88E7D2851B94A0027D673 /* TabBarComponent+Apply.swift in Sources */,
 				7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */,
@@ -1221,6 +1254,7 @@
 				70443B29285877B0009EE223 /* BaseCVC.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCVC.swift in Sources */,
 				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
+				7027D39A2862B44800F9C913 /* Gender.swift in Sources */,
 				704096492860391D003EBCE4 /* ScheduleView.swift in Sources */,
 				70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */,
 				70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */,
@@ -1249,6 +1283,7 @@
 				70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */,
 				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
 				70BDD35A285F237D00E09821 /* Divider.swift in Sources */,
+				7027D3982862B33600F9C913 /* Sign.swift in Sources */,
 				708841452836350E0024135D /* HorizontalBarChartView.swift in Sources */,
 				70443B2B28588FE8009EE223 /* StageStatusButtonBar.swift in Sources */,
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
@@ -1291,6 +1326,7 @@
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
+				7027D39C2862B4C200F9C913 /* Sso.swift in Sources */,
 				70CB0696285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift in Sources */,
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,

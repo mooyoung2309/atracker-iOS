@@ -84,5 +84,4 @@ enum AlertStyle {
             return ImageName.notification
         }
     }
-    
 }
