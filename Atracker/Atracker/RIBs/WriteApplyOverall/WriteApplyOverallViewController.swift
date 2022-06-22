@@ -108,6 +108,7 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
         
         if selectedIndexPathList.contains(indexPath) {
             if let order = selectedIndexPathList.firstIndex(of: indexPath) {
+//                Log("[D] \(order)")
                 cell.showHighlight(order: order + 1)
             }
         }
@@ -121,9 +122,11 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
         } else {
             selectedIndexPathList.append(indexPath)
         }
-        collectionView.reloadItems(at: [indexPath])
-        collectionView.reloadData()
-        print(selectedIndexPathList)
+        
+        collectionView.performBatchUpdates(nil, completion: { _ in
+            collectionView.reloadData()
+        })
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
