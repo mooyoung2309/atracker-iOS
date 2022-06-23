@@ -19,6 +19,7 @@ protocol WriteApplyOverallPresentable: Presentable {
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func setupNavigaionBar()
     func resetCollectionView()
+    func reloadCompanySearchTableView(companySearchContents: [CompanySearchContent])
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -28,14 +29,19 @@ protocol WriteApplyOverallListener: AnyObject {
 }
 
 final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverallPresentable>, WriteApplyOverallInteractable, WriteApplyOverallPresentableListener {
-
+    
     weak var router: WriteApplyOverallRouting?
     weak var listener: WriteApplyOverallListener?
+    
+    private let companyService: CompanyServiceProtocol
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: WriteApplyOverallPresentable) {
+    init(presenter: WriteApplyOverallPresentable, companyService: CompanyServiceProtocol) {
+        self.companyService = companyService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -59,6 +65,18 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     func tapResetButton() {
         presenter.resetCollectionView()
+    }
+    
+    func textCompanyTextfield(text: String) {
+        companyService.search(title: text) { [weak self] result in
+            switch result {
+            case .success(let data):
+                Log("[D] \(data.contents)")
+                self?.presenter.reloadCompanySearchTableView(companySearchContents: data.contents)
+            case .failure(let _):
+                return
+            }
+        }
     }
     
     // MARK: From Other RIBs

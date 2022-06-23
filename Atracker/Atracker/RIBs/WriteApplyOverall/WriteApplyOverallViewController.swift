@@ -14,10 +14,11 @@ protocol WriteApplyOverallPresentableListener: AnyObject {
     func tapBackButton()
     func tapNextButton()
     func tapResetButton()
+    func textCompanyTextfield(text: String)
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
-    
+
     var thisView: UIView {
         return containerView
     }
@@ -27,35 +28,49 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     let selfView = WriteApplyOverallView()
     
     private var selectedIndexPathList: [IndexPath] = []
-    
-    private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "3차 면접", "인적성", "코딩테스트", "+ 직접 입력"]
+    private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
+    private var companySearchContents: [CompanySearchContent] = []
     
     func resetCollectionView() {
         selectedIndexPathList.removeAll()
         selfView.collectionView.reloadData()
     }
     
+    func reloadCompanySearchTableView(companySearchContents: [CompanySearchContent]) {
+        self.companySearchContents = companySearchContents
+        Log("[D] \(self.companySearchContents)")
+        selfView.companySearchTableView.reloadData()
+        refreshTableView(tableView: selfView.companySearchTableView, maxHieght: Size.companySearchTableViewMaxHeight)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigaionBar()
     }
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
+        
         showNavigationBar()
         showNavigationBarBackButton()
         setNavigaionBarTitle("지원 현황 추가")
     }
     
     override func setupReload() {
+        super.setupReload()
+        
         selfView.collectionView.reloadData()
+        selfView.companySearchTableView.reloadData()
     }
     
     override func setupProperty() {
         super.setupProperty()
 
-        selfView.collectionView.delegate    = self
-        selfView.collectionView.dataSource  = self
+        selfView.collectionView.delegate            = self
+        selfView.collectionView.dataSource          = self
+        selfView.companySearchTableView.delegate    = self
+        selfView.companySearchTableView.dataSource  = self
     }
     
     override func setupHierarchy() {
@@ -91,6 +106,16 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         selfView.resetButton.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapResetButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.companyTextField.rx.text
+            .bind { [weak self] text in
+                if let text = text {
+                    if text != "" {
+                        self?.listener?.textCompanyTextfield(text: text)
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -136,15 +161,38 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
                           height: 30)
         }
         
-        return CGSize(width: mockups[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20,
+        return CGSize(width: mockups[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 25,
                       height: 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+}
+
+extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return companySearchContents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView {
+        case selfView.companySearchTableView:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
+            
+            cell.selectionStyle = .none
+            Log("[D] \(companySearchContents[indexPath.item].name)")
+            cell.update(title: companySearchContents[indexPath.item].name)
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    
 }

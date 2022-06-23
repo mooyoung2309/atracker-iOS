@@ -15,6 +15,7 @@ class WriteApplyOverallView: BaseView {
     let companyTextField        = UITextField()
     let companySearchButton     = UIButton(type: .system)
     let companyDivider          = Divider(.gray6)
+    let companySearchTableView  = UITableView()
     let objectLabel             = UILabel()
     let objectTextField         = UITextField()
     let objectSearchButton      = UIButton(type: .system)
@@ -39,6 +40,11 @@ class WriteApplyOverallView: BaseView {
         
         companySearchButton.setImage(UIImage(named: ImageName.search), for: .normal)
         companySearchButton.tintColor = .gray6
+        
+        companySearchTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
+        companySearchTableView.backgroundColor      = .backgroundLightGray
+        companySearchTableView.rowHeight            = UITableView.automaticDimension
+        companySearchTableView.estimatedRowHeight   = 50
         
         objectLabel.text                        = "지원 분야"
         objectLabel.font                        = .systemFont(ofSize: 14, weight: .medium)
@@ -93,6 +99,7 @@ class WriteApplyOverallView: BaseView {
         addSubview(resetButton)
         addSubview(collectionView)
         addSubview(nextButton)
+        addSubview(companySearchTableView)
     }
     
     override func setupLayout() {
@@ -119,6 +126,12 @@ class WriteApplyOverallView: BaseView {
             $0.top.equalTo(companyTextField.snp.bottom).inset(-6)
             $0.leading.equalTo(companyTextField)
             $0.trailing.equalTo(companySearchButton)
+        }
+        
+        companySearchTableView.snp.makeConstraints {
+            $0.top.equalTo(companyDivider.snp.bottom)
+            $0.leading.trailing.equalTo(companyDivider)
+            $0.height.equalTo(0)
         }
         
         objectLabel.snp.makeConstraints {

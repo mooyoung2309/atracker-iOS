@@ -23,11 +23,11 @@ protocol LoggedOutBuildable: Buildable {
 }
 
 final class LoggedOutBuilder: Builder<LoggedOutDependency>, LoggedOutBuildable {
-
+    
     override init(dependency: LoggedOutDependency) {
         super.init(dependency: dependency)
     }
-
+    
     func build(withListener listener: LoggedOutListener) -> LoggedOutRouting {
         let component       = LoggedOutComponent(dependency: dependency)
         let viewController  = LoggedOutViewController()

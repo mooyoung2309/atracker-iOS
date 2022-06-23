@@ -26,12 +26,22 @@ extension BaseURLRequestConvertible {
         case .query(let request):
             let params = request?.toDictionary() ?? [:]
             let queryParams = params.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
-            var components = URLComponents(string: url.appendingPathComponent(path).absoluteString)
+            var components = URLComponents(string: path)
             components?.queryItems = queryParams
             urlRequest.url = components?.url
         case .body(let request):
             let params = request?.toDictionary() ?? [:]
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+        case .both(let queryRequest, let bodyRequest):
+            let queryDict = queryRequest?.toDictionary() ?? [:]
+            let queryParams = queryDict.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+            var components = URLComponents(string: path)
+            components?.queryItems = queryParams
+            urlRequest.url = components?.url
+            Log("[D] QUERY \(urlRequest)")
+            let bodyDict = bodyRequest?.toDictionary() ?? [:]
+            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: bodyDict, options: [])
+            Log("[D] BODY \(bodyDict)")            
         default:
             print("param is nil")
         }
@@ -42,4 +52,5 @@ extension BaseURLRequestConvertible {
 enum RequestParams {
     case query(_ parameter: Encodable?)
     case body(_ parameter: Encodable?)
+    case both(_ queryParameter: Encodable?, _ bodyParameter: Encodable?)
 }

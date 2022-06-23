@@ -18,6 +18,9 @@ class AuthService: AuthServiceProtocol {
         authRepository.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
             switch result {
             case .success(let data):
+                Log("[D] test sign up success")
+                UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
+                UserDefaults.standard.set(data.refreshToken, forKey: "refreshToken")
                 completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
