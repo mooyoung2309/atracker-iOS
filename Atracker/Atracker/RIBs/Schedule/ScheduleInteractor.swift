@@ -15,6 +15,9 @@ protocol ScheduleRouting: ViewableRouting {
 protocol SchedulePresentable: Presentable {
     var listener: SchedulePresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func updateCalendarCell(prevDate: Date, currentDate: Date, nextDate: Date)
+    func updateNavigationTitle(title: String)
+    func switchBottomEditButton() -> Bool
 }
 
 protocol ScheduleListener: AnyObject {
@@ -25,6 +28,8 @@ final class ScheduleInteractor: PresentableInteractor<SchedulePresentable>, Sche
 
     weak var router: ScheduleRouting?
     weak var listener: ScheduleListener?
+    
+    private var date = Date()
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -35,11 +40,35 @@ final class ScheduleInteractor: PresentableInteractor<SchedulePresentable>, Sche
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+         updateCalendarDates(date: date)
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+    }
+    
+    func scrollCalendarPrev() {
+        date = date.plusPeriod(Period.month ,interval: -1)
+        updateCalendarDates(date: date)
+    }
+    
+    func scrollCalendarNext() {
+        date = date.plusPeriod(Period.month ,interval: 1)
+        updateCalendarDates(date: date)
+    }
+    
+    func tapBottomViewEditButton() {
+        presenter.switchBottomEditButton()
+    }
+    
+    
+    //MARK: Private
+    private func updateCalendarDates(date: Date) {
+        let prevDate    = date.plusPeriod(Period.month, interval: -1)
+        let currentDate = date
+        let nextDate    = date.plusPeriod(Period.month, interval: 1)
+        
+        presenter.updateCalendarCell(prevDate: prevDate, currentDate: currentDate, nextDate: nextDate)
+        presenter.updateNavigationTitle(title: date.getTitleOfMonth())
     }
 }

@@ -19,6 +19,12 @@ protocol WriteApplyOverallPresentable: Presentable {
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func setupNavigaionBar()
     func resetCollectionView()
+    func reloadCompanySearchTableView(companySearchContents: [CompanySearchContent])
+    func showCompanySearchTableView()
+    func hideCompanySearchTableView()
+    func selectCompanySearchButton()
+    func unSelectCompanySearchButton()
+    func switchJobSearchTableView()
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -28,14 +34,20 @@ protocol WriteApplyOverallListener: AnyObject {
 }
 
 final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverallPresentable>, WriteApplyOverallInteractable, WriteApplyOverallPresentableListener {
-
+    
     weak var router: WriteApplyOverallRouting?
     weak var listener: WriteApplyOverallListener?
+    
+    private let companyService: CompanyServiceProtocol
+    private var companySearchText = ""
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: WriteApplyOverallPresentable) {
+    init(presenter: WriteApplyOverallPresentable, companyService: CompanyServiceProtocol) {
+        self.companyService = companyService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -59,6 +71,34 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     func tapResetButton() {
         presenter.resetCollectionView()
+    }
+    
+    func tapJobTypeSearchButton() {
+        presenter.switchJobSearchTableView()
+//        Log(Date().getDatesOfMonth())
+    }
+    
+    func inputCompanyTextfield(text: String) {
+        if text.isEmpty {
+            presenter.hideCompanySearchTableView()
+            presenter.unSelectCompanySearchButton()
+        } else {
+            companyService.search(title: text) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    Log("[D] \(data.contents)")
+                    self?.presenter.reloadCompanySearchTableView(companySearchContents: data.contents)
+                    self?.presenter.showCompanySearchTableView()
+                    self?.presenter.selectCompanySearchButton()
+                case .failure(let _):
+                    return
+                }
+            }
+        }
+    }
+    
+    func tapCompanySearchButton() {
+        
     }
     
     // MARK: From Other RIBs

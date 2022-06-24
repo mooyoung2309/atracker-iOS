@@ -19,8 +19,18 @@ class CalendarCVC: BaseCVC {
     
     let dateFormatter   = DateFormatter()
     
+    func update(date: Date) {
+        dateLabel.text = "\(date.getDay())"
+        dateLabel.textColor = .white
+    }
+    
+    func updateTextColor(color: UIColor) {
+        dateLabel.textColor = color
+    }
+    
     override func prepareForReuse() {
         circleStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        dateLabel.textColor = .white
     }
     
     override func setupProperty() {
@@ -38,6 +48,8 @@ class CalendarCVC: BaseCVC {
         dateLabel.textAlignment = .center
         dateLabel.layer.cornerRadius = 10
         dateLabel.layer.masksToBounds = true
+        
+        circleStackView.isHidden = true
     }
     
     override func setupHierarchy() {
@@ -59,10 +71,6 @@ class CalendarCVC: BaseCVC {
             $0.top.equalTo(dateLabel.snp.bottom)
             $0.centerX.equalToSuperview()
         }
-    }
-    
-    func update(date: Int) {
-        dateLabel.text = String(date)
     }
     
     func showCircle(_ bool: Bool) {

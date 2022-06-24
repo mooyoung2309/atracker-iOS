@@ -15,6 +15,9 @@ protocol WriteApplyOverallDependency: Dependency {
 final class WriteApplyOverallComponent: Component<WriteApplyOverallDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var companyService: CompanyServiceProtocol {
+        return CompanyService()
+    }
 }
 
 // MARK: - Builder
@@ -32,10 +35,10 @@ final class WriteApplyOverallBuilder: Builder<WriteApplyOverallDependency>, Writ
     func build(withListener listener: WriteApplyOverallListener) -> WriteApplyOverallRouting {
         let component                   = WriteApplyOverallComponent(dependency: dependency)
         let viewController              = WriteApplyOverallViewController()
-        let interactor                  = WriteApplyOverallInteractor(presenter: viewController)
+        let interactor                  = WriteApplyOverallInteractor(presenter: viewController, companyService: component.companyService)
         let writeApplyScheduleBuilder   = WriteApplyScheduleBuilder(dependency: component)
         
-        interactor.listener = listener
+        interactor.listener             = listener
         
         return WriteApplyOverallRouter(interactor: interactor,
                                        viewController: viewController,

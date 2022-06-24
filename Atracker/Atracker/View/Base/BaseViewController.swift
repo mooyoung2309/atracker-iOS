@@ -16,7 +16,7 @@ protocol BaseViewControllerProtocol: AnyObject {
     func setupHierarchy()
     func setupLayout()
     func setupBind()
-    func refreshTableView(tableView: UITableView)
+    func refreshTableView(tableView: UITableView, maxHieght: CGFloat?)
 }
 
 class BaseViewController: UIViewController, BaseViewControllerProtocol {
@@ -40,24 +40,27 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     }
     
     func setupReload() { }
-    
     func setupProperty() { }
-    
     func setupHierarchy() { }
-    
     func setupLayout() { }
-    
     func setupBind() { }
     
-    func refreshTableView(tableView: UITableView) {
+    func refreshTableView(tableView: UITableView, maxHieght: CGFloat? = nil) {
         
         tableView.snp.updateConstraints {
             $0.height.equalTo(CGFloat.greatestFiniteMagnitude)
         }
         tableView.reloadData()
         tableView.layoutIfNeeded()
+        
+        var height = tableView.contentSize.height
+        
+        if let maxHieght = maxHieght {
+            height = height > maxHieght ? maxHieght : height
+        }
+
         tableView.snp.updateConstraints {
-            $0.height.equalTo(tableView.contentSize.height)
+            $0.height.equalTo(height)
         }
     }
 }
