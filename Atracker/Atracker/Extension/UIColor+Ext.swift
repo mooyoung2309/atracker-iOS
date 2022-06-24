@@ -30,7 +30,7 @@ extension UIColor {
     class var successProgressColor4: UIColor { UIColor(hex: 0x07D2FF) }
     class var successProgressColor5: UIColor { UIColor(hex: 0x37FFDB) }
     
-    class var backgroundLightGray: UIColor { UIColor(hex: 0x40475C) }
+    class var backgroundLightGray: UIColor { UIColor(hex: 0x272A35) }
     class var backgroundGray: UIColor { UIColor(hex: 0x1F2129) }
     class var neonGreen: UIColor { UIColor(hex: 0x37FFDB) }
     class var blue2: UIColor { UIColor(hex: 0x16E9F6) }

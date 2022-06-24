@@ -11,7 +11,6 @@ import SnapKit
 class ScheduleView: BaseView {
     
     let calendarView            = UIView()
-    let dateLabel               = UILabel()
     let topDivider              = Divider(.line)
     let weekStackView           = UIStackView()
     let bottomDivider           = Divider(.line)
@@ -25,15 +24,13 @@ class ScheduleView: BaseView {
                                                    collectionViewLayout: UICollectionViewFlowLayout())
     let rightCollectionView     = UICollectionView(frame: .zero,
                                                    collectionViewLayout: UICollectionViewFlowLayout())
+    let bottomView              = UIView()
+    let bottomTitleLabel        = UILabel()
+    let bottomEditButton        = UIButton(type: .custom)
+    let bottomTableView         = UITableView()
     
     override func setupProperty() {
         super.setupProperty()
-        
-        dateLabel.text          = "2022.06"
-        dateLabel.font          = .systemFont(ofSize: 19, weight: .bold)
-        dateLabel.textColor     = .neonGreen
-        dateLabel.textAlignment = .center
-        
         topDivider.alpha = 0.35
         
         bottomDivider.alpha = 0.35
@@ -66,13 +63,26 @@ class ScheduleView: BaseView {
         
         rightCollectionView.register(CalendarCVC.self, forCellWithReuseIdentifier: CalendarCVC.id)
         rightCollectionView.backgroundColor = .clear
+        
+        bottomView.backgroundColor = .clear
+        
+        bottomTitleLabel.text = "6월 25일 목요일"
+        bottomTitleLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        bottomTitleLabel.textColor = .neonGreen
+        
+        bottomEditButton.setTitle("수정", for: .normal)
+        bottomEditButton.setTitle("완료", for: .selected)
+        bottomEditButton.setTitleColor(.gray3, for: .normal)
+        bottomEditButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        
+        bottomTableView.backgroundColor = .clear
+        bottomTableView.register(ScheduleTVC.self, forCellReuseIdentifier: ScheduleTVC.id)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         addSubview(calendarView)
-        calendarView.addSubview(dateLabel)
         calendarView.addSubview(topDivider)
         calendarView.addSubview(weekStackView)
         calendarView.addSubview(bottomDivider)
@@ -85,6 +95,11 @@ class ScheduleView: BaseView {
         prevView.addSubview(leftCollectionView)
         nowView.addSubview(centerCollectionView)
         nextView.addSubview(rightCollectionView)
+        
+        addSubview(bottomView)
+        bottomView.addSubview(bottomTitleLabel)
+        bottomView.addSubview(bottomEditButton)
+        bottomView.addSubview(bottomTableView)
     }
     
     override func setupLayout() {
@@ -94,10 +109,6 @@ class ScheduleView: BaseView {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
-        dateLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
-            $0.centerX.equalToSuperview()
-        }
         
         topDivider.snp.makeConstraints {
             $0.top.equalTo(weekStackView.snp.top).inset(-7)
@@ -105,7 +116,7 @@ class ScheduleView: BaseView {
         }
         
         weekStackView.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).inset(-19)
+            $0.top.equalToSuperview().inset(8)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -116,7 +127,8 @@ class ScheduleView: BaseView {
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(weekStackView.snp.bottom).inset(-30)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(nowView)
         }
         
         prevView.snp.makeConstraints {
@@ -155,6 +167,26 @@ class ScheduleView: BaseView {
             $0.top.leading.trailing.bottom.equalToSuperview()
             $0.width.equalTo(Size.calendarWidth)
             $0.height.equalTo(Size.calendarHeight)
+        }
+        
+        bottomView.snp.makeConstraints {
+            $0.top.equalTo(scrollView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        bottomTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(12)
+            $0.leading.equalToSuperview().inset(21)
+        }
+        
+        bottomEditButton.snp.makeConstraints {
+            $0.centerY.equalTo(bottomTitleLabel)
+            $0.trailing.equalToSuperview().inset(28)
+        }
+        
+        bottomTableView.snp.makeConstraints {
+            $0.top.equalTo(bottomTitleLabel.snp.bottom).inset(-12)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

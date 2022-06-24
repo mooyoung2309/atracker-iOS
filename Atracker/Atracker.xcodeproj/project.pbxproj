@@ -96,6 +96,10 @@
 		70576DF128642181000406DF /* CompanyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF028642181000406DF /* CompanyResponse.swift */; };
 		70576DF32864222D000406DF /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF22864222D000406DF /* CompanyService.swift */; };
 		70576DF528643638000406DF /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF428643638000406DF /* SearchTVC.swift */; };
+		70576DF72864E09A000406DF /* JobType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF62864E099000406DF /* JobType.swift */; };
+		70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF82864E9E9000406DF /* Date+Ext.swift */; };
+		70576DFB2864EBB4000406DF /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DFA2864EBB4000406DF /* Period.swift */; };
+		70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DFC286595AE000406DF /* ScheduleTVC.swift */; };
 		705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705CCCFE285C5B3700E79540 /* AlertStyle.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
 		707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */; };
@@ -282,6 +286,10 @@
 		70576DF028642181000406DF /* CompanyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyResponse.swift; sourceTree = "<group>"; };
 		70576DF22864222D000406DF /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
 		70576DF428643638000406DF /* SearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
+		70576DF62864E099000406DF /* JobType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobType.swift; sourceTree = "<group>"; };
+		70576DF82864E9E9000406DF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		70576DFA2864EBB4000406DF /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		70576DFC286595AE000406DF /* ScheduleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTVC.swift; sourceTree = "<group>"; };
 		705CCCFE285C5B3700E79540 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
 		707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSizedRoundButton.swift; sourceTree = "<group>"; };
@@ -620,8 +628,9 @@
 		70409645286038F4003EBCE4 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				7088413B2835F6150024135D /* CalendarCVC.swift */,
 				704096482860391D003EBCE4 /* ScheduleView.swift */,
+				7088413B2835F6150024135D /* CalendarCVC.swift */,
+				70576DFC286595AE000406DF /* ScheduleTVC.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -654,6 +663,8 @@
 				7027D3992862B44800F9C913 /* Gender.swift */,
 				7027D39B2862B4C200F9C913 /* Sso.swift */,
 				7027D3BC28636FE200F9C913 /* UserDefaultKey.swift */,
+				70576DF62864E099000406DF /* JobType.swift */,
+				70576DFA2864EBB4000406DF /* Period.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -770,6 +781,7 @@
 				703DC43628546D5B0085F955 /* UIButton+Ext.swift */,
 				703F4A362852124C00C8BEC0 /* RIBs+Ext.swift */,
 				7027D3AD2863255C00F9C913 /* Encodable+Ext.swift */,
+				70576DF82864E9E9000406DF /* Date+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1326,6 +1338,7 @@
 				701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */,
 				70FBE52A28537A8000455A4B /* ApplyDetailRouter.swift in Sources */,
 				70CB0691285EF70000BE89B7 /* WriteApplyOverallRouter.swift in Sources */,
+				70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */,
 				7027D3962862B2A400F9C913 /* AuthService.swift in Sources */,
 				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
 				7027D3A02862D0C000F9C913 /* ApiRouter.swift in Sources */,
@@ -1342,6 +1355,7 @@
 				7005BD17283549B3008E380A /* ApplyDetailVC.swift in Sources */,
 				70FBE51A2852EC5D00455A4B /* ApplyEditViewController.swift in Sources */,
 				7027D3BD28636FE200F9C913 /* UserDefaultKey.swift in Sources */,
+				70576DFB2864EBB4000406DF /* Period.swift in Sources */,
 				703F4A3A28521B8F00C8BEC0 /* BaseTabViewController.swift in Sources */,
 				701CE2222849C197009230CE /* ApplyInteractor.swift in Sources */,
 				70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */,
@@ -1394,6 +1408,7 @@
 				701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */,
 				7040964428600A23003EBCE4 /* WriteApplyOverallComponent+WriteApplySchedule.swift in Sources */,
 				70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */,
+				70576DF72864E09A000406DF /* JobType.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
 				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
 				70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */,
@@ -1445,6 +1460,7 @@
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
 				70970021283D27A6000F4B89 /* BoxButton.swift in Sources */,
 				70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */,
+				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
 				7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */,

@@ -40,9 +40,11 @@ class WriteApplyOverallCVC: BaseCVC {
     override func setupProperty() {
         super.setupProperty()
         
+        
         buttonView.backgroundColor      = .backgroundLightGray
         buttonView.layer.cornerRadius   = 15
         buttonView.layer.borderWidth    = 1
+        buttonView.layer.borderColor    = UIColor.clear.cgColor
         
         
         buttonLabel.font            = .systemFont(ofSize: 14, weight: .regular)

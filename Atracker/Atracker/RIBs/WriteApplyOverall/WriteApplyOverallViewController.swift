@@ -14,11 +14,12 @@ protocol WriteApplyOverallPresentableListener: AnyObject {
     func tapBackButton()
     func tapNextButton()
     func tapResetButton()
-    func textCompanyTextfield(text: String)
+    func inputCompanyTextfield(text: String)
+    func tapCompanySearchButton()
+    func tapJobTypeSearchButton()
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
-
     var thisView: UIView {
         return containerView
     }
@@ -29,6 +30,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     private var selectedIndexPathList: [IndexPath] = []
     private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
+    private let jobTypes: [JobType] = [JobType.fullTime, JobType.contract, JobType.intern]
     private var companySearchContents: [CompanySearchContent] = []
     
     func resetCollectionView() {
@@ -43,10 +45,34 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         refreshTableView(tableView: selfView.companySearchTableView, maxHieght: Size.companySearchTableViewMaxHeight)
     }
     
+    func showCompanySearchTableView() {
+        selfView.companySearchTableView.isHidden = false
+    }
+    
+    func hideCompanySearchTableView() {
+        selfView.companySearchTableView.isHidden = true
+    }
+    
+    func selectCompanySearchButton() {
+        selfView.companySearchButton.isSelected = true
+    }
+    
+    func unSelectCompanySearchButton() {
+        selfView.companySearchButton.isSelected = false
+    }
+    
+    func switchJobSearchTableView() {
+        let bool = !selfView.jobSearchTableView.isHidden
+        selfView.jobSearchTableView.isHidden = bool
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigaionBar()
+        selfView.jobSearchTableView.reloadData()
+        refreshTableView(tableView: selfView.jobSearchTableView)
+        selfView.jobSearchTableView.isHidden = true
     }
     
     override func setupNavigaionBar() {
@@ -57,20 +83,15 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         setNavigaionBarTitle("지원 현황 추가")
     }
     
-    override func setupReload() {
-        super.setupReload()
-        
-        selfView.collectionView.reloadData()
-        selfView.companySearchTableView.reloadData()
-    }
-    
     override func setupProperty() {
         super.setupProperty()
-
+        
         selfView.collectionView.delegate            = self
         selfView.collectionView.dataSource          = self
         selfView.companySearchTableView.delegate    = self
         selfView.companySearchTableView.dataSource  = self
+        selfView.jobSearchTableView.delegate        = self
+        selfView.jobSearchTableView.dataSource      = self
     }
     
     override func setupHierarchy() {
@@ -103,7 +124,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
             }
             .disposed(by: disposeBag)
         
-        selfView.resetButton.rx.tap
+        selfView.reloadButton.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapResetButton()
             }
@@ -112,10 +133,20 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         selfView.companyTextField.rx.text
             .bind { [weak self] text in
                 if let text = text {
-                    if text != "" {
-                        self?.listener?.textCompanyTextfield(text: text)
-                    }
+                    self?.listener?.inputCompanyTextfield(text: text)
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.companySearchButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapCompanySearchButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.jobTypeButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapJobTypeSearchButton()
             }
             .disposed(by: disposeBag)
     }
@@ -133,7 +164,7 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
         
         if selectedIndexPathList.contains(indexPath) {
             if let order = selectedIndexPathList.firstIndex(of: indexPath) {
-//                Log("[D] \(order)")
+                //                Log("[D] \(order)")
                 cell.showHighlight(order: order + 1)
             }
         }
@@ -176,7 +207,15 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
 
 extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companySearchContents.count
+        Log(companySearchContents.count)
+        switch tableView {
+        case selfView.companySearchTableView:
+            return companySearchContents.count
+        case selfView.jobSearchTableView:
+            return jobTypes.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -185,8 +224,14 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            Log("[D] \(companySearchContents[indexPath.item].name)")
+            //            Log("[D] \(companySearchContents[indexPath.item].name)")
             cell.update(title: companySearchContents[indexPath.item].name)
+            
+            return cell
+        case selfView.jobSearchTableView:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            cell.update(title: jobTypes[indexPath.item].string)
             
             return cell
         default:

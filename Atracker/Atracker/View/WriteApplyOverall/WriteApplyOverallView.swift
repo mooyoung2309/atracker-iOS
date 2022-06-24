@@ -13,18 +13,19 @@ class WriteApplyOverallView: BaseView {
     
     let companyLabel            = UILabel()
     let companyTextField        = UITextField()
-    let companySearchButton     = UIButton(type: .system)
+    let companySearchButton     = UIButton(type: .custom)
     let companyDivider          = Divider(.gray6)
     let companySearchTableView  = UITableView()
-    let objectLabel             = UILabel()
-    let objectTextField         = UITextField()
-    let objectSearchButton      = UIButton(type: .system)
-    let objectDivider           = Divider(.gray6)
     let positionLabel           = UILabel()
     let positionTextField       = UITextField()
     let positionDivider         = Divider(.gray6)
+    let jobTypeLabel            = UILabel()
+    let jobTypeResultLabel      = UILabel()
+    let jobTypeButton           = UIButton(type: .custom)
+    let jobTypeDivider          = Divider(.gray6)
+    let jobSearchTableView      = UITableView()
     let progressLabel           = UILabel()
-    let resetButton             = UIButton(type: .system)
+    let reloadButton            = UIButton(type: .custom)
     let collectionView          = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let nextButton              = UIButton(type: .system)
     
@@ -38,37 +39,43 @@ class WriteApplyOverallView: BaseView {
         companyTextField.textColor              = .white
         companyTextField.attributedPlaceholder = NSAttributedString(string: "회사명을 입력해주세요.", attributes: [.foregroundColor: UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .regular)])
         
-        companySearchButton.setImage(UIImage(named: ImageName.search), for: .normal)
-        companySearchButton.tintColor = .gray6
+        companySearchButton.setBackgroundImage(UIImage(named: ImageName.search)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
+        companySearchButton.setBackgroundImage(UIImage(named: ImageName.cancle)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .selected)
         
         companySearchTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
         companySearchTableView.backgroundColor      = .backgroundLightGray
         companySearchTableView.rowHeight            = UITableView.automaticDimension
         companySearchTableView.estimatedRowHeight   = 50
         
-        objectLabel.text                        = "지원 분야"
-        objectLabel.font                        = .systemFont(ofSize: 14, weight: .medium)
-        objectLabel.textColor                   = .gray3
+        positionLabel.text                        = "지원 분야"
+        positionLabel.font                        = .systemFont(ofSize: 14, weight: .medium)
+        positionLabel.textColor                   = .gray3
         
-        objectTextField.textColor               = .white
-        objectTextField.attributedPlaceholder = NSAttributedString(string: "지원 분야를 입력해주세요.", attributes: [.foregroundColor: UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .regular)])
+        positionTextField.textColor               = .white
+        positionTextField.attributedPlaceholder = NSAttributedString(string: "지원 분야를 입력해주세요.", attributes: [.foregroundColor: UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .regular)])
         
-        objectSearchButton.setImage(UIImage(named: ImageName.search), for: .normal)
-        objectSearchButton.tintColor = .gray6
+        jobTypeLabel.text                      = "포지션"
+        jobTypeLabel.font                      = .systemFont(ofSize: 14, weight: .medium)
+        jobTypeLabel.textColor                 = .gray3
         
-        positionLabel.text                      = "포지션"
-        positionLabel.font                      = .systemFont(ofSize: 14, weight: .medium)
-        positionLabel.textColor                 = .gray3
+        jobTypeResultLabel.text         = "근무 형태를 선택해주세요."
+        jobTypeResultLabel.font         = .systemFont(ofSize: 16, weight: .light)
+        jobTypeResultLabel.textColor    = .gray6
         
-        positionTextField.attributedPlaceholder = NSAttributedString(string: "포지션명을 입력해주세요.", attributes: [.foregroundColor: UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .regular)])
-        positionTextField.textColor             = .white
+        jobTypeButton.setBackgroundImage(UIImage(named: ImageName.checkBottom)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
+        
+        jobSearchTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
+        jobSearchTableView.backgroundColor      = .backgroundLightGray
+        jobSearchTableView.rowHeight            = UITableView.automaticDimension
+        jobSearchTableView.estimatedRowHeight   = 50
+        jobSearchTableView.isScrollEnabled = false
         
         progressLabel.text                      = "지원 단계 순서대로 단계를 눌러주세요."
         progressLabel.font                      = .systemFont(ofSize: 14, weight: .medium)
         progressLabel.textColor                 = .gray3
         
-        resetButton.setImage(UIImage(named: ImageName.undo), for: .normal)
-        resetButton.tintColor = .white
+        reloadButton.setImage(UIImage(named: ImageName.reload)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
+        reloadButton.tintColor = .gray6
         
         collectionView.register(WriteApplyOverallCVC.self, forCellWithReuseIdentifier: WriteApplyOverallCVC.id)
         collectionView.backgroundColor = .clear
@@ -88,18 +95,19 @@ class WriteApplyOverallView: BaseView {
         addSubview(companyTextField)
         addSubview(companySearchButton)
         addSubview(companyDivider)
-        addSubview(objectLabel)
-        addSubview(objectTextField)
-        addSubview(objectSearchButton)
-        addSubview(objectDivider)
         addSubview(positionLabel)
         addSubview(positionTextField)
         addSubview(positionDivider)
+        addSubview(jobTypeLabel)
+        addSubview(jobTypeResultLabel)
+        addSubview(jobTypeButton)
+        addSubview(jobTypeDivider)
         addSubview(progressLabel)
-        addSubview(resetButton)
+        addSubview(reloadButton)
         addSubview(collectionView)
         addSubview(nextButton)
         addSubview(companySearchTableView)
+        addSubview(jobSearchTableView)
     }
     
     override func setupLayout() {
@@ -134,31 +142,8 @@ class WriteApplyOverallView: BaseView {
             $0.height.equalTo(0)
         }
         
-        objectLabel.snp.makeConstraints {
-            $0.top.equalTo(companyTextField.snp.bottom).inset(-34)
-            $0.leading.equalToSuperview().inset(39)
-        }
-        
-        objectTextField.snp.makeConstraints {
-            $0.top.equalTo(objectLabel.snp.bottom).inset(-15)
-            $0.leading.equalToSuperview().inset(40)
-            $0.trailing.equalTo(objectSearchButton.snp.leading)
-        }
-        
-        objectSearchButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(30)
-            $0.centerY.equalTo(objectTextField)
-            $0.width.height.equalTo(18)
-        }
-        
-        objectDivider.snp.makeConstraints {
-            $0.top.equalTo(objectTextField.snp.bottom).inset(-6)
-            $0.leading.equalTo(objectTextField)
-            $0.trailing.equalTo(objectSearchButton)
-        }
-        
         positionLabel.snp.makeConstraints {
-            $0.top.equalTo(objectTextField.snp.bottom).inset(-39)
+            $0.top.equalTo(companyTextField.snp.bottom).inset(-34)
             $0.leading.equalToSuperview().inset(39)
         }
         
@@ -170,18 +155,47 @@ class WriteApplyOverallView: BaseView {
         
         positionDivider.snp.makeConstraints {
             $0.top.equalTo(positionTextField.snp.bottom).inset(-6)
-            $0.leading.trailing.equalTo(positionTextField)
+            $0.leading.equalTo(positionTextField)
+            $0.trailing.equalToSuperview().inset(30)
         }
         
-        progressLabel.snp.makeConstraints {
+        jobTypeLabel.snp.makeConstraints {
             $0.top.equalTo(positionTextField.snp.bottom).inset(-39)
             $0.leading.equalToSuperview().inset(39)
         }
         
-        resetButton.snp.makeConstraints {
+        jobTypeResultLabel.snp.makeConstraints {
+            $0.top.equalTo(jobTypeLabel.snp.bottom).inset(-15)
+            $0.leading.equalToSuperview().inset(40)
+            $0.trailing.equalToSuperview().inset(30)
+        }
+        
+        jobTypeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(30)
+            $0.centerY.equalTo(jobTypeResultLabel)
+            $0.width.height.equalTo(18)
+        }
+        
+        jobTypeDivider.snp.makeConstraints {
+            $0.top.equalTo(jobTypeResultLabel.snp.bottom).inset(-6)
+            $0.leading.trailing.equalTo(jobTypeResultLabel)
+        }
+        
+        jobSearchTableView.snp.makeConstraints {
+            $0.top.equalTo(jobTypeDivider.snp.bottom)
+            $0.leading.trailing.equalTo(jobTypeDivider)
+            $0.height.equalTo(0)
+        }
+        
+        progressLabel.snp.makeConstraints {
+            $0.top.equalTo(jobTypeResultLabel.snp.bottom).inset(-39)
+            $0.leading.equalToSuperview().inset(39)
+        }
+        
+        reloadButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(28)
             $0.centerY.equalTo(progressLabel)
-            $0.width.height.equalTo(13)
+            $0.width.height.equalTo(18)
         }
         
         collectionView.snp.makeConstraints {

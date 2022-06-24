@@ -26,6 +26,7 @@ class SearchTVC: BaseTVC {
     
     override func setupHierarchy() {
         super.setupHierarchy()
+        
         backgroundColor = .clear
         contentView.addSubview(titleLabel)
     }
