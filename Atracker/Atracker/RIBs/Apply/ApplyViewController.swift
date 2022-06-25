@@ -43,6 +43,7 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         
         setNavigaionBarTitle("지원 현황")
         hideNavigationBarBackButton()
+        hideNavigationBar()
     }
     
     override func setupReload() {
