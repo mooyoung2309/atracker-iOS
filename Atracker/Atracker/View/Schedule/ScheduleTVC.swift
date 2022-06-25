@@ -33,6 +33,11 @@ class ScheduleTVC: BaseTVC {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        hideDatePicker()
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         

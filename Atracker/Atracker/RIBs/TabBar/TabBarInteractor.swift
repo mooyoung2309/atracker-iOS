@@ -20,6 +20,10 @@ protocol TabBarRouting: ViewableRouting {
 
 protocol TabBarPresentable: Presentable {
     var listener: TabBarPresentableListener? { get set }
+    
+    func selectBlogButton()
+    func selectApplyButton()
+    func selectScheduleButton()
 }
 
 protocol TabBarListener: AnyObject {
@@ -39,7 +43,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        router?.attachApplyRIB()
+        tabApplyButton()
     }
 
     override func willResignActive() {
@@ -47,20 +51,22 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         
     }
     
-    func didTabBlog() {
+    func tabBlogButton() {
         router?.attachBlogRIB()
+        presenter.selectBlogButton()
     }
     
-    func didTabApply() {
+    func tabApplyButton() {
         router?.attachApplyRIB()
+        presenter.selectApplyButton()
     }
     
-    func didTabPlan() {
+    func tabScheduleButton() {
         router?.attachPlanRIB()
+        presenter.selectScheduleButton()
     }
     
     func goBackToApplyRIB() {
-        Log("")
         router?.attachApplyRIBfromOtherRIB()
     }
     

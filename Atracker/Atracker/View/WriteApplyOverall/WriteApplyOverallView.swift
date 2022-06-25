@@ -81,10 +81,9 @@ class WriteApplyOverallView: BaseView {
         collectionView.backgroundColor = .clear
         
         nextButton.setTitle("다음", for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.setTitleColor(.neonGreen, for: .normal)
         nextButton.titleLabel?.font     = .systemFont(ofSize: 16, weight: .regular)
         nextButton.backgroundColor      = .backgroundGray
-        
         nextButton.addShadow(.top)
     }
     

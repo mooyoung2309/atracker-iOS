@@ -235,7 +235,7 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedCellIndexPath = selectedCellIndexPath {
             if selectedCellIndexPath == indexPath && canEdit {
-                return 200
+                return 220
             }
         }
         return 44

@@ -25,11 +25,10 @@ class WriteApplyScheduleView: BaseView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
         
-        nextButton.setTitle("다음", for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.setTitle("완료", for: .normal)
+        nextButton.setTitleColor(.neonGreen, for: .normal)
         nextButton.titleLabel?.font     = .systemFont(ofSize: 16, weight: .regular)
         nextButton.backgroundColor      = .backgroundGray
-        
         nextButton.addShadow(.top)
     }
     

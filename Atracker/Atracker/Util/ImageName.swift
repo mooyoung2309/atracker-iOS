@@ -21,4 +21,5 @@ struct ImageName {
     static let cancle           = "Cancle"
     static let checkBottom      = "CheckBottom"
     static let reload           = "Reload"
+    static let calendar         = "Calendar"
 }

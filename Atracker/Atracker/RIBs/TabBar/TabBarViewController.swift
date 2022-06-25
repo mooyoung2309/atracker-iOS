@@ -12,9 +12,9 @@ import Then
 import SnapKit
 
 protocol TabBarPresentableListener: AnyObject {
-    func didTabBlog()
-    func didTabApply()
-    func didTabPlan()
+    func tabBlogButton()
+    func tabApplyButton()
+    func tabScheduleButton()
 }
 
 final class TabBarViewController: BaseTabViewController, UITabBarControllerDelegate, TabBarPresentable, TabBarViewControllable {
@@ -34,25 +34,43 @@ final class TabBarViewController: BaseTabViewController, UITabBarControllerDeleg
             dismiss(animated: false, completion: nil)
         }
     }
+    
+    func selectBlogButton() {
+        tabBar.blogTab.isSelected       = true
+        tabBar.applyTab.isSelected      = false
+        tabBar.scheduleTab.isSelected   = false
+    }
+    
+    func selectApplyButton() {
+        tabBar.blogTab.isSelected       = false
+        tabBar.applyTab.isSelected      = true
+        tabBar.scheduleTab.isSelected   = false
+    }
+    
+    func selectScheduleButton() {
+        tabBar.blogTab.isSelected       = false
+        tabBar.applyTab.isSelected      = false
+        tabBar.scheduleTab.isSelected   = true
+    }
 
     override func setupBind() {
         super.setupBind()
 
         tabBar.blogTab.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.listener?.didTabBlog()
+                self?.listener?.tabBlogButton()
             })
             .disposed(by: disposeBag)
 
         tabBar.applyTab.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.listener?.didTabApply()
+                self?.listener?.tabApplyButton()
             })
             .disposed(by: disposeBag)
 
-        tabBar.planTab.rx.tap
+        tabBar.scheduleTab.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.listener?.didTabPlan()
+                self?.listener?.tabScheduleButton()
             })
             .disposed(by: disposeBag)
     }
