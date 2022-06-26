@@ -14,13 +14,26 @@ protocol SignOutPresentableListener: AnyObject {
     // TODO: Declare properties and methods that the view controller can invoke to perform
     // business logic, such as signIn(). This protocol is implemented by the corresponding
     // interactor class.
+    func tapGoogleSignUpButton()
+    func tapAppleSignUpButton()
+    func tapTestSignUpButton()
 }
 
 final class SignOutViewController: BaseNavigationViewController, SignOutPresentable, SignOutViewControllable {
-
+    
     weak var listener: SignOutPresentableListener?
     
     let selfView = SignOutView()
+    
+    func present(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        hideNavigationBar()
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -38,5 +51,27 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
         selfView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    override func setupBind() {
+        super.setupBind()
+        
+        selfView.googleSignUpButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapGoogleSignUpButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.appleSignUpButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapAppleSignUpButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.testSignUpButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapTestSignUpButton()
+            }
+            .disposed(by: disposeBag)
     }
 }

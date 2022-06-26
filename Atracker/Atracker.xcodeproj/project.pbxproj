@@ -15,6 +15,9 @@
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
 		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
+		700DBEBA2868B0BC00883A4F /* RootComponent+SignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */; };
+		700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */; };
+		700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */; };
 		700F34FD285C523600F16DA6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F34FC285C523600F16DA6 /* AlertView.swift */; };
 		701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21B2849C197009230CE /* ApplyRouter.swift */; };
 		701CE2202849C197009230CE /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21C2849C197009230CE /* ApplyViewController.swift */; };
@@ -213,6 +216,9 @@
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
 		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
+		700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignOut.swift"; sourceTree = "<group>"; };
+		700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
+		700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineTextFieldView.swift; sourceTree = "<group>"; };
 		700F34FC285C523600F16DA6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		701CE21B2849C197009230CE /* ApplyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRouter.swift; sourceTree = "<group>"; };
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
@@ -486,6 +492,7 @@
 				701CE2292849D0F2009230CE /* RootViewController.swift */,
 				701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */,
 				701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */,
+				700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -671,6 +678,7 @@
 				70443B2D285899A3009EE223 /* RoundButton.swift */,
 				700F34FC285C523600F16DA6 /* AlertView.swift */,
 				70BDD359285F237D00E09821 /* Divider.swift */,
+				700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -720,6 +728,7 @@
 				70576E322865B54C000406DF /* SignOutRouter.swift */,
 				70576E352865B54C000406DF /* SignOutInteractor.swift */,
 				70576E332865B54C000406DF /* SignOutViewController.swift */,
+				700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */,
 			);
 			path = SignOut;
 			sourceTree = "<group>";
@@ -1484,6 +1493,7 @@
 				701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */,
 				7040964428600A23003EBCE4 /* WriteApplyOverallComponent+WriteApplySchedule.swift in Sources */,
 				70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */,
+				700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */,
 				70576DF72864E09A000406DF /* JobType.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
 				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
@@ -1514,6 +1524,7 @@
 				70576E382865B54C000406DF /* SignOutBuilder.swift in Sources */,
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				70FBE51E2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift in Sources */,
+				700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				70576E3C2865B563000406DF /* SignOutView.swift in Sources */,
 				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
@@ -1543,6 +1554,7 @@
 				70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */,
 				70576E362865B54C000406DF /* SignOutRouter.swift in Sources */,
 				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,
+				700DBEBA2868B0BC00883A4F /* RootComponent+SignOut.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
 				7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */,

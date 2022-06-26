@@ -10,6 +10,7 @@ import RxSwift
 
 protocol SignOutRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachSignUpNicknameRIB()
 }
 
 protocol SignOutPresentable: Presentable {
@@ -25,11 +26,16 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
 
     weak var router: SignOutRouting?
     weak var listener: SignOutListener?
+    
+    private let authService: AuthService
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: SignOutPresentable) {
+    init(presenter: SignOutPresentable, authService: AuthService) {
+        self.authService = authService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -41,5 +47,18 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func tapGoogleSignUpButton() {
+        Log("[D] 구글 회원가입 버튼 클릭")
+    }
+    
+    func tapAppleSignUpButton() {
+        Log("[D] 애플 회원가입 버튼 클릭")
+    }
+    
+    func tapTestSignUpButton() {
+        Log("[D] 테스트 회원가입 버튼 클릭")
+        router?.attachSignUpNicknameRIB()
     }
 }

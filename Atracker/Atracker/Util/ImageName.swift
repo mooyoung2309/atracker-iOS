@@ -22,4 +22,6 @@ struct ImageName {
     static let checkBottom      = "CheckBottom"
     static let reload           = "Reload"
     static let calendar         = "Calendar"
+    static let google           = "Google"
+    static let apple            = "Apple"
 }

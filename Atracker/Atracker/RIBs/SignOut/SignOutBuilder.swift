@@ -15,6 +15,9 @@ protocol SignOutDependency: Dependency {
 final class SignOutComponent: Component<SignOutDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var authService: AuthService {
+        return AuthService()
+    }
 }
 
 // MARK: - Builder
@@ -30,10 +33,12 @@ final class SignOutBuilder: Builder<SignOutDependency>, SignOutBuildable {
     }
 
     func build(withListener listener: SignOutListener) -> SignOutRouting {
-        let component = SignOutComponent(dependency: dependency)
-        let viewController = SignOutViewController()
-        let interactor = SignOutInteractor(presenter: viewController)
+        let component               = SignOutComponent(dependency: dependency)
+        let viewController          = SignOutViewController()
+        let interactor              = SignOutInteractor(presenter: viewController, authService: component.authService)
+        let signUpNicknameBuilder   = SignUpNicknameBuilder(dependency: component)
+        
         interactor.listener = listener
-        return SignOutRouter(interactor: interactor, viewController: viewController)
+        return SignOutRouter(interactor: interactor, viewController: viewController, signUpNicknameBuilder: signUpNicknameBuilder)
     }
 }

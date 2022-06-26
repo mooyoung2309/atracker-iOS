@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable, LoggedOutListener, LoggedInListener {
+protocol RootInteractable: Interactable, SignOutListener,LoggedOutListener, LoggedInListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -22,14 +22,18 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     
     private let loggedOutBuilder: LoggedOutBuildable
     private let loggedInBuilder: LoggedInBuildable
+    private let signOutBuilder: SignOutBuildable
     
+    private var signOut: ViewableRouting?
     private var loggedOut: ViewableRouting?
     
     init(interactor: RootInteractable,
          viewController: RootViewControllable,
+         signOutBuilder: SignOutBuilder,
          loggedOutBuilder: LoggedOutBuilder,
          loggedInBuilder: LoggedInBuilder) {
         
+        self.signOutBuilder = signOutBuilder
         self.loggedOutBuilder = loggedOutBuilder
         self.loggedInBuilder = loggedInBuilder
         
@@ -41,7 +45,15 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     override func didLoad() {
         super.didLoad()
         
-        routeToLoggedOut()
+        routeToSignOut()
+    }
+    
+    func routeToSignOut() {
+        let signOut = signOutBuilder.build(withListener: interactor)
+        
+        self.signOut = signOut
+        attachChild(signOut)
+        viewController.present(viewController: signOut.viewControllable)
     }
     
     func routeToLoggedIn(email: String?, password: String?) {
@@ -63,8 +75,6 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
         self.loggedOut = loggedOut
         
         attachChild(loggedOut)
-        
-//        loggedOut.viewControllable.uiviewController.modalPresentationStyle = .fullScreen
         
         viewController.present(viewController: loggedOut.viewControllable)
     }

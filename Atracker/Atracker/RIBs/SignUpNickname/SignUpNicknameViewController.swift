@@ -15,11 +15,17 @@ protocol SignUpNicknamePresentableListener: AnyObject {
     // interactor class.
 }
 
-final class SignUpNicknameViewController: BaseViewController, SignUpNicknamePresentable, SignUpNicknameViewControllable {
+final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNicknamePresentable, SignUpNicknameViewControllable {
 
     weak var listener: SignUpNicknamePresentableListener?
     
     let selfView = SignUpNicknameView()
+    
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        
+        hideNavigationBar()
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -28,14 +34,15 @@ final class SignUpNicknameViewController: BaseViewController, SignUpNicknamePres
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(selfView)
+        contentView.addSubview(selfView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         selfView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

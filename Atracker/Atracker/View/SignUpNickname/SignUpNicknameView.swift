@@ -18,8 +18,14 @@ class SignUpNicknameView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        titleLabel.text = "개성있는 닉네임을 설정해주세요."
-        nicknameLabel.text = "이름"
+        titleLabel.text         = "개성있는 닉네임을 설정해주세요."
+        titleLabel.font         = .systemFont(ofSize: 20, weight: .regular)
+        titleLabel.textColor    = .white
+        
+        nicknameLabel.text      = "이름"
+        nicknameLabel.font      = .systemFont(ofSize: 14, weight: .medium)
+        nicknameLabel.textColor = .gray3
+        
     }
     
     override func setupHierarchy() {
@@ -39,13 +45,15 @@ class SignUpNicknameView: BaseView {
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).inset(37)
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-37)
             $0.leading.equalToSuperview().inset(28)
         }
         
         nicknameTextField.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel).inset(16)
-            $0.leading.equalToSuperview().inset(28)
+            $0.top.equalTo(nicknameLabel.snp.bottom).inset(-16)
+            $0.leading.trailing.equalToSuperview().inset(28)
         }
+        
+        
     }
 }
