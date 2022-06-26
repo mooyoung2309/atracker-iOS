@@ -21,8 +21,9 @@ protocol ApplyDetailPresentable: Presentable {
 
 protocol ApplyDetailListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func goBackToApplyRIB()
-    func goBackToApplyDetailRIB()
+//    func goBackToApplyRIB()
+//    func goBackToApplyDetailRIB()
+    func tapBackButtonFromChildRIB()
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
@@ -49,16 +50,16 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         // TODO: Pause any business logic.
     }
     
-    func didBackButton() {
-        listener?.goBackToApplyRIB()
+    func tapBackButton() {
+        listener?.tapBackButtonFromChildRIB()
     }
     
-    func didEditButton() {
+    func tapEditButton() {
         router?.attachApplyEditRIB(apply: apply)
     }
     
     func goBackToApplyDetailRIB() {
         router?.detachChildRIB()
-        listener?.goBackToApplyDetailRIB()
+//        listener?.goBackToApplyDetailRIB()
     }
 }

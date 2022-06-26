@@ -14,6 +14,7 @@
 		7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C88D28449B550091B225 /* ApplyEditView.swift */; };
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
+		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
 		700F34FD285C523600F16DA6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F34FC285C523600F16DA6 /* AlertView.swift */; };
 		701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21B2849C197009230CE /* ApplyRouter.swift */; };
 		701CE2202849C197009230CE /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21C2849C197009230CE /* ApplyViewController.swift */; };
@@ -164,7 +165,6 @@
 		70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB068E285EF70000BE89B7 /* WriteApplyOverallViewController.swift */; };
 		70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB068F285EF70000BE89B7 /* WriteApplyOverallBuilder.swift */; };
 		70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB0690285EF70000BE89B7 /* WriteApplyOverallInteractor.swift */; };
-		70CB0696285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB0695285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift */; };
 		70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */; };
 		70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8828478B220098C742 /* BaseTVC.swift */; };
 		70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B9B2847AEC20098C742 /* ApplyView.swift */; };
@@ -212,6 +212,7 @@
 		7005C88D28449B550091B225 /* ApplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditView.swift; sourceTree = "<group>"; };
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
+		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
 		700F34FC285C523600F16DA6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		701CE21B2849C197009230CE /* ApplyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRouter.swift; sourceTree = "<group>"; };
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
@@ -366,7 +367,6 @@
 		70CB068E285EF70000BE89B7 /* WriteApplyOverallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallViewController.swift; sourceTree = "<group>"; };
 		70CB068F285EF70000BE89B7 /* WriteApplyOverallBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallBuilder.swift; sourceTree = "<group>"; };
 		70CB0690285EF70000BE89B7 /* WriteApplyOverallInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallInteractor.swift; sourceTree = "<group>"; };
-		70CB0695285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+ApplyWrite.swift"; sourceTree = "<group>"; };
 		70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProgressTVC.swift; sourceTree = "<group>"; };
 		70CF5B8828478B220098C742 /* BaseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVC.swift; sourceTree = "<group>"; };
 		70CF5B9B2847AEC20098C742 /* ApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyView.swift; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 				701CE21C2849C197009230CE /* ApplyViewController.swift */,
 				70FBE51D2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift */,
 				703DC438285475C20085F955 /* ApplyComponent+ApplyDetail.swift */,
-				70CB0695285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift */,
+				700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */,
 			);
 			path = Apply;
 			sourceTree = "<group>";
@@ -1432,6 +1432,7 @@
 				70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */,
 				70FBE51B2852EC5D00455A4B /* ApplyEditBuilder.swift in Sources */,
 				7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */,
+				700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
 				70576E282865B2AA000406DF /* SignUpPositionViewController.swift in Sources */,
 				70576E2E2865B2F6000406DF /* SignUpPositionView.swift in Sources */,
@@ -1563,7 +1564,6 @@
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
 				7027D39C2862B4C200F9C913 /* Sso.swift in Sources */,
-				70CB0696285F000A00BE89B7 /* ApplyComponent+ApplyWrite.swift in Sources */,
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,
 				70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */,

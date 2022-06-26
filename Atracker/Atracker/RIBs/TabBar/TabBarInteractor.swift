@@ -12,10 +12,10 @@ protocol TabBarRouting: ViewableRouting {
     func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
-    func attachApplyWriteRIB()
+//    func attachApplyWriteRIB()
     func attachPlanRIB()
     func attachApplyRIBfromOtherRIB()
-    func attachWriteApplyOverallRIBfromOtherRIB()
+//    func attachWriteApplyOverallRIBfromOtherRIB()
 }
 
 protocol TabBarPresentable: Presentable {
@@ -24,6 +24,8 @@ protocol TabBarPresentable: Presentable {
     func selectBlogButton()
     func selectApplyButton()
     func selectScheduleButton()
+    func showTabBar()
+    func hideTabBar()
 }
 
 protocol TabBarListener: AnyObject {
@@ -70,12 +72,22 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         router?.attachApplyRIBfromOtherRIB()
     }
     
-    func goToApplyWriteRIB() {
-        router?.attachApplyWriteRIB()
+    func showTabBar() {
+        presenter.showTabBar()
     }
     
-    // MARK: From Other RIBs
-    func goBackToWriteApplyOverallRIB() {
-        router?.attachWriteApplyOverallRIBfromOtherRIB()
+    func hideTabBar() {
+        presenter.hideTabBar()
     }
+    
+    
+    
+//    func goToApplyWriteRIB() {
+//        router?.attachApplyWriteRIB()
+//    }
+//
+    // MARK: From Other RIBs
+//    func goBackToWriteApplyOverallRIB() {
+//        router?.attachWriteApplyOverallRIBfromOtherRIB()
+//    }
 }

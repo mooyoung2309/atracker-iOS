@@ -10,9 +10,9 @@ import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
-//    func attachApplyWriteRIB()
+    func attachWriteApplyOverall()
+    func detachThisChildRIB()
     func reAttachApplyDetailRIB()
-    func detachChildRIB()
 }
 
 protocol ApplyPresentable: Presentable {
@@ -21,8 +21,10 @@ protocol ApplyPresentable: Presentable {
 }
 
 protocol ApplyListener: AnyObject {
-    func goBackToApplyRIB()
-    func goToApplyWriteRIB()
+//    func goBackToApplyRIB()
+//    func goToApplyWriteRIB()
+    func showTabBar()
+    func hideTabBar()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
@@ -56,8 +58,8 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func tapPlusButton() {
-        router?.detachChildRIB()
-        listener?.goToApplyWriteRIB()
+        listener?.hideTabBar()
+        router?.attachWriteApplyOverall()
     }
     
     func reloadApplyList() {
@@ -67,16 +69,26 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         }
     }
     
-    func goBackToApplyRIB() {
-        router?.detachChildRIB()
-        listener?.goBackToApplyRIB()
-    }
-    
-    func goBackToApplyDetailRIB() {
-        router?.reAttachApplyDetailRIB()
-    }
-    
-//    func goBackToWriteApplyOverallRIB() {
-//        router?.attachApplyWriteRIB()
+//    func goBackToApplyRIB() {
+//        router?.detachChildRIB()
+//        listener?.goBackToApplyRIB()
 //    }
+//    
+//    func goBackToApplyDetailRIB() {
+//        router?.reAttachApplyDetailRIB()
+//    }
+//
+
+    // MARK: From Child RIB
+    func tapBackButtonFromChildRIB() {
+        router?.detachThisChildRIB()
+    }
+    
+    func showTabBar() {
+        listener?.showTabBar()
+    }
+    
+    func hideTabBar() {
+        listener?.hideTabBar()
+    }
 }

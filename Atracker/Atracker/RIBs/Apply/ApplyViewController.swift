@@ -71,7 +71,8 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         super.setupLayout()
         
         selfView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
         }
     }
     

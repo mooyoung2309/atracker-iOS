@@ -96,7 +96,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
+        view.layer.zPosition = 1
         contentView.addSubview(selfView)
     }
     

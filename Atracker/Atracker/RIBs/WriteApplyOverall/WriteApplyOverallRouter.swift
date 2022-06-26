@@ -45,7 +45,12 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
         child = writeApplySchedule
     }
     
-    func detachWriteApplyScheduleRIB() {
+//    func detachWriteApplyScheduleRIB() {
+//        detachChildRIB(child)
+//        viewController.dismissView(animation: true)
+//    }
+    
+    func detachThisChildRIB() {
         detachChildRIB(child)
         viewController.dismissView(animation: true)
     }

@@ -23,7 +23,7 @@ extension NavigationContainerViewControllable {
         thisView.subviews.forEach { $0.removeFromSuperview() }
         let vc = viewController
         vc.view.frame = thisView.bounds
-        
+
         if animation {
             let transition = CATransition()
             transition.type = .push
@@ -32,6 +32,7 @@ extension NavigationContainerViewControllable {
             
             transition.duration = 0.25
             thisView.layer.add(transition, forKey: nil)
+            
         }
         
         thisView.addSubview(vc.view)

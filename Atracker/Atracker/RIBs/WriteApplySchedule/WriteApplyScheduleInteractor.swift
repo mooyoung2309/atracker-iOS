@@ -19,7 +19,8 @@ protocol WriteApplySchedulePresentable: Presentable {
 }
 
 protocol WriteApplyScheduleListener: AnyObject {
-    func goBackToWriteApplyOverallRIB()
+//    func goBackToWriteApplyOverallRIB()
+    func tapBackButtonFromChildRIB()
 }
 
 final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedulePresentable>, WriteApplyScheduleInteractable, WriteApplySchedulePresentableListener {
@@ -44,7 +45,7 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
     }
     
     func tapBackButton() {
-        listener?.goBackToWriteApplyOverallRIB()
+        listener?.tapBackButtonFromChildRIB()
     }
     
     func didLoad() {

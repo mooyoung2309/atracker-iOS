@@ -10,8 +10,8 @@ import RxSwift
 
 protocol WriteApplyOverallRouting: ViewableRouting {
     func attachWriteApplyScheduleRIB()
-    func detachWriteApplyScheduleRIB()
-    
+//    func detachWriteApplyScheduleRIB()
+    func detachThisChildRIB()
 }
 
 protocol WriteApplyOverallPresentable: Presentable {
@@ -29,8 +29,11 @@ protocol WriteApplyOverallPresentable: Presentable {
 
 protocol WriteApplyOverallListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func goBackToApplyRIB()
-    func goBackToWriteApplyOverallRIB()
+//    func goBackToApplyRIB()
+//    func goBackToWriteApplyOverallRIB()
+    func tapBackButtonFromChildRIB()
+    func showTabBar()
+    func hideTabBar()
 }
 
 final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverallPresentable>, WriteApplyOverallInteractable, WriteApplyOverallPresentableListener {
@@ -62,7 +65,8 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     }
     
     func tapBackButton() {
-        listener?.goBackToApplyRIB()
+        listener?.showTabBar()
+        listener?.tapBackButtonFromChildRIB()
     }
     
     func tapNextButton() {
@@ -75,7 +79,6 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     func tapJobTypeSearchButton() {
         presenter.switchJobSearchTableView()
-//        Log(Date().getDatesOfMonth())
     }
     
     func inputCompanyTextfield(text: String) {
@@ -101,9 +104,15 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         
     }
     
-    // MARK: From Other RIBs
-    func goBackToWriteApplyOverallRIB() {
-        router?.detachWriteApplyScheduleRIB()
-        presenter.setupNavigaionBar()
+    // MARK: From Child RIBs
+    func tapBackButtonFromChildRIB() {
+        router?.detachThisChildRIB()
+//        presenter.setupNavigaionBar()
     }
+    
+    
+//    func goBackToWriteApplyOverallRIB() {
+//        router?.detachWriteApplyScheduleRIB()
+//        presenter.setupNavigaionBar()
+//    }
 }

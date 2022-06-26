@@ -11,8 +11,8 @@ import RxCocoa
 import UIKit
 
 protocol ApplyDetailPresentableListener: AnyObject {
-    func didBackButton()
-    func didEditButton()
+    func tapBackButton()
+    func tapEditButton()
 }
 
 final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetailPresentable, ApplyDetailViewControllable {
@@ -68,13 +68,13 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         
         navigaionBar.backButton.rx.tap
             .bind { [weak self] _ in
-                self?.listener?.didBackButton()
+                self?.listener?.tapBackButton()
             }
             .disposed(by: disposeBag)
         
         selfView.editButton.rx.tap
             .bind { [weak self] _ in
-                self?.listener?.didEditButton()
+                self?.listener?.tapEditButton()
             }
             .disposed(by: disposeBag)
     }

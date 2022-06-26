@@ -52,6 +52,14 @@ final class TabBarViewController: BaseTabViewController, UITabBarControllerDeleg
         tabBar.applyTab.isSelected      = false
         tabBar.scheduleTab.isSelected   = true
     }
+    
+    func showTabBar() {
+        tabBar.isHidden = false
+    }
+    
+    func hideTabBar() {
+        tabBar.isHidden = true
+    }
 
     override func setupBind() {
         super.setupBind()

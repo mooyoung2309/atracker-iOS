@@ -69,6 +69,7 @@ class BaseTabViewController: BaseViewController, BaseTabViewControllerProtocol {
         tabBar.scheduleTab.setTitleColor(.white, for: .highlighted)
         tabBar.scheduleTab.titleLabel?.font = .systemFont(ofSize: 10, weight: .regular)
         tabBar.addArrangedSubviews([tabBar.blogTab, tabBar.applyTab, tabBar.scheduleTab])
+        tabBar.layer.zPosition = 0
     }
     
     override func setupHierarchy() {
@@ -84,7 +85,8 @@ class BaseTabViewController: BaseViewController, BaseTabViewControllerProtocol {
         mainView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
+//            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
+            $0.bottom.equalToSuperview()
         }
         
         tabBar.snp.makeConstraints {
