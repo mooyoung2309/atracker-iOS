@@ -42,6 +42,7 @@
 		701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */; };
 		701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */; };
 		701CE2452849E1D0009230CE /* RootComponent+LoggedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */; };
+		701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */; };
 		70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */; };
 		70223C5428434F28009B7F0A /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5328434F28009B7F0A /* AlertVC.swift */; };
 		70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5528434F89009B7F0A /* BaseViewController.swift */; };
@@ -251,6 +252,7 @@
 		701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutInteractor.swift; sourceTree = "<group>"; };
 		701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
 		701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedOut.swift"; sourceTree = "<group>"; };
+		701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpPositionComponent+SignUpSuccess.swift"; sourceTree = "<group>"; };
 		70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedRoundButton.swift; sourceTree = "<group>"; };
 		70223C5328434F28009B7F0A /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		70223C5528434F89009B7F0A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -458,10 +460,10 @@
 		700DBEC52868D7FD00883A4F /* SignUpSuccess */ = {
 			isa = PBXGroup;
 			children = (
-				700DBEC62868D82D00883A4F /* SignUpSuccessRouter.swift */,
-				700DBEC72868D82D00883A4F /* SignUpSuccessViewController.swift */,
 				700DBEC82868D82D00883A4F /* SignUpSuccessBuilder.swift */,
+				700DBEC62868D82D00883A4F /* SignUpSuccessRouter.swift */,
 				700DBEC92868D82D00883A4F /* SignUpSuccessInteractor.swift */,
+				700DBEC72868D82D00883A4F /* SignUpSuccessViewController.swift */,
 			);
 			path = SignUpSuccess;
 			sourceTree = "<group>";
@@ -740,6 +742,7 @@
 				70576E232865B2AA000406DF /* SignUpPositionRouter.swift */,
 				70576E262865B2AA000406DF /* SignUpPositionInteractor.swift */,
 				70576E242865B2AA000406DF /* SignUpPositionViewController.swift */,
+				701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */,
 			);
 			path = SignUpPosition;
 			sourceTree = "<group>";
@@ -1612,6 +1615,7 @@
 				7040965828616FF9003EBCE4 /* WriteApplyScheduleTVC.swift in Sources */,
 				70576E302865B300000406DF /* SignUpNicknameView.swift in Sources */,
 				701CE22F2849D0F2009230CE /* RootInteractor.swift in Sources */,
+				701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */,
 				70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */,
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */,

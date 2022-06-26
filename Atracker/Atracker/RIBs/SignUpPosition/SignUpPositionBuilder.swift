@@ -30,10 +30,13 @@ final class SignUpPositionBuilder: Builder<SignUpPositionDependency>, SignUpPosi
     }
 
     func build(withListener listener: SignUpPositionListener) -> SignUpPositionRouting {
-        let component = SignUpPositionComponent(dependency: dependency)
-        let viewController = SignUpPositionViewController()
-        let interactor = SignUpPositionInteractor(presenter: viewController)
-        interactor.listener = listener
-        return SignUpPositionRouter(interactor: interactor, viewController: viewController)
+        let component               = SignUpPositionComponent(dependency: dependency)
+        let viewController          = SignUpPositionViewController()
+        let interactor              = SignUpPositionInteractor(presenter: viewController)
+        let signUpSuccessBuilder    = SignUpSuccessBuilder(dependency: component)
+        
+        interactor.listener         = listener
+        
+        return SignUpPositionRouter(interactor: interactor, viewController: viewController, signUpSuccessBuilder: signUpSuccessBuilder)
     }
 }
