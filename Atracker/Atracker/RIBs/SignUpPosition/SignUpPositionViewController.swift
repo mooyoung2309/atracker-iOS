@@ -15,7 +15,35 @@ protocol SignUpPositionPresentableListener: AnyObject {
     // interactor class.
 }
 
-final class SignUpPositionViewController: UIViewController, SignUpPositionPresentable, SignUpPositionViewControllable {
+final class SignUpPositionViewController: BaseNavigationViewController, SignUpPositionPresentable, SignUpPositionViewControllable {
 
     weak var listener: SignUpPositionPresentableListener?
+    
+    let selfView = SignUpPositionView()
+    
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        
+        hideNavigationBar()
+    }
+    
+    override func setupProperty() {
+        super.setupProperty()
+        
+    }
+    
+    override func setupHierarchy() {
+        super.setupHierarchy()
+        
+        contentView.addSubview(selfView)
+    }
+    
+    override func setupLayout() {
+        super.setupLayout()
+        
+        selfView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
 }

@@ -24,4 +24,5 @@ struct ImageName {
     static let calendar         = "Calendar"
     static let google           = "Google"
     static let apple            = "Apple"
+    static let chevronDown      = "ChevronDown"
 }
