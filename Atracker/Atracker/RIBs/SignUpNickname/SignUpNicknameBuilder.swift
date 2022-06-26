@@ -13,7 +13,7 @@ protocol SignUpNicknameDependency: Dependency {
 }
 
 final class SignUpNicknameComponent: Component<SignUpNicknameDependency> {
-
+    
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
@@ -24,16 +24,19 @@ protocol SignUpNicknameBuildable: Buildable {
 }
 
 final class SignUpNicknameBuilder: Builder<SignUpNicknameDependency>, SignUpNicknameBuildable {
-
+    
     override init(dependency: SignUpNicknameDependency) {
         super.init(dependency: dependency)
     }
-
+    
     func build(withListener listener: SignUpNicknameListener) -> SignUpNicknameRouting {
-        let component = SignUpNicknameComponent(dependency: dependency)
-        let viewController = SignUpNicknameViewController()
-        let interactor = SignUpNicknameInteractor(presenter: viewController)
-        interactor.listener = listener
-        return SignUpNicknameRouter(interactor: interactor, viewController: viewController)
+        let component               = SignUpNicknameComponent(dependency: dependency)
+        let viewController          = SignUpNicknameViewController()
+        let interactor              = SignUpNicknameInteractor(presenter: viewController)
+        let signUpPositionBuilder   = SignUpPositionBuilder(dependency: component)
+        
+        interactor.listener         = listener
+        
+        return SignUpNicknameRouter(interactor: interactor, viewController: viewController, signUpPositionBuilder: signUpPositionBuilder)
     }
 }

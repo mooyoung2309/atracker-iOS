@@ -22,6 +22,10 @@ class Divider: BaseView {
         contentView.backgroundColor = color
     }
     
+    func update(_ color: UIColor) {
+        contentView.backgroundColor = color
+    }
+    
     override func setupHierarchy() {
         super.setupHierarchy()
         

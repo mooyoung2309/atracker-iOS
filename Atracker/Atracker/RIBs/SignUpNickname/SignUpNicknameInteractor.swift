@@ -10,6 +10,7 @@ import RxSwift
 
 protocol SignUpNicknameRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachSignUpPositionRIB()
 }
 
 protocol SignUpNicknamePresentable: Presentable {
@@ -41,5 +42,9 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func tapNextButton() {
+        router?.attachSignUpPositionRIB()
     }
 }

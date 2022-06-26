@@ -11,9 +11,10 @@ import SnapKit
 
 class SignUpNicknameView: BaseView {
     
-    let titleLabel          = UILabel()
-    let nicknameLabel       = UILabel()
-    let nicknameTextField   = UITextField()
+    let titleLabel                      = UILabel()
+    let nicknameLabel                   = UILabel()
+    let nicknameUnderLineTextFieldView  = UnderLineTextFieldView()
+    let bottomNextButtonView            = BottomNextButtonView()
     
     override func setupProperty() {
         super.setupProperty()
@@ -26,6 +27,10 @@ class SignUpNicknameView: BaseView {
         nicknameLabel.font      = .systemFont(ofSize: 14, weight: .medium)
         nicknameLabel.textColor = .gray3
         
+        nicknameUnderLineTextFieldView.textField.textColor = .white
+        nicknameUnderLineTextFieldView.textField.tintColor = .neonGreen
+        
+        bottomNextButtonView.addShadow(.top)
     }
     
     override func setupHierarchy() {
@@ -33,7 +38,8 @@ class SignUpNicknameView: BaseView {
         
         addSubview(titleLabel)
         addSubview(nicknameLabel)
-        addSubview(nicknameTextField)
+        addSubview(nicknameUnderLineTextFieldView)
+        addSubview(bottomNextButtonView)
     }
     
     override func setupLayout() {
@@ -49,11 +55,14 @@ class SignUpNicknameView: BaseView {
             $0.leading.equalToSuperview().inset(28)
         }
         
-        nicknameTextField.snp.makeConstraints {
+        nicknameUnderLineTextFieldView.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         
-        
+        bottomNextButtonView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(Size.tabBarHeight)
+        }
     }
 }
