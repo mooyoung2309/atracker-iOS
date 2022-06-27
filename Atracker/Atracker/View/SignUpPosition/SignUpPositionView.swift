@@ -47,6 +47,7 @@ class SignUpPositionView: BaseView {
         carrerTableView.isScrollEnabled = false
         carrerTableView.isHidden = true
         
+        bottomNextButtonView.backgroundColor = .backgroundGray
         bottomNextButtonView.addShadow(.top)
     }
     

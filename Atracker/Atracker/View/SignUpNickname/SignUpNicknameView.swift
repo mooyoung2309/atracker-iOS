@@ -30,6 +30,7 @@ class SignUpNicknameView: BaseView {
         nicknameUnderLineTextFieldView.textField.textColor = .white
         nicknameUnderLineTextFieldView.textField.tintColor = .neonGreen
         
+        bottomNextButtonView.backgroundColor = .backgroundGray
         bottomNextButtonView.addShadow(.top)
     }
     

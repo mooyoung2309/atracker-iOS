@@ -31,6 +31,7 @@ extension UIView {
     
     func addShadow(_ edge: UIRectEdge) {
         let radius = 2.5
+
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = radius
         layer.shadowOpacity = 0.1
@@ -49,6 +50,8 @@ extension UIView {
         default:
             layer.shadowOffset = .zero
         }
+        
+        layer.masksToBounds = false
     }
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {

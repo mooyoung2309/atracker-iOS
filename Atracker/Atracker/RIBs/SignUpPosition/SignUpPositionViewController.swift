@@ -43,6 +43,13 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
         refreshTableView(tableView: selfView.carrerTableView)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        selfView.positionLabel.addShadow(.bottom)
+        selfView.bottomNextButtonView.addShadow(.top)
+    }
+    
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
         
