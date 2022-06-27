@@ -11,10 +11,9 @@ import SnapKit
 
 class UnderLineTextFieldView: BaseView {
     
-    var isEditing: Bool = false {
+    var isHighlight: Bool = false {
         didSet(oldValue) {
-            if self.isEditing {
-                Log("[D] 닉네임 편집 중")
+            if self.isHighlight {
                 underLineView.update(.neonGreen)
             } else {
                 underLineView.update(.gray3)

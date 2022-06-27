@@ -88,7 +88,21 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
             }
             .disposed(by: disposeBag)
         
-        selfView.careerUnderLineTextFieldView.button.rx.tap
+        selfView.positionUnderLineTextFieldView.textField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .bind { [weak self] _ in
+                self?.selfView.positionUnderLineTextFieldView.isHighlight = true
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.positionUnderLineTextFieldView.textField.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .bind { [weak self] _ in
+                self?.selfView.positionUnderLineTextFieldView.isHighlight = false
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.careerUnderLineLabelView.button.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapCareerToggleButton()
             }
@@ -108,5 +122,11 @@ extension SignUpPositionViewController: UITableViewDelegate, UITableViewDataSour
         cell.update(title: carrers[indexPath.item])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selfView.careerUnderLineLabelView.label.text = carrers[indexPath.item]
+        selfView.careerUnderLineLabelView.label.textColor = .white
+        switchCareerTableView()
     }
 }

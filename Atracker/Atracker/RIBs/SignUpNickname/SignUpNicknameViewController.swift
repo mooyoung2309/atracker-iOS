@@ -65,14 +65,14 @@ final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNi
         selfView.nicknameUnderLineTextFieldView.textField.rx.controlEvent([.editingDidBegin])
             .asObservable()
             .bind { [weak self] _ in
-                self?.selfView.nicknameUnderLineTextFieldView.isEditing = true
+                self?.selfView.nicknameUnderLineTextFieldView.isHighlight = true
             }
             .disposed(by: disposeBag)
         
         selfView.nicknameUnderLineTextFieldView.textField.rx.controlEvent([.editingDidEnd])
             .asObservable()
             .bind { [weak self] _ in
-                self?.selfView.nicknameUnderLineTextFieldView.isEditing = false
+                self?.selfView.nicknameUnderLineTextFieldView.isHighlight = false
             }
             .disposed(by: disposeBag)
         

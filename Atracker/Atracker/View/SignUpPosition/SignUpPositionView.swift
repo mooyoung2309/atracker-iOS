@@ -14,7 +14,7 @@ class SignUpPositionView: BaseView {
     let positionLabel                   = UILabel()
     let positionUnderLineTextFieldView  = UnderLineTextFieldView()
     let careerLabel                     = UILabel()
-    let careerUnderLineTextFieldView    = UnderLineLabelView()
+    let careerUnderLineLabelView        = UnderLineLabelView()
     let carrerTableView                 = UITableView()
     let bottomNextButtonView            = BottomNextButtonView()
     
@@ -25,26 +25,29 @@ class SignUpPositionView: BaseView {
         titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
         titleLabel.textColor = .white
         
-        positionLabel.text      = "이름"
+        positionLabel.text      = "포지션"
         positionLabel.font      = .systemFont(ofSize: 14, weight: .medium)
         positionLabel.textColor = .gray3
         
-//        positionUnderLineTextFieldView.textField.placeholder = "포지션명을 입력해주세요."
         positionUnderLineTextFieldView.textField.attributedPlaceholder = NSAttributedString(string: "포지션명을 입력해주세요.", attributes: [.foregroundColor : UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .light)])
+        positionUnderLineTextFieldView.textField.textColor = .white
+        positionUnderLineTextFieldView.textField.tintColor = .neonGreen
         
         careerLabel.text = "경력"
         careerLabel.font      = .systemFont(ofSize: 14, weight: .medium)
         careerLabel.textColor = .gray3
         
-        careerUnderLineTextFieldView.label.text = "경력을 선택해 주세요."
-        careerUnderLineTextFieldView.label.font = .systemFont(ofSize: 16, weight: .light)
-        careerUnderLineTextFieldView.button.isHidden = false
-        careerUnderLineTextFieldView.button.setImage(UIImage(named: ImageName.chevronDown)?.withTintColor(.gray5), for: .normal)
+        careerUnderLineLabelView.label.text = "경력을 선택해 주세요."
+        careerUnderLineLabelView.label.font = .systemFont(ofSize: 16, weight: .light)
+        careerUnderLineLabelView.button.isHidden = false
+        careerUnderLineLabelView.button.setImage(UIImage(named: ImageName.chevronDown)?.withTintColor(.gray5), for: .normal)
         
         carrerTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
         carrerTableView.backgroundColor = .backgroundLightGray
         carrerTableView.isScrollEnabled = false
         carrerTableView.isHidden = true
+        
+        bottomNextButtonView.addShadow(.top)
     }
     
     override func setupHierarchy() {
@@ -54,7 +57,7 @@ class SignUpPositionView: BaseView {
         addSubview(positionLabel)
         addSubview(positionUnderLineTextFieldView)
         addSubview(careerLabel)
-        addSubview(careerUnderLineTextFieldView)
+        addSubview(careerUnderLineLabelView)
         addSubview(carrerTableView)
         addSubview(bottomNextButtonView)
     }
@@ -82,14 +85,14 @@ class SignUpPositionView: BaseView {
             $0.leading.equalToSuperview().inset(28)
         }
         
-        careerUnderLineTextFieldView.snp.makeConstraints {
+        careerUnderLineLabelView.snp.makeConstraints {
             $0.top.equalTo(careerLabel.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         
         carrerTableView.snp.makeConstraints {
-            $0.top.equalTo(careerUnderLineTextFieldView.snp.bottom)
-            $0.leading.trailing.equalTo(careerUnderLineTextFieldView)
+            $0.top.equalTo(careerUnderLineLabelView.snp.bottom)
+            $0.leading.trailing.equalTo(careerUnderLineLabelView)
             $0.height.equalTo(0)
         }
         

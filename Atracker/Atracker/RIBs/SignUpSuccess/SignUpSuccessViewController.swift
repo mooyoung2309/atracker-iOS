@@ -51,6 +51,7 @@ final class SignUpSuccessViewController: BaseNavigationViewController, SignUpSuc
 
 extension SignUpSuccessViewController: SignInViewControllable {
     func present(viewController: ViewControllable) {
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
         present(viewController.uiviewController, animated: false, completion: nil)
     }
 }
