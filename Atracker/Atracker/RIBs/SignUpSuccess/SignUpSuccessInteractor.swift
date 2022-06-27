@@ -10,6 +10,7 @@ import RxSwift
 
 protocol SignUpSuccessRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachSignInRIB()
 }
 
 protocol SignUpSuccessPresentable: Presentable {
@@ -36,6 +37,10 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.router?.attachSignInRIB()
+        }
     }
 
     override func willResignActive() {

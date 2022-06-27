@@ -15,6 +15,9 @@ protocol SignUpPositionPresentableListener: AnyObject {
     // interactor class.
     
     func tapNextButton()
+    func tapCareerToggleButton()
+    func inputPositionTextField(text: String)
+    func inputCareerTextField(text: String)
 }
 
 final class SignUpPositionViewController: BaseNavigationViewController, SignUpPositionPresentable, SignUpPositionViewControllable {
@@ -26,6 +29,20 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
     
     let selfView = SignUpPositionView()
     
+    private var carrers = ["신입", "경력"]
+    
+    func switchCareerTableView() {
+        let bool = !selfView.carrerTableView.isHidden
+        selfView.carrerTableView.isHidden = bool
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        selfView.carrerTableView.reloadData()
+        refreshTableView(tableView: selfView.carrerTableView)
+    }
+    
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
         
@@ -35,6 +52,8 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
     override func setupProperty() {
         super.setupProperty()
         
+        selfView.carrerTableView.delegate   = self
+        selfView.carrerTableView.dataSource = self
     }
     
     override func setupHierarchy() {
@@ -60,5 +79,34 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
                 self?.listener?.tapNextButton()
             }
             .disposed(by: disposeBag)
+        
+        selfView.positionUnderLineTextFieldView.textField.rx.text
+            .bind { [weak self] text in
+                if let text = text {
+                    self?.listener?.inputPositionTextField(text: text)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.careerUnderLineTextFieldView.button.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapCareerToggleButton()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+extension SignUpPositionViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return carrers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
+        
+        cell.selectionStyle = .none
+        cell.update(title: carrers[indexPath.item])
+        
+        return cell
     }
 }

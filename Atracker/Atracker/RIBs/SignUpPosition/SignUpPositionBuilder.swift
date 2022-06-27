@@ -15,12 +15,18 @@ protocol SignUpPositionDependency: Dependency {
 final class SignUpPositionComponent: Component<SignUpPositionDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    let nickname: String
+    
+    init(dependency: SignUpPositionDependency, nickname: String) {
+        self.nickname = nickname
+        super.init(dependency: dependency)
+    }
 }
 
 // MARK: - Builder
 
 protocol SignUpPositionBuildable: Buildable {
-    func build(withListener listener: SignUpPositionListener) -> SignUpPositionRouting
+    func build(withListener listener: SignUpPositionListener, nickname: String) -> SignUpPositionRouting
 }
 
 final class SignUpPositionBuilder: Builder<SignUpPositionDependency>, SignUpPositionBuildable {
@@ -29,10 +35,10 @@ final class SignUpPositionBuilder: Builder<SignUpPositionDependency>, SignUpPosi
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SignUpPositionListener) -> SignUpPositionRouting {
-        let component               = SignUpPositionComponent(dependency: dependency)
+    func build(withListener listener: SignUpPositionListener, nickname: String) -> SignUpPositionRouting {
+        let component               = SignUpPositionComponent(dependency: dependency, nickname: nickname)
         let viewController          = SignUpPositionViewController()
-        let interactor              = SignUpPositionInteractor(presenter: viewController)
+        let interactor              = SignUpPositionInteractor(presenter: viewController, nickname: nickname)
         let signUpSuccessBuilder    = SignUpSuccessBuilder(dependency: component)
         
         interactor.listener         = listener

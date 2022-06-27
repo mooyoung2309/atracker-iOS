@@ -10,7 +10,7 @@ import RxSwift
 
 protocol SignUpNicknameRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func attachSignUpPositionRIB()
+    func attachSignUpPositionRIB(nickname: String)
 }
 
 protocol SignUpNicknamePresentable: Presentable {
@@ -26,6 +26,8 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
 
     weak var router: SignUpNicknameRouting?
     weak var listener: SignUpNicknameListener?
+    
+    private var nickname: String?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -45,6 +47,12 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     }
     
     func tapNextButton() {
-        router?.attachSignUpPositionRIB()
+        if let nickname = nickname {
+            router?.attachSignUpPositionRIB(nickname: nickname)
+        }
+    }
+    
+    func inputNicknameTextField(text: String) {
+        self.nickname = text
     }
 }

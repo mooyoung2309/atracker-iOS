@@ -15,6 +15,7 @@ class SignUpPositionView: BaseView {
     let positionUnderLineTextFieldView  = UnderLineTextFieldView()
     let careerLabel                     = UILabel()
     let careerUnderLineTextFieldView    = UnderLineLabelView()
+    let carrerTableView                 = UITableView()
     let bottomNextButtonView            = BottomNextButtonView()
     
     override func setupProperty() {
@@ -39,6 +40,11 @@ class SignUpPositionView: BaseView {
         careerUnderLineTextFieldView.label.font = .systemFont(ofSize: 16, weight: .light)
         careerUnderLineTextFieldView.button.isHidden = false
         careerUnderLineTextFieldView.button.setImage(UIImage(named: ImageName.chevronDown)?.withTintColor(.gray5), for: .normal)
+        
+        carrerTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
+        carrerTableView.backgroundColor = .backgroundLightGray
+        carrerTableView.isScrollEnabled = false
+        carrerTableView.isHidden = true
     }
     
     override func setupHierarchy() {
@@ -49,6 +55,7 @@ class SignUpPositionView: BaseView {
         addSubview(positionUnderLineTextFieldView)
         addSubview(careerLabel)
         addSubview(careerUnderLineTextFieldView)
+        addSubview(carrerTableView)
         addSubview(bottomNextButtonView)
     }
     
@@ -78,6 +85,12 @@ class SignUpPositionView: BaseView {
         careerUnderLineTextFieldView.snp.makeConstraints {
             $0.top.equalTo(careerLabel.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
+        }
+        
+        carrerTableView.snp.makeConstraints {
+            $0.top.equalTo(careerUnderLineTextFieldView.snp.bottom)
+            $0.leading.trailing.equalTo(careerUnderLineTextFieldView)
+            $0.height.equalTo(0)
         }
         
         bottomNextButtonView.snp.makeConstraints {

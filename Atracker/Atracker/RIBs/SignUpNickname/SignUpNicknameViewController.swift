@@ -14,6 +14,7 @@ protocol SignUpNicknamePresentableListener: AnyObject {
     // business logic, such as signIn(). This protocol is implemented by the corresponding
     // interactor class.
     func tapNextButton()
+    func inputNicknameTextField(text: String)
 }
 
 final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNicknamePresentable, SignUpNicknameViewControllable {
@@ -72,6 +73,14 @@ final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNi
             .asObservable()
             .bind { [weak self] _ in
                 self?.selfView.nicknameUnderLineTextFieldView.isEditing = false
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.nicknameUnderLineTextFieldView.textField.rx.text
+            .bind { [weak self] text in
+                if let text = text {
+                    self?.listener?.inputNicknameTextField(text: text)
+                }
             }
             .disposed(by: disposeBag)
     }

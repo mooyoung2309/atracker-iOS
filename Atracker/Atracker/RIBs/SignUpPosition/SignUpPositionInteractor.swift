@@ -16,6 +16,7 @@ protocol SignUpPositionRouting: ViewableRouting {
 protocol SignUpPositionPresentable: Presentable {
     var listener: SignUpPositionPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func switchCareerTableView()
 }
 
 protocol SignUpPositionListener: AnyObject {
@@ -26,11 +27,18 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
 
     weak var router: SignUpPositionRouting?
     weak var listener: SignUpPositionListener?
+    
+    private let nickname: String
+    private var position: String?
+    private var career: String?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: SignUpPositionPresentable) {
+    init(presenter: SignUpPositionPresentable, nickname: String) {
+        self.nickname = nickname
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -44,7 +52,19 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
         // TODO: Pause any business logic.
     }
     
+    func inputPositionTextField(text: String) {
+        self.position = text
+    }
+    
+    func inputCareerTextField(text: String) {
+        self.career = text
+    }
+    
     func tapNextButton() {
         router?.attachSignUpSuccessRIB()
+    }
+    
+    func tapCareerToggleButton() {
+        presenter.switchCareerTableView()
     }
 }

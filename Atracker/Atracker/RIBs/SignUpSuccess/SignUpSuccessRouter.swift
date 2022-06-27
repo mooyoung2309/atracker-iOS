@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol SignUpSuccessInteractable: Interactable {
+protocol SignUpSuccessInteractable: Interactable, SignInListener {
     var router: SignUpSuccessRouting? { get set }
     var listener: SignUpSuccessListener? { get set }
 }
@@ -17,10 +17,22 @@ protocol SignUpSuccessViewControllable: ViewControllable {
 }
 
 final class SignUpSuccessRouter: ViewableRouter<SignUpSuccessInteractable, SignUpSuccessViewControllable>, SignUpSuccessRouting {
+    
+    private let signInBuilder: SignInBuildable
 
     // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: SignUpSuccessInteractable, viewController: SignUpSuccessViewControllable) {
+    init(interactor: SignUpSuccessInteractable, viewController: SignUpSuccessViewControllable, signInBuilder: SignInBuildable) {
+        self.signInBuilder = signInBuilder
+        
         super.init(interactor: interactor, viewController: viewController)
+        
         interactor.router = self
     }
+    
+    func attachSignInRIB() {
+        let signIn = signInBuilder.build(withListener: interactor)
+        
+        attachChild(signIn)
+    }
+    
 }

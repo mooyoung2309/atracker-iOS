@@ -238,6 +238,4 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
             return UITableViewCell()
         }
     }
-    
-    
 }

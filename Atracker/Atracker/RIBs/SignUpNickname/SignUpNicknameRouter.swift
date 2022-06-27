@@ -31,8 +31,8 @@ final class SignUpNicknameRouter: ViewableRouter<SignUpNicknameInteractable, Sig
         interactor.router = self
     }
     
-    func attachSignUpPositionRIB() {
-        let signUpPosition = signUpPositionBuilder.build(withListener: interactor)
+    func attachSignUpPositionRIB(nickname: String) {
+        let signUpPosition = signUpPositionBuilder.build(withListener: interactor, nickname: nickname)
         
         self.signUpPosition = signUpPosition
         attachChild(signUpPosition)
