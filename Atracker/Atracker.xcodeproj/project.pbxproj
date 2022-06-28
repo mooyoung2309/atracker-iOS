@@ -76,7 +76,6 @@
 		703DC439285475C20085F955 /* ApplyComponent+ApplyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703DC438285475C20085F955 /* ApplyComponent+ApplyDetail.swift */; };
 		703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703F4A362852124C00C8BEC0 /* RIBs+Ext.swift */; };
 		703F4A3A28521B8F00C8BEC0 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703F4A3928521B8F00C8BEC0 /* BaseTabViewController.swift */; };
-		703FB04128486CD900BF4E32 /* ApplySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703FB04028486CD900BF4E32 /* ApplySummaryView.swift */; };
 		7040963F2860071D003EBCE4 /* WriteApplyScheduleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040963B2860071D003EBCE4 /* WriteApplyScheduleRouter.swift */; };
 		704096402860071D003EBCE4 /* WriteApplyScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040963C2860071D003EBCE4 /* WriteApplyScheduleViewController.swift */; };
 		704096412860071D003EBCE4 /* WriteApplyScheduleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040963D2860071D003EBCE4 /* WriteApplyScheduleBuilder.swift */; };
@@ -298,7 +297,6 @@
 		703DC438285475C20085F955 /* ApplyComponent+ApplyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+ApplyDetail.swift"; sourceTree = "<group>"; };
 		703F4A362852124C00C8BEC0 /* RIBs+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+Ext.swift"; sourceTree = "<group>"; };
 		703F4A3928521B8F00C8BEC0 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
-		703FB04028486CD900BF4E32 /* ApplySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplySummaryView.swift; sourceTree = "<group>"; };
 		7040963B2860071D003EBCE4 /* WriteApplyScheduleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleRouter.swift; sourceTree = "<group>"; };
 		7040963C2860071D003EBCE4 /* WriteApplyScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleViewController.swift; sourceTree = "<group>"; };
 		7040963D2860071D003EBCE4 /* WriteApplyScheduleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleBuilder.swift; sourceTree = "<group>"; };
@@ -1214,7 +1212,6 @@
 				703DC43528546A750085F955 /* Cell */,
 				70CF5B9B2847AEC20098C742 /* ApplyView.swift */,
 				70660470286AC21D00A09427 /* ApplyAnalysisView.swift */,
-				703FB04028486CD900BF4E32 /* ApplySummaryView.swift */,
 				7046E3C5283B3F590048C068 /* SummaryBoxView.swift */,
 				70970022283D363B000F4B89 /* QAWriteView.swift */,
 				70970024283D365E000F4B89 /* ReviewWriteView.swift */,
@@ -1654,7 +1651,6 @@
 				702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */,
 				701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */,
 				70A88E772851A6880027D673 /* TabBarInteractor.swift in Sources */,
-				703FB04128486CD900BF4E32 /* ApplySummaryView.swift in Sources */,
 				7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */,
 				70576E222865B2A1000406DF /* SignUpNicknameInteractor.swift in Sources */,
 				70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */,
@@ -1874,8 +1870,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = X64MATB2CC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Atracker/Info.plist;
@@ -1888,7 +1885,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tamsadan.Atracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1903,8 +1900,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = X64MATB2CC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Atracker/Info.plist;
@@ -1917,7 +1915,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tamsadan.Atracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

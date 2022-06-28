@@ -39,7 +39,7 @@ class ApplyView: BaseView {
         
         analysisView.backgroundColor = .backgroundLightGray
         analysisView.layer.cornerRadius = 10
-        analysisView.updatePieChart(data: [10, 20, 30, 40])
+        analysisView.update(data: [10, 20, 30, 40])
         
         tableView.register(ApplyProgressTVC.self, forCellReuseIdentifier: ApplyProgressTVC.id)
         tableView.isScrollEnabled = false

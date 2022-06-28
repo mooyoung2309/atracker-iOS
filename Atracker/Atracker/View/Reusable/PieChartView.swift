@@ -10,13 +10,13 @@ import UIKit
 class PieChartView: UIView {
     
     let colors: [UIColor] = [.blue6, .blue4, .blue2]
-    let data: [CGFloat]
+    let data: [Int]
     
     required init?(coder: NSCoder) {
         fatalError("not supported")
     }
     
-    init(data: [CGFloat]) {
+    init(data: [Int]) {
         self.data = data
         
         super.init(frame: .zero)
@@ -35,7 +35,7 @@ class PieChartView: UIView {
         if data.count != colors.count { return }
         
         for (index, value) in data.enumerated() {
-            endAngle = startAngle + (value / 100) * (2 * .pi)
+            endAngle = startAngle + Double((value / 100)) * (2 * .pi)
             arcLayers.append(makeArcLayer(color: colors[index], withCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true))
             startAngle = endAngle
         }

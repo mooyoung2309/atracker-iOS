@@ -16,14 +16,14 @@ class ApplyAnalysisView: BaseView {
     let sumPercentLabel = UILabel()
     let chartView       = UIView()
     let boxStackView    = UIStackView()
-    let firstBox        = SummaryBoxView(color: .blue6,title: "서류전형", percent: "75%")
-    let secondBox       = SummaryBoxView(color: .blue4 ,title: "면접전형", percent: "50%")
-    let thirdBox        = SummaryBoxView(color:.blue2 ,title: "최종전형", percent: "25%")
+    let firstBox        = SummaryBoxView()
+    let secondBox       = SummaryBoxView()
+    let thirdBox        = SummaryBoxView()
     
     var pieChartView = PieChartView(data: [])
-    var sumPercentText = "20%"
+    var sumPercentText = "0%"
     
-    func updatePieChart(data: [CGFloat]) {
+    func update(data: [Int]) {
         pieChartView.removeFromSuperview()
         
         pieChartView = PieChartView(data: data)
@@ -34,6 +34,10 @@ class ApplyAnalysisView: BaseView {
             $0.width.height.equalToSuperview()
             $0.center.equalToSuperview()
         }
+        
+        firstBox.update(color: .blue6, title: "서류전형", percent: "\(data[0])%")
+        secondBox.update(color: .blue4, title: "면접전형", percent: "\(data[1])%")
+        thirdBox.update(color: .blue2, title: "최종전형", percent: "\(data[2])%")
     }
     
     override func setupProperty() {
@@ -46,7 +50,7 @@ class ApplyAnalysisView: BaseView {
         
         sumPercentLabel.font = .systemFont(ofSize: 18, weight: .bold)
         let percentAttributeString = NSMutableAttributedString(string: sumPercentText)
-        percentAttributeString.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (sumPercentText as NSString).range(of: "%"))
+        percentAttributeString.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: (sumPercentText as NSString).range(of: "%"))
         sumPercentLabel.attributedText = percentAttributeString
         sumPercentLabel.textColor = .white
         sumPercentLabel.textAlignment = .center
@@ -77,7 +81,7 @@ class ApplyAnalysisView: BaseView {
         
         chartView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(8)
+            $0.leading.equalToSuperview().inset(15)
             $0.width.height.equalTo(64)
         }
         

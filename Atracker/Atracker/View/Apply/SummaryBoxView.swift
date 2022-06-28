@@ -22,12 +22,7 @@ class SummaryBoxView: BaseView {
         $0.textColor = .white
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    init(color: UIColor, title: String, percent: String) {
-        super.init(frame: .zero)
+    func update(color: UIColor, title: String, percent: String) {
         circleView.backgroundColor = color
         titleLabel.text = title
         percentLabel.text = percent
