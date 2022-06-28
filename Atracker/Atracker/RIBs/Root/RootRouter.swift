@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable, SignOutListener,LoggedOutListener, LoggedInListener {
+protocol RootInteractable: Interactable, SignOutListener, SignInListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -20,22 +20,15 @@ protocol RootViewControllable: ViewControllable {
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
     
-    private let loggedOutBuilder: LoggedOutBuildable
-    private let loggedInBuilder: LoggedInBuildable
     private let signOutBuilder: SignOutBuildable
+    private let signInBuilder: SignInBuildable
     
     private var signOut: ViewableRouting?
-    private var loggedOut: ViewableRouting?
     
-    init(interactor: RootInteractable,
-         viewController: RootViewControllable,
-         signOutBuilder: SignOutBuilder,
-         loggedOutBuilder: LoggedOutBuilder,
-         loggedInBuilder: LoggedInBuilder) {
+    init(interactor: RootInteractable, viewController: RootViewControllable, signOutBuilder: SignOutBuildable, signInBuilder: SignInBuildable) {
         
         self.signOutBuilder = signOutBuilder
-        self.loggedOutBuilder = loggedOutBuilder
-        self.loggedInBuilder = loggedInBuilder
+        self.signInBuilder = signInBuilder
         
         super.init(interactor: interactor, viewController: viewController)
         
@@ -45,10 +38,14 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     override func didLoad() {
         super.didLoad()
         
-        routeToSignOut()
+        if let _ = UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) {
+            attachSignInRIB()
+        } else {
+            attachSignOutRIB()
+        }
     }
     
-    func routeToSignOut() {
+    func attachSignOutRIB() {
         let signOut = signOutBuilder.build(withListener: interactor)
         
         self.signOut = signOut
@@ -56,26 +53,9 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
         viewController.present(viewController: signOut.viewControllable)
     }
     
-    func routeToLoggedIn(email: String?, password: String?) {
-        if let loggedOut = loggedOut {
-            detachChild(loggedOut)
-            viewController.dismiss(viewController: loggedOut.viewControllable)
-            
-            self.loggedOut = nil
-        }
+    func attachSignInRIB() {
+        let signIn = signInBuilder.build(withListener: interactor)
         
-        let loggedIn = loggedInBuilder.build(withListener: interactor, email: email, password: password)
-        
-        attachChild(loggedIn)
-    }
-    
-    private func routeToLoggedOut() {
-        let loggedOut = loggedOutBuilder.build(withListener: interactor)
-        
-        self.loggedOut = loggedOut
-        
-        attachChild(loggedOut)
-        
-        viewController.present(viewController: loggedOut.viewControllable)
+        attachChild(signIn)
     }
 }

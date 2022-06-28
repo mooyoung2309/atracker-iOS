@@ -18,7 +18,7 @@ class ApplySummaryView: BaseView {
         $0.distribution = .fillEqually
         $0.spacing = 5
     }
-    let pieChartView = PieChartView()
+    let pieChartView = PieChartView(data: [])
     let firstBox = SummaryBoxView(color: .blue6,title: "서류전형", percent: "75%")
     let secondBox = SummaryBoxView(color: .blue4 ,title: "면접전형", percent: "50%")
     let thirdBox = SummaryBoxView(color:.blue2 ,title: "최종전형", percent: "25%")

@@ -40,8 +40,6 @@
 		701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2332849D3B9009230CE /* LoggedOutViewController.swift */; };
 		701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */; };
 		701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */; };
-		701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */; };
-		701CE2452849E1D0009230CE /* RootComponent+LoggedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */; };
 		701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */; };
 		70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */; };
 		70223C5428434F28009B7F0A /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5328434F28009B7F0A /* AlertVC.swift */; };
@@ -140,6 +138,8 @@
 		70660469286AAF5900A09427 /* ApplyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660468286AAF5900A09427 /* ApplyAPI.swift */; };
 		7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066046A286AAF6100A09427 /* ApplyRepository.swift */; };
 		7066046D286AB06F00A09427 /* GetApplyQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066046C286AB06F00A09427 /* GetApplyQuery.swift */; };
+		70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660470286AC21D00A09427 /* ApplyAnalysisView.swift */; };
+		70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660472286AC9E300A09427 /* RootComponent+SignIn.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
 		707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */; };
 		707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD253283CAAA5000E7EE7 /* TextButton.swift */; };
@@ -262,8 +262,6 @@
 		701CE2332849D3B9009230CE /* LoggedOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutViewController.swift; sourceTree = "<group>"; };
 		701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutBuilder.swift; sourceTree = "<group>"; };
 		701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutInteractor.swift; sourceTree = "<group>"; };
-		701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
-		701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedOut.swift"; sourceTree = "<group>"; };
 		701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpPositionComponent+SignUpSuccess.swift"; sourceTree = "<group>"; };
 		70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedRoundButton.swift; sourceTree = "<group>"; };
 		70223C5328434F28009B7F0A /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
@@ -362,6 +360,8 @@
 		70660468286AAF5900A09427 /* ApplyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAPI.swift; sourceTree = "<group>"; };
 		7066046A286AAF6100A09427 /* ApplyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRepository.swift; sourceTree = "<group>"; };
 		7066046C286AB06F00A09427 /* GetApplyQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetApplyQuery.swift; sourceTree = "<group>"; };
+		70660470286AC21D00A09427 /* ApplyAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAnalysisView.swift; sourceTree = "<group>"; };
+		70660472286AC9E300A09427 /* RootComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignIn.swift"; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
 		707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSizedRoundButton.swift; sourceTree = "<group>"; };
 		707CD253283CAAA5000E7EE7 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
@@ -554,9 +554,8 @@
 				701CE2282849D0F2009230CE /* RootRouter.swift */,
 				701CE22B2849D0F2009230CE /* RootInteractor.swift */,
 				701CE2292849D0F2009230CE /* RootViewController.swift */,
-				701CE2442849E1D0009230CE /* RootComponent+LoggedOut.swift */,
-				701CE2422849E196009230CE /* RootComponent+LoggedIn.swift */,
 				700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */,
+				70660472286AC9E300A09427 /* RootComponent+SignIn.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -740,6 +739,7 @@
 		70443B2C28589996009EE223 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				70884142283623890024135D /* PieChartView.swift */,
 				70443B2D285899A3009EE223 /* RoundButton.swift */,
 				700F34FC285C523600F16DA6 /* AlertView.swift */,
 				70BDD359285F237D00E09821 /* Divider.swift */,
@@ -865,7 +865,6 @@
 		708841412836237E0024135D /* Chart */ = {
 			isa = PBXGroup;
 			children = (
-				70884142283623890024135D /* PieChartView.swift */,
 				708841442836350E0024135D /* HorizontalBarChartView.swift */,
 				7009C0F728475A8700140CB5 /* BarChatView.swift */,
 			);
@@ -1214,6 +1213,7 @@
 			children = (
 				703DC43528546A750085F955 /* Cell */,
 				70CF5B9B2847AEC20098C742 /* ApplyView.swift */,
+				70660470286AC21D00A09427 /* ApplyAnalysisView.swift */,
 				703FB04028486CD900BF4E32 /* ApplySummaryView.swift */,
 				7046E3C5283B3F590048C068 /* SummaryBoxView.swift */,
 				70970022283D363B000F4B89 /* QAWriteView.swift */,
@@ -1516,12 +1516,10 @@
 				70A88E63285193910027D673 /* LoggedInBuilder.swift in Sources */,
 				700DBECC2868D82D00883A4F /* SignUpSuccessBuilder.swift in Sources */,
 				70BDD358285F160D00E09821 /* WriteApplyOverallView.swift in Sources */,
-				701CE2452849E1D0009230CE /* RootComponent+LoggedOut.swift in Sources */,
 				7027D3BF2863771F00F9C913 /* TokenInterceptor.swift in Sources */,
 				70884143283623890024135D /* PieChartView.swift in Sources */,
 				70576E292865B2AA000406DF /* SignUpPositionBuilder.swift in Sources */,
 				7027D3C82863878900F9C913 /* CompanyRouter.swift in Sources */,
-				701CE2432849E196009230CE /* RootComponent+LoggedIn.swift in Sources */,
 				70FBE52A28537A8000455A4B /* ApplyDetailRouter.swift in Sources */,
 				70CB0691285EF70000BE89B7 /* WriteApplyOverallRouter.swift in Sources */,
 				70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */,
@@ -1618,6 +1616,7 @@
 				70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */,
 				7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */,
 				70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */,
+				70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */,
 				70A88E6D2851A4A90027D673 /* BlogBuilder.swift in Sources */,
 				7027D3B928632C0100F9C913 /* TokenRefreshResponse.swift in Sources */,
 				70576DF128642181000406DF /* CompanyResponse.swift in Sources */,
@@ -1665,6 +1664,7 @@
 				70576E392865B54C000406DF /* SignOutInteractor.swift in Sources */,
 				704096412860071D003EBCE4 /* WriteApplyScheduleBuilder.swift in Sources */,
 				70576E2A2865B2AA000406DF /* SignUpPositionInteractor.swift in Sources */,
+				70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
 				70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
