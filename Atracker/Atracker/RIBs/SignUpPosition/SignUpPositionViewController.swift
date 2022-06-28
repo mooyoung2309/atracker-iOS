@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxGesture
 import UIKit
 
 protocol SignUpPositionPresentableListener: AnyObject {
@@ -16,6 +17,7 @@ protocol SignUpPositionPresentableListener: AnyObject {
     
     func tapNextButton()
     func tapCareerToggleButton()
+    func tapCareerTableView(career: String)
     func inputPositionTextField(text: String)
     func inputCareerTextField(text: String)
 }
@@ -34,6 +36,11 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
     func switchCareerTableView() {
         let bool = !selfView.carrerTableView.isHidden
         selfView.carrerTableView.isHidden = bool
+    }
+    
+    func showCareerLabel(title: String) {
+        selfView.careerUnderLineLabelView.label.text = title
+        selfView.careerUnderLineLabelView.label.textColor = .white
     }
     
     override func viewDidLoad() {
@@ -114,6 +121,15 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
                 self?.listener?.tapCareerToggleButton()
             }
             .disposed(by: disposeBag)
+        
+        selfView.careerUnderLineLabelView.rx.tapGesture().bind {
+            [weak self] tap in
+//            Log("[D] \(tap.state)")
+            if tap.state == .ended {
+                self?.listener?.tapCareerToggleButton()
+            }
+        }
+        .disposed(by: disposeBag)
     }
 }
 
@@ -132,8 +148,6 @@ extension SignUpPositionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selfView.careerUnderLineLabelView.label.text = carrers[indexPath.item]
-        selfView.careerUnderLineLabelView.label.textColor = .white
-        switchCareerTableView()
+        listener?.tapCareerTableView(career: carrers[indexPath.item])
     }
 }

@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 protocol ApplyPresentableListener: AnyObject {
-    func didTabCell(apply: Apply)
+    func didTabCell(apply: ApplyResponse)
     func tapPlusButton()
 }
 
@@ -26,13 +26,13 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     let mockUps = ["이소진 1", "이소진 2", "이소진 3", "이소진 4", "이소진 5", "이소진 6", "이소진 7", "이소진 8"]
     
-    private var applyList: [Apply] = []
+    private var applyList: [ApplyResponse] = []
     
     func present(viewController: ViewControllable) {
         present(viewController.uiviewController, animated: true, completion: nil)
     }
     
-    func showApplyList(_ applyList: [Apply]) {
+    func showApplyList(_ applyList: [ApplyResponse]) {
         self.applyList = applyList
         selfView.tableView.reloadData()
         refreshTableView(tableView: selfView.tableView)

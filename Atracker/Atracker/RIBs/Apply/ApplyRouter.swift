@@ -24,7 +24,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private var child: ViewableRouting?
     private var writeApplyOverall: ViewableRouting?
     private var applyDetail: ViewableRouting?
-    private var apply: Apply?
+    private var apply: ApplyResponse?
     
     init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable) {
         self.writeApplyOverallBuilder  = applyWriteBuilder
@@ -35,7 +35,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         interactor.router = self
     }
     
-    func attachApplyDetailRIB(apply: Apply) {
+    func attachApplyDetailRIB(apply: ApplyResponse) {
         self.apply = apply
         let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
         self.applyDetail = applyDetail

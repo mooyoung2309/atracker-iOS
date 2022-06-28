@@ -27,6 +27,8 @@ final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNi
     
     let selfView = SignUpNicknameView()
     
+    
+    
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
         

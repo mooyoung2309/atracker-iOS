@@ -133,6 +133,13 @@
 		7066045928697A2B00A09427 /* SignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045628697A2B00A09427 /* SignInInteractor.swift */; };
 		7066045B28697A4A00A09427 /* SignInComponent+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045A28697A4A00A09427 /* SignInComponent+TabBar.swift */; };
 		7066045D28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045C28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift */; };
+		70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045F286AAD4200A09427 /* ApplyCreateRequest.swift */; };
+		70660462286AADBC00A09427 /* ApplyStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660461286AADBC00A09427 /* ApplyStage.swift */; };
+		70660464286AADCA00A09427 /* AppliedCompanyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660463286AADCA00A09427 /* AppliedCompanyInfo.swift */; };
+		70660466286AAE8700A09427 /* ApplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660465286AAE8700A09427 /* ApplyService.swift */; };
+		70660469286AAF5900A09427 /* ApplyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660468286AAF5900A09427 /* ApplyAPI.swift */; };
+		7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066046A286AAF6100A09427 /* ApplyRepository.swift */; };
+		7066046D286AB06F00A09427 /* GetApplyQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066046C286AB06F00A09427 /* GetApplyQuery.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
 		707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */; };
 		707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD253283CAAA5000E7EE7 /* TextButton.swift */; };
@@ -194,7 +201,7 @@
 		70FBE51E2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE51D2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift */; };
 		70FBE5202852FB8100455A4B /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE51F2852FB8100455A4B /* BaseNavigationViewController.swift */; };
 		70FBE52228530FFB00455A4B /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52128530FFB00455A4B /* Apply.swift */; };
-		70FBE524285312A300455A4B /* ApplyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE523285312A300455A4B /* ApplyService.swift */; };
+		70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE523285312A300455A4B /* ApplyServiceISOLDCODE.swift */; };
 		70FBE52A28537A8000455A4B /* ApplyDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52628537A8000455A4B /* ApplyDetailRouter.swift */; };
 		70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */; };
 		70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */; };
@@ -348,6 +355,13 @@
 		7066045628697A2B00A09427 /* SignInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractor.swift; sourceTree = "<group>"; };
 		7066045A28697A4A00A09427 /* SignInComponent+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInComponent+TabBar.swift"; sourceTree = "<group>"; };
 		7066045C28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpSuccessComponent+SignIn.swift"; sourceTree = "<group>"; };
+		7066045F286AAD4200A09427 /* ApplyCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCreateRequest.swift; sourceTree = "<group>"; };
+		70660461286AADBC00A09427 /* ApplyStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStage.swift; sourceTree = "<group>"; };
+		70660463286AADCA00A09427 /* AppliedCompanyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliedCompanyInfo.swift; sourceTree = "<group>"; };
+		70660465286AAE8700A09427 /* ApplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyService.swift; sourceTree = "<group>"; };
+		70660468286AAF5900A09427 /* ApplyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAPI.swift; sourceTree = "<group>"; };
+		7066046A286AAF6100A09427 /* ApplyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRepository.swift; sourceTree = "<group>"; };
+		7066046C286AB06F00A09427 /* GetApplyQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetApplyQuery.swift; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
 		707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSizedRoundButton.swift; sourceTree = "<group>"; };
 		707CD253283CAAA5000E7EE7 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
@@ -413,7 +427,7 @@
 		70FBE51D2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+ApplyEdit.swift"; sourceTree = "<group>"; };
 		70FBE51F2852FB8100455A4B /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
 		70FBE52128530FFB00455A4B /* Apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
-		70FBE523285312A300455A4B /* ApplyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyService.swift; sourceTree = "<group>"; };
+		70FBE523285312A300455A4B /* ApplyServiceISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyServiceISOLDCODE.swift; sourceTree = "<group>"; };
 		70FBE52628537A8000455A4B /* ApplyDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailRouter.swift; sourceTree = "<group>"; };
 		70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailViewController.swift; sourceTree = "<group>"; };
 		70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailBuilder.swift; sourceTree = "<group>"; };
@@ -609,6 +623,7 @@
 			children = (
 				7027D3B12863269700F9C913 /* Base */,
 				7027D3C32863787D00F9C913 /* Auth */,
+				70660467286AAF4C00A09427 /* Apply */,
 				7027D3C62863862600F9C913 /* Company */,
 			);
 			path = Repository;
@@ -819,6 +834,27 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		7066045E286AACF500A09427 /* Apply */ = {
+			isa = PBXGroup;
+			children = (
+				7066045F286AAD4200A09427 /* ApplyCreateRequest.swift */,
+				70660463286AADCA00A09427 /* AppliedCompanyInfo.swift */,
+				70660461286AADBC00A09427 /* ApplyStage.swift */,
+				7066046C286AB06F00A09427 /* GetApplyQuery.swift */,
+				70FBE52128530FFB00455A4B /* Apply.swift */,
+			);
+			path = Apply;
+			sourceTree = "<group>";
+		};
+		70660467286AAF4C00A09427 /* Apply */ = {
+			isa = PBXGroup;
+			children = (
+				70660468286AAF5900A09427 /* ApplyAPI.swift */,
+				7066046A286AAF6100A09427 /* ApplyRepository.swift */,
+			);
+			path = Apply;
+			sourceTree = "<group>";
+		};
 		7088413D2835F68F0024135D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,10 +937,10 @@
 			isa = PBXGroup;
 			children = (
 				7027D39D2862D08600F9C913 /* Auth */,
+				7066045E286AACF500A09427 /* Apply */,
 				7027D3C92863886500F9C913 /* Company */,
 				70A2F6D52834D23200E6B95B /* Application.swift */,
 				70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */,
-				70FBE52128530FFB00455A4B /* Apply.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -912,7 +948,8 @@
 		70A2F6B52834C52700E6B95B /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				70FBE523285312A300455A4B /* ApplyService.swift */,
+				70FBE523285312A300455A4B /* ApplyServiceISOLDCODE.swift */,
+				70660465286AAE8700A09427 /* ApplyService.swift */,
 				7027D3952862B2A400F9C913 /* AuthService.swift */,
 				70576DF22864222D000406DF /* CompanyService.swift */,
 			);
@@ -1512,6 +1549,7 @@
 				70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */,
 				70FBE51B2852EC5D00455A4B /* ApplyEditBuilder.swift in Sources */,
 				7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */,
+				7066046D286AB06F00A09427 /* GetApplyQuery.swift in Sources */,
 				700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
 				70576E282865B2AA000406DF /* SignUpPositionViewController.swift in Sources */,
@@ -1525,6 +1563,7 @@
 				70576E202865B2A1000406DF /* SignUpNicknameViewController.swift in Sources */,
 				701CE2262849D0C5009230CE /* AppComponent.swift in Sources */,
 				7066045728697A2B00A09427 /* SignInRouter.swift in Sources */,
+				70660469286AAF5900A09427 /* ApplyAPI.swift in Sources */,
 				70576DEF28641E6E000406DF /* CompanyRepository.swift in Sources */,
 				7040963F2860071D003EBCE4 /* WriteApplyScheduleRouter.swift in Sources */,
 				70576E212865B2A1000406DF /* SignUpNicknameBuilder.swift in Sources */,
@@ -1576,6 +1615,8 @@
 				70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */,
 				700DBECA2868D82D00883A4F /* SignUpSuccessRouter.swift in Sources */,
 				703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */,
+				70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */,
+				7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */,
 				70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */,
 				70A88E6D2851A4A90027D673 /* BlogBuilder.swift in Sources */,
 				7027D3B928632C0100F9C913 /* TokenRefreshResponse.swift in Sources */,
@@ -1625,7 +1666,7 @@
 				704096412860071D003EBCE4 /* WriteApplyScheduleBuilder.swift in Sources */,
 				70576E2A2865B2AA000406DF /* SignUpPositionInteractor.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
-				70FBE524285312A300455A4B /* ApplyService.swift in Sources */,
+				70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
 				7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */,
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
@@ -1647,8 +1688,11 @@
 				70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */,
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */,
+				70660462286AADBC00A09427 /* ApplyStage.swift in Sources */,
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
 				70BDD355285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift in Sources */,
+				70660464286AADCA00A09427 /* AppliedCompanyInfo.swift in Sources */,
+				70660466286AAE8700A09427 /* ApplyService.swift in Sources */,
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
 				7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,

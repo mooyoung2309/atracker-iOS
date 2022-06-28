@@ -15,9 +15,9 @@ final class ApplyDetailComponent: Component<ApplyDetailDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     
-    let apply: Apply?
+    let apply: ApplyResponse?
     
-    init(dependency: ApplyDetailDependency, apply: Apply) {
+    init(dependency: ApplyDetailDependency, apply: ApplyResponse) {
         self.apply = apply
         super.init(dependency: dependency)
     }
@@ -26,7 +26,7 @@ final class ApplyDetailComponent: Component<ApplyDetailDependency> {
 // MARK: - Builder
 
 protocol ApplyDetailBuildable: Buildable {
-    func build(withListener listener: ApplyDetailListener, apply: Apply) -> ApplyDetailRouting
+    func build(withListener listener: ApplyDetailListener, apply: ApplyResponse) -> ApplyDetailRouting
 }
 
 final class ApplyDetailBuilder: Builder<ApplyDetailDependency>, ApplyDetailBuildable {
@@ -35,7 +35,7 @@ final class ApplyDetailBuilder: Builder<ApplyDetailDependency>, ApplyDetailBuild
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: ApplyDetailListener, apply: Apply) -> ApplyDetailRouting {
+    func build(withListener listener: ApplyDetailListener, apply: ApplyResponse) -> ApplyDetailRouting {
         let component           = ApplyDetailComponent(dependency: dependency, apply: apply)
         let viewController      = ApplyDetailViewController()
         let interactor          = ApplyDetailInteractor(presenter: viewController, apply: apply)

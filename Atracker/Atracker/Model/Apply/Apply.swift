@@ -17,8 +17,8 @@
 
 import Foundation
 
-// MARK: - Apply
-struct Apply: Codable {
+// MARK: - ApplyResponse
+struct ApplyResponse: Codable {
     let applyID, companyID: Int
     let companyName, jobPosition: String
     let stageProgress: [StageProgress]

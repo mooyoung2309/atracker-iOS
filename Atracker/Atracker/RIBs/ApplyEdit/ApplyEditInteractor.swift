@@ -35,11 +35,11 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     weak var router: ApplyEditRouting?
     weak var listener: ApplyEditListener?
 
-    private let apply: Apply
-    private var edittedApply: Apply
+    private let apply: ApplyResponse
+    private var edittedApply: ApplyResponse
     private var isEditting: Bool = false
     
-    init(presenter: ApplyEditPresentable, apply: Apply) {
+    init(presenter: ApplyEditPresentable, apply: ApplyResponse) {
         self.apply          = apply
         self.edittedApply   = apply
         

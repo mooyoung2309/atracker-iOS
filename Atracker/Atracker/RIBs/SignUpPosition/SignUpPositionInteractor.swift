@@ -17,6 +17,7 @@ protocol SignUpPositionPresentable: Presentable {
     var listener: SignUpPositionPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func switchCareerTableView()
+    func showCareerLabel(title: String)
 }
 
 protocol SignUpPositionListener: AnyObject {
@@ -28,13 +29,16 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     weak var router: SignUpPositionRouting?
     weak var listener: SignUpPositionListener?
     
+    private let authService: AuthServiceProtocol
     private let nickname: String
+    
     private var position: String?
     private var career: String?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    init(presenter: SignUpPositionPresentable, nickname: String) {
+    init(presenter: SignUpPositionPresentable, nickname: String, authService: AuthServiceProtocol) {
+        self.authService = authService
         self.nickname = nickname
         
         super.init(presenter: presenter)
@@ -60,8 +64,27 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
         self.career = text
     }
     
+    func tapCareerTableView(career: String) {
+        self.career = career
+        presenter.showCareerLabel(title: career)
+        presenter.switchCareerTableView()
+    }
+    
     func tapNextButton() {
-        router?.attachSignUpSuccessRIB()
+        guard let position = position else { return }
+        guard let career = career else { return }
+        
+        if position.isEmpty || career.isEmpty { return }
+        
+        authService.testSignUp(email: "", gender: Gender.male.code, jobPosition: position, nickName: nickname, sso: Sso.apple.code) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.router?.attachSignUpSuccessRIB()
+                Log("[D] 테스트 회원가입 성공")
+            case .failure(_):
+                Log("[D] 테스트 회원가입 실패")
+            }
+        }
     }
     
     func tapCareerToggleButton() {

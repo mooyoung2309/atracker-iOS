@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol ApplyRouting: ViewableRouting {
-    func attachApplyDetailRIB(apply: Apply)
+    func attachApplyDetailRIB(apply: ApplyResponse)
     func attachWriteApplyOverall()
     func detachThisChildRIB()
     func reAttachApplyDetailRIB()
@@ -17,7 +17,7 @@ protocol ApplyRouting: ViewableRouting {
 
 protocol ApplyPresentable: Presentable {
     var listener: ApplyPresentableListener? { get set }
-    func showApplyList(_ applyList: [Apply])
+    func showApplyList(_ applyList: [ApplyResponse])
 }
 
 protocol ApplyListener: AnyObject {
@@ -32,11 +32,11 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
     
-    private let service: ApplyServiceProtocol
+    private let service: ApplyServiceProtocolISOLDCODE
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    init(presenter: ApplyPresentable, service: ApplyServiceProtocol) {
+    init(presenter: ApplyPresentable, service: ApplyServiceProtocolISOLDCODE) {
         self.service = service
         super.init(presenter: presenter)
         presenter.listener = self
@@ -53,7 +53,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         // TODO: Pause any business logic.
     }
     
-    func didTabCell(apply: Apply) {
+    func didTabCell(apply: ApplyResponse) {
         router?.attachApplyDetailRIB(apply: apply)
     }
     

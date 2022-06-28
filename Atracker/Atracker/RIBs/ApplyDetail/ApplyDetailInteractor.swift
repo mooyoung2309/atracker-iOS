@@ -10,7 +10,7 @@ import RxSwift
 
 protocol ApplyDetailRouting: ViewableRouting {
     func detachChildRIB()
-    func attachApplyEditRIB(apply: Apply)
+    func attachApplyEditRIB(apply: ApplyResponse)
 }
 
 protocol ApplyDetailPresentable: Presentable {
@@ -31,9 +31,9 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    let apply: Apply
+    let apply: ApplyResponse
     
-    init(presenter: ApplyDetailPresentable, apply: Apply) {
+    init(presenter: ApplyDetailPresentable, apply: ApplyResponse) {
         self.apply = apply
         super.init(presenter: presenter)
         presenter.listener = self

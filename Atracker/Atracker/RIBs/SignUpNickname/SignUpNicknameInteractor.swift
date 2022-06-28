@@ -47,7 +47,9 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     }
     
     func tapNextButton() {
-        if let nickname = nickname {
+        guard let nickname = nickname else { return }
+        
+        if nickname.isEmpty == false {
             router?.attachSignUpPositionRIB(nickname: nickname)
         }
     }
