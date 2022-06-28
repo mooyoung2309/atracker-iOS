@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
-class UnderLineTextFieldView: BaseView {
+class UnderLineTextFieldView: BaseView, UITextFieldDelegate {
+    
+    let titleLabel      = UILabel()
+    let textField       = UITextField()
+    let underLineView   = Divider(.gray3)
+    let button          = UIButton(type: .custom)
     
     var isHighlight: Bool = false {
         didSet(oldValue) {
@@ -21,12 +26,35 @@ class UnderLineTextFieldView: BaseView {
         }
     }
     
-    let textField       = UITextField()
-    let underLineView   = Divider(.gray3)
-    let button          = UIButton(type: .custom)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        underLineView.update(.neonGreen)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        underLineView.update(.gray3)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("not supported")
+    }
+    
+    init(title: String, placeholder: String) {
+        super.init(frame: .zero)
+        
+        self.titleLabel.text = title
+        
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .light)])
+    }
     
     override func setupProperty() {
         super.setupProperty()
+        
+        titleLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        titleLabel.textColor = .gray3
+        
+        textField.tintColor = .neonGreen
+        textField.textColor = .white
+        textField.delegate = self
         
         button.isHidden = true
     }
@@ -34,6 +62,7 @@ class UnderLineTextFieldView: BaseView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
+        addSubview(titleLabel)
         addSubview(underLineView)
         addSubview(button)
         addSubview(textField)
@@ -42,12 +71,17 @@ class UnderLineTextFieldView: BaseView {
     override func setupLayout() {
         super.setupLayout()
         
-        textField.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
         }
         
+        textField.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-16)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         underLineView.snp.makeConstraints {
-            $0.top.equalTo(textField.snp.bottom).inset(-1)
+            $0.top.equalTo(textField.snp.bottom).inset(-3)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         

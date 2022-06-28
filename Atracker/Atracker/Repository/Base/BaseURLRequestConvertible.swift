@@ -38,10 +38,10 @@ extension BaseURLRequestConvertible {
             var components = URLComponents(string: path)
             components?.queryItems = queryParams
             urlRequest.url = components?.url
-            Log("[D] QUERY \(urlRequest)")
+//            Log("[D] QUERY \(urlRequest)")
             let bodyDict = bodyRequest?.toDictionary() ?? [:]
             urlRequest.httpBody = try JSONSerialization.data(withJSONObject: bodyDict, options: [])
-            Log("[D] BODY \(bodyDict)")            
+//            Log("[D] BODY \(bodyDict)")            
         default:
             print("param is nil")
         }

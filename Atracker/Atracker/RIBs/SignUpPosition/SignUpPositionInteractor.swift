@@ -17,7 +17,7 @@ protocol SignUpPositionPresentable: Presentable {
     var listener: SignUpPositionPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func switchCareerTableView()
-    func showCareerLabel(title: String)
+    func updateCareerLabel(title: String)
 }
 
 protocol SignUpPositionListener: AnyObject {
@@ -66,7 +66,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     
     func tapCareerTableView(career: String) {
         self.career = career
-        presenter.showCareerLabel(title: career)
+        presenter.updateCareerLabel(title: career)
         presenter.switchCareerTableView()
     }
     

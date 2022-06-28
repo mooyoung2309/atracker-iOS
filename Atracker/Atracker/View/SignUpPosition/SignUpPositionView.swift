@@ -12,9 +12,9 @@ class SignUpPositionView: BaseView {
     
     let titleLabel                      = UILabel()
     let positionLabel                   = UILabel()
-    let positionUnderLineTextFieldView  = UnderLineTextFieldView()
+    let positionUnderLineTextFieldView  = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
     let careerLabel                     = UILabel()
-    let careerUnderLineLabelView        = UnderLineLabelView()
+    let careerUnderLineLabelView        = UnderLineLabelView(title: "경력", placeholder: "경력을 선택해 주세요.")
     let carrerTableView                 = UITableView()
     let bottomNextButtonView            = BottomNextButtonView()
     
@@ -29,16 +29,12 @@ class SignUpPositionView: BaseView {
         positionLabel.font      = .systemFont(ofSize: 14, weight: .medium)
         positionLabel.textColor = .gray3
         
-        positionUnderLineTextFieldView.textField.attributedPlaceholder = NSAttributedString(string: "포지션명을 입력해주세요.", attributes: [.foregroundColor : UIColor.gray6, .font: UIFont.systemFont(ofSize: 16, weight: .light)])
-        positionUnderLineTextFieldView.textField.textColor = .white
-        positionUnderLineTextFieldView.textField.tintColor = .neonGreen
+        
         
         careerLabel.text = "경력"
         careerLabel.font      = .systemFont(ofSize: 14, weight: .medium)
         careerLabel.textColor = .gray3
-        
-        careerUnderLineLabelView.label.text = "경력을 선택해 주세요."
-        careerUnderLineLabelView.label.font = .systemFont(ofSize: 16, weight: .light)
+         
         careerUnderLineLabelView.button.isHidden = false
         careerUnderLineLabelView.button.setImage(UIImage(named: ImageName.chevronDown)?.withTintColor(.gray5), for: .normal)
         

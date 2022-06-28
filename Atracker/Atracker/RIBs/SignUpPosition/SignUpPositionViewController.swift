@@ -38,9 +38,9 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
         selfView.carrerTableView.isHidden = bool
     }
     
-    func showCareerLabel(title: String) {
-        selfView.careerUnderLineLabelView.label.text = title
-        selfView.careerUnderLineLabelView.label.textColor = .white
+    func updateCareerLabel(title: String) {
+        selfView.careerUnderLineLabelView.contentLabel.text = title
+        selfView.careerUnderLineLabelView.contentLabel.textColor = .white
     }
     
     override func viewDidLoad() {

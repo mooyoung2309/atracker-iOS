@@ -24,7 +24,8 @@ protocol WriteApplyOverallPresentable: Presentable {
     func hideCompanySearchTableView()
     func selectCompanySearchButton()
     func unSelectCompanySearchButton()
-    func switchJobSearchTableView()
+    func switchJobTypeSearchTableView()
+    func updateJobTypeLabel(text: String)
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -42,7 +43,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     weak var listener: WriteApplyOverallListener?
     
     private let companyService: CompanyServiceProtocol
-    private var companySearchText = ""
+    private var companyText = ""
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -78,7 +79,12 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     }
     
     func tapJobTypeSearchButton() {
-        presenter.switchJobSearchTableView()
+        presenter.switchJobTypeSearchTableView()
+    }
+    
+    func tapJobTypeTableView(text: String) {
+        presenter.updateJobTypeLabel(text: text)
+        presenter.switchJobTypeSearchTableView()
     }
     
     func inputCompanyTextfield(text: String) {
@@ -87,13 +93,15 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             presenter.unSelectCompanySearchButton()
         } else {
             companyService.search(title: text) { [weak self] result in
+                Log("[D] API 호출 \(text)")
                 switch result {
                 case .success(let data):
                     Log("[D] \(data.contents)")
                     self?.presenter.reloadCompanySearchTableView(companySearchContents: data.contents)
                     self?.presenter.showCompanySearchTableView()
                     self?.presenter.selectCompanySearchButton()
-                case .failure(let _):
+                case .failure(let error):
+                    Log("[D] 검색 실패 \(error)")
                     return
                 }
             }
@@ -107,12 +115,5 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     // MARK: From Child RIBs
     func tapBackButtonFromChildRIB() {
         router?.detachThisChildRIB()
-//        presenter.setupNavigaionBar()
     }
-    
-    
-//    func goBackToWriteApplyOverallRIB() {
-//        router?.detachWriteApplyScheduleRIB()
-//        presenter.setupNavigaionBar()
-//    }
 }

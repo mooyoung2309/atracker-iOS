@@ -17,7 +17,6 @@ class ApplyRepository: ApplyRepositoryProtocol {
     
     func getApply(request: GetApplyQuery, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
         AF.request(ApplyAPI.getApply(request)).responseDecodable { (response: AFDataResponse<ApplyResponse>) in
-            
             switch response.result {
             case .success(let data):
                 completion(.success(data))

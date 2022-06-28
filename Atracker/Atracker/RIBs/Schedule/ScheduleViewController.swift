@@ -146,7 +146,7 @@ extension ScheduleViewController: UIScrollViewDelegate {
 extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 7.0
-        let height = collectionView.frame.height / CGFloat(dates.count / 7 + 1)
+        let height = collectionView.frame.height / CGFloat(currentDates.count / 7 + 1)
         return CGSize(width: width, height: height)
     }
     

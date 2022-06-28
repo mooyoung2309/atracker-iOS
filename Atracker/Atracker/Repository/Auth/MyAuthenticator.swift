@@ -17,7 +17,7 @@ class MyAuthenticator: Authenticator {
     }
     
     func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: Error) -> Bool {
-        response.statusCode == 401
+        response.statusCode == 403
     }
     
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: Credential) -> Bool {

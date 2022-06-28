@@ -7,6 +7,8 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
+import RxGesture
 import UIKit
 import SnapKit
 
@@ -17,6 +19,7 @@ protocol WriteApplyOverallPresentableListener: AnyObject {
     func inputCompanyTextfield(text: String)
     func tapCompanySearchButton()
     func tapJobTypeSearchButton()
+    func tapJobTypeTableView(text: String)
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
@@ -30,7 +33,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     private var selectedIndexPathList: [IndexPath] = []
     private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
-    private let jobTypes: [JobType] = [JobType.fullTime, JobType.contract, JobType.intern]
+    private let jobTypes: [String] = [JobType.fullTime.string, JobType.contract.string, JobType.intern.string]
     private var companySearchContents: [CompanySearchContent] = []
     
     func resetCollectionView() {
@@ -53,17 +56,26 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         selfView.companySearchTableView.isHidden = true
     }
     
+    func updateCompanyTextField(text: String) {
+        selfView.companyUnderLineTextFieldView.textField.text = text
+    }
+    
     func selectCompanySearchButton() {
-        selfView.companySearchButton.isSelected = true
+        selfView.companyUnderLineTextFieldView.button.isSelected = true
     }
     
     func unSelectCompanySearchButton() {
-        selfView.companySearchButton.isSelected = false
+        selfView.companyUnderLineTextFieldView.button.isSelected = false
     }
     
-    func switchJobSearchTableView() {
+    func switchJobTypeSearchTableView() {
         let bool = !selfView.jobSearchTableView.isHidden
         selfView.jobSearchTableView.isHidden = bool
+        selfView.jobTypeUnderLineLabelView.isHighlight = !bool
+    }
+    
+    func updateJobTypeLabel(text: String) {
+        selfView.jobTypeUnderLineLabelView.contentText = text
     }
     
     override func viewDidLoad() {
@@ -130,7 +142,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
             }
             .disposed(by: disposeBag)
         
-        selfView.companyTextField.rx.text
+        selfView.companyUnderLineTextFieldView.textField.rx.text
             .bind { [weak self] text in
                 if let text = text {
                     self?.listener?.inputCompanyTextfield(text: text)
@@ -138,15 +150,23 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
             }
             .disposed(by: disposeBag)
         
-        selfView.companySearchButton.rx.tap
+        selfView.companyUnderLineTextFieldView.button.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapCompanySearchButton()
             }
             .disposed(by: disposeBag)
         
-        selfView.jobTypeButton.rx.tap
+        selfView.jobTypeUnderLineLabelView.button.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapJobTypeSearchButton()
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.jobTypeUnderLineLabelView.rx.tapGesture()
+            .bind { [weak self] tap in
+                if tap.state == .ended {
+                    self?.listener?.tapJobTypeSearchButton()
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -231,11 +251,23 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
         case selfView.jobSearchTableView:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
             cell.selectionStyle = .none
-            cell.update(title: jobTypes[indexPath.item].string)
+            cell.update(title: jobTypes[indexPath.item])
             
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case selfView.companySearchTableView:
+            return
+        case selfView.jobSearchTableView:
+            listener?.tapJobTypeTableView(text: jobTypes[indexPath.item])
+            return
+        default:
+            return
         }
     }
 }

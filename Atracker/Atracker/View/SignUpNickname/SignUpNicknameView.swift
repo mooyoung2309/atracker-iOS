@@ -13,7 +13,7 @@ class SignUpNicknameView: BaseView {
     
     let titleLabel                      = UILabel()
     let nicknameLabel                   = UILabel()
-    let nicknameUnderLineTextFieldView  = UnderLineTextFieldView()
+    let nicknameUnderLineTextFieldView  = UnderLineTextFieldView(title: "이름", placeholder: "이름을 입력해주세요.")
     let bottomNextButtonView            = BottomNextButtonView()
     
     override func setupProperty() {
