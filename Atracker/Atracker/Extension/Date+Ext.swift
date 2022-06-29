@@ -62,6 +62,12 @@ extension Date {
         return self.getDateComponentsKST().day ?? 0
     }
     
+    func getWeek() -> String {
+        let day = ["월", "화", "수", "목", "금", "토", "일"]
+        
+        return day[(self.getDateComponentsKST().weekday ?? 1) - 1]
+    }
+    
     func getMonth() -> Int {
         return self.getDateComponentsKST().month ?? 0
     }

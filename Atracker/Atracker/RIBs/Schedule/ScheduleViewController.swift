@@ -17,6 +17,7 @@ protocol SchedulePresentableListener: AnyObject {
     func scrollCalendarPrev()
     func scrollCalendarNext()
     func tapBottomViewEditButton()
+    func tapCalendarView(date: Date)
 }
 
 final class ScheduleViewController: BaseNavigationViewController, SchedulePresentable, ScheduleViewControllable {
@@ -67,6 +68,10 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
         })
         
         return bool
+    }
+    
+    func updateBottomSheet(date: Date) {
+        selfView.bottomTitleLabel.text = "\(date.getMonth())월 \(date.getDay())일 \(date.getWeek())요일"
     }
     
     override func viewDidLoad() {
@@ -146,7 +151,7 @@ extension ScheduleViewController: UIScrollViewDelegate {
 extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 7.0
-        let height = collectionView.frame.height / CGFloat(currentDates.count / 7 + 1)
+        let height = collectionView.frame.height / CGFloat(currentDates.count / 7)
         return CGSize(width: width, height: height)
     }
     
@@ -203,7 +208,16 @@ extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollecti
         default:
             return UICollectionViewCell()
         }
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case selfView.centerCollectionView:
+            listener?.tapCalendarView(date: currentDates[indexPath.item])
+            return
+        default:
+            return
+        }
     }
 }
 

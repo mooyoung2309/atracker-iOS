@@ -128,7 +128,7 @@ class ScheduleView: BaseView {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(weekStackView.snp.bottom).inset(-30)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(nowView)
+            $0.height.equalTo(Size.calendarHeight)
         }
         
         prevView.snp.makeConstraints {

@@ -18,6 +18,7 @@ protocol SchedulePresentable: Presentable {
     func updateCalendarCell(prevDate: Date, currentDate: Date, nextDate: Date)
     func updateNavigationTitle(title: String)
     func switchBottomEditButton() -> Bool
+    func updateBottomSheet(date: Date)
 }
 
 protocol ScheduleListener: AnyObject {
@@ -30,6 +31,7 @@ final class ScheduleInteractor: PresentableInteractor<SchedulePresentable>, Sche
     weak var listener: ScheduleListener?
     
     private var date = Date()
+    private var selectedDate = Date()
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -59,6 +61,10 @@ final class ScheduleInteractor: PresentableInteractor<SchedulePresentable>, Sche
     
     func tapBottomViewEditButton() {
         presenter.switchBottomEditButton()
+    }
+    
+    func tapCalendarView(date: Date) {
+        presenter.updateBottomSheet(date: date)
     }
     
     

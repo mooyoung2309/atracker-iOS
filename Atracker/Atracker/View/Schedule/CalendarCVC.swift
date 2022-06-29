@@ -28,9 +28,15 @@ class CalendarCVC: BaseCVC {
         dateLabel.textColor = color
     }
     
+    func highlight() {
+        dateLabel.textColor = .neonGreen
+        dateLabel.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    
     override func prepareForReuse() {
         circleStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         dateLabel.textColor = .white
+        dateLabel.font = .systemFont(ofSize: 14, weight: .light)
     }
     
     override func setupProperty() {
@@ -43,7 +49,7 @@ class CalendarCVC: BaseCVC {
         circleStackView.spacing = 2
         circleStackView.distribution = .fillProportionally
         
-        dateLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        dateLabel.font = .systemFont(ofSize: 14, weight: .light)
         dateLabel.textColor = .white
         dateLabel.textAlignment = .center
         dateLabel.layer.cornerRadius = 10
