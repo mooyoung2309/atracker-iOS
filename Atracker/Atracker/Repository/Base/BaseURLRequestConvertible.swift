@@ -30,8 +30,13 @@ extension BaseURLRequestConvertible {
             components?.queryItems = queryParams
             urlRequest.url = components?.url
         case .body(let request):
-            let params = request?.toDictionary() ?? [:]
-            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
+            if let request = request {
+                let data = try JSONEncoder().encode(AnyEncodable(request))
+                urlRequest.httpBody = data
+            }
+//            let params = request?.toDictionary() ?? [:]
+//            Log("[D] \(params)")
+//            urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
         case .both(let queryRequest, let bodyRequest):
             let queryDict = queryRequest?.toDictionary() ?? [:]
             let queryParams = queryDict.map { URLQueryItem(name: $0.key, value: "\($0.value)") }

@@ -16,10 +16,13 @@ protocol WriteApplyOverallPresentableListener: AnyObject {
     func tapBackButton()
     func tapNextButton()
     func tapResetButton()
-    func inputCompanyTextfield(text: String)
+//    func inputCompanyTextfield(text: String)
     func tapCompanySearchButton()
+    func tapCompanyTableView(companySearchContent: CompanySearchContent)
     func tapJobTypeSearchButton()
     func tapJobTypeTableView(text: String)
+    func searchCompanyName(text: String?)
+    func tapPlusCompay()
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
@@ -35,6 +38,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
     private let jobTypes: [String] = [JobType.fullTime.string, JobType.contract.string, JobType.intern.string]
     private var companySearchContents: [CompanySearchContent] = []
+    private let plusCompany = "+ 직접 추가"
     
     func resetCollectionView() {
         selectedIndexPathList.removeAll()
@@ -76,6 +80,10 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     func updateJobTypeLabel(text: String) {
         selfView.jobTypeUnderLineLabelView.contentText = text
+    }
+    
+    func updateCompanyLabel(text: String) {
+        selfView.companyUnderLineTextFieldView.textField.text = text
     }
     
     override func viewDidLoad() {
@@ -145,7 +153,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         selfView.companyUnderLineTextFieldView.textField.rx.text
             .bind { [weak self] text in
                 if let text = text {
-                    self?.listener?.inputCompanyTextfield(text: text)
+                    self?.listener?.searchCompanyName(text: text)
                 }
             }
             .disposed(by: disposeBag)
@@ -169,6 +177,17 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
                 }
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
     }
 }
 
@@ -225,12 +244,25 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
     }
 }
 
-extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataSource {
+extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        switch scrollView {
+        case selfView.companySearchTableView:
+            if scrollView.contentSize.height - scrollView.contentOffset.y < Size.companySearchTableViewMaxHeight * 0.8 {
+                Log("[D] 테이블 뷰 로딩 . . . 회사 검색")
+                listener?.searchCompanyName(text: nil)
+            }
+            return
+            
+        default:
+            return
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Log(companySearchContents.count)
         switch tableView {
         case selfView.companySearchTableView:
-            return companySearchContents.count
+            return companySearchContents.count + 1
         case selfView.jobSearchTableView:
             return jobTypes.count
         default:
@@ -244,8 +276,12 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            //            Log("[D] \(companySearchContents[indexPath.item].name)")
-            cell.update(title: companySearchContents[indexPath.item].name)
+            
+            if indexPath.item == companySearchContents.count {
+                cell.update(title: plusCompany)
+            } else {
+                cell.update(title: companySearchContents[indexPath.item].name)
+            }
             
             return cell
         case selfView.jobSearchTableView:
@@ -262,6 +298,12 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case selfView.companySearchTableView:
+            if indexPath.item == companySearchContents.count {
+                listener?.tapPlusCompay()
+            } else {
+                listener?.tapCompanyTableView(companySearchContent: companySearchContents[indexPath.item])
+            }
+            
             return
         case selfView.jobSearchTableView:
             listener?.tapJobTypeTableView(text: jobTypes[indexPath.item])

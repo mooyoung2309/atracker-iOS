@@ -25,6 +25,7 @@ protocol WriteApplyOverallPresentable: Presentable {
     func selectCompanySearchButton()
     func unSelectCompanySearchButton()
     func switchJobTypeSearchTableView()
+    func updateCompanyLabel(text: String)
     func updateJobTypeLabel(text: String)
 }
 
@@ -43,7 +44,10 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     weak var listener: WriteApplyOverallListener?
     
     private let companyService: CompanyServiceProtocol
-    private var companyText = ""
+    
+    private var companySearchContents: [CompanySearchContent] = []
+    private var companyName = ""
+    private var companyPage = 1
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -87,29 +91,74 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         presenter.switchJobTypeSearchTableView()
     }
     
-    func inputCompanyTextfield(text: String) {
-        if text.isEmpty {
+    func searchCompanyName(text: String? = nil) {
+        var companName = ""
+        
+        if let text = text {
+            companName = text
+        } else {
+            companName = self.companyName
+        }
+        
+        if companName.isEmpty {
             presenter.hideCompanySearchTableView()
             presenter.unSelectCompanySearchButton()
         } else {
-            companyService.search(title: text) { [weak self] result in
-                Log("[D] API 호출 \(text)")
-                switch result {
-                case .success(let data):
-                    Log("[D] \(data.contents)")
-                    self?.presenter.reloadCompanySearchTableView(companySearchContents: data.contents)
-                    self?.presenter.showCompanySearchTableView()
-                    self?.presenter.selectCompanySearchButton()
-                case .failure(let error):
-                    Log("[D] 검색 실패 \(error)")
-                    return
-                }
-            }
+            searchCompany(companyName: companName)
         }
     }
     
     func tapCompanySearchButton() {
         
+    }
+    
+    func tapCompanyTableView(companySearchContent: CompanySearchContent) {
+        Log("[D] 회사 테이블 뷰 탭")
+        presenter.updateCompanyLabel(text: companySearchContent.name)
+        presenter.hideCompanySearchTableView()
+    }
+    
+    func tapPlusCompay() {
+        companyService.add(name: self.companyName) { [weak self] result in
+            guard let this = self else { return }
+            switch result {
+            case .success(let data):
+                Log("[D] 회사 추가 성공 \(data.companies)")
+                return
+            case .failure(let error):
+                Log("[D] 회사 추가 실패 \(error)")
+                return
+            }
+        }
+    }
+    
+    // MARK: Private
+    private func searchCompany(companyName: String) {
+        if self.companyName == companyName {
+            companyPage += 1
+        } else {
+            companyPage = 1
+            companySearchContents.removeAll()
+        }
+        Log("[D] \(companyPage)")
+        self.companyName = companyName
+        
+        companyService.search(title: companyName, page: companyPage) { [weak self] result in
+            Log("[D] API 호출 \(companyName)")
+            guard let this = self else { return }
+            switch result {
+            case .success(let data):
+                Log("[D] \(data.contents)")
+                this.companySearchContents.append(contentsOf: data.contents)
+                this.presenter.reloadCompanySearchTableView(companySearchContents: this.companySearchContents)
+                this.presenter.showCompanySearchTableView()
+                this.presenter.selectCompanySearchButton()
+                return
+            case .failure(let error):
+                Log("[D] 검색 실패 \(error)")
+                return
+            }
+        }
     }
     
     // MARK: From Child RIBs
