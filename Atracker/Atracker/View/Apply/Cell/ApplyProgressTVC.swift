@@ -18,12 +18,13 @@ class ApplyProgressTVC: BaseTVC {
         $0.textColor = .contentGray
         $0.font = .systemFont(ofSize: 13, weight: .regular)
     }
-    var progressBarView = HorizontalBarChartView()
-    var barChartView = BarChatView(.horizontal)
+    var barChartView = ProgressBarView()
     
     func update(apply: ApplyResponse) {
         companyLabel.text = apply.companyName
         positionLabel.text = apply.jobPosition
+        
+        barChartView.update(total: 5, part: 3)
     }
     
     override func setupProperty() {

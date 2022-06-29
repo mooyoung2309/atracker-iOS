@@ -12,9 +12,9 @@ import Then
 class ApplyDetailView: BaseView {
     
     let scrollView      = UIScrollView()
-    let hChartView      = BarChatView(.horizontal)
+    let hChartView      = BarChatView(.horizontal, cornerRadius: 0)
     let dateLabel       = UILabel()
-    let vChartView      = BarChatView(.vertical)
+    let vChartView      = BarChatView(.vertical, cornerRadius: 0)
     let tableView       = UITableView()
     let editButton      = UIButton(type: .system)
     

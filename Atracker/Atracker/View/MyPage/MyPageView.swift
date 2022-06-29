@@ -15,7 +15,7 @@ class MyPageView: BaseView {
     let positionLabel       = UILabel()
     let careerTagLabel      = UILabel()
     let careerLabel         = UILabel()
-    let careerDivider       = BarChatView(.horizontal)
+    let careerDivider       = BarChatView(.horizontal, cornerRadius: 0)
     let accountTagLabel     = UILabel()
     let accountDivider      = Divider(.gray6)
     let signOutButton       = UIButton(type: .system)

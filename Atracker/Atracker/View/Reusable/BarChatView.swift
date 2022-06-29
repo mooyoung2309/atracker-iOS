@@ -11,25 +11,30 @@ class BarChatView: UIView {
 
     var gradientLayer: CAGradientLayer?
     let startPoint: CGPoint = CGPoint(x: 0.0, y: 0.0)
-    var endPoint: CGPoint!
-
+    
+    let endPoint: CGPoint
+    let cornerRadius: CGFloat
+    
     required init?(coder: NSCoder) {
-        endPoint = CGPoint(x: 1.0, y: 0.0)
-        super.init(coder: coder)
+        fatalError("not supported")
     }
 
-    init(_ axis: NSLayoutConstraint.Axis) {
-        super.init(frame: .zero)
+    init(_ axis: NSLayoutConstraint.Axis, cornerRadius: CGFloat) {
+        self.cornerRadius = cornerRadius
+        
         switch axis {
         case .horizontal:
-            endPoint = CGPoint(x: 1.0, y: 0.0)
-            return
+            self.endPoint = CGPoint(x: 1.0, y: 0.0)
+            break
         case .vertical:
-            endPoint = CGPoint(x: 0.0, y: 1.0)
-            return
+            self.endPoint = CGPoint(x: 0.0, y: 1.0)
+            break
         default:
-            return
+            self.endPoint = CGPoint(x: 1.0, y: 0.0)
+            break
         }
+        
+        super.init(frame: .zero)
     }
 
 
@@ -40,7 +45,9 @@ class BarChatView: UIView {
         gradientLayer.frame         = self.bounds
         gradientLayer.startPoint    = startPoint
         gradientLayer.endPoint      = endPoint
-//        gradientLayer.cornerRadius  = 5
+        
+        gradientLayer.cornerRadius  = cornerRadius
+        
         gradientLayer.colors        = [UIColor.blue7.cgColor, UIColor.blue6.cgColor, UIColor.blue5.cgColor, UIColor.blue4.cgColor, UIColor.blue3.cgColor, UIColor.blue2.cgColor, UIColor.neonGreen.cgColor]
 
         layer.addSublayer(gradientLayer)
