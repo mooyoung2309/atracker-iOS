@@ -17,6 +17,7 @@ protocol SignInViewControllable: ViewControllable {
     // this RIB does not own its own view, this protocol is conformed to by one of this
     // RIB's ancestor RIBs' view.
     func present(viewController: ViewControllable)
+    func dismiss(viewController: ViewControllable)
 }
 
 final class SignInRouter: Router<SignInInteractable>, SignInRouting {
@@ -46,6 +47,17 @@ final class SignInRouter: Router<SignInInteractable>, SignInRouting {
         self.tabBar = tabBar
         attachChild(tabBar)
         viewController.present(viewController: tabBar.viewControllable)
+    }
+    
+    func detachTabBarRIB() {
+        Log("[SIGNOUT] start")
+        if let tabBar = tabBar {
+            detachChild(tabBar)
+            viewController.dismiss(viewController: tabBar.viewControllable)
+        }
+        
+        tabBar = nil
+        Log("[SIGNOUT] end")
     }
 
     // MARK: - Private

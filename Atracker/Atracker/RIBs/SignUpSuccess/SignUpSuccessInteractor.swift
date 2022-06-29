@@ -10,7 +10,6 @@ import RxSwift
 
 protocol SignUpSuccessRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func attachSignInRIB()
 }
 
 protocol SignUpSuccessPresentable: Presentable {
@@ -20,9 +19,11 @@ protocol SignUpSuccessPresentable: Presentable {
 
 protocol SignUpSuccessListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didSignUp()
 }
 
 final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresentable>, SignUpSuccessInteractable, SignUpSuccessPresentableListener {
+    
 
     weak var router: SignUpSuccessRouting?
     weak var listener: SignUpSuccessListener?
@@ -39,7 +40,7 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
         // TODO: Implement business logic here.
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            self?.router?.attachSignInRIB()
+            self?.listener?.didSignUp()
         }
     }
 

@@ -20,6 +20,7 @@ protocol SignOutPresentable: Presentable {
 
 protocol SignOutListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didSignUp()
 }
 
 final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOutInteractable, SignOutPresentableListener {
@@ -60,5 +61,9 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     func tapTestSignUpButton() {
         Log("[D] 테스트 회원가입 버튼 클릭")
         router?.attachSignUpNicknameRIB()
+    }
+    
+    func didSignUp() {
+        listener?.didSignUp()
     }
 }

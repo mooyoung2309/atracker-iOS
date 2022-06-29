@@ -11,6 +11,7 @@ import RxSwift
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: ApplyResponse)
     func attachWriteApplyOverall()
+    func attachMyPageRIB()
     func detachThisChildRIB()
     func reAttachApplyDetailRIB()
 }
@@ -25,6 +26,7 @@ protocol ApplyListener: AnyObject {
 //    func goToApplyWriteRIB()
     func showTabBar()
     func hideTabBar()
+    func didSignOut()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
@@ -69,15 +71,9 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         }
     }
     
-//    func goBackToApplyRIB() {
-//        router?.detachChildRIB()
-//        listener?.goBackToApplyRIB()
-//    }
-//    
-//    func goBackToApplyDetailRIB() {
-//        router?.reAttachApplyDetailRIB()
-//    }
-//
+    func tapMyPageButton() {
+        router?.attachMyPageRIB()
+    }
 
     // MARK: From Child RIB
     func tapBackButtonFromChildRIB() {
@@ -90,5 +86,11 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     
     func hideTabBar() {
         listener?.hideTabBar()
+    }
+    
+    func didSignOut() {
+        Log("[SIGNOUT] start")
+        listener?.didSignOut()
+        Log("[SIGNOUT] end")
     }
 }

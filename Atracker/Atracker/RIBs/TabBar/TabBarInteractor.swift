@@ -16,6 +16,7 @@ protocol TabBarRouting: ViewableRouting {
     func attachPlanRIB()
     func attachApplyRIBfromOtherRIB()
 //    func attachWriteApplyOverallRIBfromOtherRIB()
+    func detachApplyRIB()
 }
 
 protocol TabBarPresentable: Presentable {
@@ -29,7 +30,7 @@ protocol TabBarPresentable: Presentable {
 }
 
 protocol TabBarListener: AnyObject {
-    
+    func didSignOut()
 }
 
 final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarInteractable, TabBarPresentableListener {
@@ -72,6 +73,8 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         router?.attachApplyRIBfromOtherRIB()
     }
     
+    // MARK: From Other RIBs
+    
     func showTabBar() {
         presenter.showTabBar()
     }
@@ -80,13 +83,20 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         presenter.hideTabBar()
     }
     
-    
+    func didSignOut() {
+        Log("[SIGNOUT] start")
+        
+        router?.detachApplyRIB()
+        listener?.didSignOut()
+        
+        Log("[SIGNOUT] end")
+    }
     
 //    func goToApplyWriteRIB() {
 //        router?.attachApplyWriteRIB()
 //    }
 //
-    // MARK: From Other RIBs
+    
 //    func goBackToWriteApplyOverallRIB() {
 //        router?.attachWriteApplyOverallRIBfromOtherRIB()
 //    }

@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ApplyInteractable: Interactable, ApplyDetailListener, WriteApplyOverallListener {
+protocol ApplyInteractable: Interactable, ApplyDetailListener, WriteApplyOverallListener, MyPageListener {
     var router: ApplyRouting? { get set }
     var listener: ApplyListener? { get set }
 }
@@ -20,15 +20,18 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     
     private let writeApplyOverallBuilder: WriteApplyOverallBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
+    private let myPageBuilder: MyPageBuildable
     
     private var child: ViewableRouting?
     private var writeApplyOverall: ViewableRouting?
     private var applyDetail: ViewableRouting?
+    private var myPage: ViewableRouting?
     private var apply: ApplyResponse?
     
-    init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable) {
+    init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable, myPageBuilder: MyPageBuildable) {
         self.writeApplyOverallBuilder  = applyWriteBuilder
         self.applyDetailBuilder = applyDetailBuilder
+        self.myPageBuilder = myPageBuilder
         
         super.init(interactor: interactor, viewController: viewController)
         
@@ -54,9 +57,20 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB(child)
         attachChild(writeApplyOverall)
-//        Log("[D] 탭바 안보이게")
         viewController.presentView(writeApplyOverall, animation: true)
         child = writeApplyOverall
+    }
+    
+    func attachMyPageRIB() {
+        let myPage = myPageBuilder.build(withListener: interactor)
+        
+        self.myPage = myPage
+        
+        detachChildRIB(child)
+        attachChild(myPage)
+        viewController.presentView(myPage, animation: true)
+        
+        child = myPage
     }
     
     func reAttachApplyDetailRIB() {

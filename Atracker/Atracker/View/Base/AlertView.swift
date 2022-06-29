@@ -43,36 +43,37 @@ class AlertView: BaseView {
     
     override func setupProperty() {
         super.setupProperty()
+        
         backgroundView.backgroundColor = .black
-        backgroundView.alpha           = 0.5
+        backgroundView.alpha = 0.5
         
         contentView.backgroundColor = .backgroundLightGray
         contentView.layer.cornerRadius = 10
         
-        circleView.backgroundColor      = .backgroundGray
-        circleView.layer.cornerRadius   = 20
+        circleView.backgroundColor = .backgroundGray
+        circleView.layer.cornerRadius = 20
         
-        imageView.image     = UIImage(named: style.iamgeName)
+        imageView.image = UIImage(named: style.iamgeName)
         imageView.tintColor = .neonGreen
         imageView.sizeToFit()
         
-        titleLabel.text             = style.title(i: i).string
-        titleLabel.font             = .systemFont(ofSize: 16, weight: .regular)
-        titleLabel.textColor        = .white
-        titleLabel.attributedText   = style.title(i: i)
+        titleLabel.text = style.title(i: i).string
+        titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        titleLabel.textColor = .white
+        titleLabel.attributedText = style.title(i: i)
         
-        subTitleLabel.text          = style.subTitle
-        subTitleLabel.font          = .systemFont(ofSize: 14, weight: .regular)
-        subTitleLabel.textColor     = .gray3
+        subTitleLabel.text = style.subTitle
+        subTitleLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        subTitleLabel.textColor = .gray3
         
         buttonStackView.spacing = 14
         
-        backButton.backgroundColor      = .backgroundGray
-        backButton.layer.cornerRadius   = 5
+        backButton.backgroundColor = .backgroundGray
+        backButton.layer.cornerRadius = 5
         backButton.setTitleColor(.white, for: .normal)
         
-        nextButton.backgroundColor      = .backgroundGray
-        nextButton.layer.cornerRadius   = 5
+        nextButton.backgroundColor = .backgroundGray
+        nextButton.layer.cornerRadius = 5
         nextButton.setTitleColor(.white, for: .normal)
         
         for (indx, buttonTitle) in style.buttonTitles.enumerated() {

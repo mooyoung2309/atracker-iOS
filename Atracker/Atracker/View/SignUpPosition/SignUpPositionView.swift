@@ -11,9 +11,7 @@ import SnapKit
 class SignUpPositionView: BaseView {
     
     let titleLabel                      = UILabel()
-    let positionLabel                   = UILabel()
     let positionUnderLineTextFieldView  = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
-    let careerLabel                     = UILabel()
     let careerUnderLineLabelView        = UnderLineLabelView(title: "경력", placeholder: "경력을 선택해 주세요.")
     let carrerTableView                 = UITableView()
     let bottomNextButtonView            = BottomNextButtonView()
@@ -25,16 +23,6 @@ class SignUpPositionView: BaseView {
         titleLabel.font = .systemFont(ofSize: 20, weight: .regular)
         titleLabel.textColor = .white
         
-        positionLabel.text      = "포지션"
-        positionLabel.font      = .systemFont(ofSize: 14, weight: .medium)
-        positionLabel.textColor = .gray3
-        
-        
-        
-        careerLabel.text = "경력"
-        careerLabel.font      = .systemFont(ofSize: 14, weight: .medium)
-        careerLabel.textColor = .gray3
-         
         careerUnderLineLabelView.button.isHidden = false
         careerUnderLineLabelView.button.setImage(UIImage(named: ImageName.chevronDown)?.withTintColor(.gray5), for: .normal)
         
@@ -51,9 +39,7 @@ class SignUpPositionView: BaseView {
         super.setupHierarchy()
         
         addSubview(titleLabel)
-        addSubview(positionLabel)
         addSubview(positionUnderLineTextFieldView)
-        addSubview(careerLabel)
         addSubview(careerUnderLineLabelView)
         addSubview(carrerTableView)
         addSubview(bottomNextButtonView)
@@ -67,23 +53,13 @@ class SignUpPositionView: BaseView {
             $0.leading.equalToSuperview().inset(28)
         }
         
-        positionLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).inset(-37)
-            $0.leading.equalToSuperview().inset(28)
-        }
-        
         positionUnderLineTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(positionLabel.snp.bottom).inset(-16)
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
-        
-        careerLabel.snp.makeConstraints {
-            $0.top.equalTo(positionUnderLineTextFieldView.snp.bottom).inset(-37)
-            $0.leading.equalToSuperview().inset(28)
-        }
-        
+
         careerUnderLineLabelView.snp.makeConstraints {
-            $0.top.equalTo(careerLabel.snp.bottom).inset(-16)
+            $0.top.equalTo(positionUnderLineTextFieldView.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         

@@ -10,12 +10,14 @@ import RxSwift
 
 protocol SignInRouting: Routing {
     func attachTabBarRIB()
+    func detachTabBarRIB()
     func cleanupViews()
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
 protocol SignInListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didSignOut()
 }
 
 final class SignInInteractor: Interactor, SignInInteractable {
@@ -30,6 +32,7 @@ final class SignInInteractor: Interactor, SignInInteractable {
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
+        Log("[SIGNOUT] 탭바 RIB attach" )
         router?.attachTabBarRIB()
     }
 
@@ -38,5 +41,13 @@ final class SignInInteractor: Interactor, SignInInteractable {
 
         router?.cleanupViews()
         // TODO: Pause any business logic.
+    }
+    
+    func didSignOut() {
+        Log("[SIGNOUT] start")
+        router?.detachTabBarRIB()
+        listener?.didSignOut()
+        
+        Log("[SIGNOUT] end")
     }
 }

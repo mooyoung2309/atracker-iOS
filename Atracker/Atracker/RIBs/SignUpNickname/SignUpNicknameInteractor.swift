@@ -20,6 +20,7 @@ protocol SignUpNicknamePresentable: Presentable {
 
 protocol SignUpNicknameListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didSignUp()
 }
 
 final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresentable>, SignUpNicknameInteractable, SignUpNicknamePresentableListener {
@@ -56,5 +57,9 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     
     func inputNicknameTextField(text: String) {
         self.nickname = text
+    }
+    
+    func didSignUp() {
+        listener?.didSignUp()
     }
 }

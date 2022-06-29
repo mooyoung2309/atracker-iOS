@@ -12,6 +12,7 @@ import UIKit
 protocol ApplyPresentableListener: AnyObject {
     func didTabCell(apply: ApplyResponse)
     func tapPlusButton()
+    func tapMyPageButton()
 }
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
@@ -83,6 +84,12 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
             self?.listener?.tapPlusButton()
         }
         .disposed(by: disposeBag)
+        
+        selfView.myPageButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapMyPageButton()
+            }
+            .disposed(by: disposeBag)
     }
 }
 

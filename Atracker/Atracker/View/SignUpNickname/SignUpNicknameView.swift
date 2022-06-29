@@ -12,7 +12,6 @@ import SnapKit
 class SignUpNicknameView: BaseView {
     
     let titleLabel                      = UILabel()
-    let nicknameLabel                   = UILabel()
     let nicknameUnderLineTextFieldView  = UnderLineTextFieldView(title: "이름", placeholder: "이름을 입력해주세요.")
     let bottomNextButtonView            = BottomNextButtonView()
     
@@ -22,10 +21,6 @@ class SignUpNicknameView: BaseView {
         titleLabel.text         = "개성있는 닉네임을 설정해주세요."
         titleLabel.font         = .systemFont(ofSize: 20, weight: .regular)
         titleLabel.textColor    = .white
-        
-        nicknameLabel.text      = "이름"
-        nicknameLabel.font      = .systemFont(ofSize: 14, weight: .medium)
-        nicknameLabel.textColor = .gray3
         
         nicknameUnderLineTextFieldView.textField.textColor = .white
         nicknameUnderLineTextFieldView.textField.tintColor = .neonGreen
@@ -38,7 +33,6 @@ class SignUpNicknameView: BaseView {
         super.setupHierarchy()
         
         addSubview(titleLabel)
-        addSubview(nicknameLabel)
         addSubview(nicknameUnderLineTextFieldView)
         addSubview(bottomNextButtonView)
     }
@@ -51,13 +45,8 @@ class SignUpNicknameView: BaseView {
             $0.leading.equalToSuperview().inset(28)
         }
         
-        nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).inset(-37)
-            $0.leading.equalToSuperview().inset(28)
-        }
-        
         nicknameUnderLineTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).inset(-16)
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-16)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         

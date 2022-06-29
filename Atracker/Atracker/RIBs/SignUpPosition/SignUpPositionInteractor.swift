@@ -22,6 +22,7 @@ protocol SignUpPositionPresentable: Presentable {
 
 protocol SignUpPositionListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didSignUp()
 }
 
 final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresentable>, SignUpPositionInteractable, SignUpPositionPresentableListener {
@@ -89,5 +90,9 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     
     func tapCareerToggleButton() {
         presenter.switchCareerTableView()
+    }
+    
+    func didSignUp() {
+        listener?.didSignUp()
     }
 }

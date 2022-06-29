@@ -81,6 +81,15 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         child = schedule
     }
     
+    func detachApplyRIB() {
+        Log("[SIGNOUT] start")
+        detachChildRIB(apply)
+//        viewController.dismiss(viewController: apply.viewControllable)
+        child = nil
+        
+        Log("[SIGNOUT] end")
+    }
+    
 //    func attachApplyWriteRIB() {
 //        let applyWrite = writeApplyOverallBuilder.build(withListener: interactor)
 //        

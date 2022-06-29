@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol LoggedInInteractable: Interactable, TabBarListener {
+protocol LoggedInInteractable: Interactable {
     var router: LoggedInRouting? { get set }
     var listener: LoggedInListener? { get set }
 }
@@ -40,12 +40,12 @@ final class LoggedInRouter: Router<LoggedInInteractable>, LoggedInRouting {
     }
     
     func routeToTabBar() {
-        let tabBar = tabBarBuilder.build(withListener: interactor)
+//        let tabBar = tabBarBuilder.build(withListener: interactor)
         
-        self.tabBar = tabBar
+//        self.tabBar = tabBar
         
-        attachChild(tabBar)
-        viewController.present(viewController: tabBar.viewControllable)
+//        attachChild(tabBar)
+//        viewController.present(viewController: tabBar.viewControllable)
     }
 
 

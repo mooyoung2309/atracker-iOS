@@ -15,7 +15,6 @@
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
 		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
-		700DBEBA2868B0BC00883A4F /* RootComponent+SignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */; };
 		700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */; };
 		700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */; };
 		700DBEC02868C79200883A4F /* BottomNextButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBF2868C79200883A4F /* BottomNextButtonView.swift */; };
@@ -41,8 +40,6 @@
 		701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */; };
 		701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */; };
 		701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */; };
-		70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */; };
-		70223C5428434F28009B7F0A /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5328434F28009B7F0A /* AlertVC.swift */; };
 		70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5528434F89009B7F0A /* BaseViewController.swift */; };
 		70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */; };
 		7027070A28407DEC00BC8E41 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027070928407DEC00BC8E41 /* CircleView.swift */; };
@@ -129,7 +126,6 @@
 		7066045828697A2B00A09427 /* SignInBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045528697A2B00A09427 /* SignInBuilder.swift */; };
 		7066045928697A2B00A09427 /* SignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045628697A2B00A09427 /* SignInInteractor.swift */; };
 		7066045B28697A4A00A09427 /* SignInComponent+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045A28697A4A00A09427 /* SignInComponent+TabBar.swift */; };
-		7066045D28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045C28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift */; };
 		70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066045F286AAD4200A09427 /* ApplyCreateRequest.swift */; };
 		70660462286AADBC00A09427 /* ApplyStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660461286AADBC00A09427 /* ApplyStage.swift */; };
 		70660464286AADCA00A09427 /* AppliedCompanyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660463286AADCA00A09427 /* AppliedCompanyInfo.swift */; };
@@ -140,8 +136,6 @@
 		70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660470286AC21D00A09427 /* ApplyAnalysisView.swift */; };
 		70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660472286AC9E300A09427 /* RootComponent+SignIn.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
-		707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */; };
-		707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD253283CAAA5000E7EE7 /* TextButton.swift */; };
 		707CD256283CADB2000E7EE7 /* ApplyContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD255283CADB2000E7EE7 /* ApplyContentTVC.swift */; };
 		7088413C2835F6150024135D /* CalendarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413B2835F6150024135D /* CalendarCVC.swift */; };
 		70884143283623890024135D /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70884142283623890024135D /* PieChartView.swift */; };
@@ -149,22 +143,18 @@
 		7092C89D2858C88400C57AD1 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C89C2858C88400C57AD1 /* Enum.swift */; };
 		7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C89E2858C8A900C57AD1 /* ImageName.swift */; };
 		7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */; };
-		70970021283D27A6000F4B89 /* BoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970020283D27A6000F4B89 /* BoxButton.swift */; };
 		70970023283D363B000F4B89 /* QAWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970022283D363B000F4B89 /* QAWriteView.swift */; };
 		70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970024283D365E000F4B89 /* ReviewWriteView.swift */; };
 		70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */; };
 		70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */; };
-		70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6822834BFCB00E6B95B /* ViewController.swift */; };
 		70A2F6882834BFCB00E6B95B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A2F6872834BFCB00E6B95B /* Assets.xcassets */; };
 		70A2F68B2834BFCB00E6B95B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70A2F6892834BFCB00E6B95B /* LaunchScreen.storyboard */; };
 		70A2F6962834BFCB00E6B95B /* AtrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6952834BFCB00E6B95B /* AtrackerTests.swift */; };
 		70A2F6A02834BFCB00E6B95B /* AtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F69F2834BFCB00E6B95B /* AtrackerUITests.swift */; };
 		70A2F6A22834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */; };
 		70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */; };
-		70A2F6C72834C7C300E6B95B /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6C62834C7C300E6B95B /* ScheduleVC.swift */; };
 		70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D12834D0FD00E6B95B /* ApplySummaryTVC.swift */; };
 		70A2F6D62834D23200E6B95B /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D52834D23200E6B95B /* Application.swift */; };
-		70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DA2834D37800E6B95B /* ViewModel.swift */; };
 		70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DC2834D6B100E6B95B /* Log.swift */; };
 		70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E5F285193910027D673 /* LoggedInRouter.swift */; };
 		70A88E63285193910027D673 /* LoggedInBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E60285193910027D673 /* LoggedInBuilder.swift */; };
@@ -191,6 +181,14 @@
 		70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */; };
 		70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8828478B220098C742 /* BaseTVC.swift */; };
 		70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B9B2847AEC20098C742 /* ApplyView.swift */; };
+		70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83743286BD70D0085DE43 /* MyPageRouter.swift */; };
+		70D83748286BD70D0085DE43 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83744286BD70D0085DE43 /* MyPageViewController.swift */; };
+		70D83749286BD70D0085DE43 /* MyPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83745286BD70D0085DE43 /* MyPageBuilder.swift */; };
+		70D8374A286BD70D0085DE43 /* MyPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83746286BD70D0085DE43 /* MyPageInteractor.swift */; };
+		70D8374D286BD80B0085DE43 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8374C286BD80B0085DE43 /* MyPageView.swift */; };
+		70D8374F286BDAA70085DE43 /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8374E286BDAA70085DE43 /* CGFloat+Ext.swift */; };
+		70D83751286BE0C80085DE43 /* ApplyComponent+MyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83750286BE0C80085DE43 /* ApplyComponent+MyPage.swift */; };
+		70D8375D286C1C5D0085DE43 /* RootComponent+SignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */; };
 		70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */; };
 		70FBE5122852E58B00455A4B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5112852E58B00455A4B /* Size.swift */; };
 		70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */; };
@@ -236,7 +234,6 @@
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
 		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
-		700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignOut.swift"; sourceTree = "<group>"; };
 		700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
 		700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineTextFieldView.swift; sourceTree = "<group>"; };
 		700DBEBF2868C79200883A4F /* BottomNextButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNextButtonView.swift; sourceTree = "<group>"; };
@@ -262,8 +259,6 @@
 		701CE2342849D3B9009230CE /* LoggedOutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutBuilder.swift; sourceTree = "<group>"; };
 		701CE2352849D3B9009230CE /* LoggedOutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutInteractor.swift; sourceTree = "<group>"; };
 		701EBDBA2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpPositionComponent+SignUpSuccess.swift"; sourceTree = "<group>"; };
-		70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedRoundButton.swift; sourceTree = "<group>"; };
-		70223C5328434F28009B7F0A /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
 		70223C5528434F89009B7F0A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyISOLDCODE.swift; sourceTree = "<group>"; };
 		7027070928407DEC00BC8E41 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
@@ -350,7 +345,6 @@
 		7066045528697A2B00A09427 /* SignInBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInBuilder.swift; sourceTree = "<group>"; };
 		7066045628697A2B00A09427 /* SignInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractor.swift; sourceTree = "<group>"; };
 		7066045A28697A4A00A09427 /* SignInComponent+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInComponent+TabBar.swift"; sourceTree = "<group>"; };
-		7066045C28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpSuccessComponent+SignIn.swift"; sourceTree = "<group>"; };
 		7066045F286AAD4200A09427 /* ApplyCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyCreateRequest.swift; sourceTree = "<group>"; };
 		70660461286AADBC00A09427 /* ApplyStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStage.swift; sourceTree = "<group>"; };
 		70660463286AADCA00A09427 /* AppliedCompanyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliedCompanyInfo.swift; sourceTree = "<group>"; };
@@ -361,8 +355,6 @@
 		70660470286AC21D00A09427 /* ApplyAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAnalysisView.swift; sourceTree = "<group>"; };
 		70660472286AC9E300A09427 /* RootComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignIn.swift"; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
-		707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixSizedRoundButton.swift; sourceTree = "<group>"; };
-		707CD253283CAAA5000E7EE7 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
 		707CD255283CADB2000E7EE7 /* ApplyContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTVC.swift; sourceTree = "<group>"; };
 		7088413B2835F6150024135D /* CalendarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCVC.swift; sourceTree = "<group>"; };
 		70884142283623890024135D /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -370,13 +362,11 @@
 		7092C89C2858C88400C57AD1 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		7092C89E2858C8A900C57AD1 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDeleteButtonBar.swift; sourceTree = "<group>"; };
-		70970020283D27A6000F4B89 /* BoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxButton.swift; sourceTree = "<group>"; };
 		70970022283D363B000F4B89 /* QAWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAWriteView.swift; sourceTree = "<group>"; };
 		70970024283D365E000F4B89 /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		70A2F67B2834BFCB00E6B95B /* Atracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		70A2F6822834BFCB00E6B95B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		70A2F6872834BFCB00E6B95B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70A2F68A2834BFCB00E6B95B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70A2F68C2834BFCB00E6B95B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -386,10 +376,8 @@
 		70A2F69F2834BFCB00E6B95B /* AtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerUITests.swift; sourceTree = "<group>"; };
 		70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstISOLDCODE.swift; sourceTree = "<group>"; };
-		70A2F6C62834C7C300E6B95B /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		70A2F6D12834D0FD00E6B95B /* ApplySummaryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplySummaryTVC.swift; sourceTree = "<group>"; };
 		70A2F6D52834D23200E6B95B /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		70A2F6DA2834D37800E6B95B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		70A2F6DC2834D6B100E6B95B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		70A88E5F285193910027D673 /* LoggedInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInRouter.swift; sourceTree = "<group>"; };
 		70A88E60285193910027D673 /* LoggedInBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInBuilder.swift; sourceTree = "<group>"; };
@@ -416,6 +404,14 @@
 		70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProgressTVC.swift; sourceTree = "<group>"; };
 		70CF5B8828478B220098C742 /* BaseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVC.swift; sourceTree = "<group>"; };
 		70CF5B9B2847AEC20098C742 /* ApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyView.swift; sourceTree = "<group>"; };
+		70D83743286BD70D0085DE43 /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
+		70D83744286BD70D0085DE43 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		70D83745286BD70D0085DE43 /* MyPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageBuilder.swift; sourceTree = "<group>"; };
+		70D83746286BD70D0085DE43 /* MyPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInteractor.swift; sourceTree = "<group>"; };
+		70D8374C286BD80B0085DE43 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		70D8374E286BDAA70085DE43 /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
+		70D83750286BE0C80085DE43 /* ApplyComponent+MyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+MyPage.swift"; sourceTree = "<group>"; };
+		70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignOut.swift"; sourceTree = "<group>"; };
 		70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		70FBE5112852E58B00455A4B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditRouter.swift; sourceTree = "<group>"; };
@@ -486,7 +482,6 @@
 				700DBEC62868D82D00883A4F /* SignUpSuccessRouter.swift */,
 				700DBEC92868D82D00883A4F /* SignUpSuccessInteractor.swift */,
 				700DBEC72868D82D00883A4F /* SignUpSuccessViewController.swift */,
-				7066045C28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift */,
 			);
 			path = SignUpSuccess;
 			sourceTree = "<group>";
@@ -506,6 +501,7 @@
 				701CE21B2849C197009230CE /* ApplyRouter.swift */,
 				701CE21E2849C197009230CE /* ApplyInteractor.swift */,
 				701CE21C2849C197009230CE /* ApplyViewController.swift */,
+				70D83750286BE0C80085DE43 /* ApplyComponent+MyPage.swift */,
 				70FBE51D2852EE0A00455A4B /* ApplyComponent+ApplyEdit.swift */,
 				703DC438285475C20085F955 /* ApplyComponent+ApplyDetail.swift */,
 				700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */,
@@ -527,6 +523,7 @@
 				70A88E6F2851A6620027D673 /* TabBar */,
 				70A88E662851A4980027D673 /* Blog */,
 				701CE21A2849C129009230CE /* Apply */,
+				70D83742286BD6F80085DE43 /* MyPage */,
 				70CB068C285EF6C800BE89B7 /* WriteApplyOverall */,
 				7040963A286006FC003EBCE4 /* WriteApplySchedule */,
 				70FBE52528537A6A00455A4B /* ApplyDetail */,
@@ -540,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */,
+				70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */,
 				701CE2252849D0C5009230CE /* AppComponent.swift */,
 			);
 			path = App;
@@ -552,8 +550,8 @@
 				701CE2282849D0F2009230CE /* RootRouter.swift */,
 				701CE22B2849D0F2009230CE /* RootInteractor.swift */,
 				701CE2292849D0F2009230CE /* RootViewController.swift */,
-				700DBEB92868B0BC00883A4F /* RootComponent+SignOut.swift */,
 				70660472286AC9E300A09427 /* RootComponent+SignIn.swift */,
+				70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -567,15 +565,6 @@
 				701CE2332849D3B9009230CE /* LoggedOutViewController.swift */,
 			);
 			path = LoggedOut;
-			sourceTree = "<group>";
-		};
-		70223C5228434F19009B7F0A /* Reusable */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B912847A9F90098C742 /* View */,
-				70CF5B8F2847A9C70098C742 /* ViewController */,
-			);
-			path = Reusable;
 			sourceTree = "<group>";
 		};
 		7027D392286191F400F9C913 /* WriteApplySchedule */ = {
@@ -691,6 +680,7 @@
 		703F4A3828521B8500C8BEC0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				700F34FC285C523600F16DA6 /* AlertView.swift */,
 				7005C89028449C8C0091B225 /* BaseView.swift */,
 				70443B28285877B0009EE223 /* BaseCVC.swift */,
 				70CF5B8828478B220098C742 /* BaseTVC.swift */,
@@ -737,9 +727,11 @@
 		70443B2C28589996009EE223 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				7027070928407DEC00BC8E41 /* CircleView.swift */,
+				708841442836350E0024135D /* HorizontalBarChartView.swift */,
+				7009C0F728475A8700140CB5 /* BarChatView.swift */,
 				70884142283623890024135D /* PieChartView.swift */,
 				70443B2D285899A3009EE223 /* RoundButton.swift */,
-				700F34FC285C523600F16DA6 /* AlertView.swift */,
 				70BDD359285F237D00E09821 /* Divider.swift */,
 				700DBEC32868D1E500883A4F /* UnderLineLabelView.swift */,
 				700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */,
@@ -853,22 +845,6 @@
 			path = Apply;
 			sourceTree = "<group>";
 		};
-		7088413D2835F68F0024135D /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		708841412836237E0024135D /* Chart */ = {
-			isa = PBXGroup;
-			children = (
-				708841442836350E0024135D /* HorizontalBarChartView.swift */,
-				7009C0F728475A8700140CB5 /* BarChatView.swift */,
-			);
-			path = Chart;
-			sourceTree = "<group>";
-		};
 		70A2F6722834BFCB00E6B95B = {
 			isa = PBXGroup;
 			children = (
@@ -903,9 +879,6 @@
 				70A2F6B52834C52700E6B95B /* Service */,
 				701CE2232849CC24009230CE /* RIBs */,
 				70FBE5102852E3DD00455A4B /* View */,
-				70CF5B8E2847A9990098C742 /* Source */,
-				70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */,
-				70A2F6822834BFCB00E6B95B /* ViewController.swift */,
 				70A2F6872834BFCB00E6B95B /* Assets.xcassets */,
 				70A2F6892834BFCB00E6B95B /* LaunchScreen.storyboard */,
 				70A2F68C2834BFCB00E6B95B /* Info.plist */,
@@ -966,6 +939,7 @@
 				703F4A362852124C00C8BEC0 /* RIBs+Ext.swift */,
 				7027D3AD2863255C00F9C913 /* Encodable+Ext.swift */,
 				70576DF82864E9E9000406DF /* Date+Ext.swift */,
+				70D8374E286BDAA70085DE43 /* CGFloat+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -981,45 +955,6 @@
 				7092C89E2858C8A900C57AD1 /* ImageName.swift */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		70A2F6BC2834C58300E6B95B /* Main */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		70A2F6C02834C62D00E6B95B /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B982847AB340098C742 /* ViewController */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		70A2F6C32834C66100E6B95B /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B962847AA850098C742 /* View */,
-				70CF5B902847A9E10098C742 /* ViewController */,
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		70A2F6C82834C89E00E6B95B /* Blog */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B992847AB3C0098C742 /* ViewController */,
-			);
-			path = Blog;
-			sourceTree = "<group>";
-		};
-		70A2F6D72834D2A000E6B95B /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		70A88E65285193960027D673 /* LoggedIn */ = {
@@ -1081,109 +1016,23 @@
 			path = WriteApplyOverall;
 			sourceTree = "<group>";
 		};
-		70CF5B8A2847A7DC0098C742 /* Apply */ = {
+		70D83742286BD6F80085DE43 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				70CF5B8C2847A9390098C742 /* ViewController */,
-				70A2F6D72834D2A000E6B95B /* ViewModel */,
+				70D83745286BD70D0085DE43 /* MyPageBuilder.swift */,
+				70D83743286BD70D0085DE43 /* MyPageRouter.swift */,
+				70D83746286BD70D0085DE43 /* MyPageInteractor.swift */,
+				70D83744286BD70D0085DE43 /* MyPageViewController.swift */,
 			);
-			path = Apply;
+			path = MyPage;
 			sourceTree = "<group>";
 		};
-		70CF5B8C2847A9390098C742 /* ViewController */ = {
+		70D8374B286BD7300085DE43 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				70D8374C286BD80B0085DE43 /* MyPageView.swift */,
 			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		70CF5B8E2847A9990098C742 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B922847AA0D0098C742 /* Base */,
-				70223C5228434F19009B7F0A /* Reusable */,
-				70A2F6BC2834C58300E6B95B /* Main */,
-				70CF5B8A2847A7DC0098C742 /* Apply */,
-				70A2F6C32834C66100E6B95B /* Schedule */,
-				70A2F6C82834C89E00E6B95B /* Blog */,
-				70A2F6C02834C62D00E6B95B /* Login */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		70CF5B8F2847A9C70098C742 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				70223C5328434F28009B7F0A /* AlertVC.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		70CF5B902847A9E10098C742 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				70A2F6C62834C7C300E6B95B /* ScheduleVC.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		70CF5B912847A9F90098C742 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B952847AA490098C742 /* Button */,
-				708841412836237E0024135D /* Chart */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		70CF5B922847AA0D0098C742 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				70CF5B972847AAE30098C742 /* ViewModel */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		70CF5B952847AA490098C742 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-				707CD24F283C9B17000E7EE7 /* FixSizedRoundButton.swift */,
-				70223C4D28433DA2009B7F0A /* AutoSizedRoundButton.swift */,
-				707CD253283CAAA5000E7EE7 /* TextButton.swift */,
-				70970020283D27A6000F4B89 /* BoxButton.swift */,
-			);
-			path = Button;
-			sourceTree = "<group>";
-		};
-		70CF5B962847AA850098C742 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7088413D2835F68F0024135D /* Cell */,
-				7027070928407DEC00BC8E41 /* CircleView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		70CF5B972847AAE30098C742 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				70A2F6DA2834D37800E6B95B /* ViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		70CF5B982847AB340098C742 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		70CF5B992847AB3C0098C742 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		70FBE5102852E3DD00455A4B /* View */ = {
@@ -1192,6 +1041,7 @@
 				703F4A3828521B8500C8BEC0 /* Base */,
 				70443B2C28589996009EE223 /* Reusable */,
 				70576E3A2865B555000406DF /* SignOut */,
+				70D8374B286BD7300085DE43 /* MyPage */,
 				70576E2B2865B2CB000406DF /* SignUpNickname */,
 				70576E2C2865B2D1000406DF /* SignUpPosition */,
 				700DBECE2868D84F00883A4F /* SignUpSuccess */,
@@ -1522,19 +1372,15 @@
 				70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */,
 				700DBECD2868D82D00883A4F /* SignUpSuccessInteractor.swift in Sources */,
 				7027D3962862B2A400F9C913 /* AuthService.swift in Sources */,
-				70A2F6832834BFCB00E6B95B /* ViewController.swift in Sources */,
 				7027D3A02862D0C000F9C913 /* ApiRouter.swift in Sources */,
 				70A88E6C2851A4A90027D673 /* BlogViewController.swift in Sources */,
 				70A88E7D2851B94A0027D673 /* TabBarComponent+Apply.swift in Sources */,
 				7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */,
 				700DBED22868D89700883A4F /* SignUpSuccessView.swift in Sources */,
-				7066045D28697B9100A09427 /* SignUpSuccessComponent+SignIn.swift in Sources */,
 				7027D3C52863792100F9C913 /* MyAuthenticator.swift in Sources */,
 				700DBEC42868D1E500883A4F /* UnderLineLabelView.swift in Sources */,
 				70A88E6E2851A4A90027D673 /* BlogInteractor.swift in Sources */,
-				707CD254283CAAA5000E7EE7 /* TextButton.swift in Sources */,
 				705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */,
-				707CD250283C9B17000E7EE7 /* FixSizedRoundButton.swift in Sources */,
 				7027D3C2286377C100F9C913 /* MyAuthenticationCredential.swift in Sources */,
 				70FBE51A2852EC5D00455A4B /* ApplyEditViewController.swift in Sources */,
 				7027D3BD28636FE200F9C913 /* UserDefaultKey.swift in Sources */,
@@ -1555,6 +1401,7 @@
 				70A88E752851A6880027D673 /* TabBarViewController.swift in Sources */,
 				7040964F2860409A003EBCE4 /* ScheduleRouter.swift in Sources */,
 				70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */,
+				70D8375D286C1C5D0085DE43 /* RootComponent+SignOut.swift in Sources */,
 				70576E202865B2A1000406DF /* SignUpNicknameViewController.swift in Sources */,
 				701CE2262849D0C5009230CE /* AppComponent.swift in Sources */,
 				7066045728697A2B00A09427 /* SignInRouter.swift in Sources */,
@@ -1563,18 +1410,17 @@
 				7040963F2860071D003EBCE4 /* WriteApplyScheduleRouter.swift in Sources */,
 				70576E212865B2A1000406DF /* SignUpNicknameBuilder.swift in Sources */,
 				703DC439285475C20085F955 /* ApplyComponent+ApplyDetail.swift in Sources */,
-				70A2F6C72834C7C300E6B95B /* ScheduleVC.swift in Sources */,
 				701CE2362849D3B9009230CE /* LoggedOutRouter.swift in Sources */,
 				7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */,
 				7027D3AC2863242A00F9C913 /* AuthRouter.swift in Sources */,
 				70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */,
 				700DBEC22868CBEF00883A4F /* SignUpNicknameComponent+SignUpPosition.swift in Sources */,
-				70223C5428434F28009B7F0A /* AlertVC.swift in Sources */,
 				704096402860071D003EBCE4 /* WriteApplyScheduleViewController.swift in Sources */,
 				70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */,
 				70A88E6B2851A4A90027D673 /* BlogRouter.swift in Sources */,
 				7046E3C4283B39930048C068 /* UIFont+Ext.swift in Sources */,
 				700DBECB2868D82D00883A4F /* SignUpSuccessViewController.swift in Sources */,
+				70D83748286BD70D0085DE43 /* MyPageViewController.swift in Sources */,
 				70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */,
 				70576DF32864222D000406DF /* CompanyService.swift in Sources */,
 				701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */,
@@ -1583,6 +1429,7 @@
 				70FBE5202852FB8100455A4B /* BaseNavigationViewController.swift in Sources */,
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
 				70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */,
+				70D8374F286BDAA70085DE43 /* CGFloat+Ext.swift in Sources */,
 				70FBE5122852E58B00455A4B /* Size.swift in Sources */,
 				704096522860409A003EBCE4 /* ScheduleInteractor.swift in Sources */,
 				70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */,
@@ -1607,7 +1454,6 @@
 				70576DF72864E09A000406DF /* JobType.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
 				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
-				70223C4E28433DA2009B7F0A /* AutoSizedRoundButton.swift in Sources */,
 				700DBECA2868D82D00883A4F /* SignUpSuccessRouter.swift in Sources */,
 				703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */,
 				70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */,
@@ -1642,12 +1488,12 @@
 				700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				70576E3C2865B563000406DF /* SignOutView.swift in Sources */,
+				70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */,
 				7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */,
 				7092C89D2858C88400C57AD1 /* Enum.swift in Sources */,
 				7066045928697A2B00A09427 /* SignInInteractor.swift in Sources */,
 				7027D3B32863274300F9C913 /* HTTPHeaderField.swift in Sources */,
 				7027D3A62862E02A00F9C913 /* LoggedOutView.swift in Sources */,
-				70A2F6DB2834D37800E6B95B /* ViewModel.swift in Sources */,
 				702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */,
 				701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */,
 				70A88E772851A6880027D673 /* TabBarInteractor.swift in Sources */,
@@ -1666,19 +1512,20 @@
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
 				7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */,
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
-				70970021283D27A6000F4B89 /* BoxButton.swift in Sources */,
 				70A2F6D22834D0FD00E6B95B /* ApplySummaryTVC.swift in Sources */,
 				70576E362865B54C000406DF /* SignOutRouter.swift in Sources */,
 				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,
-				700DBEBA2868B0BC00883A4F /* RootComponent+SignOut.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
+				70D8374D286BD80B0085DE43 /* MyPageView.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
+				70D83749286BD70D0085DE43 /* MyPageBuilder.swift in Sources */,
 				7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */,
 				70576DF528643638000406DF /* SearchTVC.swift in Sources */,
 				70576E372865B54C000406DF /* SignOutViewController.swift in Sources */,
 				70970023283D363B000F4B89 /* QAWriteView.swift in Sources */,
 				7040965828616FF9003EBCE4 /* WriteApplyScheduleTVC.swift in Sources */,
 				70576E302865B300000406DF /* SignUpNicknameView.swift in Sources */,
+				70D8374A286BD70D0085DE43 /* MyPageInteractor.swift in Sources */,
 				701CE22F2849D0F2009230CE /* RootInteractor.swift in Sources */,
 				701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */,
 				70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */,
@@ -1699,6 +1546,7 @@
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,
 				70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */,
+				70D83751286BE0C80085DE43 /* ApplyComponent+MyPage.swift in Sources */,
 				70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */,
 				70443B2728587761009EE223 /* StageTitleCVC.swift in Sources */,
 			);

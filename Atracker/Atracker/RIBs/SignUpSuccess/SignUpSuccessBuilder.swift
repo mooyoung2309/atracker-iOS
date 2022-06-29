@@ -13,13 +13,6 @@ protocol SignUpSuccessDependency: Dependency {
 }
 
 final class SignUpSuccessComponent: Component<SignUpSuccessDependency> {
-    let signUpSuccessViewController: SignUpSuccessViewController
-    
-    init(dependency: SignUpSuccessDependency, signUpSuccessViewController: SignUpSuccessViewController) {
-        self.signUpSuccessViewController = signUpSuccessViewController
-        
-        super.init(dependency: dependency)
-    }
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     
 }
@@ -38,12 +31,11 @@ final class SignUpSuccessBuilder: Builder<SignUpSuccessDependency>, SignUpSucces
 
     func build(withListener listener: SignUpSuccessListener) -> SignUpSuccessRouting {
         let viewController  = SignUpSuccessViewController()
-        let component       = SignUpSuccessComponent(dependency: dependency, signUpSuccessViewController: viewController)
+        let component       = SignUpSuccessComponent(dependency: dependency)
         let interactor      = SignUpSuccessInteractor(presenter: viewController)
-        let signInBuilder    = SignInBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return SignUpSuccessRouter(interactor: interactor, viewController: viewController, signInBuilder: signInBuilder)
+        return SignUpSuccessRouter(interactor: interactor, viewController: viewController)
     }
 }

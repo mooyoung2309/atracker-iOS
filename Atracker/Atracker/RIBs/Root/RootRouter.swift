@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable, SignOutListener, SignInListener {
+protocol RootInteractable: Interactable, SignInListener, SignOutListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -23,7 +23,9 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     private let signOutBuilder: SignOutBuildable
     private let signInBuilder: SignInBuildable
     
+    private var child: Routing?
     private var signOut: ViewableRouting?
+    private var signIn: Routing?
     
     init(interactor: RootInteractable, viewController: RootViewControllable, signOutBuilder: SignOutBuildable, signInBuilder: SignInBuildable) {
         
@@ -46,16 +48,31 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     }
     
     func attachSignOutRIB() {
+        if let signOut = signOut {
+            viewController.dismiss(viewController: signOut.viewControllable)
+        }
+        
         let signOut = signOutBuilder.build(withListener: interactor)
         
-        self.signOut = signOut
+        detachChildRIB(child)
         attachChild(signOut)
         viewController.present(viewController: signOut.viewControllable)
+        
+        self.signOut = signOut
+        self.child = signOut
     }
     
     func attachSignInRIB() {
+        if let signOut = signOut {
+            viewController.dismiss(viewController: signOut.viewControllable)
+        }
+        
         let signIn = signInBuilder.build(withListener: interactor)
         
+        detachChildRIB(child)
         attachChild(signIn)
+        
+        self.signIn = signIn
+        self.child = signIn
     }
 }
