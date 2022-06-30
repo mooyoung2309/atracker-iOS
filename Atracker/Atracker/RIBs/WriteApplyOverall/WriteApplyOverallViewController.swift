@@ -18,7 +18,7 @@ protocol WriteApplyOverallPresentableListener: AnyObject {
     func tapResetButton()
 //    func inputCompanyTextfield(text: String)
     func tapCompanySearchButton()
-    func tapCompanyTableView(companySearchContent: CompanySearchContent)
+    func tapCompanyTableView(company: Company)
     func tapJobTypeSearchButton()
     func tapJobTypeTableView(text: String)
     func searchCompanyName(text: String?)
@@ -37,7 +37,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     private var selectedIndexPathList: [IndexPath] = []
     private let mockups = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
     private let jobTypes: [String] = [JobType.fullTime.string, JobType.contract.string, JobType.intern.string]
-    private var companySearchContents: [CompanySearchContent] = []
+    private var companies: [Company] = []
     private let plusCompany = "+ 직접 추가"
     
     func resetCollectionView() {
@@ -45,9 +45,9 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         selfView.collectionView.reloadData()
     }
     
-    func reloadCompanySearchTableView(companySearchContents: [CompanySearchContent]) {
-        self.companySearchContents = companySearchContents
-        Log("[D] \(self.companySearchContents)")
+    func reloadCompanySearchTableView(companies: [Company]) {
+        self.companies = companies
+        Log("[D] \(self.companies)")
         selfView.companySearchTableView.reloadData()
         refreshTableView(tableView: selfView.companySearchTableView, maxHieght: Size.companySearchTableViewMaxHeight)
     }
@@ -262,7 +262,7 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case selfView.companySearchTableView:
-            return companySearchContents.count + 1
+            return companies.count + 1
         case selfView.jobSearchTableView:
             return jobTypes.count
         default:
@@ -277,10 +277,10 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
             
             cell.selectionStyle = .none
             
-            if indexPath.item == companySearchContents.count {
+            if indexPath.item == companies.count {
                 cell.update(title: plusCompany)
             } else {
-                cell.update(title: companySearchContents[indexPath.item].name)
+                cell.update(title: companies[indexPath.item].name)
             }
             
             return cell
@@ -298,10 +298,10 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case selfView.companySearchTableView:
-            if indexPath.item == companySearchContents.count {
+            if indexPath.item == companies.count {
                 listener?.tapPlusCompay()
             } else {
-                listener?.tapCompanyTableView(companySearchContent: companySearchContents[indexPath.item])
+                listener?.tapCompanyTableView(company: companies[indexPath.item])
             }
             
             return

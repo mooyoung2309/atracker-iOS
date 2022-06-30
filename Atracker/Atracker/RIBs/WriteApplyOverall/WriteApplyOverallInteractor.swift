@@ -19,7 +19,7 @@ protocol WriteApplyOverallPresentable: Presentable {
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func setupNavigaionBar()
     func resetCollectionView()
-    func reloadCompanySearchTableView(companySearchContents: [CompanySearchContent])
+    func reloadCompanySearchTableView(companies: [Company])
     func showCompanySearchTableView()
     func hideCompanySearchTableView()
     func selectCompanySearchButton()
@@ -45,7 +45,8 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     private let companyService: CompanyServiceProtocol
     
-    private var companySearchContents: [CompanySearchContent] = []
+    private var companies: [Company] = []
+    private var selectedCompany: Company?
     private var companyName = ""
     private var companyPage = 1
 
@@ -112,9 +113,9 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         
     }
     
-    func tapCompanyTableView(companySearchContent: CompanySearchContent) {
+    func tapCompanyTableView(company: Company) {
         Log("[D] 회사 테이블 뷰 탭")
-        presenter.updateCompanyLabel(text: companySearchContent.name)
+        presenter.updateCompanyLabel(text: company.name)
         presenter.hideCompanySearchTableView()
     }
     
@@ -124,12 +125,14 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             switch result {
             case .success(let data):
                 Log("[D] 회사 추가 성공 \(data.companies)")
+//                data.companies.first
                 return
             case .failure(let error):
                 Log("[D] 회사 추가 실패 \(error)")
                 return
             }
         }
+        presenter.hideCompanySearchTableView()
     }
     
     // MARK: Private
@@ -138,7 +141,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             companyPage += 1
         } else {
             companyPage = 1
-            companySearchContents.removeAll()
+            companies.removeAll()
         }
         Log("[D] \(companyPage)")
         self.companyName = companyName
@@ -149,8 +152,8 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             switch result {
             case .success(let data):
                 Log("[D] \(data.contents)")
-                this.companySearchContents.append(contentsOf: data.contents)
-                this.presenter.reloadCompanySearchTableView(companySearchContents: this.companySearchContents)
+                this.companies.append(contentsOf: data.contents)
+                this.presenter.reloadCompanySearchTableView(companies: this.companies)
                 this.presenter.showCompanySearchTableView()
                 this.presenter.selectCompanySearchButton()
                 return

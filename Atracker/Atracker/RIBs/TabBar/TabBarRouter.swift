@@ -25,10 +25,10 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     private let scheduleBuilder: ScheduleBuildable
     
     private var child: Routing?
-    private var blog: ViewableRouting
-    private var apply: ViewableRouting
+    private var blog: ViewableRouting?
+    private var apply: ViewableRouting?
     private var writeApplyOverall: ViewableRouting?
-    private var schedule: ViewableRouting
+    private var schedule: ViewableRouting?
     
     init(interactor: TabBarInteractable,
          viewController: TabBarViewControllable,
@@ -37,14 +37,14 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
          writeApplyOverallBuilder: WriteApplyOverallBuildable,
          scheduleBuilder: ScheduleBuildable) {
         
-        self.blogBuilder                = blogBuilder
-        self.applyBuilder               = applyBuilder
-        self.writeApplyOverallBuilder   = writeApplyOverallBuilder
-        self.scheduleBuilder                = scheduleBuilder
+        self.blogBuilder = blogBuilder
+        self.applyBuilder = applyBuilder
+        self.writeApplyOverallBuilder = writeApplyOverallBuilder
+        self.scheduleBuilder = scheduleBuilder
         
-        self.blog   = blogBuilder.build(withListener: interactor)
-        self.apply  = applyBuilder.build(withListener: interactor)
-        self.schedule   = scheduleBuilder.build(withListener: interactor)
+        self.blog = blogBuilder.build(withListener: interactor)
+        self.apply = applyBuilder.build(withListener: interactor)
+        self.schedule = scheduleBuilder.build(withListener: interactor)
         
         super.init(interactor: interactor, viewController: viewController)
         
@@ -59,14 +59,27 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     
     func attachBlogRIB() {
         detachChildRIB()
+        
+        if let _ = blog { } else {
+            self.blog = blogBuilder.build(withListener: interactor)
+        }
+        
+        guard let blog = blog else { return }
+        
         attachChild(blog)
         viewController.presentView(blog, animation: false)
-        
         child = blog
     }
     
     func attachApplyRIB() {
         detachChildRIB()
+        
+        if let _ = apply { } else {
+            self.apply = applyBuilder.build(withListener: interactor)
+        }
+        
+        guard let apply = apply else { return }
+        
         attachChild(apply)
         viewController.presentView(apply, animation: false)
         
@@ -75,6 +88,13 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     
     func attachPlanRIB() {
         detachChildRIB()
+        
+        if let _ = schedule { } else {
+            self.schedule = scheduleBuilder.build(withListener: interactor)
+        }
+        
+        guard let schedule = schedule else { return }
+        
         attachChild(schedule)
         viewController.presentView(schedule, animation: false)
         

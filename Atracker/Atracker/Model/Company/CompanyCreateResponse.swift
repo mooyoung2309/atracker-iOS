@@ -11,9 +11,3 @@ import Foundation
 struct CompanyCreateResponse: Codable {
     let companies: [Company]
 }
-
-// MARK: - CreatedCompany
-struct Company: Codable {
-    let id: Int
-    let name: String
-}

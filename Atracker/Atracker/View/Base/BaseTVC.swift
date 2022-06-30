@@ -19,6 +19,7 @@ class BaseTVC: UITableViewCell, BaseViewProtocol {
         setupProperty()
         setupHierarchy()
         setupLayout()
+        setupBind()
     }
     
     func update() { }
@@ -28,4 +29,6 @@ class BaseTVC: UITableViewCell, BaseViewProtocol {
     func setupHierarchy() { }
     
     func setupLayout() { }
+    
+    func setupBind() { }
 }

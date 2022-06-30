@@ -33,10 +33,9 @@ final class WriteApplyScheduleBuilder: Builder<WriteApplyScheduleDependency>, Wr
         let component       = WriteApplyScheduleComponent(dependency: dependency)
         let viewController  = WriteApplyScheduleViewController()
         let interactor      = WriteApplyScheduleInteractor(presenter: viewController)
-        let scheduleBuilder = ScheduleBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return WriteApplyScheduleRouter(interactor: interactor, viewController: viewController, scheduleBuilder: scheduleBuilder)
+        return WriteApplyScheduleRouter(interactor: interactor, viewController: viewController)
     }
 }

@@ -84,7 +84,6 @@
 		704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040964D2860409A003EBCE4 /* ScheduleBuilder.swift */; };
 		704096522860409A003EBCE4 /* ScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040964E2860409A003EBCE4 /* ScheduleInteractor.swift */; };
 		7040965428604251003EBCE4 /* TabBarComponent+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040965328604251003EBCE4 /* TabBarComponent+Schedule.swift */; };
-		7040965628609CF4003EBCE4 /* WriteApplyScheduleComponent+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040965528609CF4003EBCE4 /* WriteApplyScheduleComponent+Schedule.swift */; };
 		7040965828616FF9003EBCE4 /* WriteApplyScheduleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7040965728616FF9003EBCE4 /* WriteApplyScheduleTVC.swift */; };
 		70443B2728587761009EE223 /* StageTitleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70443B2628587761009EE223 /* StageTitleCVC.swift */; };
 		70443B29285877B0009EE223 /* BaseCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70443B28285877B0009EE223 /* BaseCVC.swift */; };
@@ -145,6 +144,7 @@
 		7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */; };
 		70970023283D363B000F4B89 /* QAWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970022283D363B000F4B89 /* QAWriteView.swift */; };
 		70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970024283D365E000F4B89 /* ReviewWriteView.swift */; };
+		709F70C4286DFFC6007CBFE0 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709F70C3286DFFC6007CBFE0 /* Company.swift */; };
 		70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */; };
 		70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */; };
 		70A2F6882834BFCB00E6B95B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A2F6872834BFCB00E6B95B /* Assets.xcassets */; };
@@ -304,7 +304,6 @@
 		7040964D2860409A003EBCE4 /* ScheduleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleBuilder.swift; sourceTree = "<group>"; };
 		7040964E2860409A003EBCE4 /* ScheduleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInteractor.swift; sourceTree = "<group>"; };
 		7040965328604251003EBCE4 /* TabBarComponent+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarComponent+Schedule.swift"; sourceTree = "<group>"; };
-		7040965528609CF4003EBCE4 /* WriteApplyScheduleComponent+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteApplyScheduleComponent+Schedule.swift"; sourceTree = "<group>"; };
 		7040965728616FF9003EBCE4 /* WriteApplyScheduleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleTVC.swift; sourceTree = "<group>"; };
 		70443B2628587761009EE223 /* StageTitleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageTitleCVC.swift; sourceTree = "<group>"; };
 		70443B28285877B0009EE223 /* BaseCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCVC.swift; sourceTree = "<group>"; };
@@ -365,6 +364,7 @@
 		7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDeleteButtonBar.swift; sourceTree = "<group>"; };
 		70970022283D363B000F4B89 /* QAWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAWriteView.swift; sourceTree = "<group>"; };
 		70970024283D365E000F4B89 /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
+		709F70C3286DFFC6007CBFE0 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		70A2F67B2834BFCB00E6B95B /* Atracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F67E2834BFCB00E6B95B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70A2F6802834BFCB00E6B95B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -656,6 +656,7 @@
 				70576DEA28641716000406DF /* CompanySearchCondition.swift */,
 				70576DEC28641B86000406DF /* CompanySearchQuery.swift */,
 				70576DF028642181000406DF /* CompanyResponse.swift */,
+				709F70C3286DFFC6007CBFE0 /* Company.swift */,
 			);
 			path = Company;
 			sourceTree = "<group>";
@@ -700,7 +701,6 @@
 				7040963B2860071D003EBCE4 /* WriteApplyScheduleRouter.swift */,
 				7040963E2860071D003EBCE4 /* WriteApplyScheduleInteractor.swift */,
 				7040963C2860071D003EBCE4 /* WriteApplyScheduleViewController.swift */,
-				7040965528609CF4003EBCE4 /* WriteApplyScheduleComponent+Schedule.swift */,
 			);
 			path = WriteApplySchedule;
 			sourceTree = "<group>";
@@ -1476,7 +1476,6 @@
 				70A88E742851A6880027D673 /* TabBarRouter.swift in Sources */,
 				704096502860409A003EBCE4 /* ScheduleViewController.swift in Sources */,
 				7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */,
-				7040965628609CF4003EBCE4 /* WriteApplyScheduleComponent+Schedule.swift in Sources */,
 				70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */,
 				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
 				700DBEC02868C79200883A4F /* BottomNextButtonView.swift in Sources */,
@@ -1553,6 +1552,7 @@
 				70D83751286BE0C80085DE43 /* ApplyComponent+MyPage.swift in Sources */,
 				70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */,
 				70443B2728587761009EE223 /* StageTitleCVC.swift in Sources */,
+				709F70C4286DFFC6007CBFE0 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

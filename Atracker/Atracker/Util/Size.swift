@@ -16,7 +16,7 @@ struct Size {
     static let tabBarHeight         = 80.0
     
     static let calendarWidth        = ((Size.screenWidth - 1) / 7.0) * 7.0
-    static let calendarHeight       = (Size.screenHeight) * 0.28
+    static let calendarHeight       = (Size.screenHeight) * 0.3
     
     static let companySearchTableViewMaxHeight = 330.0
 }
