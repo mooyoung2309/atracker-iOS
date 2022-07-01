@@ -8,17 +8,17 @@
 import UIKit
 
 enum AlertStyle {
-    case delete
+    case delete(Int)
     case next
     case back
     case save
     
-    func title(i: Int = 0) -> NSMutableAttributedString {
+    var attriTitle: NSMutableAttributedString {
         var title: String
         var attriTitle: NSMutableAttributedString
         
         switch self {
-        case .delete:
+        case .delete(let i):
             title       = "\(i)개의 후기를 정말 삭제하시겠습니까?"
             attriTitle  = NSMutableAttributedString(string: title)
             attriTitle.addAttribute(.foregroundColor,
@@ -45,6 +45,39 @@ enum AlertStyle {
             return attriTitle
         }
     }
+    
+//    func title(i: Int = 0) -> NSMutableAttributedString {
+//        var title: String
+//        var attriTitle: NSMutableAttributedString
+//
+//        switch self {
+//        case .delete(let i):
+//            title       = "\(i)개의 후기를 정말 삭제하시겠습니까?"
+//            attriTitle  = NSMutableAttributedString(string: title)
+//            attriTitle.addAttribute(.foregroundColor,
+//                                    value: UIColor.neonGreen,
+//                                    range: (title as NSString).range(of: "\(i)개의 후기"))
+//            attriTitle.addAttribute(.font,
+//                                    value: UIFont.systemFont(ofSize: 16, weight: .bold),
+//                                    range: (title as NSString).range(of: "\(i)개의 후기"))
+//            return attriTitle
+//        case .next:
+//            title       = "이전 전형에 합격을 선택하셔야\n다음 전형으로 넘어갈 수 있습니다."
+//            attriTitle  = NSMutableAttributedString(string: title)
+//            return attriTitle
+//        case .back:
+//            title       = "작성을 취소하고 나가시겠습니까?"
+//            attriTitle  = NSMutableAttributedString(string: title)
+//            return attriTitle
+//        case .save:
+//            title       = "저장이 완료되었습니다!"
+//            attriTitle  = NSMutableAttributedString(string: title)
+//            attriTitle.addAttribute(.foregroundColor,
+//                                    value: UIColor.neonGreen,
+//                                    range: (title as NSString).range(of: title))
+//            return attriTitle
+//        }
+//    }
     
     var subTitle: String? {
         switch self {

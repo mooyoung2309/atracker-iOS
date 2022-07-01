@@ -13,9 +13,9 @@ class AlertView: BaseView {
     
     var disposeBag = DisposeBag()
     
-    let style: AlertStyle
-    let i: Int
-    
+//    let style: AlertStyle
+//    let i: Int
+//
     let backgroundView  = UIView()
     let contentView     = UIView()
     let circleView      = UIView()
@@ -33,12 +33,28 @@ class AlertView: BaseView {
         fatalError("not supported")
     }
     
-    init(style: AlertStyle, i: Int) {
-        self.style  = style
-        self.i      = i
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        super.init(frame: .zero)
         setupBind()
+    }
+    
+    func update(style: AlertStyle) {
+        imageView.image = UIImage(named: style.iamgeName)
+        titleLabel.text = style.attriTitle.string
+        titleLabel.attributedText = style.attriTitle
+        subTitleLabel.text = style.subTitle
+        
+        for (indx, buttonTitle) in style.buttonTitles.enumerated() {
+            if indx == 0 {
+                backButton.setTitle(buttonTitle, for: .normal)
+                buttonStackView.addArrangedSubview(backButton)
+                
+            } else if indx == 1 {
+                nextButton.setTitle(buttonTitle, for: .normal)
+                buttonStackView.addArrangedSubview(nextButton)
+            }
+        }
     }
     
     override func setupProperty() {
@@ -53,16 +69,13 @@ class AlertView: BaseView {
         circleView.backgroundColor = .backgroundGray
         circleView.layer.cornerRadius = 20
         
-        imageView.image = UIImage(named: style.iamgeName)
         imageView.tintColor = .neonGreen
         imageView.sizeToFit()
         
-        titleLabel.text = style.title(i: i).string
         titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
         titleLabel.textColor = .white
-        titleLabel.attributedText = style.title(i: i)
         
-        subTitleLabel.text = style.subTitle
+        
         subTitleLabel.font = .systemFont(ofSize: 14, weight: .regular)
         subTitleLabel.textColor = .gray3
         
@@ -76,16 +89,6 @@ class AlertView: BaseView {
         nextButton.layer.cornerRadius = 5
         nextButton.setTitleColor(.white, for: .normal)
         
-        for (indx, buttonTitle) in style.buttonTitles.enumerated() {
-            if indx == 0 {
-                backButton.setTitle(buttonTitle, for: .normal)
-                buttonStackView.addArrangedSubview(backButton)
-                
-            } else if indx == 1 {
-                nextButton.setTitle(buttonTitle, for: .normal)
-                buttonStackView.addArrangedSubview(nextButton)
-            }
-        }
     }
     
     override func setupHierarchy() {

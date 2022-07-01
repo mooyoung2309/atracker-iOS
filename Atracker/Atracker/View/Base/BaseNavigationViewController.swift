@@ -42,6 +42,36 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     var mainView        = UIView()
     var contentView     = UIView()
     
+    var alertView       = AlertView()
+    
+    var isAlertBack: ((Bool) -> Void)?
+    var isAlertNext: ((Bool) -> Void)?
+    
+    func showAlertView(style: AlertStyle) {
+        alertView.update(style: style)
+        
+        view.addSubview(alertView)
+        
+        alertView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        alertView.isAlertBack { [weak self] _ in
+            Log("[D] 경고창 왼쪽 버튼")
+            self?.isAlertBack?(true)
+        }
+        
+        alertView.isAlertNext { [weak self] _ in
+            Log("[D] 경고창 오른쪽 버튼")
+            self?.isAlertNext?(true)
+        }
+    }
+    
+    func hideAlertView() {
+        alertView.removeFromSuperview()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigaionBar()
@@ -153,5 +183,13 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func setNavigationBarTrailingButtonTitle(_ text: String) {
         navigaionBar.trailingButton.setTitle(text, for: .normal)
+    }
+    
+    func isAlertBack(completion: @escaping (Bool) -> Void) {
+        self.isAlertBack = completion
+    }
+    
+    func isAlertNext(completion: @escaping (Bool) -> Void) {
+        self.isAlertNext = completion
     }
 }

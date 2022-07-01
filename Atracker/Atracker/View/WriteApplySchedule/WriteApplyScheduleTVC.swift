@@ -42,7 +42,7 @@ class WriteApplyScheduleTVC: BaseTVC {
             return
         }
         
-        dateLabel.text = date.getISO8601String()
+        dateLabel.text = date.getKRString()
         datePicker.date = date
     }
     

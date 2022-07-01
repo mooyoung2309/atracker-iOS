@@ -22,7 +22,7 @@ protocol ApplyEditPresentable: Presentable {
     func showStageContentList(_ stageContentList: [StageContent])
     func showCheckButton()
     func hideCheckButton()
-    func showAlertView(i: Int)
+    func showAlertView(style: AlertStyle)
     func hideAlertView()
 }
 
@@ -99,7 +99,7 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     
     func tapDeleteButton() {
         Log("")
-        presenter.showAlertView(i: 78)
+        presenter.showAlertView(style: AlertStyle.delete(10))
     }
     
     func tapAlertBackButton() {

@@ -230,7 +230,6 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
             }
         }
         return 44
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
