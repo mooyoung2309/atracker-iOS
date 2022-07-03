@@ -27,7 +27,7 @@ protocol ApplyEditPresentable: Presentable {
 }
 
 protocol ApplyEditListener: AnyObject {
-    func goBackToApplyDetailRIB()
+    func tapBackButtonFromChildRIB()
 }
 
 final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, ApplyEditInteractable, ApplyEditPresentableListener {
@@ -62,7 +62,7 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     }
     
     func didTapBackButton() {
-        listener?.goBackToApplyDetailRIB()
+        listener?.tapBackButtonFromChildRIB()
     }
     
     func reloadTableView(stageProgressTitle: String) {

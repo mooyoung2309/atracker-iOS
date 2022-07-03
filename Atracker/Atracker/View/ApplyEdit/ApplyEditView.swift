@@ -32,7 +32,7 @@ class ApplyEditView: BaseView {
         
         dividerView.backgroundColor = .gray7
         
-        tableView.register(ReviewEditTVC.self, forCellReuseIdentifier: ReviewEditTVC.id)
+        tableView.register(ApplyEditTVC.self, forCellReuseIdentifier: ApplyEditTVC.id)
         tableView.backgroundColor                       = .clear
         tableView.rowHeight                             = UITableView.automaticDimension
         tableView.estimatedRowHeight                    = 600
@@ -81,7 +81,7 @@ class ApplyEditView: BaseView {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(stageStatusButtonBar.snp.bottom).inset(-17)
+            $0.top.equalTo(stageStatusButtonBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -91,6 +91,7 @@ class ApplyEditView: BaseView {
             $0.trailing.equalToSuperview()
             $0.width.equalToSuperview()
             $0.height.equalTo(0)
+            $0.bottom.equalToSuperview()
         }
         
 //        plusButtonStackView.snp.makeConstraints {

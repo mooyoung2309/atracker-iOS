@@ -86,6 +86,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     }
     
     func detachThisChildRIB() {
+        Log("[D] ")
         detachChildRIB(child)
         viewController.dismissView(animation: true)
     }

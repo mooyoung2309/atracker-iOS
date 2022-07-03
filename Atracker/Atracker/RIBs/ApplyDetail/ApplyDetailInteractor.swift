@@ -11,6 +11,7 @@ import RxSwift
 protocol ApplyDetailRouting: ViewableRouting {
     func detachChildRIB()
     func attachApplyEditRIB(apply: ApplyResponse)
+    func detachThisChildRIB()
 }
 
 protocol ApplyDetailPresentable: Presentable {
@@ -21,8 +22,6 @@ protocol ApplyDetailPresentable: Presentable {
 
 protocol ApplyDetailListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-//    func goBackToApplyRIB()
-//    func goBackToApplyDetailRIB()
     func tapBackButtonFromChildRIB()
 }
 
@@ -61,5 +60,9 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     func goBackToApplyDetailRIB() {
         router?.detachChildRIB()
 //        listener?.goBackToApplyDetailRIB()
+    }
+    
+    func tapBackButtonFromChildRIB() {
+        router?.detachThisChildRIB()
     }
 }

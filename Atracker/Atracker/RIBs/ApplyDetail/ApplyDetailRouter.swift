@@ -51,4 +51,9 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         
         child = applyEdit
     }
+    
+    func detachThisChildRIB() {
+        detachChildRIB(child)
+        viewController.dismissView(animation: true)
+    }
 }

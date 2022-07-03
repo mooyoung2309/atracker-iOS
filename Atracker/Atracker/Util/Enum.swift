@@ -32,14 +32,17 @@ enum StageProgressStatus: String {
 }
 
 enum StageContentType: String {
-    case qna    = "질의응답"
-    case free   = "종합후기"
+    case OVERALL = "종합"
+    case QNA = "질의응답"
+    case FREE = "종합후기"
     
     var code: String {
         switch self {
-        case .qna:
+        case .OVERALL:
+            return "OVERALL"
+        case .QNA:
             return "QNA"
-        case .free:
+        case .FREE:
             return "FREE_FORM"
         }
     }

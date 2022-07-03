@@ -30,10 +30,10 @@ class ApplyServiceISOLDCODE: ApplyServiceProtocolISOLDCODE {
             var stageProgressStatus: String
             
             if Bool.random() {
-                stageContent = StageContent(contentType: StageContentType.qna.code,
+                stageContent = StageContent(contentType: StageContentType.QNA.code,
                                             content: "QNA 테스트")
             } else {
-                stageContent = StageContent(contentType: StageContentType.free.code,
+                stageContent = StageContent(contentType: StageContentType.FREE.code,
                                             content: "FREE 테스트")
             }
             

@@ -28,7 +28,7 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
         super.update()
         
         switch stageContent.contentType {
-        case StageContentType.qna.code:
+        case StageContentType.QNA.code:
             editView = qnaStageContentEditView
             qnaStageContentEditView.qTextView.text        = stageContent.content
             qnaStageContentEditView.aTextView.text        = stageContent.content
@@ -38,7 +38,7 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
             qnaStageContentEditView.aTextView.delegate = self
             qnaStageContentEditView.rTextView.delegate = self
             break
-        case StageContentType.free.code:
+        case StageContentType.FREE.code:
             editView = freeStageContentEditView
             freeStageContentEditView.fTextView.text = stageContent.content
             freeStageContentEditView.fTextView.delegate = self
