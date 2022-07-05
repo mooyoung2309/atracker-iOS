@@ -25,6 +25,7 @@
 		70091BAA2873DA76005D2627 /* EditApplyStageProgressBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA62873DA76005D2627 /* EditApplyStageProgressBuilder.swift */; };
 		70091BAB2873DA76005D2627 /* EditApplyStageProgressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */; };
 		70091BAD2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */; };
+		70091BB02873F27D005D2627 /* DraggableStageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
 		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
 		700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */; };
@@ -258,6 +259,7 @@
 		70091BA62873DA76005D2627 /* EditApplyStageProgressBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressBuilder.swift; sourceTree = "<group>"; };
 		70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressInteractor.swift; sourceTree = "<group>"; };
 		70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+EditApplyStageProgress.swift"; sourceTree = "<group>"; };
+		70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableStageTVC.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
 		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
 		700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		70091B9E2873D540005D2627 /* EditApplyOverall */ = {
 			isa = PBXGroup;
 			children = (
+				70091BAE2873F24F005D2627 /* Cell */,
 				70091B9F2873D555005D2627 /* EditApplyOverallView.swift */,
 			);
 			path = EditApplyOverall;
@@ -550,6 +553,14 @@
 				70091BA52873DA76005D2627 /* EditApplyStageProgressViewController.swift */,
 			);
 			path = EditApplyStageProgress;
+			sourceTree = "<group>";
+		};
+		70091BAE2873F24F005D2627 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		700DBEC52868D7FD00883A4F /* SignUpSuccess */ = {
@@ -1576,6 +1587,7 @@
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */,
 				70091B9A2873D4AF005D2627 /* EditApplyOverallRouter.swift in Sources */,
+				70091BB02873F27D005D2627 /* DraggableStageTVC.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				70576E3C2865B563000406DF /* SignOutView.swift in Sources */,
 				70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */,
