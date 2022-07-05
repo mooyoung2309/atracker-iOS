@@ -14,8 +14,8 @@ class ApplyDetailTVC: BaseTVC {
     
     let circle = UIView()
     let titleLabel = UILabel()
-    
     let contextLabel = UILabel()
+    let divider = Divider(.neonGreen)
     
     override func setupProperty() {
         super.setupProperty()
@@ -41,28 +41,33 @@ class ApplyDetailTVC: BaseTVC {
         contentView.addSubview(circle)
         contentView.addSubview(titleLabel)
         contentView.addSubview(contextLabel)
+        contentView.addSubview(divider)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        circle.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel)
+            $0.leading.equalToSuperview().inset(21)
+            $0.width.height.equalTo(8)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(35)
             $0.leading.equalTo(circle.snp.trailing).inset(-6)
             $0.centerY.equalTo(circle)
         }
         
-        circle.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel)
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.height.equalTo(8)
+        contextLabel.snp.makeConstraints {
+            $0.top.equalTo(circle.snp.bottom).inset(-16)
+            $0.leading.trailing.equalToSuperview().inset(16)
         }
         
-        contextLabel.snp.makeConstraints {
-            $0.top.equalTo(circle.snp.bottom).inset(-15)
-            $0.leading.equalTo(circle)
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
+        divider.snp.makeConstraints {
+            $0.top.equalTo(contextLabel.snp.bottom).inset(-34)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }

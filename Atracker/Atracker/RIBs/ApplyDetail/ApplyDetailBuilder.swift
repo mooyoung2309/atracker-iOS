@@ -36,15 +36,15 @@ final class ApplyDetailBuilder: Builder<ApplyDetailDependency>, ApplyDetailBuild
     }
 
     func build(withListener listener: ApplyDetailListener, apply: ApplyResponse) -> ApplyDetailRouting {
-        let component           = ApplyDetailComponent(dependency: dependency, apply: apply)
-        let viewController      = ApplyDetailViewController()
-        let interactor          = ApplyDetailInteractor(presenter: viewController, apply: apply)
-        let applyEditBuilder    = ApplyEditBuilder(dependency: component)
+        let component = ApplyDetailComponent(dependency: dependency, apply: apply)
+        let viewController = ApplyDetailViewController()
+        let interactor = ApplyDetailInteractor(presenter: viewController, apply: apply)
+        let applyEditBuilder = ApplyEditBuilder(dependency: component)
+        let editApplyOverallBuilder = EditApplyOverallBuilder(dependency: component)
+        let editApplyStageProgressBuilder = EditApplyStageProgressBuilder(dependency: component)
         
-        interactor.listener     = listener
+        interactor.listener = listener
         
-        return ApplyDetailRouter(interactor: interactor,
-                                 viewController: viewController,
-                                 applyEditBuilder: applyEditBuilder)
+        return ApplyDetailRouter(interactor: interactor, viewController: viewController, applyEditBuilder: applyEditBuilder, editApplyOverallBuilder: editApplyOverallBuilder, editApplyStageProgressBuilder: editApplyStageProgressBuilder)
     }
 }

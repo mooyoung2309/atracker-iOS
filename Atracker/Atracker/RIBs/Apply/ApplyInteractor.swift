@@ -48,6 +48,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         super.didBecomeActive()
         
         reloadApplyList()
+        Log("[D] ")
     }
 
     override func willResignActive() {
@@ -78,6 +79,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     // MARK: From Child RIB
     func tapBackButtonFromChildRIB() {
         router?.detachThisChildRIB()
+        showTabBar()
     }
     
     func showTabBar() {

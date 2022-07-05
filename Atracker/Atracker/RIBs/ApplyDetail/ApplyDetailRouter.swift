@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ApplyDetailInteractable: Interactable, ApplyEditListener {
+protocol ApplyDetailInteractable: Interactable, ApplyEditListener, EditApplyOverallListener, EditApplyStageProgressListener {
     var router: ApplyDetailRouting? { get set }
     var listener: ApplyDetailListener? { get set }
 }
@@ -18,38 +18,62 @@ protocol ApplyDetailViewControllable: NavigationContainerViewControllable {
 
 final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDetailViewControllable>, ApplyDetailRouting {
     
-    
     private let applyEditBuilder: ApplyEditBuildable
+    private let editApplyOverallBuilder: EditApplyOverallBuildable
+    private let editApplyStageProgressBuilder: EditApplyStageProgressBuildable
     
     private var child: ViewableRouting?
     private var applyEdit: ViewableRouting?
+    private var editApplyOverall: ViewableRouting?
+    private var editApplyStageProgress: ViewableRouting?
     
     init(interactor: ApplyDetailInteractable,
          viewController: ApplyDetailViewControllable,
-         applyEditBuilder: ApplyEditBuilder) {
+         applyEditBuilder: ApplyEditBuilder, editApplyOverallBuilder: EditApplyOverallBuildable, editApplyStageProgressBuilder: EditApplyStageProgressBuildable) {
         
         self.applyEditBuilder = applyEditBuilder
+        self.editApplyOverallBuilder = editApplyOverallBuilder
+        self.editApplyStageProgressBuilder = editApplyStageProgressBuilder
         
         super.init(interactor: interactor, viewController: viewController)
         
         interactor.router = self
     }
     
-    func detachChildRIB() {
-        guard let child = child else { return }
-        detachChild(child)
-    }
-    
     func attachApplyEditRIB(apply: ApplyResponse) {
         let applyEdit = applyEditBuilder.build(withListener: interactor, apply: apply)
         self.applyEdit = applyEdit
         
-        detachChildRIB()
+        detachChildRIB(child)
         attachChild(applyEdit)
         
         viewController.presentView(applyEdit, transitionSubType: .fromRight)
         
         child = applyEdit
+    }
+    
+    func attachEditApplyOverallRIB() {
+        let editApplyOverall = editApplyOverallBuilder.build(withListener: interactor)
+        self.editApplyOverall = editApplyOverall
+        
+        detachChildRIB(child)
+        attachChild(editApplyOverall)
+        
+        viewController.presentView(editApplyOverall)
+        
+        child = editApplyOverall
+    }
+    
+    func attachEditApplyStageProgressRIB() {
+        let editApplyStageProgress = editApplyStageProgressBuilder.build(withListener: interactor)
+        self.editApplyStageProgress = editApplyStageProgress
+        
+        detachChildRIB(child)
+        attachChild(editApplyStageProgress)
+        
+        viewController.presentView(editApplyStageProgress)
+        
+        child = editApplyStageProgress
     }
     
     func detachThisChildRIB() {

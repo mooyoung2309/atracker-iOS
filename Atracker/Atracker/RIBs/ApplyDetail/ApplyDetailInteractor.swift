@@ -9,8 +9,9 @@ import RIBs
 import RxSwift
 
 protocol ApplyDetailRouting: ViewableRouting {
-    func detachChildRIB()
     func attachApplyEditRIB(apply: ApplyResponse)
+    func attachEditApplyOverallRIB()
+    func attachEditApplyStageProgressRIB()
     func detachThisChildRIB()
 }
 
@@ -18,11 +19,15 @@ protocol ApplyDetailPresentable: Presentable {
     var listener: ApplyDetailPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     func setNavigaionBarTitle(_ text: String)
+    func showEditTableView()
+    func hideEditTableView()
 }
 
 protocol ApplyDetailListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func tapBackButtonFromChildRIB()
+    func showTabBar()
+    func hideTabBar()
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
@@ -31,6 +36,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var listener: ApplyDetailListener?
 
     let apply: ApplyResponse
+    private var isShowEditTableView = false
     
     init(presenter: ApplyDetailPresentable, apply: ApplyResponse) {
         self.apply = apply
@@ -54,15 +60,36 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     func tapEditButton() {
-        router?.attachApplyEditRIB(apply: apply)
+        if isShowEditTableView {
+            presenter.hideEditTableView()
+            listener?.showTabBar()
+        } else {
+            presenter.showEditTableView()
+            listener?.hideTabBar()
+        }
+        
+        isShowEditTableView = !isShowEditTableView
     }
     
-    func goBackToApplyDetailRIB() {
-        router?.detachChildRIB()
-//        listener?.goBackToApplyDetailRIB()
+    func tapEditApplyOverallButton() {
+        Log("[D] 지원 후기 수정하기 버튼 클릭됨")
+        router?.attachEditApplyOverallRIB()
+    }
+    
+    func tapEditApplyStageProgressButton() {
+        Log("[D] 전형 편집하기 버튼 클릭됨")
+        router?.attachEditApplyStageProgressRIB()
+    }
+    
+    func tapDeleteApplyButton() {
+        Log("[D] 지원 후기 삭제하기 버튼 클릭됨")
     }
     
     func tapBackButtonFromChildRIB() {
         router?.detachThisChildRIB()
+        
+        presenter.hideEditTableView()
+        listener?.showTabBar()
+        isShowEditTableView = false
     }
 }

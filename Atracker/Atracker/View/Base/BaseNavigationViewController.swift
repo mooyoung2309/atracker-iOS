@@ -32,17 +32,19 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
     func showNavigationBarTrailingButton()
     func hideNavigationBarTrailingButton()
     func setNavigationBarTrailingButtonTitle(_ text: String)
+    func setNavigationBarTrailingButtonImage(_ image: UIImage?)
 }
 
 class BaseNavigationViewController: BaseViewController, BaseNavigationViewControllerProtocol {
     
-    var statusBar       = UIView()
-    var navigaionBar    = NavigationBar()
-    var containerView   = UIView()
-    var mainView        = UIView()
-    var contentView     = UIView()
+    var statusBar = UIView()
+    var navigaionBar = NavigationBar()
+    var containerView = UIView()
+    var mainView = UIView()
+    var contentView = UIView()
     
-    var alertView       = AlertView()
+    var alertView = AlertView()
+    var blurView = UIView()
     
     var isAlertBack: ((Bool) -> Void)?
     var isAlertNext: ((Bool) -> Void)?
@@ -70,6 +72,18 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func hideAlertView() {
         alertView.removeFromSuperview()
+    }
+    
+    func showBlurView() {
+        view.addSubview(blurView)
+        
+        blurView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func hideBlurView() {
+        blurView.removeFromSuperview()
     }
     
     override func viewDidLoad() {
@@ -183,6 +197,10 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func setNavigationBarTrailingButtonTitle(_ text: String) {
         navigaionBar.trailingButton.setTitle(text, for: .normal)
+    }
+    
+    func setNavigationBarTrailingButtonImage(_ image: UIImage?) {
+        navigaionBar.trailingButton.setImage(image, for: .normal)
     }
     
     func isAlertBack(completion: @escaping (Bool) -> Void) {

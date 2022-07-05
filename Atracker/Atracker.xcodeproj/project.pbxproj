@@ -13,6 +13,18 @@
 		7005BD192835548C008E380A /* ApplicationReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */; };
 		7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C88D28449B550091B225 /* ApplyEditView.swift */; };
 		7005C89128449C8C0091B225 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7005C89028449C8C0091B225 /* BaseView.swift */; };
+		70091B932871EC39005D2627 /* EditTypeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B922871EC39005D2627 /* EditTypeTVC.swift */; };
+		70091B9A2873D4AF005D2627 /* EditApplyOverallRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B962873D4AF005D2627 /* EditApplyOverallRouter.swift */; };
+		70091B9B2873D4AF005D2627 /* EditApplyOverallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B972873D4AF005D2627 /* EditApplyOverallViewController.swift */; };
+		70091B9C2873D4AF005D2627 /* EditApplyOverallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B982873D4AF005D2627 /* EditApplyOverallBuilder.swift */; };
+		70091B9D2873D4AF005D2627 /* EditApplyOverallInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B992873D4AF005D2627 /* EditApplyOverallInteractor.swift */; };
+		70091BA02873D555005D2627 /* EditApplyOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091B9F2873D555005D2627 /* EditApplyOverallView.swift */; };
+		70091BA22873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA12873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift */; };
+		70091BA82873DA76005D2627 /* EditApplyStageProgressRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA42873DA76005D2627 /* EditApplyStageProgressRouter.swift */; };
+		70091BA92873DA76005D2627 /* EditApplyStageProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA52873DA76005D2627 /* EditApplyStageProgressViewController.swift */; };
+		70091BAA2873DA76005D2627 /* EditApplyStageProgressBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA62873DA76005D2627 /* EditApplyStageProgressBuilder.swift */; };
+		70091BAB2873DA76005D2627 /* EditApplyStageProgressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */; };
+		70091BAD2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
 		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
 		700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */; };
@@ -234,6 +246,18 @@
 		7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReviewTableViewCell.swift; sourceTree = "<group>"; };
 		7005C88D28449B550091B225 /* ApplyEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditView.swift; sourceTree = "<group>"; };
 		7005C89028449C8C0091B225 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		70091B922871EC39005D2627 /* EditTypeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTypeTVC.swift; sourceTree = "<group>"; };
+		70091B962873D4AF005D2627 /* EditApplyOverallRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyOverallRouter.swift; sourceTree = "<group>"; };
+		70091B972873D4AF005D2627 /* EditApplyOverallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyOverallViewController.swift; sourceTree = "<group>"; };
+		70091B982873D4AF005D2627 /* EditApplyOverallBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyOverallBuilder.swift; sourceTree = "<group>"; };
+		70091B992873D4AF005D2627 /* EditApplyOverallInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyOverallInteractor.swift; sourceTree = "<group>"; };
+		70091B9F2873D555005D2627 /* EditApplyOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyOverallView.swift; sourceTree = "<group>"; };
+		70091BA12873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+EditApplyOverall.swift"; sourceTree = "<group>"; };
+		70091BA42873DA76005D2627 /* EditApplyStageProgressRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressRouter.swift; sourceTree = "<group>"; };
+		70091BA52873DA76005D2627 /* EditApplyStageProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressViewController.swift; sourceTree = "<group>"; };
+		70091BA62873DA76005D2627 /* EditApplyStageProgressBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressBuilder.swift; sourceTree = "<group>"; };
+		70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressInteractor.swift; sourceTree = "<group>"; };
+		70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+EditApplyStageProgress.swift"; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
 		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
 		700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
@@ -479,6 +503,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		70091B912871EC1A005D2627 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70CAB8ED286EC7D9000B5A05 /* ApplyEditTVC.swift */,
+				70FD6DD42857808B0050ADB8 /* ReviewEditTVC.swift */,
+				70443B2628587761009EE223 /* StageTitleCVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		70091B942871F1E7005D2627 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */,
+				70091B922871EC39005D2627 /* EditTypeTVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		70091B952873D44F005D2627 /* EditApplyOverall */ = {
+			isa = PBXGroup;
+			children = (
+				70091B982873D4AF005D2627 /* EditApplyOverallBuilder.swift */,
+				70091B962873D4AF005D2627 /* EditApplyOverallRouter.swift */,
+				70091B992873D4AF005D2627 /* EditApplyOverallInteractor.swift */,
+				70091B972873D4AF005D2627 /* EditApplyOverallViewController.swift */,
+			);
+			path = EditApplyOverall;
+			sourceTree = "<group>";
+		};
+		70091B9E2873D540005D2627 /* EditApplyOverall */ = {
+			isa = PBXGroup;
+			children = (
+				70091B9F2873D555005D2627 /* EditApplyOverallView.swift */,
+			);
+			path = EditApplyOverall;
+			sourceTree = "<group>";
+		};
+		70091BA32873DA60005D2627 /* EditApplyStageProgress */ = {
+			isa = PBXGroup;
+			children = (
+				70091BA62873DA76005D2627 /* EditApplyStageProgressBuilder.swift */,
+				70091BA42873DA76005D2627 /* EditApplyStageProgressRouter.swift */,
+				70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */,
+				70091BA52873DA76005D2627 /* EditApplyStageProgressViewController.swift */,
+			);
+			path = EditApplyStageProgress;
+			sourceTree = "<group>";
+		};
 		700DBEC52868D7FD00883A4F /* SignUpSuccess */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +604,8 @@
 				7040963A286006FC003EBCE4 /* WriteApplySchedule */,
 				70FBE52528537A6A00455A4B /* ApplyDetail */,
 				70FBE5142852EC4600455A4B /* ApplyEdit */,
+				70091B952873D44F005D2627 /* EditApplyOverall */,
+				70091BA32873DA60005D2627 /* EditApplyStageProgress */,
 				7040964A28604085003EBCE4 /* Schedule */,
 			);
 			path = RIBs;
@@ -665,8 +740,8 @@
 		70322DEF2854E2A500EA0EF7 /* ApplyDetail */ = {
 			isa = PBXGroup;
 			children = (
+				70091B942871F1E7005D2627 /* Cell */,
 				70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */,
-				70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */,
 			);
 			path = ApplyDetail;
 			sourceTree = "<group>";
@@ -1052,6 +1127,7 @@
 				70FBE5132852E68400455A4B /* Apply */,
 				70322DEF2854E2A500EA0EF7 /* ApplyDetail */,
 				70FD6DD328577FDE0050ADB8 /* ApplyEdit */,
+				70091B9E2873D540005D2627 /* EditApplyOverall */,
 				70BDD356285F12A100E09821 /* WriteApplyOverall */,
 				7027D392286191F400F9C913 /* WriteApplySchedule */,
 				70409645286038F4003EBCE4 /* Schedule */,
@@ -1093,6 +1169,8 @@
 				70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */,
 				70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */,
 				70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */,
+				70091BA12873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift */,
+				70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */,
 			);
 			path = ApplyDetail;
 			sourceTree = "<group>";
@@ -1100,13 +1178,11 @@
 		70FD6DD328577FDE0050ADB8 /* ApplyEdit */ = {
 			isa = PBXGroup;
 			children = (
+				70091B912871EC1A005D2627 /* Cell */,
 				7005C88D28449B550091B225 /* ApplyEditView.swift */,
-				70CAB8ED286EC7D9000B5A05 /* ApplyEditTVC.swift */,
 				70CAB8EF286ECB5B000B5A05 /* QNAEditView.swift */,
 				70443B2A28588FE8009EE223 /* StageStatusButtonBar.swift */,
 				7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */,
-				70FD6DD42857808B0050ADB8 /* ReviewEditTVC.swift */,
-				70443B2628587761009EE223 /* StageTitleCVC.swift */,
 				702B5A33285B0BB200E94A6E /* QnaStageContentEditView.swift */,
 				702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */,
 			);
@@ -1401,6 +1477,7 @@
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
 				70576E282865B2AA000406DF /* SignUpPositionViewController.swift in Sources */,
 				70576E2E2865B2F6000406DF /* SignUpPositionView.swift in Sources */,
+				70091BAA2873DA76005D2627 /* EditApplyStageProgressBuilder.swift in Sources */,
 				70A88E762851A6880027D673 /* TabBarBuilder.swift in Sources */,
 				7027D3BB28632D4D00F9C913 /* TokenRefreshRequest.swift in Sources */,
 				7066045B28697A4A00A09427 /* SignInComponent+TabBar.swift in Sources */,
@@ -1420,6 +1497,7 @@
 				7046E3D1283B59900048C068 /* UILabel+Ext.swift in Sources */,
 				7027D3AC2863242A00F9C913 /* AuthRouter.swift in Sources */,
 				70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */,
+				70091B9D2873D4AF005D2627 /* EditApplyOverallInteractor.swift in Sources */,
 				700DBEC22868CBEF00883A4F /* SignUpNicknameComponent+SignUpPosition.swift in Sources */,
 				704096402860071D003EBCE4 /* WriteApplyScheduleViewController.swift in Sources */,
 				70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */,
@@ -1435,12 +1513,15 @@
 				70FBE5202852FB8100455A4B /* BaseNavigationViewController.swift in Sources */,
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
 				70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */,
+				70091BA82873DA76005D2627 /* EditApplyStageProgressRouter.swift in Sources */,
 				70D8374F286BDAA70085DE43 /* CGFloat+Ext.swift in Sources */,
 				70FBE5122852E58B00455A4B /* Size.swift in Sources */,
 				704096522860409A003EBCE4 /* ScheduleInteractor.swift in Sources */,
 				70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */,
 				70576E1F2865B2A1000406DF /* SignUpNicknameRouter.swift in Sources */,
 				70443B29285877B0009EE223 /* BaseCVC.swift in Sources */,
+				70091BA22873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift in Sources */,
+				70091BA02873D555005D2627 /* EditApplyOverallView.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCVC.swift in Sources */,
 				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
 				7027D39A2862B44800F9C913 /* Gender.swift in Sources */,
@@ -1459,6 +1540,7 @@
 				700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */,
 				70576DF72864E09A000406DF /* JobType.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
+				70091B9B2873D4AF005D2627 /* EditApplyOverallViewController.swift in Sources */,
 				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
 				700DBECA2868D82D00883A4F /* SignUpSuccessRouter.swift in Sources */,
 				703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */,
@@ -1467,6 +1549,7 @@
 				70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */,
 				70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */,
 				70A88E6D2851A4A90027D673 /* BlogBuilder.swift in Sources */,
+				70091B9C2873D4AF005D2627 /* EditApplyOverallBuilder.swift in Sources */,
 				7027D3B928632C0100F9C913 /* TokenRefreshResponse.swift in Sources */,
 				70576DF128642181000406DF /* CompanyResponse.swift in Sources */,
 				7027D3B728632B6600F9C913 /* UserRegistrationRequest.swift in Sources */,
@@ -1479,6 +1562,7 @@
 				70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */,
 				70A88E742851A6880027D673 /* TabBarRouter.swift in Sources */,
 				704096502860409A003EBCE4 /* ScheduleViewController.swift in Sources */,
+				70091BAD2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift in Sources */,
 				7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */,
 				70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */,
 				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
@@ -1491,6 +1575,7 @@
 				70576E382865B54C000406DF /* SignOutBuilder.swift in Sources */,
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */,
+				70091B9A2873D4AF005D2627 /* EditApplyOverallRouter.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				70576E3C2865B563000406DF /* SignOutView.swift in Sources */,
 				70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */,
@@ -1506,6 +1591,7 @@
 				70576E222865B2A1000406DF /* SignUpNicknameInteractor.swift in Sources */,
 				70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */,
 				702B5A36285B1C8D00E94A6E /* FreeStageContentEditView.swift in Sources */,
+				70091BA92873DA76005D2627 /* EditApplyStageProgressViewController.swift in Sources */,
 				70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */,
 				701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */,
 				70576E392865B54C000406DF /* SignOutInteractor.swift in Sources */,
@@ -1548,11 +1634,13 @@
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
+				70091BAB2873DA76005D2627 /* EditApplyStageProgressInteractor.swift in Sources */,
 				7027D39C2862B4C200F9C913 /* Sso.swift in Sources */,
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,
 				70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */,
 				70D83751286BE0C80085DE43 /* ApplyComponent+MyPage.swift in Sources */,
+				70091B932871EC39005D2627 /* EditTypeTVC.swift in Sources */,
 				70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */,
 				70443B2728587761009EE223 /* StageTitleCVC.swift in Sources */,
 				70CAB8EE286EC7D9000B5A05 /* ApplyEditTVC.swift in Sources */,

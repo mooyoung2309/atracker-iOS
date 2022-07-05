@@ -11,44 +11,53 @@ import Then
 
 class ApplyDetailView: BaseView {
     
-    let scrollView      = UIScrollView()
-    let hChartView      = BarChatView(.horizontal, cornerRadius: 0)
-    let dateLabel       = UILabel()
-    let vChartView      = BarChatView(.vertical, cornerRadius: 0)
-    let tableView       = UITableView()
-    let editButton      = UIButton(type: .system)
+    let scrollView = UIScrollView()
+    let hChartView = BarChatView(.horizontal, cornerRadius: 5)
+    let tableView = UITableView()
+    let editTableView = UITableView()
+    let tabBarbottomView = UIView()
+    
+    func showEditTableView() {
+        editTableView.isHidden = false
+        tabBarbottomView.isHidden = false
+    }
+    
+    func hideEditTableView() {
+        editTableView.isHidden = true
+        tabBarbottomView.isHidden = true
+    }
     
     override func setupProperty() {
         super.setupProperty()
         
         scrollView.showsVerticalScrollIndicator = false
         
-        dateLabel.text      = "2022.06.12"
-        dateLabel.font      = .systemFont(ofSize: 15, weight: .bold)
-        dateLabel.textColor = .gray2
-        
         tableView.register(ApplyDetailTVC.self, forCellReuseIdentifier: ApplyDetailTVC.id)
-        tableView.backgroundColor       = .clear
-        tableView.rowHeight             = UITableView.automaticDimension
-        tableView.estimatedRowHeight    = 100
-        tableView.isScrollEnabled       = false
-        tableView.separatorStyle        = .singleLine
-        tableView.separatorInset        = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        tableView.separatorColor        = .gray2
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
         
-        editButton.setTitle("편집", for: .normal)
-        editButton.setTitleColor(.white, for: .normal)
-        editButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        editTableView.register(EditTypeTVC.self, forCellReuseIdentifier: EditTypeTVC.id)
+        editTableView.backgroundColor = .clear
+        editTableView.rowHeight = UITableView.automaticDimension
+        editTableView.estimatedRowHeight = 100
+        editTableView.isScrollEnabled = false
+        
+        tabBarbottomView.backgroundColor = .backgroundLightGray
+        
+        hideEditTableView()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         addSubview(scrollView)
+        addSubview(editTableView)
+        addSubview(tabBarbottomView)
+        
         scrollView.addSubview(hChartView)
-        scrollView.addSubview(dateLabel)
-        scrollView.addSubview(editButton)
-        scrollView.addSubview(vChartView)
         scrollView.addSubview(tableView)
     }
     
@@ -66,30 +75,24 @@ class ApplyDetailView: BaseView {
             $0.height.equalTo(10)
         }
         
-        dateLabel.snp.makeConstraints {
-            $0.top.equalTo(hChartView.snp.bottom).inset(-13)
-            $0.leading.equalTo(hChartView)
-        }
-        
-        editButton.snp.makeConstraints {
-            $0.trailing.equalTo(hChartView)
-            $0.centerY.equalTo(dateLabel)
-        }
-        
-        vChartView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(dateLabel.snp.bottom)
-            $0.bottom.equalTo(tableView)
-            $0.width.equalTo(2)
-        }
-        
         tableView.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom)
-            $0.leading.equalTo(vChartView)
-            $0.trailing.equalToSuperview()
+            $0.top.equalTo(hChartView.snp.bottom)
+            $0.leading.equalTo(self)
+            $0.trailing.equalTo(self)
             $0.bottom.equalToSuperview()
-            $0.width.equalToSuperview().inset(10)
             $0.height.equalTo(0)
+        }
+        
+        editTableView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(tabBarbottomView.snp.top)
+            $0.height.equalTo(0)
+        }
+        
+        tabBarbottomView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(56)
         }
     }
 }
