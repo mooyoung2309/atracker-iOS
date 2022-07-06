@@ -15,9 +15,9 @@ protocol ApplyEditDependency: Dependency {
 final class ApplyEditComponent: Component<ApplyEditDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-    let apply: ApplyResponse?
+    let apply: Apply?
     
-    init(dependency: ApplyEditDependency, apply: ApplyResponse) {
+    init(dependency: ApplyEditDependency, apply: Apply) {
         self.apply = apply
         super.init(dependency: dependency)
     }
@@ -26,7 +26,7 @@ final class ApplyEditComponent: Component<ApplyEditDependency> {
 // MARK: - Builder
 
 protocol ApplyEditBuildable: Buildable {
-    func build(withListener listener: ApplyEditListener, apply: ApplyResponse) -> ApplyEditRouting
+    func build(withListener listener: ApplyEditListener, apply: Apply) -> ApplyEditRouting
 }
 
 final class ApplyEditBuilder: Builder<ApplyEditDependency>, ApplyEditBuildable {
@@ -35,7 +35,7 @@ final class ApplyEditBuilder: Builder<ApplyEditDependency>, ApplyEditBuildable {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: ApplyEditListener, apply: ApplyResponse) -> ApplyEditRouting {
+    func build(withListener listener: ApplyEditListener, apply: Apply) -> ApplyEditRouting {
         let component = ApplyEditComponent(dependency: dependency, apply: apply)
         let viewController = ApplyEditViewController()
         let interactor = ApplyEditInteractor(presenter: viewController, apply: apply)

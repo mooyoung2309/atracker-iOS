@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol ApplyDetailRouting: ViewableRouting {
-    func attachApplyEditRIB(apply: ApplyResponse)
+    func attachApplyEditRIB(apply: Apply)
     func attachEditApplyOverallRIB()
     func attachEditApplyStageProgressRIB()
     func detachThisChildRIB()
@@ -35,10 +35,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    let apply: ApplyResponse
+    let apply: Apply
     private var isShowEditTableView = false
     
-    init(presenter: ApplyDetailPresentable, apply: ApplyResponse) {
+    init(presenter: ApplyDetailPresentable, apply: Apply) {
         self.apply = apply
         super.init(presenter: presenter)
         presenter.listener = self

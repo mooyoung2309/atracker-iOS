@@ -20,6 +20,12 @@ class DraggableStageTVC: BaseTVC {
         titleLabel.text = title
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        containerView.layer.cornerRadius = 0
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -30,6 +36,8 @@ class DraggableStageTVC: BaseTVC {
         titleLabel.text = "사전 과제"
         titleLabel.font = .systemFont(ofSize: 14, weight: .regular)
         titleLabel.textColor = .white
+        
+        cancleButton.setImage(UIImage(named: ImageName.cancle)?.withTintColor(.white), for: .normal)
     }
     
     override func setupHierarchy() {
@@ -52,6 +60,12 @@ class DraggableStageTVC: BaseTVC {
         titleLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(12)
             $0.top.bottom.equalToSuperview().inset(13)
+        }
+        
+        cancleButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(10)
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(20)
         }
     }
 }

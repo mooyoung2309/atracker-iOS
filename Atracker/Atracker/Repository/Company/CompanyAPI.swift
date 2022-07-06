@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-enum CompanyRouter{
+enum CompanyAPI{
     case companies(CompanyCreateRequests)
     case search(CompanySearchQuery, CompanySearchCondition)
 }
 
-extension CompanyRouter: BaseURLRequestConvertible {
+extension CompanyAPI: BaseURLRequestConvertible {
     var baseURL: String {
         return Key.baseURL + "/company"
     }

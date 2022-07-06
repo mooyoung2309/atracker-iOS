@@ -10,15 +10,12 @@
 //
 //   let apply = try? newJSONDecoder().decode(Apply.self, from: jsonData)
 
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let apply = try? newJSONDecoder().decode(Apply.self, from: jsonData)
-
 import Foundation
 
 // MARK: - ApplyResponse
-struct ApplyResponse: Codable {
+typealias ApplyResponse = [Apply]
+
+struct Apply: Codable {
     let applyID, companyID: Int
     let companyName, jobPosition: String
     let stageProgress: [StageProgress]

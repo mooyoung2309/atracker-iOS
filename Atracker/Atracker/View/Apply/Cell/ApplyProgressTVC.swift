@@ -20,7 +20,7 @@ class ApplyProgressTVC: BaseTVC {
     }
     var barChartView = ProgressBarView()
     
-    func update(apply: ApplyResponse) {
+    func update(apply: Apply) {
         companyLabel.text = apply.companyName
         positionLabel.text = apply.jobPosition
         

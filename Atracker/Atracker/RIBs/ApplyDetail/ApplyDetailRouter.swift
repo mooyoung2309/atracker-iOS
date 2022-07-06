@@ -40,7 +40,7 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         interactor.router = self
     }
     
-    func attachApplyEditRIB(apply: ApplyResponse) {
+    func attachApplyEditRIB(apply: Apply) {
         let applyEdit = applyEditBuilder.build(withListener: interactor, apply: apply)
         self.applyEdit = applyEdit
         

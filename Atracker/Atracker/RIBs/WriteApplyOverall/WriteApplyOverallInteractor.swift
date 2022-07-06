@@ -27,6 +27,7 @@ protocol WriteApplyOverallPresentable: Presentable {
     func switchJobTypeSearchTableView()
     func updateCompanyLabel(text: String)
     func updateJobTypeLabel(text: String)
+    func updateStageCollectionView(stages: [Stage])
 }
 
 protocol WriteApplyOverallListener: AnyObject {
@@ -44,6 +45,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     weak var listener: WriteApplyOverallListener?
     
     private let companyService: CompanyServiceProtocol
+    private let stageService: StageServiceProtocol
     
     private var companies: [Company] = []
     private var selectedCompany: Company?
@@ -52,8 +54,9 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    init(presenter: WriteApplyOverallPresentable, companyService: CompanyServiceProtocol) {
+    init(presenter: WriteApplyOverallPresentable, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
         self.companyService = companyService
+        self.stageService = stageService
         
         super.init(presenter: presenter)
         
@@ -63,6 +66,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
+        refreshStage()
     }
 
     override func willResignActive() {
@@ -133,6 +137,21 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             }
         }
         presenter.hideCompanySearchTableView()
+    }
+    
+    func refreshStage() {
+        stageService.get { [weak self] result in
+            switch result {
+            case .success(let data):
+                Log("[D] 스테이지 얻기 성공 \(data)")
+                self?.presenter.updateStageCollectionView(stages: data)
+                return
+            case .failure(let error):
+                Log("[D] 스테이지 얻기 실패")
+                return
+            }
+            
+        }
     }
     
     // MARK: Private

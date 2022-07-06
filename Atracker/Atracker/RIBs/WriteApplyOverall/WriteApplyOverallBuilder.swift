@@ -18,6 +18,10 @@ final class WriteApplyOverallComponent: Component<WriteApplyOverallDependency> {
     var companyService: CompanyServiceProtocol {
         return CompanyService()
     }
+    
+    var stageService: StageServiceProtocol {
+        return StageService()
+    }
 }
 
 // MARK: - Builder
@@ -33,15 +37,13 @@ final class WriteApplyOverallBuilder: Builder<WriteApplyOverallDependency>, Writ
     }
 
     func build(withListener listener: WriteApplyOverallListener) -> WriteApplyOverallRouting {
-        let component                   = WriteApplyOverallComponent(dependency: dependency)
-        let viewController              = WriteApplyOverallViewController()
-        let interactor                  = WriteApplyOverallInteractor(presenter: viewController, companyService: component.companyService)
-        let writeApplyScheduleBuilder   = WriteApplyScheduleBuilder(dependency: component)
+        let component = WriteApplyOverallComponent(dependency: dependency)
+        let viewController = WriteApplyOverallViewController()
+        let interactor = WriteApplyOverallInteractor(presenter: viewController, companyService: component.companyService, stageService: component.stageService)
+        let writeApplyScheduleBuilder = WriteApplyScheduleBuilder(dependency: component)
         
-        interactor.listener             = listener
+        interactor.listener = listener
         
-        return WriteApplyOverallRouter(interactor: interactor,
-                                       viewController: viewController,
-                                       writeApplyScheduleBuilder: writeApplyScheduleBuilder)
+        return WriteApplyOverallRouter(interactor: interactor, viewController: viewController, writeApplyScheduleBuilder: writeApplyScheduleBuilder)
     }
 }

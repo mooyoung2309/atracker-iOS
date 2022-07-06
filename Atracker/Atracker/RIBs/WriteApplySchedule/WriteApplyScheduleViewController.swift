@@ -35,7 +35,7 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
     private var nextDates: [Date]       = []
     
     private var selectedCellIndexPath: IndexPath?
-    private var applyStages: [ApplyStage] = [ApplyStage(eventAt: nil, order: 0, stageID: 0), ApplyStage(eventAt: nil, order: 1, stageID: 1), ApplyStage(eventAt: nil, order: 2, stageID: 2)]
+    private var applyStages: [ApplyCreateStage] = [ApplyCreateStage(eventAt: nil, order: 0, stageID: 0), ApplyCreateStage(eventAt: nil, order: 1, stageID: 1), ApplyCreateStage(eventAt: nil, order: 2, stageID: 2)]
     
     func updateCalendarCell(prevDate: Date, currentDate: Date, nextDate: Date) {
         self.prevDate = prevDate

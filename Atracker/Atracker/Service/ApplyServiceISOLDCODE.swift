@@ -8,11 +8,11 @@
 import Foundation
 
 protocol ApplyServiceProtocolISOLDCODE: class {
-    func getApplyList(completion: @escaping ([ApplyResponse]) -> Void)
+    func getApplyList(completion: @escaping ([Apply]) -> Void)
 }
 
 class ApplyServiceISOLDCODE: ApplyServiceProtocolISOLDCODE {
-    func getApplyList(completion: @escaping ([ApplyResponse]) -> Void) {
+    func getApplyList(completion: @escaping ([Apply]) -> Void) {
         let applyList = makeApplyList(count: Int.random(in: 8...15))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -63,12 +63,12 @@ class ApplyServiceISOLDCODE: ApplyServiceProtocolISOLDCODE {
         return stageProgressList
     }
     
-    private func makeApplyList(count: Int) -> [ApplyResponse] {
-        var applyList: [ApplyResponse] = []
+    private func makeApplyList(count: Int) -> [Apply] {
+        var applyList: [Apply] = []
         
         for i in 0..<count {
             let stageProgressList = makeStageProgressList(count: Int.random(in: 2...10))
-            let apply = ApplyResponse(applyID: i,
+            let apply = Apply(applyID: i,
                               companyID: i,
                               companyName: "테스트 회사이름 \(i)",
                               jobPosition: "테스트 잡포지션 \(i)",

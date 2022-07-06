@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 enum ApplyAPI {
-    case getApply(GetApplyQuery)
+    case getApply(ApplyRequest)
     case postApply(ApplyCreateRequest)
 }
 

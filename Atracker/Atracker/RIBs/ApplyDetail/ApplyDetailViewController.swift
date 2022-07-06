@@ -30,7 +30,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     let mockUps = 0...30
     let editTypes = ["지원 후기 수정하기", "전형 편집하기", "지원 후기 삭제하기"]
     
-    private var apply: ApplyResponse?
+    private var apply: Apply?
     
     func showEditTableView() {
         selfView.showEditTableView()

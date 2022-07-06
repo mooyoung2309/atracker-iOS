@@ -50,9 +50,6 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
         selfView.stageTableView.dragInteractionEnabled = true
         selfView.stageTableView.dragDelegate = self
         selfView.stageTableView.dropDelegate = self
-        //        self.exerciseTableView.dragInteractionEnabled = true
-        //            self.exerciseTableView.dragDelegate = self
-        //            self.exerciseTableView.dropDelegate = self
     }
     
     override func setupHierarchy() {
@@ -101,6 +98,14 @@ extension EditApplyOverallViewController: UITableViewDelegate, UITableViewDataSo
         
         cell.selectionStyle = .none
         
+        if indexPath.row == 0 {
+            cell.containerView.layer.cornerRadius = 10
+            cell.containerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        } else if indexPath.row == stages.count - 1 {
+            cell.containerView.layer.cornerRadius = 10
+            cell.containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        }
+        
         cell.update(title: stages[indexPath.row])
         
         return cell
@@ -111,6 +116,7 @@ extension EditApplyOverallViewController: UITableViewDelegate, UITableViewDataSo
         let moveCell = self.stages[sourceIndexPath.row]
         self.stages.remove(at: sourceIndexPath.row)
         self.stages.insert(moveCell, at: destinationIndexPath.row)
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
