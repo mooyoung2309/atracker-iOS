@@ -15,6 +15,10 @@ protocol ApplyDependency: Dependency {
 final class ApplyComponent: Component<ApplyDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var applyService: ApplyServiceProtocol {
+        return ApplyService()
+    }
+    
 }
 
 // MARK: - Builder

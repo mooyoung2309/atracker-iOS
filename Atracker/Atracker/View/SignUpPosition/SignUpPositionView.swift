@@ -10,11 +10,11 @@ import SnapKit
 
 class SignUpPositionView: BaseView {
     
-    let titleLabel                      = UILabel()
-    let positionUnderLineTextFieldView  = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
-    let careerUnderLineLabelView        = UnderLineLabelView(title: "경력", placeholder: "경력을 선택해 주세요.")
-    let carrerTableView                 = UITableView()
-    let bottomNextButtonView            = BottomNextButtonView()
+    let titleLabel = UILabel()
+    let positionUnderLineTextFieldView = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
+    let careerUnderLineLabelView = UnderLineLabelView(title: "경력", placeholder: "경력을 선택해 주세요.")
+    let carrerTableView = UITableView()
+    let bottomNextButtonView = BottomNextButtonView()
     
     override func setupProperty() {
         super.setupProperty()

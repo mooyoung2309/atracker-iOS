@@ -186,7 +186,6 @@
 		70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E782851A6E60027D673 /* LoggedInComponent+TabBar.swift */; };
 		70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E7A2851B93D0027D673 /* TabBarComponent+Blog.swift */; };
 		70A88E7D2851B94A0027D673 /* TabBarComponent+Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E7C2851B94A0027D673 /* TabBarComponent+Apply.swift */; };
-		70BDD355285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD354285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift */; };
 		70BDD358285F160D00E09821 /* WriteApplyOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */; };
 		70BDD35A285F237D00E09821 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD359285F237D00E09821 /* Divider.swift */; };
 		70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */; };
@@ -428,7 +427,6 @@
 		70A88E782851A6E60027D673 /* LoggedInComponent+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoggedInComponent+TabBar.swift"; sourceTree = "<group>"; };
 		70A88E7A2851B93D0027D673 /* TabBarComponent+Blog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarComponent+Blog.swift"; sourceTree = "<group>"; };
 		70A88E7C2851B94A0027D673 /* TabBarComponent+Apply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarComponent+Apply.swift"; sourceTree = "<group>"; };
-		70BDD354285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarComponent+ApplyWrite.swift"; sourceTree = "<group>"; };
 		70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallView.swift; sourceTree = "<group>"; };
 		70BDD359285F237D00E09821 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleView.swift; sourceTree = "<group>"; };
@@ -1105,7 +1103,6 @@
 				70A88E712851A6880027D673 /* TabBarViewController.swift */,
 				70A88E7A2851B93D0027D673 /* TabBarComponent+Blog.swift */,
 				70A88E7C2851B94A0027D673 /* TabBarComponent+Apply.swift */,
-				70BDD354285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift */,
 				7040965328604251003EBCE4 /* TabBarComponent+Schedule.swift */,
 			);
 			path = TabBar;
@@ -1668,7 +1665,6 @@
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
 				70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */,
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
-				70BDD355285F0C6100E09821 /* TabBarComponent+ApplyWrite.swift in Sources */,
 				70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */,
 				70660466286AAE8700A09427 /* ApplyService.swift in Sources */,
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,

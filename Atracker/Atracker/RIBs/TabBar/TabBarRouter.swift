@@ -21,25 +21,21 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
-    private let writeApplyOverallBuilder: WriteApplyOverallBuildable
     private let scheduleBuilder: ScheduleBuildable
     
     private var child: Routing?
     private var blog: ViewableRouting?
     private var apply: ViewableRouting?
-    private var writeApplyOverall: ViewableRouting?
     private var schedule: ViewableRouting?
     
     init(interactor: TabBarInteractable,
          viewController: TabBarViewControllable,
          blogBuilder: BlogBuildable,
          applyBuilder: ApplyBuildable,
-         writeApplyOverallBuilder: WriteApplyOverallBuildable,
          scheduleBuilder: ScheduleBuildable) {
         
         self.blogBuilder = blogBuilder
         self.applyBuilder = applyBuilder
-        self.writeApplyOverallBuilder = writeApplyOverallBuilder
         self.scheduleBuilder = scheduleBuilder
         
         self.blog = blogBuilder.build(withListener: interactor)
@@ -122,21 +118,21 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
 //        child = applyWrite
 //    }
     
-    func attachApplyRIBfromOtherRIB() {
-        if let applyWrite = writeApplyOverall {
-            viewController.dismiss(viewController: applyWrite.viewControllable)
-        }
-        
-        let apply = applyBuilder.build(withListener: interactor)
-        self.apply = apply
-        
-        detachChildRIB()
-        attachChild(apply)
-        
-        viewController.presentView(apply, transitionSubType: .fromLeft)
-        
-        child = apply
-    }
+//    func attachApplyRIBfromOtherRIB() {
+//        if let applyWrite = writeApplyOverall {
+//            viewController.dismiss(viewController: applyWrite.viewControllable)
+//        }
+//        
+//        let apply = applyBuilder.build(withListener: interactor)
+//        self.apply = apply
+//        
+//        detachChildRIB()
+//        attachChild(apply)
+//        
+//        viewController.presentView(apply, transitionSubType: .fromLeft)
+//        
+//        child = apply
+//    }
     
 //    func attachWriteApplyOverallRIBfromOtherRIB() {
 //        if let applyWrite = writeApplyOverall {

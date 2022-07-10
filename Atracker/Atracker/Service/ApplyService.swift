@@ -8,9 +8,27 @@
 import Foundation
 
 protocol ApplyServiceProtocol {
-//    func
+    func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void)
+    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void)
 }
 
-class ApplyService {
+class ApplyService: ApplyServiceProtocol {
+    let applyRepository = ApplyRepository()
     
+    func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
+        applyRepository.get(request: request) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void) {
+        applyRepository.post(request: request) { result in
+            completion(result)
+        }
+    }
 }

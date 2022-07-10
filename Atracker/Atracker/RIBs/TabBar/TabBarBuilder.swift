@@ -36,7 +36,6 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
         let interactor                  = TabBarInteractor(presenter: viewController)
         let blogBuilder                 = BlogBuilder(dependency: component)
         let applyBuilder                = ApplyBuilder(dependency: component)
-        let writeApplyOverallBuilder    = WriteApplyOverallBuilder(dependency: component)
         let scheduleBuilder             = ScheduleBuilder(dependency: component)
         
         interactor.listener = listener
@@ -45,7 +44,6 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
                             viewController: viewController,
                             blogBuilder: blogBuilder,
                             applyBuilder: applyBuilder,
-                            writeApplyOverallBuilder: writeApplyOverallBuilder,
                             scheduleBuilder: scheduleBuilder)
     }
 }

@@ -14,7 +14,7 @@ protocol TabBarRouting: ViewableRouting {
     func attachApplyRIB()
 //    func attachApplyWriteRIB()
     func attachPlanRIB()
-    func attachApplyRIBfromOtherRIB()
+//    func attachApplyRIBfromOtherRIB()
 //    func attachWriteApplyOverallRIBfromOtherRIB()
     func detachApplyRIB()
 }
@@ -69,9 +69,9 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         presenter.selectScheduleButton()
     }
     
-    func goBackToApplyRIB() {
-        router?.attachApplyRIBfromOtherRIB()
-    }
+//    func goBackToApplyRIB() {
+//        router?.attachApplyRIBfromOtherRIB()
+//    }
     
     // MARK: From Other RIBs
     

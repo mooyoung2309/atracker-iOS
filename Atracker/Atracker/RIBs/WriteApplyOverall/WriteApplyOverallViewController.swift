@@ -12,87 +12,165 @@ import RxGesture
 import UIKit
 import SnapKit
 
+// MARK: - Presenter
+
+protocol WriteApplyOverallPresentableAction: AnyObject {
+    var tapBackButton: Observable<Void> { get }
+    var tapNextButton: Observable<Void> { get }
+    var tapAddCompanyButton: Observable<Void> { get }
+    var tapJobTypeButton: Observable<Void> { get }
+    var textCompanyName: Observable<String> { get }
+    var textPositionName: Observable<String> { get }
+    var textJobTypeName: Observable<String> { get }
+    var selectedCompany: Observable<Company> { get }
+    var selectedStages: Observable<[Stage]> { get }
+}
+
+protocol WriteApplyOverallPresentableHandler: AnyObject {
+    var companies: Observable<[Company]> { get }
+    var stages: Observable<[Stage]> { get }
+    var isShowCompanyTableView: Observable<Bool> { get }
+    var isShowJobTypeTableView: Observable<Bool> { get }
+}
+
 protocol WriteApplyOverallPresentableListener: AnyObject {
-    func tapBackButton()
-    func tapNextButton()
-    func tapResetButton()
+//    func tapBackButton()
+//    func tapNextButton()
+//    func tapResetButton()
 //    func inputCompanyTextfield(text: String)
-    func tapCompanySearchButton()
-    func tapCompanyTableView(company: Company)
-    func tapJobTypeSearchButton()
-    func tapJobTypeTableView(text: String)
-    func searchCompanyName(text: String?)
-    func tapPlusCompay()
+//    func tapCompanySearchButton()
+//    func tapCompanyTableView(company: Company)
+//    func tapJobTypeSearchButton()
+//    func tapJobTypeTableView(text: String)
+//    func searchCompanyName(text: String?)
+//    func tapPlusCompay()
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
     
+    weak var listener: WriteApplyOverallPresentableListener?
     
     var thisView: UIView {
         return containerView
     }
     
-    weak var listener: WriteApplyOverallPresentableListener?
+    var action: WriteApplyOverallPresentableAction? {
+        return self
+    }
+    
+    var handler: WriteApplyOverallPresentableHandler?
     
     let selfView = WriteApplyOverallView()
     
+    private let tapAddCompanyButtonSubject = PublishSubject<Void>()
+    private let textJobTypeNameSubject = PublishSubject<String>()
+    private let selectedCompanySubject = PublishSubject<Company>()
+    private let selectedStagesSubject = BehaviorSubject<[Stage]>(value: [])
+    
     private var selectedIndexPathList: [IndexPath] = []
     private var stages: [Stage] = []
-//    = ["서류", "사전과제", "포트폴리오", "1차 면접", "2차 면접", "인성검사", "적성검사", "코딩테스트"]
     private let jobTypes: [String] = [JobType.fullTime.string, JobType.contract.string, JobType.intern.string]
     private var companies: [Company] = []
+    private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"
     
-    func updateStageCollectionView(stages: [Stage]) {
-        self.stages = stages
-        selfView.collectionView.reloadData()
-    }
+//    func updateStageCollectionView(stages: [Stage]) {
+//        self.stages = stages
+//        selfView.collectionView.reloadData()
+//    }
+//
+//    func resetCollectionView() {
+//        selectedIndexPathList.removeAll()
+//        selfView.collectionView.reloadData()
+//    }
     
-    func resetCollectionView() {
-        selectedIndexPathList.removeAll()
-        selfView.collectionView.reloadData()
-    }
     
     func reloadCompanySearchTableView(companies: [Company]) {
         self.companies = companies
-        Log("[D] \(self.companies)")
         selfView.companySearchTableView.reloadData()
         refreshTableView(tableView: selfView.companySearchTableView, maxHieght: Size.companySearchTableViewMaxHeight)
     }
     
-    func showCompanySearchTableView() {
+    func reloadStageCollectionView(stages: [Stage]) {
+        self.stages = stages
+        selfView.collectionView.reloadData()
+    }
+    
+    func showCompanyTableView() {
         selfView.companySearchTableView.isHidden = false
+        Log("[D] 보여짐")
     }
     
-    func hideCompanySearchTableView() {
+    func hideCompanyTableView() {
         selfView.companySearchTableView.isHidden = true
+        Log("[D] 가려짐")
     }
     
-    func updateCompanyTextField(text: String) {
-        selfView.companyUnderLineTextFieldView.textField.text = text
+    func showJobTypeTableView() {
+        selfView.jobSearchTableView.isHidden = false
     }
     
-    func selectCompanySearchButton() {
-        selfView.companyUnderLineTextFieldView.button.isSelected = true
+    func hideJobTypeTableView() {
+        selfView.jobSearchTableView.isHidden = true
     }
     
-    func unSelectCompanySearchButton() {
-        selfView.companyUnderLineTextFieldView.button.isSelected = false
+//    func toggleJobTypeTableView() {
+//        if selfView.jobSearchTableView.isHidden {
+//            showJobTypeTableView()
+//        } else {
+//            hideJobTypeTableView()
+//        }
+//    }
+    
+    func updateJobTypeLabel(text: String?) {
+        if let text = text {
+            selfView.jobTypeUnderLineLabelView.contentText = text
+        }
     }
     
-    func switchJobTypeSearchTableView() {
-        let bool = !selfView.jobSearchTableView.isHidden
-        selfView.jobSearchTableView.isHidden = bool
-        selfView.jobTypeUnderLineLabelView.isHighlight = !bool
-    }
+//
+//    func showCompanySearchTableView() {
+//        selfView.companySearchTableView.isHidden = false
+//    }
+//
+//    func hideCompanySearchTableView() {
+//        selfView.companySearchTableView.isHidden = true
+//    }
+//
+//    func updateCompanyTextField(text: String) {
+//        selfView.companyUnderLineTextFieldView.textField.text = text
+//    }
+//
+//    func selectCompanySearchButton() {
+//        selfView.companyUnderLineTextFieldView.button.isSelected = true
+//    }
+//
+//    func unSelectCompanySearchButton() {
+//        selfView.companyUnderLineTextFieldView.button.isSelected = false
+//    }
+//
+//    func switchJobTypeSearchTableView() {
+//        let bool = !selfView.jobSearchTableView.isHidden
+//        selfView.jobSearchTableView.isHidden = bool
+//        selfView.jobTypeUnderLineLabelView.isHighlight = !bool
+//    }
+//
+//    func updateJobTypeLabel(text: String) {
+//        selfView.jobTypeUnderLineLabelView.contentText = text
+//    }
+//
+//    func updateCompanyLabel(text: String) {
+//        selfView.companyUnderLineTextFieldView.textField.text = text
+//    }
     
-    func updateJobTypeLabel(text: String) {
-        selfView.jobTypeUnderLineLabelView.contentText = text
-    }
-    
-    func updateCompanyLabel(text: String) {
-        selfView.companyUnderLineTextFieldView.textField.text = text
-    }
+//    required init?(coder: NSCoder) {
+//        fatalError("not supported")
+//    }
+//    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//        action = self
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,48 +218,50 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     override func setupBind() {
         super.setupBind()
         
-        navigaionBar.backButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapBackButton()
+        guard let action = action else { return }
+        
+        action.selectedCompany
+            .bind { [weak self] company in
+                self?.selfView.companyUnderLineTextFieldView.textField.text = company.name
             }
             .disposed(by: disposeBag)
         
-        selfView.nextButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapNextButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selfView.reloadButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapResetButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selfView.companyUnderLineTextFieldView.textField.rx.text
+        action.textJobTypeName
             .bind { [weak self] text in
-                if let text = text {
-                    self?.listener?.searchCompanyName(text: text)
+                self?.updateJobTypeLabel(text: text)
+            }
+            .disposed(by: disposeBag)
+        
+        guard let handler = handler else { return }
+        
+        handler.companies
+            .bind { [weak self] companies in
+                self?.reloadCompanySearchTableView(companies: companies)
+            }
+            .disposed(by: disposeBag)
+        
+        handler.stages
+            .bind { [weak self] stages in
+                self?.reloadStageCollectionView(stages: stages)
+            }
+            .disposed(by: disposeBag)
+        
+        handler.isShowCompanyTableView
+            .bind { [weak self] bool in
+                if bool {
+                    self?.showCompanyTableView()
+                } else {
+                    self?.hideCompanyTableView()
                 }
             }
             .disposed(by: disposeBag)
         
-        selfView.companyUnderLineTextFieldView.button.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapCompanySearchButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selfView.jobTypeUnderLineLabelView.button.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapJobTypeSearchButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selfView.jobTypeUnderLineLabelView.rx.tapGesture()
-            .bind { [weak self] tap in
-                if tap.state == .ended {
-                    self?.listener?.tapJobTypeSearchButton()
+        handler.isShowJobTypeTableView
+            .bind { [weak self] bool in
+                if bool {
+                    self?.showJobTypeTableView()
+                } else {
+                    self?.hideJobTypeTableView()
                 }
             }
             .disposed(by: disposeBag)
@@ -196,6 +276,44 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         spinner.startAnimating()
         
         return footerView
+    }
+}
+
+extension WriteApplyOverallViewController: WriteApplyOverallPresentableAction {
+    var tapBackButton: Observable<Void> {
+        return navigaionBar.backButton.rx.tap.asObservable()
+    }
+    
+    var tapNextButton: Observable<Void> {
+        return selfView.nextButton.rx.tap.asObservable()
+    }
+    
+    var tapAddCompanyButton: Observable<Void> {
+        return tapAddCompanyButtonSubject.asObservable()
+    }
+    
+    var tapJobTypeButton: Observable<Void> {
+        return selfView.jobTypeUnderLineLabelView.button.rx.tap.asObservable()
+    }
+    
+    var textCompanyName: Observable<String> {
+        return selfView.companyUnderLineTextFieldView.textField.rx.text.orEmpty.distinctUntilChanged().asObservable()
+    }
+    
+    var textPositionName: Observable<String> {
+        return selfView.positionUnderLineTextFieldView.textField.rx.text.orEmpty.asObservable()
+    }
+    
+    var textJobTypeName: Observable<String> {
+        return textJobTypeNameSubject.asObservable()
+    }
+    
+    var selectedCompany: Observable<Company> {
+        return selectedCompanySubject.asObservable()
+    }
+    
+    var selectedStages: Observable<[Stage]> {
+        return selectedStagesSubject.asObservable()
     }
 }
 
@@ -222,9 +340,14 @@ extension WriteApplyOverallViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedIndexPathList.contains(indexPath) {
             selectedIndexPathList.removeElementByReference(indexPath)
+            tmpSelectedStages.removeAll(where: { $0.id == stages[indexPath.item].id })
+            
         } else {
             selectedIndexPathList.append(indexPath)
+            tmpSelectedStages.append(stages[indexPath.item])
         }
+        
+        selectedStagesSubject.onNext(tmpSelectedStages)
         
         collectionView.performBatchUpdates(nil, completion: { _ in
             collectionView.reloadData()
@@ -258,7 +381,7 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
         case selfView.companySearchTableView:
             if scrollView.contentSize.height - scrollView.contentOffset.y < Size.companySearchTableViewMaxHeight * 0.8 {
                 Log("[D] 테이블 뷰 로딩 . . . 회사 검색")
-                listener?.searchCompanyName(text: nil)
+//                listener?.searchCompanyName(text: nil)
             }
             return
             
@@ -307,14 +430,13 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
         switch tableView {
         case selfView.companySearchTableView:
             if indexPath.item == companies.count {
-                listener?.tapPlusCompay()
+                tapAddCompanyButtonSubject.onNext(())
             } else {
-                listener?.tapCompanyTableView(company: companies[indexPath.item])
+                selectedCompanySubject.onNext(companies[indexPath.item])
             }
-            
             return
         case selfView.jobSearchTableView:
-            listener?.tapJobTypeTableView(text: jobTypes[indexPath.item])
+            textJobTypeNameSubject.onNext(jobTypes[indexPath.item])
             return
         default:
             return

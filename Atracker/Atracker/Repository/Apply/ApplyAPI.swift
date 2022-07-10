@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 enum ApplyAPI {
-    case getApply(ApplyRequest)
-    case postApply(ApplyCreateRequest)
+    case get(ApplyRequest)
+    case post(ApplyCreateRequest)
 }
 
 extension ApplyAPI: BaseURLRequestConvertible {
@@ -20,28 +20,28 @@ extension ApplyAPI: BaseURLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .getApply:
+        case .get:
             return .get
-        case .postApply:
+        case .post:
             return .post
         }
     }
     
     var path: String {
         switch self {
-        case .getApply:
+        case .get:
             return baseURL
-        case .postApply:
+        case .post:
             return baseURL
         }
     }
     
     var parameters: RequestParams? {
         switch self {
-        case .getApply(let getApplyQuery):
-            return .query(getApplyQuery)
-        case .postApply(let applyCreateRequest):
-            return .body(applyCreateRequest)
+        case .get(let request):
+            return .query(request)
+        case .post(let request):
+            return .body(request)
         }
     }
 }
