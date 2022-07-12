@@ -15,7 +15,7 @@ enum ApplyAPI {
 
 extension ApplyAPI: BaseURLRequestConvertible {
     var baseURL: String {
-        return Key.baseURL + "/apply"
+        return Key.baseURL + "/apply/"
     }
     
     var method: HTTPMethod {

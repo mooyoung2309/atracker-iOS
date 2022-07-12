@@ -35,15 +35,6 @@ protocol WriteApplyOverallPresentableHandler: AnyObject {
 
 protocol WriteApplyOverallPresentableListener: AnyObject {
 //    func tapBackButton()
-//    func tapNextButton()
-//    func tapResetButton()
-//    func inputCompanyTextfield(text: String)
-//    func tapCompanySearchButton()
-//    func tapCompanyTableView(company: Company)
-//    func tapJobTypeSearchButton()
-//    func tapJobTypeTableView(text: String)
-//    func searchCompanyName(text: String?)
-//    func tapPlusCompay()
 }
 
 final class WriteApplyOverallViewController: BaseNavigationViewController, WriteApplyOverallPresentable, WriteApplyOverallViewControllable {
@@ -74,17 +65,6 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"
     
-//    func updateStageCollectionView(stages: [Stage]) {
-//        self.stages = stages
-//        selfView.collectionView.reloadData()
-//    }
-//
-//    func resetCollectionView() {
-//        selectedIndexPathList.removeAll()
-//        selfView.collectionView.reloadData()
-//    }
-    
-    
     func reloadCompanySearchTableView(companies: [Company]) {
         self.companies = companies
         selfView.companySearchTableView.reloadData()
@@ -113,65 +93,13 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     func hideJobTypeTableView() {
         selfView.jobSearchTableView.isHidden = true
     }
-    
-//    func toggleJobTypeTableView() {
-//        if selfView.jobSearchTableView.isHidden {
-//            showJobTypeTableView()
-//        } else {
-//            hideJobTypeTableView()
-//        }
-//    }
-    
+
     func updateJobTypeLabel(text: String?) {
         if let text = text {
             selfView.jobTypeUnderLineLabelView.contentText = text
         }
     }
-    
-//
-//    func showCompanySearchTableView() {
-//        selfView.companySearchTableView.isHidden = false
-//    }
-//
-//    func hideCompanySearchTableView() {
-//        selfView.companySearchTableView.isHidden = true
-//    }
-//
-//    func updateCompanyTextField(text: String) {
-//        selfView.companyUnderLineTextFieldView.textField.text = text
-//    }
-//
-//    func selectCompanySearchButton() {
-//        selfView.companyUnderLineTextFieldView.button.isSelected = true
-//    }
-//
-//    func unSelectCompanySearchButton() {
-//        selfView.companyUnderLineTextFieldView.button.isSelected = false
-//    }
-//
-//    func switchJobTypeSearchTableView() {
-//        let bool = !selfView.jobSearchTableView.isHidden
-//        selfView.jobSearchTableView.isHidden = bool
-//        selfView.jobTypeUnderLineLabelView.isHighlight = !bool
-//    }
-//
-//    func updateJobTypeLabel(text: String) {
-//        selfView.jobTypeUnderLineLabelView.contentText = text
-//    }
-//
-//    func updateCompanyLabel(text: String) {
-//        selfView.companyUnderLineTextFieldView.textField.text = text
-//    }
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("not supported")
-//    }
-//    
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//        action = self
-//    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -192,12 +120,12 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     override func setupProperty() {
         super.setupProperty()
         
-        selfView.collectionView.delegate            = self
-        selfView.collectionView.dataSource          = self
-        selfView.companySearchTableView.delegate    = self
-        selfView.companySearchTableView.dataSource  = self
-        selfView.jobSearchTableView.delegate        = self
-        selfView.jobSearchTableView.dataSource      = self
+        selfView.collectionView.delegate = self
+        selfView.collectionView.dataSource = self
+        selfView.companySearchTableView.delegate = self
+        selfView.companySearchTableView.dataSource = self
+        selfView.jobSearchTableView.delegate = self
+        selfView.jobSearchTableView.dataSource = self
     }
     
     override func setupHierarchy() {
@@ -219,33 +147,32 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         super.setupBind()
         
         guard let action = action else { return }
-        
+        guard let handler = handler else { return }
+
         action.selectedCompany
             .bind { [weak self] company in
                 self?.selfView.companyUnderLineTextFieldView.textField.text = company.name
             }
             .disposed(by: disposeBag)
-        
+
         action.textJobTypeName
             .bind { [weak self] text in
                 self?.updateJobTypeLabel(text: text)
             }
             .disposed(by: disposeBag)
-        
-        guard let handler = handler else { return }
-        
+
         handler.companies
             .bind { [weak self] companies in
                 self?.reloadCompanySearchTableView(companies: companies)
             }
             .disposed(by: disposeBag)
-        
+
         handler.stages
             .bind { [weak self] stages in
                 self?.reloadStageCollectionView(stages: stages)
             }
             .disposed(by: disposeBag)
-        
+
         handler.isShowCompanyTableView
             .bind { [weak self] bool in
                 if bool {
@@ -255,7 +182,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
                 }
             }
             .disposed(by: disposeBag)
-        
+
         handler.isShowJobTypeTableView
             .bind { [weak self] bool in
                 if bool {

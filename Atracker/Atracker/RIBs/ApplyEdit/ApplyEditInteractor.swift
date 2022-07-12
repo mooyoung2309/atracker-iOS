@@ -66,11 +66,11 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     }
     
     func reloadTableView(stageProgressTitle: String) {
-        guard let stageProgress = edittedApply.stageProgress.first(where: { $0.title == stageProgressTitle}) else {
-            return
-        }
-        
-        presenter.showStageContentList([stageProgress.stageContent])
+//        guard let stageProgress = edittedApply.stageProgress?.first(where: { $0.title == stageProgressTitle}) else {
+//            return
+//        }
+//        
+//        presenter.showStageContentList([stageProgress.stageContent])
     }
     
     func tapStageStatusButton(status: StageProgressStatus) {

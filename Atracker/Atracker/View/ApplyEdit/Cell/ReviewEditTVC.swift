@@ -26,29 +26,29 @@ class ReviewEditTVC: BaseTVC, UITextViewDelegate {
     
     func update(stageContent: StageContent) {
         super.update()
-        
-        switch stageContent.contentType {
-        case StageContentType.QNA.code:
-            editView = qnaStageContentEditView
-            qnaStageContentEditView.qTextView.text        = stageContent.content
-            qnaStageContentEditView.aTextView.text        = stageContent.content
-            qnaStageContentEditView.rTextView.text  = stageContent.content
-            
-            qnaStageContentEditView.qTextView.delegate = self
-            qnaStageContentEditView.aTextView.delegate = self
-            qnaStageContentEditView.rTextView.delegate = self
-            break
-        case StageContentType.FREE.code:
-            editView = freeStageContentEditView
-            freeStageContentEditView.fTextView.text = stageContent.content
-            freeStageContentEditView.fTextView.delegate = self
-            break
-        default:
-            editView = freeStageContentEditView
-            break
-        }
-        
-        stackView.addArrangedSubviews([checkButtonView, editView])
+//        
+//        switch stageContent.contentType {
+//        case StageContentType.QNA.code:
+//            editView = qnaStageContentEditView
+//            qnaStageContentEditView.qTextView.text        = stageContent.content
+//            qnaStageContentEditView.aTextView.text        = stageContent.content
+//            qnaStageContentEditView.rTextView.text  = stageContent.content
+//            
+//            qnaStageContentEditView.qTextView.delegate = self
+//            qnaStageContentEditView.aTextView.delegate = self
+//            qnaStageContentEditView.rTextView.delegate = self
+//            break
+//        case StageContentType.FREE.code:
+//            editView = freeStageContentEditView
+//            freeStageContentEditView.fTextView.text = stageContent.content
+//            freeStageContentEditView.fTextView.delegate = self
+//            break
+//        default:
+//            editView = freeStageContentEditView
+//            break
+//        }
+//        
+//        stackView.addArrangedSubviews([checkButtonView, editView])
     }
     
     func showCheckButton() {

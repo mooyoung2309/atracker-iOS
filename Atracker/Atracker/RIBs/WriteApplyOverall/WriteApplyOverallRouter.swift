@@ -34,14 +34,15 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
         interactor.router = self
     }
     
-    func attachWriteApplyScheduleRIB() {
-        let writeApplySchedule = writeApplyScheduleBuilder.build(withListener: interactor)
+    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest) {
+        let writeApplySchedule = writeApplyScheduleBuilder.build(withListener: interactor, applyCreateRequest: applyCreateRequest)
         self.writeApplySchedule = writeApplySchedule
 
         detachChildRIB(child)
         attachChild(writeApplySchedule)
+        
         viewController.presentView(writeApplySchedule, transitionSubType: .fromRight)
-
+        
         child = writeApplySchedule
     }
     
@@ -53,5 +54,7 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
     func detachThisChildRIB() {
         detachChildRIB(child)
         viewController.dismissView(animation: true)
+        
+        child = nil
     }
 }

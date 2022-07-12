@@ -9,7 +9,7 @@ import Foundation
 
 protocol ApplyServiceProtocol {
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void)
-    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void)
+    func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class ApplyService: ApplyServiceProtocol {
@@ -26,7 +26,15 @@ class ApplyService: ApplyServiceProtocol {
         }
     }
     
-    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void) {
+    func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void) {
+        applyRepository.post(request: request) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
         applyRepository.post(request: request) { result in
             completion(result)
         }

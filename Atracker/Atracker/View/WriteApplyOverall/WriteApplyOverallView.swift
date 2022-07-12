@@ -11,45 +11,45 @@ import SnapKit
 
 class WriteApplyOverallView: BaseView {
     
-    let companyLabel                    = UILabel()
-    let companyUnderLineTextFieldView   = UnderLineTextFieldView(title: "회사명", placeholder: "회사명을 입력해주세요.")
-    let companySearchTableView          = UITableView()
-    let positionUnderLineTextFieldView  = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
-    let jobTypeUnderLineLabelView       = UnderLineLabelView(title: "근무형태", placeholder: "근무형태를 선택해주세요.")
-    let jobSearchTableView              = UITableView()
-    let progressLabel                   = UILabel()
-    let reloadButton                    = UIButton(type: .custom)
-    let collectionView                  = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    let nextButton                      = UIButton(type: .system)
+    let companyLabel = UILabel()
+    let companyUnderLineTextFieldView = UnderLineTextFieldView(title: "회사명", placeholder: "회사명을 입력해주세요.")
+    let companySearchTableView = UITableView()
+    let positionUnderLineTextFieldView = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
+    let jobTypeUnderLineLabelView = UnderLineLabelView(title: "근무형태", placeholder: "근무형태를 선택해주세요.")
+    let jobSearchTableView = UITableView()
+    let progressLabel = UILabel()
+    let reloadButton = UIButton(type: .custom)
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let nextButton = UIButton(type: .system)
     
     override func setupProperty() {
         super.setupProperty()
         
-        companyLabel.text                       = "회사명"
-        companyLabel.font                       = .systemFont(ofSize: 14, weight: .medium)
-        companyLabel.textColor                  = .gray3
+        companyLabel.text = "회사명"
+        companyLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        companyLabel.textColor = .gray3
         
         companyUnderLineTextFieldView.button.setBackgroundImage(UIImage(named: ImageName.search)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
         companyUnderLineTextFieldView.button.setBackgroundImage(UIImage(named: ImageName.cancle)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .selected)
         companyUnderLineTextFieldView.button.isHidden = false
         
         companySearchTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
-        companySearchTableView.backgroundColor      = .backgroundLightGray
-        companySearchTableView.rowHeight            = UITableView.automaticDimension
-        companySearchTableView.estimatedRowHeight   = 50
+        companySearchTableView.backgroundColor = .backgroundLightGray
+        companySearchTableView.rowHeight = UITableView.automaticDimension
+        companySearchTableView.estimatedRowHeight = 50
         
         jobTypeUnderLineLabelView.button.setBackgroundImage(UIImage(named: ImageName.checkBottom)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
         jobTypeUnderLineLabelView.button.isHidden = false
         
         jobSearchTableView.register(SearchTVC.self, forCellReuseIdentifier: SearchTVC.id)
-        jobSearchTableView.backgroundColor      = .backgroundLightGray
-        jobSearchTableView.rowHeight            = UITableView.automaticDimension
-        jobSearchTableView.estimatedRowHeight   = 50
+        jobSearchTableView.backgroundColor = .backgroundLightGray
+        jobSearchTableView.rowHeight = UITableView.automaticDimension
+        jobSearchTableView.estimatedRowHeight = 50
         jobSearchTableView.isScrollEnabled = false
         
-        progressLabel.text                      = "지원 단계 순서대로 단계를 눌러주세요."
-        progressLabel.font                      = .systemFont(ofSize: 14, weight: .medium)
-        progressLabel.textColor                 = .gray3
+        progressLabel.text = "지원 단계 순서대로 단계를 눌러주세요."
+        progressLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        progressLabel.textColor = .gray3
         
         reloadButton.setImage(UIImage(named: ImageName.reload)?.withTintColor(.gray6, renderingMode: .alwaysOriginal), for: .normal)
         reloadButton.tintColor = .gray6
@@ -59,8 +59,8 @@ class WriteApplyOverallView: BaseView {
         
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.neonGreen, for: .normal)
-        nextButton.titleLabel?.font     = .systemFont(ofSize: 16, weight: .regular)
-        nextButton.backgroundColor      = .backgroundGray
+        nextButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        nextButton.backgroundColor = .backgroundGray
         nextButton.addShadow(.top)
     }
     

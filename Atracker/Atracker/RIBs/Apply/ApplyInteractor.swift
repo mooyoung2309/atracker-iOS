@@ -34,13 +34,15 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
     
-    private let service: ApplyServiceProtocolISOLDCODE
+    private let applyService: ApplyServiceProtocol
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    init(presenter: ApplyPresentable, service: ApplyServiceProtocolISOLDCODE) {
-        self.service = service
+    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocol) {
+        self.applyService = applyService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
     }
 
@@ -66,9 +68,14 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func reloadApplyList() {
-        service.getApplyList { [weak self] (response) in
-            guard let this = self else { return }
-            this.presenter.showApplyList(response)
+        applyService.get(request: ApplyRequest(applyIds: nil, includeContent: true)) { [weak self] result in
+            switch result {
+            case .success(let data):
+                Log("[D] 리로드 성공 \(data)")
+            case .failure(let error):
+                Log("[D] 리로드 실패 \(error)")
+            }
+            
         }
     }
     

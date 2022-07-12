@@ -13,18 +13,24 @@
 import Foundation
 
 // MARK: - ApplyResponse
-typealias ApplyResponse = [Apply]
+struct ApplyResponse: Codable {
+    let applies: [Apply]
+}
 
+// MARK: - Apply
 struct Apply: Codable {
-    let applyID, companyID: Int
-    let companyName, jobPosition: String
+    let applyID: Int
+    let jobPosition, jobType: String
+    let companyID: Int
+    let companyName: String
     let stageProgress: [StageProgress]
 
     enum CodingKeys: String, CodingKey {
         case applyID = "apply_id"
+        case jobPosition = "job_position"
+        case jobType = "job_type"
         case companyID = "company_id"
         case companyName = "company_name"
-        case jobPosition = "job_position"
         case stageProgress = "stage_progress"
     }
 }
@@ -32,25 +38,21 @@ struct Apply: Codable {
 // MARK: - StageProgress
 struct StageProgress: Codable {
     let id: Int
-    let title: String
-    let stageContent: StageContent
     let status: String
+    let order: Int
+    let stageContents: [StageContent]
+    let stageID: Int
+    let stageTitle: String
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case stageContent = "stage_content"
-        case status
+        case id, status, order
+        case stageContents = "stage_contents"
+        case stageID = "stage_id"
+        case stageTitle = "stage_title"
     }
 }
 
 // MARK: - StageContent
 struct StageContent: Codable {
-    let contentType: String
-    var content: String
-
-    enum CodingKeys: String, CodingKey {
-        case content
-        case contentType = "content_type"
-    }
+    let id, order: Int
 }

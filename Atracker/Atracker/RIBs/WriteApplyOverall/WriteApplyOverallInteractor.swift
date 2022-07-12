@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol WriteApplyOverallRouting: ViewableRouting {
-    func attachWriteApplyScheduleRIB()
+    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest)
     func detachThisChildRIB()
 }
 
@@ -48,6 +48,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     private var searchCompanyPage = 1
     
     private var applyCreateRequest: ApplyCreateRequest?
+    private var disposBag = DisposeBag()
 
     init(presenter: WriteApplyOverallPresentable,applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
         
@@ -63,15 +64,14 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        
         setupBind()
         fetchStages()
     }
     
     override func willResignActive() {
         super.willResignActive()
-        
-    }
+        presenter.handler = nil
+    }    
     
     func setupBind() {
         guard let action = presenter.action else { return }
@@ -80,6 +80,18 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             .bind { [weak self] in
                 self?.listener?.showTabBar()
                 self?.listener?.tapBackButtonFromChildRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapNextButton
+            .bind { [weak self] in
+                guard let this = self else { return }
+                if let applyCreateRequest = this.applyCreateRequest {
+                    this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest)
+                } else {
+                    Log("[D] 테스트 용")
+                    this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest(company: Company(id: 0, name: "이소진"), jobPosition: "이소진", jobType: "테스트",stages: [ApplyCreateStage(eventAt: nil, order: 0, stageID: 0)]))
+                }
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -139,7 +151,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
                 applyCreateStages.append(applyCreateStage)
             }
             
-            self?.applyCreateRequest = ApplyCreateRequest(company: company, jobPosition: position, stages: applyCreateStages)
+            self?.applyCreateRequest = ApplyCreateRequest(company: company, jobPosition: position, jobType: "INTERN", stages: applyCreateStages)
             
             Log("[D] 리퀘스트 변경됨 \(self?.applyCreateRequest)")
         }

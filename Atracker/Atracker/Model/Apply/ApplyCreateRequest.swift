@@ -10,12 +10,13 @@ import Foundation
 // MARK: - ApplyCreateRequest
 struct ApplyCreateRequest: Codable {
     let company: Company
-    let jobPosition: String
-    let stages: [ApplyCreateStage]
+    let jobPosition, jobType: String
+    var stages: [ApplyCreateStage]
 
     enum CodingKeys: String, CodingKey {
         case company
         case jobPosition = "job_position"
+        case jobType = "job_type"
         case stages
     }
 }

@@ -10,37 +10,55 @@ import RxSwift
 import UIKit
 import SnapKit
 
+protocol WriteApplySchedulePresentableAction: AnyObject {
+    var scrollCalendar: Observable<Int> { get }
+    var tapBackButton: Observable<Void> { get }
+    var tapNextButton: Observable<Void> { get }
+    var changedApplyCreateStages: Observable<[ApplyCreateStage]> { get }
+}
+
+protocol WriteApplySchedulePresentableHandler: AnyObject {
+    var date: Observable<Date> { get }
+    var applyCreateStages: Observable<[ApplyCreateStage]> { get }
+}
+
 protocol WriteApplySchedulePresentableListener: AnyObject {
-    func tapBackButton()
-    func scrollCalendarPrev()
-    func scrollCalendarNext()
+    
 }
 
 final class WriteApplyScheduleViewController: BaseNavigationViewController, WriteApplySchedulePresentable, WriteApplyScheduleViewControllable {
+    
+    weak var listener: WriteApplySchedulePresentableListener?
     
     var thisView: UIView {
         return containerView
     }
     
-    weak var listener: WriteApplySchedulePresentableListener?
+    var action: WriteApplySchedulePresentableAction? {
+        return self
+    }
     
-    let selfView                        = WriteApplyScheduleView()
+    var handler: WriteApplySchedulePresentableHandler?
     
-    private var prevDate: Date          = Date()
-    private var currentDate: Date       = Date()
-    private var nextDate: Date          = Date()
+    let selfView = WriteApplyScheduleView()
     
-    private var prevDates: [Date]       = []
-    private var currentDates: [Date]    = []
-    private var nextDates: [Date]       = []
+    private var prevDate = Date()
+    private var currentDate = Date()
+    private var nextDate = Date()
+    private var prevDates: [Date] = []
+    private var currentDates: [Date] = []
+    private var nextDates: [Date] = []
+    
+    private let scrollCalendarSubject = PublishSubject<Int>()
+    private let changedApplyCreateStagesSubject = PublishSubject<[ApplyCreateStage]>()
     
     private var selectedCellIndexPath: IndexPath?
-    private var applyStages: [ApplyCreateStage] = [ApplyCreateStage(eventAt: nil, order: 0, stageID: 0), ApplyCreateStage(eventAt: nil, order: 1, stageID: 1), ApplyCreateStage(eventAt: nil, order: 2, stageID: 2)]
+    private var applyCreateStages: [ApplyCreateStage] = []
     
-    func updateCalendarCell(prevDate: Date, currentDate: Date, nextDate: Date) {
-        self.prevDate = prevDate
-        self.currentDate = currentDate
-        self.nextDate = nextDate
+    func reloadCalnedarCollectionView(date: Date) {
+        self.prevDate = date.plusPeriod(.month, interval: -1)
+        self.currentDate = date
+        self.nextDate = date.plusPeriod(.month, interval: 1)
         
         self.prevDates = prevDate.getDatesOfMonth()
         self.currentDates = currentDate.getDatesOfMonth()
@@ -49,6 +67,11 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
         selfView.prevCollectionView.reloadData()
         selfView.currentCollectionView.reloadData()
         selfView.nextCollectionView.reloadData()
+    }
+    
+    func reloadApplyStageEventAtTableView(applyCreateStages: [ApplyCreateStage]) {
+        self.applyCreateStages = applyCreateStages
+        selfView.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -102,11 +125,45 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
     override func setupBind() {
         super.setupBind()
         
-        navigaionBar.backButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapBackButton()
+        guard let action = action else { return }
+        guard let handler = handler else { return }
+        
+        handler.date
+            .bind { [weak self] date in
+                self?.reloadCalnedarCollectionView(date: date)
+                self?.setNavigaionBarTitle(date.getTitleOfMonth())
             }
             .disposed(by: disposeBag)
+        
+        handler.applyCreateStages
+            .bind { [weak self] applyCreateStages in
+                self?.reloadApplyStageEventAtTableView(applyCreateStages: applyCreateStages)
+            }
+            .disposed(by: disposeBag)
+        
+        navigaionBar.backButton.rx.tap
+            .bind { [weak self] _ in
+//                self?.listener?.tapBackButton()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+extension WriteApplyScheduleViewController: WriteApplySchedulePresentableAction {
+    var scrollCalendar: Observable<Int> {
+        return scrollCalendarSubject.asObservable()
+    }
+    
+    var tapBackButton: Observable<Void> {
+        return navigaionBar.backButton.rx.tap.asObservable()
+    }
+    
+    var tapNextButton: Observable<Void> {
+        return selfView.nextButton.rx.tap.asObservable()
+    }
+    
+    var changedApplyCreateStages: Observable<[ApplyCreateStage]> {
+        return changedApplyCreateStagesSubject.asObservable()
     }
 }
 
@@ -115,9 +172,9 @@ extension WriteApplyScheduleViewController: UIScrollViewDelegate {
         switch scrollView {
         case selfView.scrollView:
             if scrollView.contentOffset.x > scrollView.frame.width {
-                listener?.scrollCalendarNext()
+                scrollCalendarSubject.onNext(1)
             } else if scrollView.contentOffset.x < scrollView.frame.width {
-                listener?.scrollCalendarPrev()
+                scrollCalendarSubject.onNext(-1)
             }
             scrollView.contentOffset.x = scrollView.frame.width
         default:
@@ -185,14 +242,13 @@ extension WriteApplyScheduleViewController: UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Log("[D] 캘린더 클릭됨. \(indexPath)")
     }
     
 }
 
 extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return applyStages.count
+        return applyCreateStages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -203,7 +259,7 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
         case selfView.tableView:
             cell.selectionStyle = .none
             
-            cell.update(date: Date().getDateFromISO8601String(iso8601: applyStages[indexPath.item].eventAt))
+            cell.update(date: Date().getDateFromISO8601String(iso8601: applyCreateStages[indexPath.item].eventAt))
             
             if let selectedCellIndexPath = selectedCellIndexPath {
                 if selectedCellIndexPath == indexPath {
@@ -213,9 +269,10 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
                 cell.hideDatePicker()
             }
             cell.dateChanged { [weak self] date in
-                self?.applyStages[indexPath.item].updateEventAt(eventAt: date.getISO8601String())
-                
-                Log("[D] \(date) \(indexPath)")
+                self?.applyCreateStages[indexPath.item].updateEventAt(eventAt: date.getISO8601String())
+                if let applyCreateStages = self?.applyCreateStages {
+                    self?.changedApplyCreateStagesSubject.onNext(applyCreateStages)
+                }
             }
             return cell
         default:

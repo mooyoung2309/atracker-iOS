@@ -22,33 +22,33 @@ class ApplyEditTVC: BaseTVC {
     
     func update(content: StageContent) {
         prepareForReuse()
-        
-        switch content.contentType {
-        case StageContentType.OVERALL.code:
-            editView = QNAEditView()
-            guard let editView = editView as? QNAEditView else { return }
-
-            editView.questionTextView.delegate = self
-            editView.answerTextView.delegate = self
-            editView.feedbackTextView.delegate = self
-            
-        case StageContentType.QNA.code:
-            editView = QNAEditView()
-        case StageContentType.FREE.code:
-            editView = QNAEditView()
-        default:
-            break
-        }
-        
-        guard let editView = editView else { return }
-
-        contentView.addSubview(editView)
-        
-        editView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(16)
-        }
+//        
+//        switch content.contentType {
+//        case StageContentType.OVERALL.code:
+//            editView = QNAEditView()
+//            guard let editView = editView as? QNAEditView else { return }
+//
+//            editView.questionTextView.delegate = self
+//            editView.answerTextView.delegate = self
+//            editView.feedbackTextView.delegate = self
+//            
+//        case StageContentType.QNA.code:
+//            editView = QNAEditView()
+//        case StageContentType.FREE.code:
+//            editView = QNAEditView()
+//        default:
+//            break
+//        }
+//        
+//        guard let editView = editView else { return }
+//
+//        contentView.addSubview(editView)
+//        
+//        editView.snp.makeConstraints {
+//            $0.top.equalToSuperview()
+//            $0.leading.trailing.equalToSuperview().inset(16)
+//            $0.bottom.equalToSuperview().inset(16)
+//        }
     }
     
     override func prepareForReuse() {

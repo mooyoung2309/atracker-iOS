@@ -9,14 +9,14 @@ import UIKit
 
 class ApplyView: BaseView {
     
-    let scrollView          = UIScrollView()
-    let positionLabel       = UILabel()
-    let titleLabel          = UILabel()
-    let analysisView        = ApplyAnalysisView()
-    let tableView           = UITableView()
-    let myPageButton        = UIButton()
-    let notificationButton  = UIButton()
-    let plusButton          = UIButton()
+    let scrollView = UIScrollView()
+    let positionLabel = UILabel()
+    let titleLabel = UILabel()
+    let analysisView = ApplyAnalysisView()
+    let tableView = UITableView()
+    let myPageButton = UIButton()
+    let notificationButton = UIButton()
+    let plusButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()

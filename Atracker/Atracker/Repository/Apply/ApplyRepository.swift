@@ -10,14 +10,22 @@ import Alamofire
 
 protocol ApplyRepositoryProtocol {
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void)
-    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void)
+    func post(request: ApplyCreateRequest, completion: @escaping (Result<(), Error>) -> Void)
 }
 
 class ApplyRepository: ApplyRepositoryProtocol {
     static let shared = ApplyRepository()
     
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
-        AF.request(ApplyAPI.get(request)).responseDecodable { (response: AFDataResponse<ApplyResponse>) in
+        AF.request(ApplyAPI.get(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<ApplyResponse>) in
+//            print(response.data)
+//            print(response.response)
+//            print(response.result)
+//            print(response.error)
+//            print(response.request)
+//            print(response.debugDescription)
+//            print(response.description)
+//            print(response.value)
             switch response.result {
             case .success(let data):
                 Log("[D] 지원 현황 가져오기 성공")
@@ -29,19 +37,24 @@ class ApplyRepository: ApplyRepositoryProtocol {
         }
     }
     
-    func post(request: ApplyCreateRequest, completion: @escaping (Int) -> Void) {
-        AF.request(ApplyAPI.post(request)).responseDecodable { (response: AFDataResponse<Int>) in
-            guard let statusCode = response.response?.statusCode else { return }
-            
-            switch statusCode {
-            case 200:
+    func post(request: ApplyCreateRequest, completion: @escaping (Result<(), Error>) -> Void) {
+        AF.request(ApplyAPI.post(request), interceptor: TokenInterceptor.shared.getInterceptor()).response { response in
+//            print(response.data)
+//            print(response.response)
+//            print(response.result)
+//            print(response.error)
+//            print(response.request)
+//            print(response.debugDescription)
+//            print(response.description)
+//            print(response.value)
+            switch response.result {
+            case .success(_):
                 Log("[D] 지원 현황 생성 성공")
-                completion(statusCode)
-            default:
+                completion(.success(()))
+            case .failure(let error):
                 Log("[D] 지원 현황 생성 실패")
-                completion(statusCode)
+                completion(.failure(error))
             }
-            
         }
     }
 }

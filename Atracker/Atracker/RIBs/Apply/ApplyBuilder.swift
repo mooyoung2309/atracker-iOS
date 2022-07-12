@@ -35,13 +35,12 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
 
     func build(withListener listener: ApplyListener) -> ApplyRouting {
         
-        let component           = ApplyComponent(dependency: dependency)
-        let viewController      = ApplyViewController()
-        let service             = ApplyServiceISOLDCODE()
-        let interactor          = ApplyInteractor(presenter: viewController, service: service)
-        let applyWriteBuilder   = WriteApplyOverallBuilder(dependency: component)
-        let applyDetailBuilder  = ApplyDetailBuilder(dependency: component)
-        let myPageBuilder       = MyPageBuilder(dependency: component)
+        let component = ApplyComponent(dependency: dependency)
+        let viewController = ApplyViewController()
+        let interactor = ApplyInteractor(presenter: viewController, applyService: component.applyService)
+        let applyWriteBuilder = WriteApplyOverallBuilder(dependency: component)
+        let applyDetailBuilder = ApplyDetailBuilder(dependency: component)
+        let myPageBuilder = MyPageBuilder(dependency: component)
         
         interactor.listener = listener
         
