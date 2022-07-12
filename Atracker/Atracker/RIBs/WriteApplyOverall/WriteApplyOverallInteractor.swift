@@ -16,14 +16,11 @@ protocol WriteApplyOverallRouting: ViewableRouting {
 
 protocol WriteApplyOverallPresentable: Presentable {
     var listener: WriteApplyOverallPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
-    
     var action: WriteApplyOverallPresentableAction? { get }
     var handler: WriteApplyOverallPresentableHandler? { get set }
 }
 
 protocol WriteApplyOverallListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func tapBackButtonFromChildRIB()
     func showTabBar()
     func hideTabBar()
@@ -49,7 +46,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     
     private var applyCreateRequest: ApplyCreateRequest?
     private var disposBag = DisposeBag()
-
+    
     init(presenter: WriteApplyOverallPresentable,applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
         
         self.applyService = applyService
@@ -71,7 +68,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     override func willResignActive() {
         super.willResignActive()
         presenter.handler = nil
-    }    
+    }
     
     func setupBind() {
         guard let action = presenter.action else { return }
@@ -103,6 +100,14 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
                 } else {
                     this.isShowJobTypeTableViewRelay.accept(true)
                 }
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        Observable.combineLatest(action.tapAddCompanyButton, action.textCompanyName)
+            .bind { [weak self] _, companyName in
+                self?.addCompany(companyName: companyName)
+                self?.isShowCompanyTableViewRelay.accept(false)
+                self?.isShowJobTypeTableViewRelay.accept(false)
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -174,6 +179,20 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
                 this.companiesRelay.accept(this.tmpCompanies)
                 return
             case  .failure(_):
+                return
+            }
+        }
+    }
+    
+    func addCompany(companyName: String) {
+        companyService.add(name: companyName) { [weak self] result in
+            guard let this = self else { return }
+            switch result {
+            case .success(let data):
+                Log("[D] 회사 추가 성공 \(data.companies)")
+                return
+            case .failure(let error):
+                Log("[D] 회사 추가 실패 \(error)")
                 return
             }
         }

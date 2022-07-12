@@ -107,5 +107,21 @@ extension UIView {
         mask.path = path.cgPath
         self.layer.mask = mask
     }
+    
+    func concaveEnds(depth: CGFloat) {
+            let width = self.bounds.width
+            let height = self.bounds.height
+
+            let path = UIBezierPath()
+            path.move(to: CGPoint.zero)
+            path.addLine(to: CGPoint(x: width, y: 0))
+            path.addQuadCurve(to: CGPoint(x: width, y: height), controlPoint: CGPoint(x: width - height * depth, y: height / 2))
+            path.addLine(to: CGPoint(x: 0, y: height))
+            path.addQuadCurve(to: CGPoint.zero, controlPoint: CGPoint(x: height * depth, y: height / 2))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            self.layer.mask = mask
+            self.layer.masksToBounds = false
+        }
 }
 

@@ -9,6 +9,14 @@ import RIBs
 import RxSwift
 import UIKit
 
+protocol ApplyPresentableAction: AnyObject {
+    
+}
+
+protocol ApplyPresentableHandler: AnyObject {
+    var applies: Observable<[Apply]> { get }
+}
+
 protocol ApplyPresentableListener: AnyObject {
     func didTabCell(apply: Apply)
     func tapPlusButton()
@@ -22,22 +30,14 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     }
 
     weak var listener: ApplyPresentableListener?
+    weak var action: ApplyPresentableAction? {
+        return self
+    }
+    weak var handler: ApplyPresentableHandler?
     
     let selfView = ApplyView()
     
-    let mockUps = ["이소진 1", "이소진 2", "이소진 3", "이소진 4", "이소진 5", "이소진 6", "이소진 7", "이소진 8"]
-    
-    private var applyList: [Apply] = []
-    
-    func present(viewController: ViewControllable) {
-        present(viewController.uiviewController, animated: true, completion: nil)
-    }
-    
-    func showApplyList(_ applyList: [Apply]) {
-        self.applyList = applyList
-        selfView.tableView.reloadData()
-        refreshTableView(tableView: selfView.tableView)
-    }
+    private var applies: [Apply] = []
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -51,14 +51,14 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         super.setupReload()
         
         view.backgroundColor = .backgroundGray
-        refreshTableView(tableView: selfView.tableView)
+        refreshTableView(tableView: selfView.applyTableView)
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        selfView.tableView.delegate = self
-        selfView.tableView.dataSource = self
+        selfView.applyTableView.delegate = self
+        selfView.applyTableView.dataSource = self
         selfView.scrollView.delegate = self
     }
     
@@ -79,6 +79,16 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     override func setupBind() {
         super.setupBind()
+        
+        guard let action = action else { return }
+        guard let handler = handler else { return }
+        
+        handler.applies
+            .bind { [weak self] applies in
+                self?.reloadApplyTableView(applies: applies)
+            }
+            .disposed(by: disposeBag)
+        
         selfView.plusButton.rx.tap
         .bind { [weak self] _ in
             self?.listener?.tapPlusButton()
@@ -91,20 +101,36 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
             }
             .disposed(by: disposeBag)
     }
+    
+    func reloadApplyTableView(applies: [Apply]) {
+        self.applies = applies
+        
+        selfView.applyTableView.reloadData()
+        refreshTableView(tableView: selfView.applyTableView)
+    }
+    
+    func present(viewController: ViewControllable) {
+        present(viewController.uiviewController, animated: true, completion: nil)
+    }
+}
+
+extension ApplyViewController: ApplyPresentableAction {
+    
 }
 
 extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return applyList.count
+        return applies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
-        case selfView.tableView:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyProgressTVC.id, for: indexPath) as? ApplyProgressTVC else { return UITableViewCell() }
+        case selfView.applyTableView:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyTVC.id, for: indexPath) as? ApplyTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            cell.update(apply: applyList[indexPath.row])
+            cell.update(apply: applies[indexPath.row])
+            
             return cell
         default:
             return UITableViewCell()
@@ -112,7 +138,7 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.listener?.didTabCell(apply: applyList[indexPath.row])
+        self.listener?.didTabCell(apply: applies[indexPath.row])
     }
 }
 

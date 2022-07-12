@@ -13,7 +13,7 @@ class ApplyView: BaseView {
     let positionLabel = UILabel()
     let titleLabel = UILabel()
     let analysisView = ApplyAnalysisView()
-    let tableView = UITableView()
+    let applyTableView = UITableView()
     let myPageButton = UIButton()
     let notificationButton = UIButton()
     let plusButton = UIButton()
@@ -41,18 +41,18 @@ class ApplyView: BaseView {
         analysisView.layer.cornerRadius = 10
         analysisView.update(data: [10, 20, 30, 40])
         
-        tableView.register(ApplyProgressTVC.self, forCellReuseIdentifier: ApplyProgressTVC.id)
-        tableView.isScrollEnabled = false
-        tableView.backgroundColor = .backgroundLightGray
-        tableView.separatorStyle = .singleLine
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.separatorColor = UIColor(hex: 0x292C3F)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-        tableView.layer.masksToBounds = true
-        tableView.layer.cornerRadius = 12
-        tableView.layer.borderWidth = 0
-        tableView.layer.borderColor = UIColor.backgroundLightGray.cgColor
+        applyTableView.register(ApplyTVC.self, forCellReuseIdentifier: ApplyTVC.id)
+        applyTableView.isScrollEnabled = false
+        applyTableView.backgroundColor = .backgroundLightGray
+        applyTableView.separatorStyle = .singleLine
+        applyTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        applyTableView.separatorColor = UIColor(hex: 0x292C3F)
+        applyTableView.rowHeight = UITableView.automaticDimension
+        applyTableView.estimatedRowHeight = 100
+        applyTableView.layer.masksToBounds = true
+        applyTableView.layer.cornerRadius = 12
+        applyTableView.layer.borderWidth = 0
+        applyTableView.layer.borderColor = UIColor.backgroundLightGray.cgColor
         
         myPageButton.setImage(UIImage(named: ImageName.user), for: .normal)
         
@@ -82,7 +82,7 @@ class ApplyView: BaseView {
         scrollView.addSubview(myPageButton)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(analysisView)
-        scrollView.addSubview(tableView)
+        scrollView.addSubview(applyTableView)
     }
     
     override func setupLayout() {
@@ -119,7 +119,7 @@ class ApplyView: BaseView {
             $0.leading.trailing.equalTo(self).inset(16)
             $0.height.equalTo(90)
         }
-        tableView.snp.makeConstraints {
+        applyTableView.snp.makeConstraints {
             $0.top.equalTo(analysisView.snp.bottom).inset(-18)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.width.equalToSuperview().inset(16)
