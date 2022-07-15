@@ -9,7 +9,8 @@ import UIKit
 
 class FREEContentView: BaseView {
     
-    let contentLabel = UILabel()
+    let titleLabel = UILabel()
+    let contextLabel = UILabel()
     
     required init?(coder: NSCoder) {
         fatalError("not supported")
@@ -17,28 +18,39 @@ class FREEContentView: BaseView {
     
     init(freeContent: FreeContent) {
         super.init(frame: .zero)
-        contentLabel.text = freeContent.t
+        
+        titleLabel.text = freeContent.t
+        contextLabel.text = freeContent.c
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        contentLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        contentLabel.textColor = .white
-        contentLabel.numberOfLines = 0
+        titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        titleLabel.textColor = .neonGreen
+        titleLabel.numberOfLines = 0
+        
+        contextLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        contextLabel.textColor = .white
+        contextLabel.numberOfLines = 0
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(contentLabel)
+        addSubview(contextLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        contentLabel.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+        titleLabel.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+        }
+        
+        contextLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-20)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
