@@ -15,12 +15,15 @@ protocol EditApplyStageProgressDependency: Dependency {
 final class EditApplyStageProgressComponent: Component<EditApplyStageProgressDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var stageProgressService: StageProgressServiceProtocol {
+        return StageProgressService()
+    }
 }
 
 // MARK: - Builder
 
 protocol EditApplyStageProgressBuildable: Buildable {
-    func build(withListener listener: EditApplyStageProgressListener) -> EditApplyStageProgressRouting
+    func build(withListener listener: EditApplyStageProgressListener, apply: Apply) -> EditApplyStageProgressRouting
 }
 
 final class EditApplyStageProgressBuilder: Builder<EditApplyStageProgressDependency>, EditApplyStageProgressBuildable {
@@ -29,10 +32,10 @@ final class EditApplyStageProgressBuilder: Builder<EditApplyStageProgressDepende
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: EditApplyStageProgressListener) -> EditApplyStageProgressRouting {
+    func build(withListener listener: EditApplyStageProgressListener, apply: Apply) -> EditApplyStageProgressRouting {
         let component = EditApplyStageProgressComponent(dependency: dependency)
         let viewController = EditApplyStageProgressViewController()
-        let interactor = EditApplyStageProgressInteractor(presenter: viewController)
+        let interactor = EditApplyStageProgressInteractor(presenter: viewController, stageProgressService: component.stageProgressService, apply: apply)
         interactor.listener = listener
         return EditApplyStageProgressRouter(interactor: interactor, viewController: viewController)
     }

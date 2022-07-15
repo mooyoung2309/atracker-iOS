@@ -34,11 +34,11 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
         return containerView
     }
     
-    var action: WriteApplySchedulePresentableAction? {
+    weak var action: WriteApplySchedulePresentableAction? {
         return self
     }
     
-    var handler: WriteApplySchedulePresentableHandler?
+    weak var handler: WriteApplySchedulePresentableHandler?
     
     let selfView = WriteApplyScheduleView()
     
@@ -186,6 +186,7 @@ extension WriteApplyScheduleViewController: UIScrollViewDelegate {
 extension WriteApplyScheduleViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let width = collectionView.frame.width / 7.0
         let height = collectionView.frame.height / CGFloat(currentDates.count / 7)
         

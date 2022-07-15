@@ -77,7 +77,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
         
         if position.isEmpty || career.isEmpty { return }
         
-        authService.testSignUp(email: "TEST", gender: Gender.male.code, jobPosition: position, nickName: nickname, sso: Sso.apple.code) { [weak self] result in
+        authService.testSignUp(email: "TEST", gender: Gender.male.code, jobPosition: position, nickName: nickname, sso: SSO.apple.code) { [weak self] result in
             switch result {
             case .success(_):
                 self?.router?.attachSignUpSuccessRIB()

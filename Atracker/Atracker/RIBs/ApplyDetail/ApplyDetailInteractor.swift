@@ -7,17 +7,19 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 protocol ApplyDetailRouting: ViewableRouting {
     func attachApplyEditRIB(apply: Apply)
     func attachEditApplyOverallRIB()
-    func attachEditApplyStageProgressRIB()
+    func attachEditApplyStageProgressRIB(apply: Apply)
     func detachThisChildRIB()
 }
 
 protocol ApplyDetailPresentable: Presentable {
     var listener: ApplyDetailPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    var action: ApplyDetailPresentableAction? { get }
+    var handler: ApplyDetailPresentableHandler? { get set }
     func setNavigaionBarTitle(_ text: String)
     func showEditTableView()
     func hideEditTableView()
@@ -35,24 +37,35 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    let apply: Apply
+    private let apply: Apply
     private var isShowEditTableView = false
+    
+    private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
     
     init(presenter: ApplyDetailPresentable, apply: Apply) {
         self.apply = apply
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        
+        Log("[D] 지원 현황 디테일 페이지 \(apply.stageProgress)")
+        setupBind()
         presenter.setNavigaionBarTitle(apply.companyName)
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        
+        presenter.handler = nil
+    }
+    
+    func setupBind() {
+//        stageContentsRelay.accept(apply.)
     }
     
     func tapBackButton() {
@@ -78,18 +91,36 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     
     func tapEditApplyStageProgressButton() {
         Log("[D] 전형 편집하기 버튼 클릭됨")
-        router?.attachEditApplyStageProgressRIB()
+        router?.attachEditApplyStageProgressRIB(apply: apply)
     }
     
     func tapDeleteApplyButton() {
         Log("[D] 지원 후기 삭제하기 버튼 클릭됨")
     }
     
+    // MARK: From Child RIBs
     func tapBackButtonFromChildRIB() {
         router?.detachThisChildRIB()
         
         presenter.hideEditTableView()
         listener?.showTabBar()
         isShowEditTableView = false
+    }
+    
+    func didEditApplyStageProgress() {
+        router?.detachThisChildRIB()
+    }
+}
+
+// MARK: PresentableHandler
+extension ApplyDetailInteractor: ApplyDetailPresentableHandler {
+    var stageTitles: Observable<[String]> {
+        return Observable.just(apply.stageProgress.map({ (stageProgress: StageProgress) -> String in
+            return stageProgress.stageTitle
+        }))
+    }
+    
+    var stageProgresses: Observable<[StageProgress]> {
+        return Observable.just(apply.stageProgress)
     }
 }

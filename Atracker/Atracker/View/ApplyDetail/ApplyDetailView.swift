@@ -12,8 +12,8 @@ import Then
 class ApplyDetailView: BaseView {
     
     let scrollView = UIScrollView()
-    let hChartView = BarChatView(.horizontal, cornerRadius: 5)
-    let tableView = UITableView()
+    let stageTitleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let stageProgressTableView = UITableView()
     let editTableView = UITableView()
     let tabBarbottomView = UIView()
     
@@ -32,12 +32,19 @@ class ApplyDetailView: BaseView {
         
         scrollView.showsVerticalScrollIndicator = false
         
-        tableView.register(ApplyDetailTVC.self, forCellReuseIdentifier: ApplyDetailTVC.id)
-        tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-        tableView.isScrollEnabled = false
-        tableView.separatorStyle = .none
+        stageTitleCollectionView.register(StageTitleCVC.self, forCellWithReuseIdentifier: StageTitleCVC.id)
+        stageTitleCollectionView.backgroundColor = .clear
+        stageTitleCollectionView.showsHorizontalScrollIndicator = false
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        stageTitleCollectionView.collectionViewLayout = layout
+        
+        stageProgressTableView.register(StageProgressTVC.self, forCellReuseIdentifier: StageProgressTVC.id)
+        stageProgressTableView.backgroundColor = .clear
+        stageProgressTableView.rowHeight = UITableView.automaticDimension
+        stageProgressTableView.estimatedRowHeight = 100
+        stageProgressTableView.isScrollEnabled = false
+        stageProgressTableView.separatorStyle = .none
         
         editTableView.register(EditTypeTVC.self, forCellReuseIdentifier: EditTypeTVC.id)
         editTableView.backgroundColor = .clear
@@ -53,33 +60,31 @@ class ApplyDetailView: BaseView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
+        addSubview(stageTitleCollectionView)
         addSubview(scrollView)
         addSubview(editTableView)
         addSubview(tabBarbottomView)
         
-        scrollView.addSubview(hChartView)
-        scrollView.addSubview(tableView)
+        scrollView.addSubview(stageProgressTableView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        stageTitleCollectionView.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.height.equalTo(50)
+        }
+        
         scrollView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(stageTitleCollectionView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        hChartView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().inset(28)
-            $0.height.equalTo(10)
-        }
-        
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(hChartView.snp.bottom)
-            $0.leading.equalTo(self)
-            $0.trailing.equalTo(self)
-            $0.bottom.equalToSuperview()
+        stageProgressTableView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalTo(self)
             $0.height.equalTo(0)
         }
         

@@ -16,7 +16,7 @@ protocol ApplyEditPresentable: Presentable {
     var listener: ApplyEditPresentableListener? { get set }
     
     func setNavigaionBarTitle(_ text: String)
-    func highlightStageStatusButton(status: StageProgressStatus)
+    func highlightStageStatusButton(status: ProgressStatus)
     func showStageStatusButtonBar()
     func showDeleteButtonBar()
     func showStageContentList(_ stageContentList: [StageContent])
@@ -73,7 +73,7 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
 //        presenter.showStageContentList([stageProgress.stageContent])
     }
     
-    func tapStageStatusButton(status: StageProgressStatus) {
+    func tapStageStatusButton(status: ProgressStatus) {
         switch status {
         case .notStarted:
             presenter.highlightStageStatusButton(status: .notStarted)

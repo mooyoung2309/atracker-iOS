@@ -47,8 +47,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     private var applyCreateRequest: ApplyCreateRequest?
     private var disposBag = DisposeBag()
     
-    init(presenter: WriteApplyOverallPresentable,applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
-        
+    init(presenter: WriteApplyOverallPresentable, applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
         self.applyService = applyService
         self.companyService = companyService
         self.stageService = stageService

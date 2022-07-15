@@ -19,9 +19,11 @@ class ApplyTVC: BaseTVC {
         companyLabel.text = apply.companyName
         
         positionLabel.text = apply.jobPosition
+        let totalCount = apply.stageProgress.count
+        let failCount = apply.stageProgress.filter({ $0.status == ProgressStatus.fail.code }).count
+        let passCount = apply.stageProgress.filter({ $0.status == ProgressStatus.pass.code }).count
         
-        barChartView.update(total: apply.stageProgress.count, part: 2)
-        Log("[D] \(apply.stageProgress.count)")
+        barChartView.update(total: totalCount, part: failCount + passCount)
     }
     
     override func setupProperty() {

@@ -64,8 +64,8 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         child = editApplyOverall
     }
     
-    func attachEditApplyStageProgressRIB() {
-        let editApplyStageProgress = editApplyStageProgressBuilder.build(withListener: interactor)
+    func attachEditApplyStageProgressRIB(apply: Apply) {
+        let editApplyStageProgress = editApplyStageProgressBuilder.build(withListener: interactor, apply: apply)
         self.editApplyStageProgress = editApplyStageProgress
         
         detachChildRIB(child)

@@ -54,6 +54,12 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         
         setupBind()
         fetchApplies()
+        
+        let qnaContent = (ContentSerialization.shared.toQNAContent(string: "[{ \"q\": \"질문1\", \"a\": \"답변1\"},{ \"q\": \"질문2\", \"a\": \"답변2\"},]"))
+        Log("[D] QNAContent: \(qnaContent)")
+        
+        let string = ContentSerialization.shared.toQNAString(qnaContent: qnaContent)
+        Log("[D] String: \(string)")
     }
 
     override func willResignActive() {
@@ -63,28 +69,38 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func setupBind() {
+        guard let action = presenter.action else { return }
         
+        action.tapApplyTVC
+            .bind { [weak self] apply in
+                self?.router?.attachApplyDetailRIB(apply: apply)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapPlusButton
+            .bind { [weak self] _ in
+                self?.listener?.hideTabBar()
+                self?.router?.attachWriteApplyOverall()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapMyPageButton
+            .bind { [weak self] _ in
+                self?.router?.attachMyPageRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
     func fetchApplies() {
         applyService.get(request: ApplyRequest(applyIds: nil, includeContent: true)) { [weak self] result in
             switch result {
             case .success(let data):
-                Log("[D] 지원 현황 가져오기 성공")
+                Log("[D] 지원 현황 가져오기 성공\n\(data)")
                 self?.appliesRelay.accept(data.applies)
             case .failure(_):
                 Log("[D] 지원 현황 가져오기 실패")
             }
         }
-    }
-    
-    func didTabCell(apply: Apply) {
-        router?.attachApplyDetailRIB(apply: apply)
-    }
-    
-    func tapPlusButton() {
-        listener?.hideTabBar()
-        router?.attachWriteApplyOverall()
     }
     
     func reloadApplyList() {
@@ -95,12 +111,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
             case .failure(let error):
                 Log("[D] 리로드 실패 \(error)")
             }
-            
         }
-    }
-    
-    func tapMyPageButton() {
-        router?.attachMyPageRIB()
     }
 
     // MARK: From Child RIB
@@ -118,9 +129,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func didSignOut() {
-        Log("[SIGNOUT] start")
         listener?.didSignOut()
-        Log("[SIGNOUT] end")
     }
 }
 

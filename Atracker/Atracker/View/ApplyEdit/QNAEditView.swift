@@ -125,4 +125,3 @@ extension QNAEditView: UITextViewDelegate {
         textChanged?(textView.text)
     }
 }
-

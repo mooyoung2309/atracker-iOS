@@ -10,9 +10,6 @@ import SnapKit
 import RxSwift
 
 class AlertView: BaseView {
-    
-    var disposeBag = DisposeBag()
-    
 //    let style: AlertStyle
 //    let i: Int
 //
@@ -154,7 +151,9 @@ class AlertView: BaseView {
         }
     }
     
-    func setupBind() {
+    override func setupBind() {
+        super.setupBind()
+        
         backButton.rx.tap
             .bind { [weak self] _ in
                 self?.isAlertBack?(true)

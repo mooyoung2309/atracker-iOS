@@ -55,7 +55,6 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
             case .failure(let error):
                 Log("[D] \(error)")
             }
-            
         }
     }
     

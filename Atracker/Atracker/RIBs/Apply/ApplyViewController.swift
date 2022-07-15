@@ -10,7 +10,9 @@ import RxSwift
 import UIKit
 
 protocol ApplyPresentableAction: AnyObject {
-    
+    var tapPlusButton: Observable<Void> { get }
+    var tapMyPageButton: Observable<Void> { get }
+    var tapApplyTVC: Observable<Apply> { get }
 }
 
 protocol ApplyPresentableHandler: AnyObject {
@@ -18,9 +20,6 @@ protocol ApplyPresentableHandler: AnyObject {
 }
 
 protocol ApplyPresentableListener: AnyObject {
-    func didTabCell(apply: Apply)
-    func tapPlusButton()
-    func tapMyPageButton()
 }
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
@@ -37,7 +36,10 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     let selfView = ApplyView()
     
+    private let tapApplyTVCSubject = PublishSubject<Apply>()
+    
     private var applies: [Apply] = []
+    
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -88,18 +90,6 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
                 self?.reloadApplyTableView(applies: applies)
             }
             .disposed(by: disposeBag)
-        
-        selfView.plusButton.rx.tap
-        .bind { [weak self] _ in
-            self?.listener?.tapPlusButton()
-        }
-        .disposed(by: disposeBag)
-        
-        selfView.myPageButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapMyPageButton()
-            }
-            .disposed(by: disposeBag)
     }
     
     func reloadApplyTableView(applies: [Apply]) {
@@ -115,7 +105,17 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
 }
 
 extension ApplyViewController: ApplyPresentableAction {
+    var tapApplyTVC: Observable<Apply> {
+        return tapApplyTVCSubject.asObservable()
+    }
     
+    var tapPlusButton: Observable<Void> {
+        return selfView.plusButton.rx.tap.asObservable()
+    }
+    
+    var tapMyPageButton: Observable<Void> {
+        return selfView.myPageButton.rx.tap.asObservable()
+    }
 }
 
 extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
@@ -138,7 +138,7 @@ extension ApplyViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.listener?.didTabCell(apply: applies[indexPath.row])
+        tapApplyTVCSubject.onNext(applies[indexPath.item])
     }
 }
 

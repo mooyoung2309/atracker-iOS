@@ -22,8 +22,6 @@ class BaseTVC: UITableViewCell, BaseViewProtocol {
         setupBind()
     }
     
-    func update() { }
-    
     func setupProperty() { }
     
     func setupHierarchy() { }

@@ -16,7 +16,7 @@ protocol ApplyEditPresentableListener: AnyObject {
     // interactor class.
     func reloadTableView(stageProgressTitle: String)
     func didTapBackButton()
-    func tapStageStatusButton(status: StageProgressStatus)
+    func tapStageStatusButton(status: ProgressStatus)
     func tapEditButton()
     func tapEditCompleteButton()
     func tapDeleteButton()
@@ -36,7 +36,7 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     private var stageContentList: [StageContent]    = []
     private var isEditButtonClicked                 = false
     
-    func highlightStageStatusButton(status: StageProgressStatus) {
+    func highlightStageStatusButton(status: ProgressStatus) {
         selfView.stageStatusButtonBar.notStartedButton.isSelected   = false
         selfView.stageStatusButtonBar.failButton.isSelected         = false
         selfView.stageStatusButtonBar.passButton.isSelected         = false

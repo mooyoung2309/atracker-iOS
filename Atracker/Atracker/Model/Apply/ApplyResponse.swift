@@ -40,7 +40,7 @@ struct StageProgress: Codable {
     let id: Int
     let status: String
     let order: Int
-    let stageContents: [StageContent]
+    var stageContents: [StageContent]
     let stageID: Int
     let stageTitle: String
 
@@ -54,5 +54,13 @@ struct StageProgress: Codable {
 
 // MARK: - StageContent
 struct StageContent: Codable {
-    let id, order: Int
+    let id: Int
+    var order: Int
+    var content: String?
+    let contentType: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, order, content
+        case contentType = "content_type"
+    }
 }

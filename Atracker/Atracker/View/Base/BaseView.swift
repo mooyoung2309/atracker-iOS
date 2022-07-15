@@ -16,6 +16,8 @@ protocol BaseViewProtocol {
 }
 
 class BaseView: UIView, BaseViewProtocol {
+    let disposeBag = DisposeBag()
+    
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
     }
@@ -26,6 +28,7 @@ class BaseView: UIView, BaseViewProtocol {
         setupProperty()
         setupHierarchy()
         setupLayout()
+        setupBind()
     }
     
     func setupProperty() { }
@@ -33,4 +36,6 @@ class BaseView: UIView, BaseViewProtocol {
     func setupHierarchy() { }
     
     func setupLayout() { }
+    
+    func setupBind() { }
 }

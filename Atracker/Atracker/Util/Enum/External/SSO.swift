@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sso {
+enum SSO {
     case apple
     case google
     

@@ -26,6 +26,11 @@
 		70091BAB2873DA76005D2627 /* EditApplyStageProgressInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */; };
 		70091BAD2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */; };
 		70091BB02873F27D005D2627 /* DraggableStageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */; };
+		70095FE5287E8D0F006933BC /* ContentSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70095FE4287E8D0F006933BC /* ContentSerialization.swift */; };
+		70095FEC287E8E72006933BC /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70095FEB287E8E72006933BC /* TabBarItem.swift */; };
+		70095FEE287E8EAA006933BC /* ProgressContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70095FED287E8EAA006933BC /* ProgressContentType.swift */; };
+		70095FF0287EB37A006933BC /* EditOVERALLContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70095FEF287EB37A006933BC /* EditOVERALLContentTVC.swift */; };
+		70095FF2287EF74D006933BC /* EditFREEContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70095FF1287EF74D006933BC /* EditFREEContentTVC.swift */; };
 		7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7009C0F728475A8700140CB5 /* BarChatView.swift */; };
 		700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */; };
 		700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */; };
@@ -39,6 +44,7 @@
 		700DBECD2868D82D00883A4F /* SignUpSuccessInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBEC92868D82D00883A4F /* SignUpSuccessInteractor.swift */; };
 		700DBED22868D89700883A4F /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DBED12868D89700883A4F /* SignUpSuccessView.swift */; };
 		700F34FD285C523600F16DA6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F34FC285C523600F16DA6 /* AlertView.swift */; };
+		701CE1B3288089D100D6E6CC /* StageProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE1B2288089D100D6E6CC /* StageProgressService.swift */; };
 		701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21B2849C197009230CE /* ApplyRouter.swift */; };
 		701CE2202849C197009230CE /* ApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21C2849C197009230CE /* ApplyViewController.swift */; };
 		701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CE21D2849C197009230CE /* ApplyBuilder.swift */; };
@@ -60,7 +66,7 @@
 		7027D3962862B2A400F9C913 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3952862B2A400F9C913 /* AuthService.swift */; };
 		7027D3982862B33600F9C913 /* SignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3972862B33600F9C913 /* SignResponse.swift */; };
 		7027D39A2862B44800F9C913 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3992862B44800F9C913 /* Gender.swift */; };
-		7027D39C2862B4C200F9C913 /* Sso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39B2862B4C200F9C913 /* Sso.swift */; };
+		7027D39C2862B4C200F9C913 /* SSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39B2862B4C200F9C913 /* SSO.swift */; };
 		7027D3A02862D0C000F9C913 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D39F2862D0C000F9C913 /* ApiRouter.swift */; };
 		7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3A22862DEA300F9C913 /* TestUserRegistrationRequest.swift */; };
 		7027D3A62862E02A00F9C913 /* LoggedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7027D3A52862E02A00F9C913 /* LoggedOutView.swift */; };
@@ -152,6 +158,7 @@
 		70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660470286AC21D00A09427 /* ApplyAnalysisView.swift */; };
 		70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660472286AC9E300A09427 /* RootComponent+SignIn.swift */; };
 		706CAFA4287D29740032C281 /* ApplyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CAFA3287D29740032C281 /* ApplyTVC.swift */; };
+		706CAFA8287D47EE0032C281 /* ProgressStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CAFA7287D47EE0032C281 /* ProgressStatus.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
 		707CD256283CADB2000E7EE7 /* ApplyContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD255283CADB2000E7EE7 /* ApplyContentTVC.swift */; };
 		7088413C2835F6150024135D /* CalendarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7088413B2835F6150024135D /* CalendarCVC.swift */; };
@@ -160,6 +167,11 @@
 		7092C89D2858C88400C57AD1 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C89C2858C88400C57AD1 /* Enum.swift */; };
 		7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C89E2858C8A900C57AD1 /* ImageName.swift */; };
 		7092C8A52858D58B00C57AD1 /* ReviewDeleteButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */; };
+		7093407E287E66BE00DAFB40 /* EditQNAContentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093407D287E66BE00DAFB40 /* EditQNAContentTVC.swift */; };
+		70934082287E6A8D00DAFB40 /* StageProgressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70934081287E6A8D00DAFB40 /* StageProgressAPI.swift */; };
+		70934084287E6A9B00DAFB40 /* StageProgressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70934083287E6A9B00DAFB40 /* StageProgressRepository.swift */; };
+		70934087287E6B0B00DAFB40 /* StageProgressUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70934086287E6B0B00DAFB40 /* StageProgressUpdateRequest.swift */; };
+		70934089287E6DF300DAFB40 /* StageProgressDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70934088287E6DF300DAFB40 /* StageProgressDeleteRequest.swift */; };
 		70970023283D363B000F4B89 /* QAWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970022283D363B000F4B89 /* QAWriteView.swift */; };
 		70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70970024283D365E000F4B89 /* ReviewWriteView.swift */; };
 		709F70C4286DFFC6007CBFE0 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709F70C3286DFFC6007CBFE0 /* Company.swift */; };
@@ -170,7 +182,6 @@
 		70A2F6962834BFCB00E6B95B /* AtrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6952834BFCB00E6B95B /* AtrackerTests.swift */; };
 		70A2F6A02834BFCB00E6B95B /* AtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F69F2834BFCB00E6B95B /* AtrackerUITests.swift */; };
 		70A2F6A22834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */; };
-		70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */; };
 		70A2F6D62834D23200E6B95B /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6D52834D23200E6B95B /* Application.swift */; };
 		70A2F6DD2834D6B100E6B95B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A2F6DC2834D6B100E6B95B /* Log.swift */; };
 		70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A88E5F285193910027D673 /* LoggedInRouter.swift */; };
@@ -209,6 +220,10 @@
 		70D8375D286C1C5D0085DE43 /* RootComponent+SignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */; };
 		70D83761286C4CA90085DE43 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83760286C4CA90085DE43 /* ProgressBarView.swift */; };
 		70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83762286CB87D0085DE43 /* CompanyCreateResponse.swift */; };
+		70EBE7B52881A6BC00D605CE /* StageProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7B42881A6BC00D605CE /* StageProgressTVC.swift */; };
+		70EBE7B72881A8F900D605CE /* OVERALLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7B62881A8F900D605CE /* OVERALLContentView.swift */; };
+		70EBE7B92881AFFA00D605CE /* FREEContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7B82881AFFA00D605CE /* FREEContentView.swift */; };
+		70EBE7BB2881B03100D605CE /* QNAContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7BA2881B03100D605CE /* QNAContentView.swift */; };
 		70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */; };
 		70FBE5122852E58B00455A4B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5112852E58B00455A4B /* Size.swift */; };
 		70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */; };
@@ -224,7 +239,7 @@
 		70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */; };
 		70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */; };
 		70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */; };
-		70FD6DD52857808B0050ADB8 /* ReviewEditTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DD42857808B0050ADB8 /* ReviewEditTVC.swift */; };
+		70FE71C8287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +279,11 @@
 		70091BA72873DA76005D2627 /* EditApplyStageProgressInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressInteractor.swift; sourceTree = "<group>"; };
 		70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+EditApplyStageProgress.swift"; sourceTree = "<group>"; };
 		70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableStageTVC.swift; sourceTree = "<group>"; };
+		70095FE4287E8D0F006933BC /* ContentSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSerialization.swift; sourceTree = "<group>"; };
+		70095FEB287E8E72006933BC /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		70095FED287E8EAA006933BC /* ProgressContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressContentType.swift; sourceTree = "<group>"; };
+		70095FEF287EB37A006933BC /* EditOVERALLContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOVERALLContentTVC.swift; sourceTree = "<group>"; };
+		70095FF1287EF74D006933BC /* EditFREEContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFREEContentTVC.swift; sourceTree = "<group>"; };
 		7009C0F728475A8700140CB5 /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
 		700DBEB728684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyComponent+WriteApplyOverall.swift"; sourceTree = "<group>"; };
 		700DBEBB2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
@@ -277,6 +297,7 @@
 		700DBEC92868D82D00883A4F /* SignUpSuccessInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessInteractor.swift; sourceTree = "<group>"; };
 		700DBED12868D89700883A4F /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		700F34FC285C523600F16DA6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		701CE1B2288089D100D6E6CC /* StageProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressService.swift; sourceTree = "<group>"; };
 		701CE21B2849C197009230CE /* ApplyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRouter.swift; sourceTree = "<group>"; };
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
 		701CE21D2849C197009230CE /* ApplyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyBuilder.swift; sourceTree = "<group>"; };
@@ -298,7 +319,7 @@
 		7027D3952862B2A400F9C913 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		7027D3972862B33600F9C913 /* SignResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignResponse.swift; sourceTree = "<group>"; };
 		7027D3992862B44800F9C913 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
-		7027D39B2862B4C200F9C913 /* Sso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sso.swift; sourceTree = "<group>"; };
+		7027D39B2862B4C200F9C913 /* SSO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSO.swift; sourceTree = "<group>"; };
 		7027D39F2862D0C000F9C913 /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		7027D3A22862DEA300F9C913 /* TestUserRegistrationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserRegistrationRequest.swift; sourceTree = "<group>"; };
 		7027D3A52862E02A00F9C913 /* LoggedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutView.swift; sourceTree = "<group>"; };
@@ -390,6 +411,7 @@
 		70660470286AC21D00A09427 /* ApplyAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAnalysisView.swift; sourceTree = "<group>"; };
 		70660472286AC9E300A09427 /* RootComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignIn.swift"; sourceTree = "<group>"; };
 		706CAFA3287D29740032C281 /* ApplyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTVC.swift; sourceTree = "<group>"; };
+		706CAFA7287D47EE0032C281 /* ProgressStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStatus.swift; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
 		707CD255283CADB2000E7EE7 /* ApplyContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTVC.swift; sourceTree = "<group>"; };
 		7088413B2835F6150024135D /* CalendarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCVC.swift; sourceTree = "<group>"; };
@@ -398,6 +420,11 @@
 		7092C89C2858C88400C57AD1 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		7092C89E2858C8A900C57AD1 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
 		7092C8A42858D58B00C57AD1 /* ReviewDeleteButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDeleteButtonBar.swift; sourceTree = "<group>"; };
+		7093407D287E66BE00DAFB40 /* EditQNAContentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQNAContentTVC.swift; sourceTree = "<group>"; };
+		70934081287E6A8D00DAFB40 /* StageProgressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressAPI.swift; sourceTree = "<group>"; };
+		70934083287E6A9B00DAFB40 /* StageProgressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressRepository.swift; sourceTree = "<group>"; };
+		70934086287E6B0B00DAFB40 /* StageProgressUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressUpdateRequest.swift; sourceTree = "<group>"; };
+		70934088287E6DF300DAFB40 /* StageProgressDeleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressDeleteRequest.swift; sourceTree = "<group>"; };
 		70970022283D363B000F4B89 /* QAWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAWriteView.swift; sourceTree = "<group>"; };
 		70970024283D365E000F4B89 /* ReviewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWriteView.swift; sourceTree = "<group>"; };
 		709F70C3286DFFC6007CBFE0 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
@@ -412,7 +439,6 @@
 		70A2F69B2834BFCB00E6B95B /* AtrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A2F69F2834BFCB00E6B95B /* AtrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerUITests.swift; sourceTree = "<group>"; };
 		70A2F6A12834BFCB00E6B95B /* AtrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstISOLDCODE.swift; sourceTree = "<group>"; };
 		70A2F6D52834D23200E6B95B /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		70A2F6DC2834D6B100E6B95B /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		70A88E5F285193910027D673 /* LoggedInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInRouter.swift; sourceTree = "<group>"; };
@@ -451,6 +477,10 @@
 		70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignOut.swift"; sourceTree = "<group>"; };
 		70D83760286C4CA90085DE43 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		70D83762286CB87D0085DE43 /* CompanyCreateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCreateResponse.swift; sourceTree = "<group>"; };
+		70EBE7B42881A6BC00D605CE /* StageProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressTVC.swift; sourceTree = "<group>"; };
+		70EBE7B62881A8F900D605CE /* OVERALLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVERALLContentView.swift; sourceTree = "<group>"; };
+		70EBE7B82881AFFA00D605CE /* FREEContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FREEContentView.swift; sourceTree = "<group>"; };
+		70EBE7BA2881B03100D605CE /* QNAContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QNAContentView.swift; sourceTree = "<group>"; };
 		70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		70FBE5112852E58B00455A4B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditRouter.swift; sourceTree = "<group>"; };
@@ -466,7 +496,7 @@
 		70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailInteractor.swift; sourceTree = "<group>"; };
 		70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailTVC.swift; sourceTree = "<group>"; };
 		70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+ApplyEdit.swift"; sourceTree = "<group>"; };
-		70FD6DD42857808B0050ADB8 /* ReviewEditTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEditTVC.swift; sourceTree = "<group>"; };
+		70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressView.swift; sourceTree = "<group>"; };
 		71C1F406B5B563EF89E70B6C /* Pods_AtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823922B5C40C72978266EF0B /* Pods_Atracker_AtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker_AtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		875AD423A55E3481C085DAD0 /* Pods_Atracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -517,7 +547,6 @@
 			isa = PBXGroup;
 			children = (
 				70CAB8ED286EC7D9000B5A05 /* ApplyEditTVC.swift */,
-				70FD6DD42857808B0050ADB8 /* ReviewEditTVC.swift */,
 				70443B2628587761009EE223 /* StageTitleCVC.swift */,
 			);
 			path = Cell;
@@ -526,6 +555,7 @@
 		70091B942871F1E7005D2627 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				70EBE7B42881A6BC00D605CE /* StageProgressTVC.swift */,
 				70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */,
 				70091B922871EC39005D2627 /* EditTypeTVC.swift */,
 			);
@@ -569,6 +599,46 @@
 				70091BAF2873F27D005D2627 /* DraggableStageTVC.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		70095FE6287E8D5C006933BC /* External */ = {
+			isa = PBXGroup;
+			children = (
+				7027D39B2862B4C200F9C913 /* SSO.swift */,
+				7027D3992862B44800F9C913 /* Gender.swift */,
+				70576DF62864E099000406DF /* JobType.swift */,
+				706CAFA7287D47EE0032C281 /* ProgressStatus.swift */,
+				70095FED287E8EAA006933BC /* ProgressContentType.swift */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		70095FE7287E8D6A006933BC /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				7027D3BC28636FE200F9C913 /* UserDefaultKey.swift */,
+				705CCCFE285C5B3700E79540 /* AlertStyle.swift */,
+				70576DFA2864EBB4000406DF /* Period.swift */,
+				70095FEB287E8E72006933BC /* TabBarItem.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		70095FE9287E8DC8006933BC /* Func */ = {
+			isa = PBXGroup;
+			children = (
+				70A2F6DC2834D6B100E6B95B /* Log.swift */,
+			);
+			path = Func;
+			sourceTree = "<group>";
+		};
+		70095FEA287E8DD2006933BC /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				70FBE5112852E58B00455A4B /* Size.swift */,
+				7092C89E2858C8A900C57AD1 /* ImageName.swift */,
+			);
+			path = Const;
 			sourceTree = "<group>";
 		};
 		700DBEC52868D7FD00883A4F /* SignUpSuccess */ = {
@@ -706,9 +776,10 @@
 			children = (
 				7027D3B12863269700F9C913 /* Base */,
 				7027D3C32863787D00F9C913 /* Auth */,
+				7027D3C62863862600F9C913 /* Company */,
 				70660467286AAF4C00A09427 /* Apply */,
 				702D86DB2874898D009682A4 /* Stage */,
-				7027D3C62863862600F9C913 /* Company */,
+				70934080287E6A6C00DAFB40 /* StageProgress */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -781,6 +852,9 @@
 			children = (
 				70091B942871F1E7005D2627 /* Cell */,
 				70322DF02854E2C800EA0EF7 /* ApplyDetailView.swift */,
+				70EBE7B62881A8F900D605CE /* OVERALLContentView.swift */,
+				70EBE7B82881AFFA00D605CE /* FREEContentView.swift */,
+				70EBE7BA2881B03100D605CE /* QNAContentView.swift */,
 			);
 			path = ApplyDetail;
 			sourceTree = "<group>";
@@ -921,12 +995,8 @@
 		705CCD00285C5B4500E79540 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				705CCCFE285C5B3700E79540 /* AlertStyle.swift */,
-				7027D3992862B44800F9C913 /* Gender.swift */,
-				7027D39B2862B4C200F9C913 /* Sso.swift */,
-				7027D3BC28636FE200F9C913 /* UserDefaultKey.swift */,
-				70576DF62864E099000406DF /* JobType.swift */,
-				70576DFA2864EBB4000406DF /* Period.swift */,
+				70095FE7287E8D6A006933BC /* Internal */,
+				70095FE6287E8D5C006933BC /* External */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -959,6 +1029,34 @@
 				7066046A286AAF6100A09427 /* ApplyRepository.swift */,
 			);
 			path = Apply;
+			sourceTree = "<group>";
+		};
+		7093407F287E66F400DAFB40 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70095FEF287EB37A006933BC /* EditOVERALLContentTVC.swift */,
+				7093407D287E66BE00DAFB40 /* EditQNAContentTVC.swift */,
+				70095FF1287EF74D006933BC /* EditFREEContentTVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		70934080287E6A6C00DAFB40 /* StageProgress */ = {
+			isa = PBXGroup;
+			children = (
+				70934081287E6A8D00DAFB40 /* StageProgressAPI.swift */,
+				70934083287E6A9B00DAFB40 /* StageProgressRepository.swift */,
+			);
+			path = StageProgress;
+			sourceTree = "<group>";
+		};
+		70934085287E6AEB00DAFB40 /* StageProgress */ = {
+			isa = PBXGroup;
+			children = (
+				70934086287E6B0B00DAFB40 /* StageProgressUpdateRequest.swift */,
+				70934088287E6DF300DAFB40 /* StageProgressDeleteRequest.swift */,
+			);
+			path = StageProgress;
 			sourceTree = "<group>";
 		};
 		70A2F6722834BFCB00E6B95B = {
@@ -1022,9 +1120,11 @@
 		70A2F6B32834C51F00E6B95B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				70095FE4287E8D0F006933BC /* ContentSerialization.swift */,
 				7027D39D2862D08600F9C913 /* Auth */,
 				7066045E286AACF500A09427 /* Apply */,
 				702D86D628748916009682A4 /* Stage */,
+				70934085287E6AEB00DAFB40 /* StageProgress */,
 				7027D3C92863886500F9C913 /* Company */,
 				70A2F6D52834D23200E6B95B /* Application.swift */,
 				70223C5728437354009B7F0A /* ApplyISOLDCODE.swift */,
@@ -1039,6 +1139,7 @@
 				7027D3952862B2A400F9C913 /* AuthService.swift */,
 				70660465286AAE8700A09427 /* ApplyService.swift */,
 				702D86D928748983009682A4 /* StageService.swift */,
+				701CE1B2288089D100D6E6CC /* StageProgressService.swift */,
 				70576DF22864222D000406DF /* CompanyService.swift */,
 			);
 			path = Service;
@@ -1065,12 +1166,10 @@
 		70A2F6BB2834C56900E6B95B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				70095FE9287E8DC8006933BC /* Func */,
+				70095FEA287E8DD2006933BC /* Const */,
 				705CCD00285C5B4500E79540 /* Enum */,
-				70A2F6DC2834D6B100E6B95B /* Log.swift */,
-				70FBE5112852E58B00455A4B /* Size.swift */,
-				70A2F6BE2834C5CC00E6B95B /* ConstISOLDCODE.swift */,
 				7092C89C2858C88400C57AD1 /* Enum.swift */,
-				7092C89E2858C8A900C57AD1 /* ImageName.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1167,6 +1266,7 @@
 				70322DEF2854E2A500EA0EF7 /* ApplyDetail */,
 				70FD6DD328577FDE0050ADB8 /* ApplyEdit */,
 				70091B9E2873D540005D2627 /* EditApplyOverall */,
+				70FE71C6287DC8B800E5ECB5 /* EditApplyStageProgress */,
 				70BDD356285F12A100E09821 /* WriteApplyOverall */,
 				7027D392286191F400F9C913 /* WriteApplySchedule */,
 				70409645286038F4003EBCE4 /* Schedule */,
@@ -1226,6 +1326,15 @@
 				702B5A35285B1C8D00E94A6E /* FreeStageContentEditView.swift */,
 			);
 			path = ApplyEdit;
+			sourceTree = "<group>";
+		};
+		70FE71C6287DC8B800E5ECB5 /* EditApplyStageProgress */ = {
+			isa = PBXGroup;
+			children = (
+				7093407F287E66F400DAFB40 /* Cell */,
+				70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */,
+			);
+			path = EditApplyStageProgress;
 			sourceTree = "<group>";
 		};
 		7A544D46B65CB50D8A063A7E /* Pods */ = {
@@ -1479,6 +1588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7093407E287E66BE00DAFB40 /* EditQNAContentTVC.swift in Sources */,
 				70443B2E285899A3009EE223 /* RoundButton.swift in Sources */,
 				70322DF12854E2C800EA0EF7 /* ApplyDetailView.swift in Sources */,
 				70A88E63285193910027D673 /* LoggedInBuilder.swift in Sources */,
@@ -1505,6 +1615,7 @@
 				70A88E6E2851A4A90027D673 /* BlogInteractor.swift in Sources */,
 				705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */,
 				702D86E52875FA40009682A4 /* StageCreateRequest.swift in Sources */,
+				701CE1B3288089D100D6E6CC /* StageProgressService.swift in Sources */,
 				7027D3C2286377C100F9C913 /* MyAuthenticationCredential.swift in Sources */,
 				70FBE51A2852EC5D00455A4B /* ApplyEditViewController.swift in Sources */,
 				7027D3BD28636FE200F9C913 /* UserDefaultKey.swift in Sources */,
@@ -1517,6 +1628,7 @@
 				7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */,
 				700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
+				70EBE7B92881AFFA00D605CE /* FREEContentView.swift in Sources */,
 				70576E282865B2AA000406DF /* SignUpPositionViewController.swift in Sources */,
 				70576E2E2865B2F6000406DF /* SignUpPositionView.swift in Sources */,
 				70091BAA2873DA76005D2627 /* EditApplyStageProgressBuilder.swift in Sources */,
@@ -1542,6 +1654,7 @@
 				70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */,
 				70091B9D2873D4AF005D2627 /* EditApplyOverallInteractor.swift in Sources */,
 				700DBEC22868CBEF00883A4F /* SignUpNicknameComponent+SignUpPosition.swift in Sources */,
+				70EBE7B52881A6BC00D605CE /* StageProgressTVC.swift in Sources */,
 				704096402860071D003EBCE4 /* WriteApplyScheduleViewController.swift in Sources */,
 				70A2F67F2834BFCB00E6B95B /* AppDelegate.swift in Sources */,
 				70A88E6B2851A4A90027D673 /* BlogRouter.swift in Sources */,
@@ -1550,8 +1663,10 @@
 				70D83748286BD70D0085DE43 /* MyPageViewController.swift in Sources */,
 				70A2F6812834BFCB00E6B95B /* SceneDelegate.swift in Sources */,
 				70576DF32864222D000406DF /* CompanyService.swift in Sources */,
+				70934087287E6B0B00DAFB40 /* StageProgressUpdateRequest.swift in Sources */,
 				701CE2382849D3B9009230CE /* LoggedOutBuilder.swift in Sources */,
 				70A2F6D62834D23200E6B95B /* Application.swift in Sources */,
+				70095FF2287EF74D006933BC /* EditFREEContentTVC.swift in Sources */,
 				7066045828697A2B00A09427 /* SignInBuilder.swift in Sources */,
 				70FBE5202852FB8100455A4B /* BaseNavigationViewController.swift in Sources */,
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
@@ -1566,12 +1681,15 @@
 				70091BA22873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift in Sources */,
 				70091BA02873D555005D2627 /* EditApplyOverallView.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCVC.swift in Sources */,
+				70EBE7B72881A8F900D605CE /* OVERALLContentView.swift in Sources */,
+				70095FF0287EB37A006933BC /* EditOVERALLContentTVC.swift in Sources */,
 				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
 				7027D39A2862B44800F9C913 /* Gender.swift in Sources */,
 				7027D3A9286320A300F9C913 /* AuthRepository.swift in Sources */,
 				706CAFA4287D29740032C281 /* ApplyTVC.swift in Sources */,
 				70576DEB28641716000406DF /* CompanySearchCondition.swift in Sources */,
 				7027D3CB2863887F00F9C913 /* CompanyCreateRequest.swift in Sources */,
+				70095FEE287E8EAA006933BC /* ProgressContentType.swift in Sources */,
 				704096492860391D003EBCE4 /* ScheduleView.swift in Sources */,
 				70576DED28641B86000406DF /* CompanySearchQuery.swift in Sources */,
 				70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */,
@@ -1581,15 +1699,18 @@
 				701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */,
 				7040964428600A23003EBCE4 /* WriteApplyOverallComponent+WriteApplySchedule.swift in Sources */,
 				70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */,
+				70EBE7BB2881B03100D605CE /* QNAContentView.swift in Sources */,
 				700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */,
 				70576DF72864E09A000406DF /* JobType.swift in Sources */,
 				701CE2202849C197009230CE /* ApplyViewController.swift in Sources */,
 				70091B9B2873D4AF005D2627 /* EditApplyOverallViewController.swift in Sources */,
 				701CE22E2849D0F2009230CE /* RootBuilder.swift in Sources */,
+				70934089287E6DF300DAFB40 /* StageProgressDeleteRequest.swift in Sources */,
 				700DBECA2868D82D00883A4F /* SignUpSuccessRouter.swift in Sources */,
 				703F4A372852124C00C8BEC0 /* RIBs+Ext.swift in Sources */,
 				70660460286AAD4200A09427 /* ApplyCreateRequest.swift in Sources */,
 				7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */,
+				70095FE5287E8D0F006933BC /* ContentSerialization.swift in Sources */,
 				70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */,
 				70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */,
 				70A88E6D2851A4A90027D673 /* BlogBuilder.swift in Sources */,
@@ -1600,7 +1721,6 @@
 				7005C89128449C8C0091B225 /* BaseView.swift in Sources */,
 				703DC43728546D5B0085F955 /* UIButton+Ext.swift in Sources */,
 				70576E272865B2AA000406DF /* SignUpPositionRouter.swift in Sources */,
-				70FD6DD52857808B0050ADB8 /* ReviewEditTVC.swift in Sources */,
 				7040965428604251003EBCE4 /* TabBarComponent+Schedule.swift in Sources */,
 				70CAB8F0286ECB5B000B5A05 /* QNAEditView.swift in Sources */,
 				70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */,
@@ -1620,6 +1740,7 @@
 				7009C0F828475A8700140CB5 /* BarChatView.swift in Sources */,
 				700DBEBC2868BA6D00883A4F /* SignOutComponent+SignUpNickname.swift in Sources */,
 				70091B9A2873D4AF005D2627 /* EditApplyOverallRouter.swift in Sources */,
+				70934082287E6A8D00DAFB40 /* StageProgressAPI.swift in Sources */,
 				70091BB02873F27D005D2627 /* DraggableStageTVC.swift in Sources */,
 				7046E3D3283B59A60048C068 /* UIView+Ext.swift in Sources */,
 				70576E3C2865B563000406DF /* SignOutView.swift in Sources */,
@@ -1628,6 +1749,7 @@
 				7092C89D2858C88400C57AD1 /* Enum.swift in Sources */,
 				7066045928697A2B00A09427 /* SignInInteractor.swift in Sources */,
 				7027D3B32863274300F9C913 /* HTTPHeaderField.swift in Sources */,
+				70FE71C8287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift in Sources */,
 				7027D3A62862E02A00F9C913 /* LoggedOutView.swift in Sources */,
 				702B5A34285B0BB200E94A6E /* QnaStageContentEditView.swift in Sources */,
 				701CE22C2849D0F2009230CE /* RootRouter.swift in Sources */,
@@ -1651,6 +1773,7 @@
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
 				70576E362865B54C000406DF /* SignOutRouter.swift in Sources */,
 				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,
+				706CAFA8287D47EE0032C281 /* ProgressStatus.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				70D8374D286BD80B0085DE43 /* MyPageView.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
@@ -1667,19 +1790,20 @@
 				701EBDBB2868DC2600E09670 /* SignUpPositionComponent+SignUpSuccess.swift in Sources */,
 				70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */,
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
-				70A2F6BF2834C5CC00E6B95B /* ConstISOLDCODE.swift in Sources */,
+				70934084287E6A9B00DAFB40 /* StageProgressRepository.swift in Sources */,
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
 				70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */,
 				70660466286AAE8700A09427 /* ApplyService.swift in Sources */,
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
 				7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */,
+				70095FEC287E8E72006933BC /* TabBarItem.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,
 				70D83761286C4CA90085DE43 /* ProgressBarView.swift in Sources */,
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
 				70091BAB2873DA76005D2627 /* EditApplyStageProgressInteractor.swift in Sources */,
-				7027D39C2862B4C200F9C913 /* Sso.swift in Sources */,
+				7027D39C2862B4C200F9C913 /* SSO.swift in Sources */,
 				7046E3D5283B59BF0048C068 /* UIStackView+Ext.swift in Sources */,
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,
 				70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */,
