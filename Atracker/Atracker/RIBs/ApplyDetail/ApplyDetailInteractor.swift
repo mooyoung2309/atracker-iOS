@@ -98,7 +98,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         Log("[D] 지원 후기 삭제하기 버튼 클릭됨")
     }
     
-    // MARK: From Child RIBs
+    // MARK: 자식 RIBs으로 부터
     func tapBackButtonFromChildRIB() {
         router?.detachThisChildRIB()
         
@@ -109,6 +109,9 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     
     func didEditApplyStageProgress() {
         router?.detachThisChildRIB()
+        
+        presenter.hideEditTableView()
+        listener?.showTabBar()
     }
 }
 

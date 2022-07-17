@@ -11,6 +11,7 @@ import UIKit
 
 protocol EditApplyStageProgressPresentableAction: AnyObject {
     var tapNextButton: Observable<Void> { get }
+    var tapProgressStatusButton: Observable<ProgressStatus> { get }
     var selectedPageIndex: Observable<Int> { get }
     var addQNAContentButton: Observable<Void> { get }
     var addFreeContentButton: Observable<Void> { get }
@@ -19,6 +20,7 @@ protocol EditApplyStageProgressPresentableAction: AnyObject {
 
 protocol EditApplyStageProgressPresentableHandler: AnyObject {
     var navigationTitle: Observable<String> { get }
+    var progressStatus: Observable<ProgressStatus> { get }
     var stageTitles: Observable<[String]> { get }
     var stageContents: Observable<[StageContent]> { get }
     var currentPageIndex: Observable<Int> { get }
@@ -42,6 +44,7 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
     private let selfView = EditApplyStageProgressView()
     
     private let tapNextButtonSubject = PublishSubject<Void>()
+    private let tapProgressStatusButtonSubject = PublishSubject<ProgressStatus>()
     private let addQNAContentButtonSubject = PublishSubject<Void>()
     private let addFREEContentButtonSubject = PublishSubject<Void>()
     private let selectedPageIndexSubject = PublishSubject<Int>()
@@ -94,6 +97,24 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
             }
             .disposed(by: disposeBag)
         
+        selfView.statusButtonBar.notStartedButton.rx.tap
+            .bind { [weak self] in
+                self?.tapProgressStatusButtonSubject.onNext(.notStarted)
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.statusButtonBar.failButton.rx.tap
+            .bind { [weak self] in
+                self?.tapProgressStatusButtonSubject.onNext(.fail)
+            }
+            .disposed(by: disposeBag)
+        
+        selfView.statusButtonBar.passButton.rx.tap
+            .bind { [weak self] in
+                self?.tapProgressStatusButtonSubject.onNext(.pass)
+            }
+            .disposed(by: disposeBag)
+        
         selfView.addQNAContentButton.rx.tap
             .bind { [weak self] in
                 self?.emitUpdatedStageContentsSubject()
@@ -123,8 +144,13 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         
         handler.stageContents
             .bind { [weak self] stageContents in
-                Log("[D] \(stageContents)")
                 self?.reloadEditProgressTableView(stageContents: stageContents)
+            }
+            .disposed(by: disposeBag)
+        
+        handler.progressStatus
+            .bind { [weak self] progressStatus in
+                self?.reloadProgressStatusButton(progressStatus: progressStatus)
             }
             .disposed(by: disposeBag)
         
@@ -133,6 +159,21 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
                 self?.listener?.tapBackButton()
             }
             .disposed(by: disposeBag)
+    }
+    
+    func reloadProgressStatusButton(progressStatus: ProgressStatus) {
+        selfView.statusButtonBar.notStartedButton.isSelected = false
+        selfView.statusButtonBar.failButton.isSelected = false
+        selfView.statusButtonBar.passButton.isSelected = false
+        
+        switch progressStatus {
+        case .notStarted:
+            selfView.statusButtonBar.notStartedButton.isSelected = true
+        case .pass:
+            selfView.statusButtonBar.passButton.isSelected = true
+        case .fail:
+            selfView.statusButtonBar.failButton.isSelected = true
+        }
     }
     
     func emitUpdatedStageContentsSubject() {
@@ -157,6 +198,10 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
 extension EditApplyStageProgressViewController: EditApplyStageProgressPresentableAction {
     var tapNextButton: Observable<Void> {
         return tapNextButtonSubject.asObservable()
+    }
+    
+    var tapProgressStatusButton: Observable<ProgressStatus> {
+        return tapProgressStatusButtonSubject.asObservable()
     }
     
     var selectedPageIndex: Observable<Int> {

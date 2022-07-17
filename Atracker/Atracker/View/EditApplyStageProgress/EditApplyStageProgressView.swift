@@ -86,19 +86,19 @@ class EditApplyStageProgressView: BaseView {
         }
         
         statusButtonBar.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(16)
             $0.leading.trailing.equalTo(self).inset(15)
-            $0.height.equalTo(30)
+            $0.height.equalTo(26)
         }
         
         deleteButtonBar.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(16)
             $0.leading.trailing.equalTo(self).inset(15)
-            $0.height.equalTo(30)
+            $0.height.equalTo(26)
         }
         
         editProgressTableView.snp.makeConstraints {
-            $0.top.equalTo(statusButtonBar.snp.bottom)
+            $0.top.equalTo(statusButtonBar.snp.bottom).inset(-16)
             $0.leading.trailing.equalTo(self).inset(16)
             $0.height.equalTo(0)
         }

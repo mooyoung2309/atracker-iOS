@@ -35,6 +35,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     private var changedStageProgresses: [StageProgress]
     private var changedStageProgressUpdateRequest: StageProgressUpdateRequest
     
+    private let progressStatusRelay = PublishRelay<ProgressStatus>()
     private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
     private let currentPageIndexRelay = BehaviorRelay<Int>(value: 0)
     
@@ -50,7 +51,6 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         }
         
         self.changedStageProgressUpdateRequest = StageProgressUpdateRequest(stageProgressUpdateContents: stageProgressUpdateContents)
-        Log("[D] \(changedStageProgressUpdateRequest)")
         
         super.init(presenter: presenter)
         
@@ -78,7 +78,8 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         action.tapNextButton
             .bind { [weak self] in
                 guard let this = self else { return }
-                this.putStageProgress(request: this.changedStageProgressUpdateRequest) {
+                this.updateStageProgress(request: this.changedStageProgressUpdateRequest) {
+                    Log("[D] API 업데이트 요청 \(this.changedStageProgressUpdateRequest)")
                     this.listener?.didEditApplyStageProgress()
                 }
             }
@@ -108,26 +109,39 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
             }
             .disposeOnDeactivate(interactor: self)
         
-        // bind handler
+        action.tapProgressStatusButton
+            .bind(to: progressStatusRelay)
+            .disposeOnDeactivate(interactor: self)
+        
+        // 핸들러 바인딩
         handler.currentPageIndex
             .bind { [weak self] i in
                 guard let this = self else { return }
+                Log("[D] 현재 페이지 \(i)")
                 this.emitStageContentsRelay(contents: this.changedStageProgresses[i].stageContents)
+                this.emitProgressStatusRelay(progressStatusCode: this.changedStageProgressUpdateRequest.stageProgressUpdateContents[i].status)
             }
             .disposeOnDeactivate(interactor: self)
         
         handler.stageContents
             .bind { [weak self] stageContents in
-                Log("[D] stageContents가 변경됨 \(stageContents)")
                 guard let this = self else { return }
                 let index = this.currentPageIndexRelay.value
                 this.updateChangedStageProgress(index: index, contents: stageContents)
                 this.updateChangedStageProgressUpdateRequest(index: index, originContents: this.apply.stageProgress[index].stageContents, contents: stageContents)
             }
             .disposeOnDeactivate(interactor: self)
+        
+        handler.progressStatus
+            .bind { [weak self] progressStatus in
+                guard let this = self else { return }
+                let index = this.currentPageIndexRelay.value
+                self?.updateProgressStatus(index: index, progressStatus: progressStatus)
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
-    func putStageProgress(request: StageProgressUpdateRequest, completion: @escaping () -> ()) {
+    func updateStageProgress(request: StageProgressUpdateRequest, completion: @escaping () -> ()) {
         stageProgressService.put(request: request) { result in
             switch result {
             case .success(_):
@@ -140,7 +154,23 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         }
     }
     
-    func emitStageContentsRelay(contents: [StageContent]) {
+    private func emitProgressStatusRelay(progressStatusCode: String) {
+        switch progressStatusCode {
+        case ProgressStatus.notStarted.code:
+            progressStatusRelay.accept(ProgressStatus.notStarted)
+            return
+        case ProgressStatus.fail.code:
+            progressStatusRelay.accept(ProgressStatus.fail)
+            return
+        case ProgressStatus.pass.code:
+            progressStatusRelay.accept(ProgressStatus.pass)
+            return
+        default:
+            return
+        }
+    }
+    
+    private func emitStageContentsRelay(contents: [StageContent]) {
         var validatedContents = contents
         
         validatedContents = validContainOVERALLContent(contents: validatedContents)
@@ -149,11 +179,15 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         stageContentsRelay.accept(validatedContents)
     }
     
-    func updateChangedStageProgress(index: Int, contents: [StageContent]) {
+    private func updateProgressStatus(index: Int, progressStatus: ProgressStatus) {
+        changedStageProgressUpdateRequest.stageProgressUpdateContents[index].status = progressStatus.code
+    }
+    
+    private func updateChangedStageProgress(index: Int, contents: [StageContent]) {
         changedStageProgresses[index].stageContents = contents
     }
     
-    func updateChangedStageProgressUpdateRequest(index: Int, originContents: [StageContent], contents: [StageContent]) {
+    private func updateChangedStageProgressUpdateRequest(index: Int, originContents: [StageContent], contents: [StageContent]) {
         changedStageProgressUpdateRequest = updatedStageProgressUpdateRequest(index: index, stageProgressUpdateRequest: changedStageProgressUpdateRequest, originContents: originContents, contents: contents)
     }
     
@@ -275,6 +309,10 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
 }
 
 extension EditApplyStageProgressInteractor: EditApplyStageProgressPresentableHandler {
+    var progressStatus: Observable<ProgressStatus> {
+        return progressStatusRelay.asObservable()
+    }
+    
     var stageTitles: Observable<[String]> {
         return Observable.just(apply.stageProgress.map({ (stageProgress: StageProgress) -> String in
             return stageProgress.stageTitle

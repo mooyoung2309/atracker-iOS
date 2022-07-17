@@ -21,7 +21,7 @@ struct StageProgressUpdateContent: Codable {
     var deletedContents: [DeletedContent]
     let id: Int
     var newContents: [NewContent]
-    let status: String
+    var status: String
     var updatedContents: [UpdatedContent]
 
     enum CodingKeys: String, CodingKey {
