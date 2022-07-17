@@ -46,9 +46,9 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
         self.currentDates   = currentDate.getDatesOfMonth()
         self.nextDates      = nextDate.getDatesOfMonth()
         
-        selfView.leftCollectionView.reloadData()
-        selfView.centerCollectionView.reloadData()
-        selfView.rightCollectionView.reloadData()
+//        selfView.leftCollectionView.reloadData()
+//        selfView.centerCollectionView.reloadData()
+//        selfView.rightCollectionView.reloadData()
     }
     
     func updateNavigationTitle(title: String) {
@@ -75,14 +75,14 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selfView.bottomTableView.reloadData()
+//        selfView.bottomTableView.reloadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
+//    }
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -231,13 +231,13 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case selfView.bottomTableView:
             cell.selectionStyle = .none
-            if let selectedCellIndexPath = selectedCellIndexPath {
-                if selectedCellIndexPath == indexPath && canEdit {
-                    cell.showDatePicker()
-                }
-            } else {
-                cell.hideDatePicker()
-            }
+//            if let selectedCellIndexPath = selectedCellIndexPath {
+//                if selectedCellIndexPath == indexPath && canEdit {
+//                    cell.showDatePicker()
+//                }
+//            } else {
+//                cell.hideDatePicker()
+//            }
             return cell
         default:
             return UITableViewCell()
