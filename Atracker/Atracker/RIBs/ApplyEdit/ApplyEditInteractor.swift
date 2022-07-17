@@ -16,18 +16,18 @@ protocol ApplyEditPresentable: Presentable {
     var listener: ApplyEditPresentableListener? { get set }
     
     func setNavigaionBarTitle(_ text: String)
-    func highlightStageStatusButton(status: StageProgressStatus)
+    func highlightStageStatusButton(status: ProgressStatus)
     func showStageStatusButtonBar()
     func showDeleteButtonBar()
     func showStageContentList(_ stageContentList: [StageContent])
     func showCheckButton()
     func hideCheckButton()
-    func showAlertView(i: Int)
+    func showAlertView(style: AlertStyle)
     func hideAlertView()
 }
 
 protocol ApplyEditListener: AnyObject {
-    func goBackToApplyDetailRIB()
+    func tapBackButtonFromChildRIB()
 }
 
 final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, ApplyEditInteractable, ApplyEditPresentableListener {
@@ -62,18 +62,18 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     }
     
     func didTapBackButton() {
-        listener?.goBackToApplyDetailRIB()
+        listener?.tapBackButtonFromChildRIB()
     }
     
     func reloadTableView(stageProgressTitle: String) {
-        guard let stageProgress = edittedApply.stageProgress.first(where: { $0.title == stageProgressTitle}) else {
-            return
-        }
-        
-        presenter.showStageContentList([stageProgress.stageContent])
+//        guard let stageProgress = edittedApply.stageProgress?.first(where: { $0.title == stageProgressTitle}) else {
+//            return
+//        }
+//        
+//        presenter.showStageContentList([stageProgress.stageContent])
     }
     
-    func tapStageStatusButton(status: StageProgressStatus) {
+    func tapStageStatusButton(status: ProgressStatus) {
         switch status {
         case .notStarted:
             presenter.highlightStageStatusButton(status: .notStarted)
@@ -99,7 +99,7 @@ final class ApplyEditInteractor: PresentableInteractor<ApplyEditPresentable>, Ap
     
     func tapDeleteButton() {
         Log("")
-        presenter.showAlertView(i: 78)
+        presenter.showAlertView(style: AlertStyle.delete(10))
     }
     
     func tapAlertBackButton() {

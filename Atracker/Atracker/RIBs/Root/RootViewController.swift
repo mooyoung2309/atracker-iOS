@@ -39,8 +39,8 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
     }
 }
 
-// MARK: LoggedInViewControllable
+// MARK: SignInViewControllable
 
-extension RootViewController: LoggedInViewControllable {
+extension RootViewController: SignInViewControllable {
     
 }

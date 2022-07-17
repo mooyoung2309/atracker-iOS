@@ -39,6 +39,8 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         setupReload()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){      self.view.endEditing(true)}
+    
     func setupReload() { }
     func setupProperty() { }
     func setupHierarchy() { }

@@ -17,6 +17,7 @@ protocol SchedulePresentableListener: AnyObject {
     func scrollCalendarPrev()
     func scrollCalendarNext()
     func tapBottomViewEditButton()
+    func tapCalendarView(date: Date)
 }
 
 final class ScheduleViewController: BaseNavigationViewController, SchedulePresentable, ScheduleViewControllable {
@@ -24,8 +25,6 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     weak var listener: SchedulePresentableListener?
     
     let selfView = ScheduleView()
-    
-    private let dates: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
     
     private var prevDate: Date          = Date()
     private var currentDate: Date       = Date()
@@ -47,9 +46,9 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
         self.currentDates   = currentDate.getDatesOfMonth()
         self.nextDates      = nextDate.getDatesOfMonth()
         
-        selfView.leftCollectionView.reloadData()
-        selfView.centerCollectionView.reloadData()
-        selfView.rightCollectionView.reloadData()
+//        selfView.leftCollectionView.reloadData()
+//        selfView.centerCollectionView.reloadData()
+//        selfView.rightCollectionView.reloadData()
     }
     
     func updateNavigationTitle(title: String) {
@@ -69,17 +68,21 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
         return bool
     }
     
+    func updateBottomSheet(date: Date) {
+        selfView.bottomTitleLabel.text = "\(date.getMonth())월 \(date.getDay())일 \(date.getWeek())요일"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selfView.bottomTableView.reloadData()
+//        selfView.bottomTableView.reloadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
+//    }
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -146,7 +149,7 @@ extension ScheduleViewController: UIScrollViewDelegate {
 extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 7.0
-        let height = collectionView.frame.height / CGFloat(dates.count / 7 + 1)
+        let height = collectionView.frame.height / CGFloat(currentDates.count / 7)
         return CGSize(width: width, height: height)
     }
     
@@ -203,7 +206,16 @@ extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollecti
         default:
             return UICollectionViewCell()
         }
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case selfView.centerCollectionView:
+            listener?.tapCalendarView(date: currentDates[indexPath.item])
+            return
+        default:
+            return
+        }
     }
 }
 
@@ -219,13 +231,13 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case selfView.bottomTableView:
             cell.selectionStyle = .none
-            if let selectedCellIndexPath = selectedCellIndexPath {
-                if selectedCellIndexPath == indexPath && canEdit {
-                    cell.showDatePicker()
-                }
-            } else {
-                cell.hideDatePicker()
-            }
+//            if let selectedCellIndexPath = selectedCellIndexPath {
+//                if selectedCellIndexPath == indexPath && canEdit {
+//                    cell.showDatePicker()
+//                }
+//            } else {
+//                cell.hideDatePicker()
+//            }
             return cell
         default:
             return UITableViewCell()
@@ -235,7 +247,7 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedCellIndexPath = selectedCellIndexPath {
             if selectedCellIndexPath == indexPath && canEdit {
-                return 200
+                return 220
             }
         }
         return 44

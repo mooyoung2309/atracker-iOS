@@ -62,6 +62,12 @@ extension Date {
         return self.getDateComponentsKST().day ?? 0
     }
     
+    func getWeek() -> String {
+        let day = ["월", "화", "수", "목", "금", "토", "일"]
+        
+        return day[(self.getDateComponentsKST().weekday ?? 1) - 1]
+    }
+    
     func getMonth() -> Int {
         return self.getDateComponentsKST().month ?? 0
     }
@@ -72,5 +78,29 @@ extension Date {
         dateFormatter.dateFormat = "yyyy.MM"
         
         return dateFormatter.string(from: date)
+    }
+    
+    func getISO8601String() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        
+        return formatter.string(from: self)
+    }
+    
+    func getKRString() -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy.MM.dd a hh시 mm분"
+        dateFormatter.locale = Locale(identifier:"ko_KR")
+        
+        return dateFormatter.string(from: self)
+    }
+    
+    func getDateFromISO8601String(iso8601: String?) -> Date? {
+        guard let iso8601 = iso8601 else { return nil }
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        
+        return formatter.date(from: iso8601)
     }
 }

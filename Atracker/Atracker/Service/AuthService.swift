@@ -14,6 +14,10 @@ protocol AuthServiceProtocol {
 class AuthService: AuthServiceProtocol {
     let authRepository = AuthRepository()
     
+    func signOut() {
+        UserDefaults.standard.string(forKey: UserDefaultKey.accessToken)
+    }
+    
     func testSignUp(email: String, gender: String, jobPosition: String, nickName: String, sso: String, completion: @escaping (Result<SignResponse, Error>) -> Void) {
         authRepository.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
             switch result {

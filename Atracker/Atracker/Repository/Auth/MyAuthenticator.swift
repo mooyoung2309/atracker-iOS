@@ -17,7 +17,7 @@ class MyAuthenticator: Authenticator {
     }
     
     func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: Error) -> Bool {
-        response.statusCode == 401
+        response.statusCode == 403
     }
     
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: Credential) -> Bool {
@@ -34,10 +34,12 @@ class MyAuthenticator: Authenticator {
         AuthRepository.postTokenRefresh(request: request) { response in
             switch response {
             case .success(let data):
+                Log("[D] 토큰 리프레시 성공")
                 let accessToken = data.accessToken
                 UserDefaults.standard.set(accessToken, forKey: UserDefaultKey.accessToken)
                 completion(.success(MyAuthenticationCredential(accessToken: accessToken, refreshToken: refreshToken)))
             case .failure(let error):
+                Log("[D] 토큰 리프레시 실패")
                 completion(.failure(error))
             }
         }

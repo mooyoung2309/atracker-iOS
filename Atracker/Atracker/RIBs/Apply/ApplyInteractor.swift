@@ -7,22 +7,26 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
-//    func attachApplyWriteRIB()
+    func attachWriteApplyOverall()
+    func attachMyPageRIB()
+    func detachThisChildRIB()
     func reAttachApplyDetailRIB()
-    func detachChildRIB()
 }
 
 protocol ApplyPresentable: Presentable {
     var listener: ApplyPresentableListener? { get set }
-    func showApplyList(_ applyList: [Apply])
+    var action: ApplyPresentableAction? { get }
+    var handler: ApplyPresentableHandler? { get set }
 }
 
 protocol ApplyListener: AnyObject {
-    func goBackToApplyRIB()
-    func goToApplyWriteRIB()
+    func showTabBar()
+    func hideTabBar()
+    func didSignOut()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
@@ -30,53 +34,89 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
     
-    private let service: ApplyServiceProtocol
+    private let applyService: ApplyServiceProtocol
+    
+    private let appliesRelay = BehaviorRelay<[Apply]>(value: [])
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    init(presenter: ApplyPresentable, service: ApplyServiceProtocol) {
-        self.service = service
+    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocol) {
+        self.applyService = applyService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        reloadApplyList()
+        setupBind()
+        fetchApplies()
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        
+        presenter.handler = nil
     }
     
-    func didTabCell(apply: Apply) {
-        router?.attachApplyDetailRIB(apply: apply)
+    func setupBind() {
+        guard let action = presenter.action else { return }
+        
+        action.tapApplyTVC
+            .bind { [weak self] apply in
+                self?.router?.attachApplyDetailRIB(apply: apply)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapPlusButton
+            .bind { [weak self] _ in
+                self?.listener?.hideTabBar()
+                self?.router?.attachWriteApplyOverall()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapMyPageButton
+            .bind { [weak self] _ in
+                self?.router?.attachMyPageRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
-    func tapPlusButton() {
-        router?.detachChildRIB()
-        listener?.goToApplyWriteRIB()
-    }
-    
-    func reloadApplyList() {
-        service.getApplyList { [weak self] (response) in
-            guard let this = self else { return }
-            this.presenter.showApplyList(response)
+    func fetchApplies() {
+        applyService.get(request: ApplyRequest(applyIds: nil, includeContent: true)) { [weak self] result in
+            switch result {
+            case .success(let data):
+                Log("[D] 지원 현황 가져오기 성공\n\(data.applies)")
+                self?.appliesRelay.accept(data.applies)
+            case .failure(_):
+                Log("[D] 지원 현황 가져오기 실패")
+            }
         }
     }
     
-    func goBackToApplyRIB() {
-        router?.detachChildRIB()
-        listener?.goBackToApplyRIB()
+    // MARK: From Child RIB
+    func tapBackButtonFromChildRIB() {
+        router?.detachThisChildRIB()
+        fetchApplies()
+        showTabBar()
     }
     
-    func goBackToApplyDetailRIB() {
-        router?.reAttachApplyDetailRIB()
+    func showTabBar() {
+        listener?.showTabBar()
     }
     
-//    func goBackToWriteApplyOverallRIB() {
-//        router?.attachApplyWriteRIB()
-//    }
+    func hideTabBar() {
+        listener?.hideTabBar()
+    }
+    
+    func didSignOut() {
+        listener?.didSignOut()
+    }
+}
+
+extension ApplyInteractor: ApplyPresentableHandler {
+    var applies: Observable<[Apply]> {
+        return appliesRelay.asObservable()
+    }
 }

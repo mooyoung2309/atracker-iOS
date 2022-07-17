@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable, LoggedOutListener, LoggedInListener {
+protocol RootInteractable: Interactable, SignInListener, SignOutListener {
     var router: RootRouting? { get set }
     var listener: RootListener? { get set }
 }
@@ -20,18 +20,17 @@ protocol RootViewControllable: ViewControllable {
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
     
-    private let loggedOutBuilder: LoggedOutBuildable
-    private let loggedInBuilder: LoggedInBuildable
+    private let signOutBuilder: SignOutBuildable
+    private let signInBuilder: SignInBuildable
     
-    private var loggedOut: ViewableRouting?
+    private var child: Routing?
+    private var signOut: ViewableRouting?
+    private var signIn: Routing?
     
-    init(interactor: RootInteractable,
-         viewController: RootViewControllable,
-         loggedOutBuilder: LoggedOutBuilder,
-         loggedInBuilder: LoggedInBuilder) {
+    init(interactor: RootInteractable, viewController: RootViewControllable, signOutBuilder: SignOutBuildable, signInBuilder: SignInBuildable) {
         
-        self.loggedOutBuilder = loggedOutBuilder
-        self.loggedInBuilder = loggedInBuilder
+        self.signOutBuilder = signOutBuilder
+        self.signInBuilder = signInBuilder
         
         super.init(interactor: interactor, viewController: viewController)
         
@@ -41,31 +40,39 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     override func didLoad() {
         super.didLoad()
         
-        routeToLoggedOut()
+        if let _ = UserDefaults.standard.string(forKey: UserDefaultKey.accessToken) {
+            attachSignInRIB()
+        } else {
+            attachSignOutRIB()
+        }
     }
     
-    func routeToLoggedIn(email: String?, password: String?) {
-        if let loggedOut = loggedOut {
-            detachChild(loggedOut)
-            viewController.dismiss(viewController: loggedOut.viewControllable)
-            
-            self.loggedOut = nil
+    func attachSignOutRIB() {
+        if let signOut = signOut {
+            viewController.dismiss(viewController: signOut.viewControllable)
         }
         
-        let loggedIn = loggedInBuilder.build(withListener: interactor, email: email, password: password)
+        let signOut = signOutBuilder.build(withListener: interactor)
         
-        attachChild(loggedIn)
+        detachChildRIB(child)
+        attachChild(signOut)
+        viewController.present(viewController: signOut.viewControllable)
+        
+        self.signOut = signOut
+        self.child = signOut
     }
     
-    private func routeToLoggedOut() {
-        let loggedOut = loggedOutBuilder.build(withListener: interactor)
+    func attachSignInRIB() {
+        if let signOut = signOut {
+            viewController.dismiss(viewController: signOut.viewControllable)
+        }
         
-        self.loggedOut = loggedOut
+        let signIn = signInBuilder.build(withListener: interactor)
         
-        attachChild(loggedOut)
+        detachChildRIB(child)
+        attachChild(signIn)
         
-//        loggedOut.viewControllable.uiviewController.modalPresentationStyle = .fullScreen
-        
-        viewController.present(viewController: loggedOut.viewControllable)
+        self.signIn = signIn
+        self.child = signIn
     }
 }

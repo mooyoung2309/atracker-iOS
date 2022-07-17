@@ -32,15 +32,59 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
     func showNavigationBarTrailingButton()
     func hideNavigationBarTrailingButton()
     func setNavigationBarTrailingButtonTitle(_ text: String)
+    func setNavigationBarTrailingButtonImage(_ image: UIImage?)
 }
 
 class BaseNavigationViewController: BaseViewController, BaseNavigationViewControllerProtocol {
     
-    var statusBar       = UIView()
-    var navigaionBar    = NavigationBar()
-    var containerView   = UIView()
-    var mainView        = UIView()
-    var contentView     = UIView()
+    var statusBar = UIView()
+    var navigaionBar = NavigationBar()
+    var containerView = UIView()
+    var mainView = UIView()
+    var contentView = UIView()
+    
+    var alertView = AlertView()
+    var blurView = UIView()
+    
+    var isAlertBack: ((Bool) -> Void)?
+    var isAlertNext: ((Bool) -> Void)?
+    
+    func showAlertView(style: AlertStyle) {
+        alertView.update(style: style)
+        
+        view.addSubview(alertView)
+        
+        alertView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        alertView.isAlertBack { [weak self] _ in
+            Log("[D] 경고창 왼쪽 버튼")
+            self?.isAlertBack?(true)
+        }
+        
+        alertView.isAlertNext { [weak self] _ in
+            Log("[D] 경고창 오른쪽 버튼")
+            self?.isAlertNext?(true)
+        }
+    }
+    
+    func hideAlertView() {
+        alertView.removeFromSuperview()
+    }
+    
+    func showBlurView() {
+        view.addSubview(blurView)
+        
+        blurView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func hideBlurView() {
+        blurView.removeFromSuperview()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,5 +197,17 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func setNavigationBarTrailingButtonTitle(_ text: String) {
         navigaionBar.trailingButton.setTitle(text, for: .normal)
+    }
+    
+    func setNavigationBarTrailingButtonImage(_ image: UIImage?) {
+        navigaionBar.trailingButton.setImage(image, for: .normal)
+    }
+    
+    func isAlertBack(completion: @escaping (Bool) -> Void) {
+        self.isAlertBack = completion
+    }
+    
+    func isAlertNext(completion: @escaping (Bool) -> Void) {
+        self.isAlertNext = completion
     }
 }

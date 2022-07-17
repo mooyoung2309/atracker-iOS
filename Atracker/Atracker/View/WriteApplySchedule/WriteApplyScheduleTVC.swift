@@ -7,9 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class WriteApplyScheduleTVC: BaseTVC {
     static let id = "WriteApplyScheduleTVC"
+    var disposeBag = DisposeBag()
     
     let circle          = UIView()
     let titleLabel      = UILabel()
@@ -17,6 +20,8 @@ class WriteApplyScheduleTVC: BaseTVC {
     let dateLabel       = UILabel()
     let divisionLabel   = UILabel()
     let timeLabel       = UILabel()
+    
+    var dateChanged: ((Date) -> Void)?
     
     func showDatePicker() {
         datePicker.isHidden = false
@@ -32,6 +37,29 @@ class WriteApplyScheduleTVC: BaseTVC {
         }
     }
     
+    func update(date: Date?) {
+        guard let date = date else {
+            return
+        }
+        
+        dateLabel.text = date.getKRString()
+        datePicker.date = date
+    }
+    
+    func dateChanged(completion: @escaping (Date) -> Void) {
+        self.dateChanged = completion
+    }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        dateLabel.text = "+"
+        datePicker.date = Date()
+        
+        hideDatePicker()
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -45,13 +73,10 @@ class WriteApplyScheduleTVC: BaseTVC {
         dateLabel.font          = .systemFont(ofSize: 16, weight: .regular)
         dateLabel.textColor     = .gray3
         
-        divisionLabel.font      = .systemFont(ofSize: 14, weight: .regular)
-        divisionLabel.textColor = .gray5
-        
-        timeLabel.font          = .systemFont(ofSize: 16, weight: .regular)
-        timeLabel.textColor     = .gray3
-        
         datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.minuteInterval = 5
+        datePicker.datePickerMode = .dateAndTime
+        
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
         } else {
@@ -60,9 +85,9 @@ class WriteApplyScheduleTVC: BaseTVC {
         
         circle.backgroundColor  = .neonGreen
         titleLabel.text         = "서류"
-        dateLabel.text          = "2022  03  12"
-        divisionLabel.text      = "오후"
-        timeLabel.text          = "12 : 00"
+//        dateLabel.text          = "2022  03  12     오후  12 : 00"
+        dateLabel.text = "+"
+        dateLabel.textAlignment = .center
         datePicker.isHidden     = true
         datePicker.backgroundColor = .backgroundLightGray
     }
@@ -96,22 +121,22 @@ class WriteApplyScheduleTVC: BaseTVC {
             $0.top.equalTo(titleLabel.snp.bottom).inset(-6)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(0)
-//            $0.bottom.equalToSuperview()
-        }
-        
-        timeLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(45)
-            $0.centerY.equalTo(titleLabel)
-        }
-        
-        divisionLabel.snp.makeConstraints {
-            $0.trailing.equalTo(timeLabel.snp.leading).inset(-14)
-            $0.centerY.equalTo(titleLabel)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.trailing.equalTo(divisionLabel.snp.leading).inset(-26)
+            $0.leading.equalToSuperview().inset(111)
+            $0.trailing.equalToSuperview().inset(40)
             $0.centerY.equalTo(titleLabel)
         }
+    }
+    
+    override func setupBind() {
+        super.setupBind()
+        
+        datePicker.rx.date
+            .bind { [weak self] date in
+                self?.dateChanged?(date)
+            }
+            .disposed(by: disposeBag)
     }
 }

@@ -12,18 +12,25 @@ protocol TabBarRouting: ViewableRouting {
     func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
-    func attachApplyWriteRIB()
+//    func attachApplyWriteRIB()
     func attachPlanRIB()
-    func attachApplyRIBfromOtherRIB()
-    func attachWriteApplyOverallRIBfromOtherRIB()
+//    func attachApplyRIBfromOtherRIB()
+//    func attachWriteApplyOverallRIBfromOtherRIB()
+    func detachApplyRIB()
 }
 
 protocol TabBarPresentable: Presentable {
     var listener: TabBarPresentableListener? { get set }
+    
+    func selectBlogButton()
+    func selectApplyButton()
+    func selectScheduleButton()
+    func showTabBar()
+    func hideTabBar()
 }
 
 protocol TabBarListener: AnyObject {
-    
+    func didSignOut()
 }
 
 final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarInteractable, TabBarPresentableListener {
@@ -39,7 +46,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        router?.attachApplyRIB()
+        tabApplyButton()
     }
 
     override func willResignActive() {
@@ -47,29 +54,50 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         
     }
     
-    func didTabBlog() {
+    func tabBlogButton() {
         router?.attachBlogRIB()
+        presenter.selectBlogButton()
     }
     
-    func didTabApply() {
+    func tabApplyButton() {
         router?.attachApplyRIB()
+        presenter.selectApplyButton()
     }
     
-    func didTabPlan() {
+    func tabScheduleButton() {
         router?.attachPlanRIB()
+        presenter.selectScheduleButton()
     }
     
-    func goBackToApplyRIB() {
-        Log("")
-        router?.attachApplyRIBfromOtherRIB()
-    }
-    
-    func goToApplyWriteRIB() {
-        router?.attachApplyWriteRIB()
-    }
+//    func goBackToApplyRIB() {
+//        router?.attachApplyRIBfromOtherRIB()
+//    }
     
     // MARK: From Other RIBs
-    func goBackToWriteApplyOverallRIB() {
-        router?.attachWriteApplyOverallRIBfromOtherRIB()
+    
+    func showTabBar() {
+        presenter.showTabBar()
     }
+    
+    func hideTabBar() {
+        presenter.hideTabBar()
+    }
+    
+    func didSignOut() {
+        Log("[SIGNOUT] start")
+        
+        router?.detachApplyRIB()
+        listener?.didSignOut()
+        
+        Log("[SIGNOUT] end")
+    }
+    
+//    func goToApplyWriteRIB() {
+//        router?.attachApplyWriteRIB()
+//    }
+//
+    
+//    func goBackToWriteApplyOverallRIB() {
+//        router?.attachWriteApplyOverallRIBfromOtherRIB()
+//    }
 }

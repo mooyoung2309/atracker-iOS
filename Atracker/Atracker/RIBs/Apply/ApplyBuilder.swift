@@ -15,6 +15,10 @@ protocol ApplyDependency: Dependency {
 final class ApplyComponent: Component<ApplyDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var applyService: ApplyServiceProtocol {
+        return ApplyService()
+    }
+    
 }
 
 // MARK: - Builder
@@ -31,18 +35,15 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
 
     func build(withListener listener: ApplyListener) -> ApplyRouting {
         
-        let component           = ApplyComponent(dependency: dependency)
-        let viewController      = ApplyViewController()
-        let service             = ApplyService()
-        let interactor          = ApplyInteractor(presenter: viewController, service: service)
-        let applyWriteBuilder   = WriteApplyOverallBuilder(dependency: component)
-        let applyDetailBuilder  = ApplyDetailBuilder(dependency: component)
+        let component = ApplyComponent(dependency: dependency)
+        let viewController = ApplyViewController()
+        let interactor = ApplyInteractor(presenter: viewController, applyService: component.applyService)
+        let applyWriteBuilder = WriteApplyOverallBuilder(dependency: component)
+        let applyDetailBuilder = ApplyDetailBuilder(dependency: component)
+        let myPageBuilder = MyPageBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return ApplyRouter(interactor: interactor,
-                           viewController: viewController,
-                           applyWriteBuilder: applyWriteBuilder,
-                           applyDetailBuilder: applyDetailBuilder)
+        return ApplyRouter(interactor: interactor, viewController: viewController, applyWriteBuilder: applyWriteBuilder, applyDetailBuilder: applyDetailBuilder, myPageBuilder: myPageBuilder)
     }
 }

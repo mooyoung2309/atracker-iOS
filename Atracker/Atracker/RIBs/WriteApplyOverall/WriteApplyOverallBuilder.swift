@@ -10,13 +10,22 @@ import RIBs
 protocol WriteApplyOverallDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
+    var applyService: ApplyServiceProtocol { get }
 }
 
 final class WriteApplyOverallComponent: Component<WriteApplyOverallDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var applyService: ApplyServiceProtocol {
+        return dependency.applyService
+    }
+    
     var companyService: CompanyServiceProtocol {
         return CompanyService()
+    }
+    
+    var stageService: StageServiceProtocol {
+        return StageService()
     }
 }
 
@@ -33,15 +42,13 @@ final class WriteApplyOverallBuilder: Builder<WriteApplyOverallDependency>, Writ
     }
 
     func build(withListener listener: WriteApplyOverallListener) -> WriteApplyOverallRouting {
-        let component                   = WriteApplyOverallComponent(dependency: dependency)
-        let viewController              = WriteApplyOverallViewController()
-        let interactor                  = WriteApplyOverallInteractor(presenter: viewController, companyService: component.companyService)
-        let writeApplyScheduleBuilder   = WriteApplyScheduleBuilder(dependency: component)
+        let component = WriteApplyOverallComponent(dependency: dependency)
+        let viewController = WriteApplyOverallViewController()
+        let interactor = WriteApplyOverallInteractor(presenter: viewController, applyService: component.applyService, companyService: component.companyService, stageService: component.stageService)
+        let writeApplyScheduleBuilder = WriteApplyScheduleBuilder(dependency: component)
         
-        interactor.listener             = listener
+        interactor.listener = listener
         
-        return WriteApplyOverallRouter(interactor: interactor,
-                                       viewController: viewController,
-                                       writeApplyScheduleBuilder: writeApplyScheduleBuilder)
+        return WriteApplyOverallRouter(interactor: interactor, viewController: viewController, writeApplyScheduleBuilder: writeApplyScheduleBuilder)
     }
 }

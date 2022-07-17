@@ -16,7 +16,7 @@ protocol ApplyEditPresentableListener: AnyObject {
     // interactor class.
     func reloadTableView(stageProgressTitle: String)
     func didTapBackButton()
-    func tapStageStatusButton(status: StageProgressStatus)
+    func tapStageStatusButton(status: ProgressStatus)
     func tapEditButton()
     func tapEditCompleteButton()
     func tapDeleteButton()
@@ -29,14 +29,14 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
     weak var listener: ApplyEditPresentableListener?
     
     let selfView            = ApplyEditView()
-    var alertView           = AlertView(style: .delete, i: 0)
+//    var alertView           = AlertView(style: .delete, i: 0)
     let collectionMockUps   = ["서류", "사전과제", "1차 면접", "2차 면접", "인적성 검사", "최종 면접"]
     let tableMockUps        = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     
     private var stageContentList: [StageContent]    = []
     private var isEditButtonClicked                 = false
     
-    func highlightStageStatusButton(status: StageProgressStatus) {
+    func highlightStageStatusButton(status: ProgressStatus) {
         selfView.stageStatusButtonBar.notStartedButton.isSelected   = false
         selfView.stageStatusButtonBar.failButton.isSelected         = false
         selfView.stageStatusButtonBar.passButton.isSelected         = false
@@ -82,27 +82,22 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
         refreshTableView(tableView: selfView.tableView)
     }
     
-    func showAlertView(i: Int) {
-        alertView = AlertView(style: .delete, i: i)
-        contentView.addSubview(alertView)
+//    func showAlertView(style: ) {
+//        showAlertView()
+//        alertView = AlertView(style: .delete, i: i)
+//        contentView.addSubview(alertView)
+//
+//        alertView.snp.makeConstraints {
+//            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
+//            $0.leading.trailing.bottom.equalToSuperview()
+//        }
+//
         
-        alertView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Size.navigationBarHeight)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        alertView.isAlertBack { [weak self] _ in
-            self?.listener?.tapAlertBackButton()
-        }
-        
-        alertView.isAlertNext { [weak self] _ in
-            self?.listener?.tapAlertNextButton()
-        }
-    }
-    
-    func hideAlertView() {
-        alertView.removeFromSuperview()
-    }
+//    }
+//
+//    func hideAlertView() {
+//        alertView.removeFromSuperview()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,6 +180,16 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
                 self?.listener?.tapDeleteButton()
             }
             .disposed(by: disposeBag)
+        
+        
+        isAlertBack { [weak self] _ in
+            self?.listener?.tapAlertBackButton()
+        }
+
+        
+        isAlertNext { [weak self] _ in
+            self?.listener?.tapAlertNextButton()
+        }
     }
 }
 
@@ -231,21 +236,22 @@ extension ApplyEditViewController: UICollectionViewDelegate, UICollectionViewDat
 extension ApplyEditViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stageContentList.count
+//        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewEditTVC.id, for: indexPath) as? ReviewEditTVC else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ApplyEditTVC.id, for: indexPath) as? ApplyEditTVC else {
             return UITableViewCell()
         }
         
-        cell.update(stageContent: stageContentList[indexPath.item])
+        cell.update(content: stageContentList[indexPath.item])
         
-        if isEditButtonClicked {
-            cell.hideCheckButton()
-        } else {
-            cell.showCheckButton()
-        }
-        
+//        if isEditButtonClicked {
+//            cell.hideCheckButton()
+//        } else {
+//            cell.showCheckButton()
+//        }
+//
         cell.selectionStyle = .none
         cell.textChanged {
             [weak tableView] (_) in
@@ -257,5 +263,9 @@ extension ApplyEditViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Log("[D] \(indexPath)")
     }
 }

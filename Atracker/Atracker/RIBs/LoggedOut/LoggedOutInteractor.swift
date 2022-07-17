@@ -45,7 +45,7 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, Lo
     }
     
     func login(withEmail: String?, _ password: String?) {
-        authService.testSignUp(email: "test01@gmail.com", gender: Gender.male.code, jobPosition: "개발자", nickName: "안나포", sso: Sso.google.code) { [weak self] result in
+        authService.testSignUp(email: "test01@gmail.com", gender: Gender.male.code, jobPosition: "개발자", nickName: "안나포", sso: SSO.google.code) { [weak self] result in
             self?.listener?.didLogin(withEmail: withEmail, password)
         }
     }

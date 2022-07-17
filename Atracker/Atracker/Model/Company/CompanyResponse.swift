@@ -13,7 +13,7 @@ struct CompanyResponse: Codable {
     let first, last: Bool
     let size, remainCount, prevCount: Int
     let hasNext, hasPrev, empty: Bool
-    let contents: [CompanySearchContent]
+    let contents: [Company]
 
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -28,10 +28,4 @@ struct CompanyResponse: Codable {
         case hasPrev = "has_prev"
         case empty, contents
     }
-}
-
-// MARK: - Content
-struct CompanySearchContent: Codable {
-    let id: Int
-    let name: String
 }
