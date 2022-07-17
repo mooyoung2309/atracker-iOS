@@ -38,6 +38,8 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     private let progressStatusRelay = PublishRelay<ProgressStatus>()
     private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
     private let currentPageIndexRelay = BehaviorRelay<Int>(value: 0)
+    private let showStatusButtonBarRelay = PublishRelay<Void>()
+    private let showDeleteButtonBarRelay = PublishRelay<Void>()
     
     init(presenter: EditApplyStageProgressPresentable, stageProgressService: StageProgressServiceProtocol, apply: Apply) {
         self.apply = apply
@@ -111,6 +113,14 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         
         action.tapProgressStatusButton
             .bind(to: progressStatusRelay)
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapEditButton
+            .bind(to: showDeleteButtonBarRelay)
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapEditCompleteButton
+            .bind(to: showStatusButtonBarRelay)
             .disposeOnDeactivate(interactor: self)
         
         // 핸들러 바인딩
@@ -329,5 +339,13 @@ extension EditApplyStageProgressInteractor: EditApplyStageProgressPresentableHan
     
     var currentPageIndex: Observable<Int> {
         return currentPageIndexRelay.asObservable()
+    }
+    
+    var showStatusButtonBar: Observable<Void> {
+        return showStatusButtonBarRelay.asObservable()
+    }
+    
+    var showDeleteButtonBar: Observable<Void> {
+        return showDeleteButtonBarRelay.asObservable()
     }
 }

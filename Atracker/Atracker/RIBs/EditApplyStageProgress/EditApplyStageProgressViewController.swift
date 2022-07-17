@@ -12,6 +12,9 @@ import UIKit
 protocol EditApplyStageProgressPresentableAction: AnyObject {
     var tapNextButton: Observable<Void> { get }
     var tapProgressStatusButton: Observable<ProgressStatus> { get }
+    var tapEditButton: Observable<Void> { get }
+    var tapDeleteButton: Observable<Void> { get }
+    var tapEditCompleteButton: Observable<Void> { get }
     var selectedPageIndex: Observable<Int> { get }
     var addQNAContentButton: Observable<Void> { get }
     var addFreeContentButton: Observable<Void> { get }
@@ -24,6 +27,8 @@ protocol EditApplyStageProgressPresentableHandler: AnyObject {
     var stageTitles: Observable<[String]> { get }
     var stageContents: Observable<[StageContent]> { get }
     var currentPageIndex: Observable<Int> { get }
+    var showStatusButtonBar: Observable<Void> { get }
+    var showDeleteButtonBar: Observable<Void> { get }
 }
 
 protocol EditApplyStageProgressPresentableListener: AnyObject {
@@ -154,6 +159,20 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
             }
             .disposed(by: disposeBag)
         
+        handler.showStatusButtonBar
+            .bind { [weak self] in
+                self?.selfView.statusButtonBar.isHidden = false
+                self?.selfView.deleteButtonBar.isHidden = true
+            }
+            .disposed(by: disposeBag)
+        
+        handler.showDeleteButtonBar
+            .bind { [weak self] in
+                self?.selfView.statusButtonBar.isHidden = true
+                self?.selfView.deleteButtonBar.isHidden = false
+            }
+            .disposed(by: disposeBag)
+        
         navigaionBar.backButton.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapBackButton()
@@ -202,6 +221,18 @@ extension EditApplyStageProgressViewController: EditApplyStageProgressPresentabl
     
     var tapProgressStatusButton: Observable<ProgressStatus> {
         return tapProgressStatusButtonSubject.asObservable()
+    }
+    
+    var tapEditButton: Observable<Void> {
+        return selfView.statusButtonBar.editButton.rx.tap.asObservable()
+    }
+    
+    var tapDeleteButton: Observable<Void> {
+        return selfView.deleteButtonBar.deleteButton.rx.tap.asObservable()
+    }
+    
+    var tapEditCompleteButton: Observable<Void> {
+        return selfView.deleteButtonBar.editCompleteButton.rx.tap.asObservable()
     }
     
     var selectedPageIndex: Observable<Int> {
