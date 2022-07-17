@@ -88,6 +88,7 @@ class QNAContentView: BaseView {
         feedbackLabel.snp.makeConstraints {
             $0.top.equalTo(answerLabel.snp.bottom).inset(-28)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }

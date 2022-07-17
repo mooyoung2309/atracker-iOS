@@ -19,11 +19,13 @@ class ApplyTVC: BaseTVC {
         companyLabel.text = apply.companyName
         
         positionLabel.text = apply.jobPosition
+        
         let totalCount = apply.stageProgress.count
         let failCount = apply.stageProgress.filter({ $0.status == ProgressStatus.fail.code }).count
         let passCount = apply.stageProgress.filter({ $0.status == ProgressStatus.pass.code }).count
+        let notStartedCount = apply.stageProgress.filter({ $0.status == ProgressStatus.notStarted.code }).count
         
-        barChartView.update(total: totalCount, part: failCount + passCount)
+        barChartView.update(total: totalCount, part: notStartedCount + passCount)
     }
     
     override func setupProperty() {
@@ -52,10 +54,12 @@ class ApplyTVC: BaseTVC {
         companyLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().inset(20)
         }
+        
         positionLabel.snp.makeConstraints {
             $0.centerY.equalTo(companyLabel)
             $0.leading.equalTo(companyLabel.snp.trailing).inset(-8)
         }
+        
         barChartView.snp.makeConstraints {
             $0.top.equalTo(companyLabel.snp.bottom).inset(-10)
             $0.centerX.equalToSuperview()

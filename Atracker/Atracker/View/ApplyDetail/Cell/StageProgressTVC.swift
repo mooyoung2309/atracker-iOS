@@ -16,6 +16,8 @@ class StageProgressTVC: BaseTVC {
     let divider = Divider(.white)
     
     func update(stageProgress: StageProgress) {
+        prepareForReuse()
+        
         titleLabel.text = stageProgress.stageTitle
         
         circle.backgroundColor = .progressColors[stageProgress.order]
@@ -43,6 +45,12 @@ class StageProgressTVC: BaseTVC {
                 break
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        contentStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
     }
     
     override func setupProperty() {
