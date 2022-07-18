@@ -18,10 +18,6 @@ protocol MyPagePresentableListener: AnyObject {
 }
 
 final class MyPageViewController: BaseNavigationViewController, MyPagePresentable, MyPageViewControllable {
-    
-    var thisView: UIView {
-        return containerView
-    }
 
     weak var listener: MyPagePresentableListener?
     

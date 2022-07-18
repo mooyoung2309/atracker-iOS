@@ -12,7 +12,7 @@ protocol WriteApplyScheduleInteractable: Interactable {
     var listener: WriteApplyScheduleListener? { get set }
 }
 
-protocol WriteApplyScheduleViewControllable: NavigationContainerViewControllable {
+protocol WriteApplyScheduleViewControllable: NavigationViewControllable {
     
 }
 
@@ -22,5 +22,10 @@ final class WriteApplyScheduleRouter: ViewableRouter<WriteApplyScheduleInteracta
     override init(interactor: WriteApplyScheduleInteractable, viewController: WriteApplyScheduleViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func detachThisRIB() {
+        detachChild(self)
+        viewController.dismiss(nil, isTabBarShow: false)
     }
 }

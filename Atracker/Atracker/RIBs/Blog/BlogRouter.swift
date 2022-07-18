@@ -12,7 +12,7 @@ protocol BlogInteractable: Interactable {
     var listener: BlogListener? { get set }
 }
 
-protocol BlogViewControllable: ViewControllable {
+protocol BlogViewControllable: NavigationViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 

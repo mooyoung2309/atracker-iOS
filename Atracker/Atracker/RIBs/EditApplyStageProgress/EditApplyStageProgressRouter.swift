@@ -12,8 +12,8 @@ protocol EditApplyStageProgressInteractable: Interactable {
     var listener: EditApplyStageProgressListener? { get set }
 }
 
-protocol EditApplyStageProgressViewControllable: NavigationContainerViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol EditApplyStageProgressViewControllable: NavigationViewControllable {
+
 }
 
 final class EditApplyStageProgressRouter: ViewableRouter<EditApplyStageProgressInteractable, EditApplyStageProgressViewControllable>, EditApplyStageProgressRouting {
@@ -22,5 +22,11 @@ final class EditApplyStageProgressRouter: ViewableRouter<EditApplyStageProgressI
     override init(interactor: EditApplyStageProgressInteractable, viewController: EditApplyStageProgressViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func detachThisRIB() {
+        detachChild(self)
+        
+        viewController.dismiss(nil, isTabBarShow: true)
     }
 }

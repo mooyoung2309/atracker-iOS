@@ -19,15 +19,9 @@ protocol SignUpNicknamePresentableListener: AnyObject {
 
 final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNicknamePresentable, SignUpNicknameViewControllable {
     
-    var thisView: UIView {
-        return mainView
-    }
-    
     weak var listener: SignUpNicknamePresentableListener?
     
     let selfView = SignUpNicknameView()
-    
-    
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()

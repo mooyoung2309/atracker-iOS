@@ -7,26 +7,20 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 protocol TabBarRouting: ViewableRouting {
     func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
-//    func attachApplyWriteRIB()
     func attachPlanRIB()
-//    func attachApplyRIBfromOtherRIB()
-//    func attachWriteApplyOverallRIBfromOtherRIB()
     func detachApplyRIB()
 }
 
 protocol TabBarPresentable: Presentable {
     var listener: TabBarPresentableListener? { get set }
-    
-    func selectBlogButton()
-    func selectApplyButton()
-    func selectScheduleButton()
-    func showTabBar()
-    func hideTabBar()
+    var action: TabBarPresentableAction? { get }
+    var handler: TabBarPresentableHandler? { get set }
 }
 
 protocol TabBarListener: AnyObject {
@@ -38,50 +32,60 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     weak var router: TabBarRouting?
     weak var listener: TabBarListener?
 
+    private let selectedIndexRelay = BehaviorRelay<Int>(value: 1)
+    
     override init(presenter: TabBarPresentable) {
         super.init(presenter: presenter)
+        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        tabApplyButton()
+        setupBind()
     }
 
     override func willResignActive() {
         super.willResignActive()
         
+        presenter.handler = nil
     }
     
-    func tabBlogButton() {
-        router?.attachBlogRIB()
-        presenter.selectBlogButton()
+    func setupBind() {
+        guard let action = presenter.action else { return }
+        guard let handler = presenter.handler else { return }
+        
+        // 액션 바인딩
+        action.tapTabBar
+            .bind(to: selectedIndexRelay)
+            .disposeOnDeactivate(interactor: self)
+        
+        
+        // 핸들러 바인딩
+        handler.selectedIndex
+            .bind { [weak self] i in
+                self?.tabTabBar(index: i)
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
-    func tabApplyButton() {
-        router?.attachApplyRIB()
-        presenter.selectApplyButton()
+    func tabTabBar(index: Int) {
+        Log("[D] \(index)")
+        switch index {
+        case 0:
+            router?.attachBlogRIB()
+        case 1:
+            router?.attachApplyRIB()
+        case 2:
+            router?.attachPlanRIB()
+        default:
+            return
+        }
     }
-    
-    func tabScheduleButton() {
-        router?.attachPlanRIB()
-        presenter.selectScheduleButton()
-    }
-    
-//    func goBackToApplyRIB() {
-//        router?.attachApplyRIBfromOtherRIB()
-//    }
     
     // MARK: From Other RIBs
-    
-    func showTabBar() {
-        presenter.showTabBar()
-    }
-    
-    func hideTabBar() {
-        presenter.hideTabBar()
-    }
     
     func didSignOut() {
         Log("[SIGNOUT] start")
@@ -91,13 +95,10 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         
         Log("[SIGNOUT] end")
     }
-    
-//    func goToApplyWriteRIB() {
-//        router?.attachApplyWriteRIB()
-//    }
-//
-    
-//    func goBackToWriteApplyOverallRIB() {
-//        router?.attachWriteApplyOverallRIBfromOtherRIB()
-//    }
+}
+
+extension TabBarInteractor: TabBarPresentableHandler {
+    var selectedIndex: Observable<Int> {
+        return selectedIndexRelay.asObservable()
+    }
 }

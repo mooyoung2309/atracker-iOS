@@ -41,10 +41,6 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     weak var listener: WriteApplyOverallPresentableListener?
     
-    var thisView: UIView {
-        return containerView
-    }
-    
     var action: WriteApplyOverallPresentableAction? {
         return self
     }
@@ -64,6 +60,10 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     private var companies: [Company] = []
     private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"
+
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
+    }
     
     func reloadCompanySearchTableView(companies: [Company]) {
         self.companies = companies
@@ -103,6 +103,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
         setupNavigaionBar()
         selfView.jobSearchTableView.reloadData()
         refreshTableView(tableView: selfView.jobSearchTableView)

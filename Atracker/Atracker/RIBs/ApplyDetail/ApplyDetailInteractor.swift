@@ -10,10 +10,9 @@ import RxSwift
 import RxCocoa
 
 protocol ApplyDetailRouting: ViewableRouting {
-    func attachApplyEditRIB(apply: Apply)
     func attachEditApplyOverallRIB()
     func attachEditApplyStageProgressRIB(apply: Apply)
-    func detachThisChildRIB()
+    func detachThisRIB()
 }
 
 protocol ApplyDetailPresentable: Presentable {
@@ -26,10 +25,7 @@ protocol ApplyDetailPresentable: Presentable {
 }
 
 protocol ApplyDetailListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func tapBackButtonFromChildRIB()
-    func showTabBar()
-    func hideTabBar()
+    
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
@@ -41,6 +37,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     private var isShowEditTableView = false
     
     private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
+    private let showEditTypeTableViewRelay = BehaviorRelay<Bool>(value: false)
     
     init(presenter: ApplyDetailPresentable, apply: Apply) {
         self.apply = apply
@@ -65,23 +62,45 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     func setupBind() {
-//        stageContentsRelay.accept(apply.)
-    }
-    
-    func tapBackButton() {
-        listener?.tapBackButtonFromChildRIB()
-    }
-    
-    func tapEditButton() {
-        if isShowEditTableView {
-            presenter.hideEditTableView()
-            listener?.showTabBar()
-        } else {
-            presenter.showEditTableView()
-            listener?.hideTabBar()
-        }
+        guard let action = presenter.action else { return }
         
-        isShowEditTableView = !isShowEditTableView
+        // 액션 바인딩
+        action.tapBackButton
+            .bind { [weak self] in
+                self?.router?.detachThisRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapEditButton
+            .bind { [weak self] in
+                self?.didTapEditButton()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapEditTypeCell
+            .bind { [weak self] editTypeItem in
+                self?.didTapEditTypeCell(editTypeItem: editTypeItem)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+    }
+    
+    private func didTapEditButton() {
+        let bool = !showEditTypeTableViewRelay.value
+        showEditTypeTableViewRelay.accept(bool)
+    }
+    
+    private func didTapEditTypeCell(editTypeItem: EditTypeItem) {
+        switch editTypeItem {
+        case .apply:
+            router?.attachEditApplyOverallRIB()
+            didTapEditButton()
+        case .stage:
+            router?.attachEditApplyStageProgressRIB(apply: apply)
+            didTapEditButton()
+        case .delete:
+            return
+        }
     }
     
     func tapEditApplyOverallButton() {
@@ -99,19 +118,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     // MARK: 자식 RIBs으로 부터
-    func tapBackButtonFromChildRIB() {
-        router?.detachThisChildRIB()
-        
-        presenter.hideEditTableView()
-        listener?.showTabBar()
-        isShowEditTableView = false
-    }
-    
     func didEditApplyStageProgress() {
-        router?.detachThisChildRIB()
+//        router?.detachThisChildRIB()
         
         presenter.hideEditTableView()
-        listener?.showTabBar()
     }
 }
 
@@ -125,5 +135,9 @@ extension ApplyDetailInteractor: ApplyDetailPresentableHandler {
     
     var stageProgresses: Observable<[StageProgress]> {
         return Observable.just(apply.stageProgress)
+    }
+    
+    var showEditTypeTableView: Observable<Bool> {
+        return showEditTypeTableViewRelay.asObservable()
     }
 }

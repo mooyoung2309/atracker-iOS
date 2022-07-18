@@ -12,6 +12,7 @@ import RxCocoa
 protocol WriteApplyOverallRouting: ViewableRouting {
     func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest)
     func detachThisChildRIB()
+    func testBackButton()
 }
 
 protocol WriteApplyOverallPresentable: Presentable {
@@ -21,9 +22,7 @@ protocol WriteApplyOverallPresentable: Presentable {
 }
 
 protocol WriteApplyOverallListener: AnyObject {
-    func tapBackButtonFromChildRIB()
-    func showTabBar()
-    func hideTabBar()
+    func didWriteApply()
 }
 
 final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverallPresentable>, WriteApplyOverallInteractable, WriteApplyOverallPresentableListener {
@@ -74,8 +73,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         
         action.tapBackButton
             .bind { [weak self] in
-                self?.listener?.showTabBar()
-                self?.listener?.tapBackButtonFromChildRIB()
+                self?.router?.testBackButton()
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -207,6 +205,10 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
                 return
             }
         }
+    }
+    
+    func didWriteApply() {
+        listener?.didWriteApply()
     }
     
     //    func setBind() {

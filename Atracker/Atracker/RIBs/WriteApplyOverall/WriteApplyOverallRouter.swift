@@ -12,8 +12,8 @@ protocol WriteApplyOverallInteractable: Interactable, WriteApplyScheduleListener
     var listener: WriteApplyOverallListener? { get set }
 }
 
-protocol WriteApplyOverallViewControllable: NavigationContainerViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol WriteApplyOverallViewControllable: NavigationViewControllable {
+
 }
 
 final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractable, WriteApplyOverallViewControllable>, WriteApplyOverallRouting {
@@ -41,10 +41,11 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
         detachChildRIB(child)
         attachChild(writeApplySchedule)
         
-        viewController.presentView(writeApplySchedule, transitionSubType: .fromRight)
+        viewController.present(writeApplySchedule.viewControllable, isTabBarShow: false)
         
         child = writeApplySchedule
     }
+    
     
 //    func detachWriteApplyScheduleRIB() {
 //        detachChildRIB(child)
@@ -53,8 +54,13 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
     
     func detachThisChildRIB() {
         detachChildRIB(child)
-        viewController.dismissView(animation: true)
+//        viewController.dismissView(animation: true)
         
         child = nil
+    }
+    
+    func testBackButton() {
+        detachChild(self)
+        viewController.dismiss(nil, isTabBarShow: false)
     }
 }

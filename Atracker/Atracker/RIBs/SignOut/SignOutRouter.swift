@@ -12,9 +12,8 @@ protocol SignOutInteractable: Interactable, SignUpNicknameListener {
     var listener: SignOutListener? { get set }
 }
 
-protocol SignOutViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-    func present(viewController: UIViewController)
+protocol SignOutViewControllable: NavigationViewControllable {
+    
 }
 
 final class SignOutRouter: ViewableRouter<SignOutInteractable, SignOutViewControllable>, SignOutRouting {
@@ -36,7 +35,7 @@ final class SignOutRouter: ViewableRouter<SignOutInteractable, SignOutViewContro
         
         self.signUpNickname = signUpNickname
         
-        viewController.present(viewController: signUpNickname.viewControllable.uiviewController)
+        viewController.present(signUpNickname.viewControllable, isTabBarShow: true)
     }
 //
 //    func attachWriteApplyOverall() {

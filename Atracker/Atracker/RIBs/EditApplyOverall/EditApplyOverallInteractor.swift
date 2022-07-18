@@ -9,17 +9,17 @@ import RIBs
 import RxSwift
 
 protocol EditApplyOverallRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func detachThisRIB()
 }
 
 protocol EditApplyOverallPresentable: Presentable {
     var listener: EditApplyOverallPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    var action: EditApplyOverallPresentableAction? { get }
+    var handler: EditApplyOverallPresentableHandler? { get set }
 }
 
 protocol EditApplyOverallListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func tapBackButtonFromChildRIB()
 }
 
 final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPresentable>, EditApplyOverallInteractable, EditApplyOverallPresentableListener {
@@ -31,20 +31,34 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
     // in constructor.
     override init(presenter: EditApplyOverallPresentable) {
         super.init(presenter: presenter)
+        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
+        setupBind()
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        
+        presenter.handler = nil
     }
     
-    func tapBackButton() {
-        listener?.tapBackButtonFromChildRIB()
+    func setupBind() {
+        guard let action = presenter.action else { return }
+        
+        action.tapBackButton
+            .bind { [weak self] in
+                self?.router?.detachThisRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
     }
+}
+
+extension EditApplyOverallInteractor: EditApplyOverallPresentableHandler {
+    
 }

@@ -39,12 +39,11 @@ final class ApplyDetailBuilder: Builder<ApplyDetailDependency>, ApplyDetailBuild
         let component = ApplyDetailComponent(dependency: dependency, apply: apply)
         let viewController = ApplyDetailViewController()
         let interactor = ApplyDetailInteractor(presenter: viewController, apply: apply)
-        let applyEditBuilder = ApplyEditBuilder(dependency: component)
         let editApplyOverallBuilder = EditApplyOverallBuilder(dependency: component)
         let editApplyStageProgressBuilder = EditApplyStageProgressBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return ApplyDetailRouter(interactor: interactor, viewController: viewController, applyEditBuilder: applyEditBuilder, editApplyOverallBuilder: editApplyOverallBuilder, editApplyStageProgressBuilder: editApplyStageProgressBuilder)
+        return ApplyDetailRouter(interactor: interactor, viewController: viewController, editApplyOverallBuilder: editApplyOverallBuilder, editApplyStageProgressBuilder: editApplyStageProgressBuilder)
     }
 }

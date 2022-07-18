@@ -30,10 +30,6 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
     
     weak var listener: WriteApplySchedulePresentableListener?
     
-    var thisView: UIView {
-        return containerView
-    }
-    
     weak var action: WriteApplySchedulePresentableAction? {
         return self
     }
@@ -54,6 +50,10 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
     
     private var selectedCellIndexPath: IndexPath?
     private var applyCreateStages: [ApplyCreateStage] = []
+    
+    func dismiss() {
+        navigationController?.popViewController(animated: true)
+    }
     
     func reloadCalnedarCollectionView(date: Date) {
         self.prevDate = date.plusPeriod(.month, interval: -1)

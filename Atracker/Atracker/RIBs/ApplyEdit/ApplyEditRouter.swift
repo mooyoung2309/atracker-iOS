@@ -12,8 +12,8 @@ protocol ApplyEditInteractable: Interactable {
     var listener: ApplyEditListener? { get set }
 }
 
-protocol ApplyEditViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol ApplyEditViewControllable: NavigationViewControllable {
+
 }
 
 final class ApplyEditRouter: ViewableRouter<ApplyEditInteractable, ApplyEditViewControllable>, ApplyEditRouting {

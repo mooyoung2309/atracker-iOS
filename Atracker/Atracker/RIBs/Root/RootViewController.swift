@@ -16,22 +16,16 @@ protocol RootPresentableListener: AnyObject {
 }
 
 final class RootViewController: UIViewController, RootPresentable, RootViewControllable {
-
-    weak var listener: RootPresentableListener?
-
-    func presentModal(viewController: ViewControllable) {
-        present(viewController.uiviewController, animated: true, completion: nil)
-    }
     
-    func present(viewController: ViewControllable) {
+    weak var listener: RootPresentableListener?
+    
+    func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
         viewController.uiviewController.modalPresentationStyle = .fullScreen
         present(viewController.uiviewController, animated: false, completion: nil)
     }
-
-    func dismiss(viewController: ViewControllable) {
-        if presentedViewController === viewController.uiviewController {
-            dismiss(animated: false, completion: nil)
-        }
+    
+    func dismiss(_ rootViewController: ViewControllable?, isTabBarShow: Bool) {
+        dismiss(animated: false, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -42,5 +36,5 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
 // MARK: SignInViewControllable
 
 extension RootViewController: SignInViewControllable {
-    
+
 }

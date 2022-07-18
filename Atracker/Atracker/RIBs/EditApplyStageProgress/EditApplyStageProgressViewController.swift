@@ -10,6 +10,7 @@ import RxSwift
 import UIKit
 
 protocol EditApplyStageProgressPresentableAction: AnyObject {
+    var tapBackButton: Observable<Void> { get }
     var tapNextButton: Observable<Void> { get }
     var tapProgressStatusButton: Observable<ProgressStatus> { get }
     var tapEditButton: Observable<Void> { get }
@@ -32,7 +33,7 @@ protocol EditApplyStageProgressPresentableHandler: AnyObject {
 }
 
 protocol EditApplyStageProgressPresentableListener: AnyObject {
-    func tapBackButton()
+
 }
 
 final class EditApplyStageProgressViewController: BaseNavigationViewController, EditApplyStageProgressPresentable, EditApplyStageProgressViewControllable {
@@ -41,10 +42,6 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         return self
     }
     weak var handler: EditApplyStageProgressPresentableHandler?
-    
-    var thisView: UIView {
-        return containerView
-    }
     
     private let selfView = EditApplyStageProgressView()
     
@@ -172,12 +169,6 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
                 self?.selfView.deleteButtonBar.isHidden = false
             }
             .disposed(by: disposeBag)
-        
-        navigaionBar.backButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapBackButton()
-            }
-            .disposed(by: disposeBag)
     }
     
     func reloadProgressStatusButton(progressStatus: ProgressStatus) {
@@ -215,6 +206,10 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
 
 // MARK: PresenterAction
 extension EditApplyStageProgressViewController: EditApplyStageProgressPresentableAction {
+    var tapBackButton: Observable<Void> {
+        return navigaionBar.backButton.rx.tap.asObservable()
+    }
+    
     var tapNextButton: Observable<Void> {
         return tapNextButtonSubject.asObservable()
     }

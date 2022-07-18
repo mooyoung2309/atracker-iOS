@@ -5,6 +5,7 @@
 //  Created by 송영모 on 2022/06/10.
 //
 
+import RIBs
 import UIKit
 import SnapKit
 import Then
@@ -20,9 +21,8 @@ class NavigationBar: UIView {
 protocol BaseNavigationViewControllerProtocol: AnyObject {
     var statusBar: UIView { get }
     var navigaionBar: NavigationBar { get }
-    var containerView: UIView { get }
-    var mainView: UIView { get }
     var contentView: UIView { get }
+    
     func setupNavigaionBar()
     func showNavigationBar()
     func hideNavigationBar()
@@ -36,18 +36,32 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
 }
 
 class BaseNavigationViewController: BaseViewController, BaseNavigationViewControllerProtocol {
-    
+    var contentView = UIView()
     var statusBar = UIView()
     var navigaionBar = NavigationBar()
-    var containerView = UIView()
-    var mainView = UIView()
-    var contentView = UIView()
     
     var alertView = AlertView()
     var blurView = UIView()
     
     var isAlertBack: ((Bool) -> Void)?
     var isAlertNext: ((Bool) -> Void)?
+    
+    func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
+        viewController.uiviewController.hidesBottomBarWhenPushed = !isTabBarShow
+        navigationController?.pushViewController(viewController.uiviewController, animated: true)
+        
+        tabBarController?.tabBar.isHidden = !isTabBarShow
+    }
+    
+    func dismiss(_ rootViewController: ViewControllable? = nil, isTabBarShow: Bool) {
+        if let rootViewController = rootViewController {
+            navigationController?.popToViewController(rootViewController.uiviewController, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        
+        tabBarController?.tabBar.isHidden = !isTabBarShow
+    }
     
     func showAlertView(style: AlertStyle) {
         alertView.update(style: style)
@@ -108,13 +122,9 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(containerView)
-        
-        containerView.addSubview(mainView)
-        
-        mainView.addSubview(statusBar)
-        mainView.addSubview(contentView)
-        mainView.addSubview(navigaionBar)
+        view.addSubview(statusBar)
+        view.addSubview(contentView)
+        view.addSubview(navigaionBar)
         
         navigaionBar.addSubview(navigaionBar.title)
         navigaionBar.addSubview(navigaionBar.backButton)
@@ -123,14 +133,6 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     override func setupLayout() {
         super.setupLayout()
-        
-        containerView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        mainView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
-        }
         
         statusBar.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -165,7 +167,9 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         }
     }
     
-    func setupNavigaionBar() { }
+    func setupNavigaionBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     
     func showNavigationBar() {
         navigaionBar.alpha = 1

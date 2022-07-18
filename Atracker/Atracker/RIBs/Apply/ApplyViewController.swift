@@ -20,15 +20,12 @@ protocol ApplyPresentableHandler: AnyObject {
 }
 
 protocol ApplyPresentableListener: AnyObject {
+    
 }
 
 final class ApplyViewController: BaseNavigationViewController, ApplyPresentable, ApplyViewControllable {
-    
-    var thisView: UIView {
-        return containerView
-    }
-
     weak var listener: ApplyPresentableListener?
+    
     weak var action: ApplyPresentableAction? {
         return self
     }
@@ -39,7 +36,6 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     private let tapApplyTVCSubject = PublishSubject<Apply>()
     
     private var applies: [Apply] = []
-    
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -97,10 +93,6 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         
         selfView.applyTableView.reloadData()
         refreshTableView(tableView: selfView.applyTableView)
-    }
-    
-    func present(viewController: ViewControllable) {
-        present(viewController.uiviewController, animated: true, completion: nil)
     }
 }
 

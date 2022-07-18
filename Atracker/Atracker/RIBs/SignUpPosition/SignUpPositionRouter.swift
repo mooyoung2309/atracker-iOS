@@ -12,8 +12,8 @@ protocol SignUpPositionInteractable: Interactable, SignUpSuccessListener {
     var listener: SignUpPositionListener? { get set }
 }
 
-protocol SignUpPositionViewControllable: NavigationContainerViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol SignUpPositionViewControllable: NavigationViewControllable {
+
 }
 
 final class SignUpPositionRouter: ViewableRouter<SignUpPositionInteractable, SignUpPositionViewControllable>, SignUpPositionRouting {
@@ -37,6 +37,6 @@ final class SignUpPositionRouter: ViewableRouter<SignUpPositionInteractable, Sig
         
         self.signUpSuccess = signUpSuccess
         attachChild(signUpSuccess)
-        viewController.presentView(signUpSuccess, animation: true)
+        viewController.present(signUpSuccess.viewControllable, isTabBarShow: true)
     }
 }

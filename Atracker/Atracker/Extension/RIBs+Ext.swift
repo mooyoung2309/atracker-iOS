@@ -9,6 +9,11 @@ import RIBs
 import UIKit
 import SnapKit
 
+protocol NavigationViewControllable: ViewControllable {
+    func present(_ viewController: ViewControllable, isTabBarShow: Bool)
+    func dismiss(_ rootViewController: ViewControllable?, isTabBarShow: Bool)
+}
+
 protocol NavigationContainerViewControllable: ViewControllable {
     var thisView: UIView { get }
     var mainView: UIView { get }

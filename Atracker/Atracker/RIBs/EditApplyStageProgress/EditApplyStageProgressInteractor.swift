@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol EditApplyStageProgressRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func detachThisRIB()
 }
 
 protocol EditApplyStageProgressPresentable: Presentable {
@@ -20,8 +20,6 @@ protocol EditApplyStageProgressPresentable: Presentable {
 }
 
 protocol EditApplyStageProgressListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func tapBackButtonFromChildRIB()
     func didEditApplyStageProgress()
 }
 
@@ -77,6 +75,12 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         guard let handler = presenter.handler else { return }
         
         // bind action
+        action.tapBackButton
+            .bind { [weak self] in
+                self?.router?.detachThisRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
         action.tapNextButton
             .bind { [weak self] in
                 guard let this = self else { return }
@@ -311,10 +315,6 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         contents.append(newContent)
         
         stageContentsRelay.accept(contents)
-    }
-    
-    func tapBackButton() {
-        listener?.tapBackButtonFromChildRIB()
     }
 }
 

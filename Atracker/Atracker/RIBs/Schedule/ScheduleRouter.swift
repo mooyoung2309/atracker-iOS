@@ -12,8 +12,8 @@ protocol ScheduleInteractable: Interactable {
     var listener: ScheduleListener? { get set }
 }
 
-protocol ScheduleViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol ScheduleViewControllable: NavigationViewControllable {
+
 }
 
 final class ScheduleRouter: ViewableRouter<ScheduleInteractable, ScheduleViewControllable>, ScheduleRouting {

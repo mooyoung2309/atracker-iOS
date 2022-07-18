@@ -210,6 +210,7 @@
 		70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */; };
 		70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8828478B220098C742 /* BaseTVC.swift */; };
 		70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B9B2847AEC20098C742 /* ApplyView.swift */; };
+		70D587C02885365B00872282 /* EditTypeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587BF2885365B00872282 /* EditTypeItem.swift */; };
 		70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83743286BD70D0085DE43 /* MyPageRouter.swift */; };
 		70D83748286BD70D0085DE43 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83744286BD70D0085DE43 /* MyPageViewController.swift */; };
 		70D83749286BD70D0085DE43 /* MyPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83745286BD70D0085DE43 /* MyPageBuilder.swift */; };
@@ -238,7 +239,6 @@
 		70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */; };
 		70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */; };
 		70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */; };
-		70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */; };
 		70FE71C8287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */; };
 /* End PBXBuildFile section */
 
@@ -467,6 +467,7 @@
 		70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProgressTVC.swift; sourceTree = "<group>"; };
 		70CF5B8828478B220098C742 /* BaseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVC.swift; sourceTree = "<group>"; };
 		70CF5B9B2847AEC20098C742 /* ApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyView.swift; sourceTree = "<group>"; };
+		70D587BF2885365B00872282 /* EditTypeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTypeItem.swift; sourceTree = "<group>"; };
 		70D83743286BD70D0085DE43 /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
 		70D83744286BD70D0085DE43 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		70D83745286BD70D0085DE43 /* MyPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageBuilder.swift; sourceTree = "<group>"; };
@@ -495,7 +496,6 @@
 		70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailBuilder.swift; sourceTree = "<group>"; };
 		70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailInteractor.swift; sourceTree = "<group>"; };
 		70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailTVC.swift; sourceTree = "<group>"; };
-		70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplyDetailComponent+ApplyEdit.swift"; sourceTree = "<group>"; };
 		70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressView.swift; sourceTree = "<group>"; };
 		71C1F406B5B563EF89E70B6C /* Pods_AtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823922B5C40C72978266EF0B /* Pods_Atracker_AtrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Atracker_AtrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -620,6 +620,7 @@
 				705CCCFE285C5B3700E79540 /* AlertStyle.swift */,
 				70576DFA2864EBB4000406DF /* Period.swift */,
 				70095FEB287E8E72006933BC /* TabBarItem.swift */,
+				70D587BF2885365B00872282 /* EditTypeItem.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -1307,7 +1308,6 @@
 				70FBE52628537A8000455A4B /* ApplyDetailRouter.swift */,
 				70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */,
 				70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */,
-				70FD6DD1285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift */,
 				70091BA12873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift */,
 				70091BAC2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift */,
 			);
@@ -1759,7 +1759,6 @@
 				70970025283D365E000F4B89 /* ReviewWriteView.swift in Sources */,
 				702B5A36285B1C8D00E94A6E /* FreeStageContentEditView.swift in Sources */,
 				70091BA92873DA76005D2627 /* EditApplyStageProgressViewController.swift in Sources */,
-				70FD6DD2285731030050ADB8 /* ApplyDetailComponent+ApplyEdit.swift in Sources */,
 				701CE2372849D3B9009230CE /* LoggedOutViewController.swift in Sources */,
 				70576E392865B54C000406DF /* SignOutInteractor.swift in Sources */,
 				702D86D828748947009682A4 /* StageResponse.swift in Sources */,
@@ -1770,6 +1769,7 @@
 				70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
 				7027D3A32862DEA300F9C913 /* TestUserRegistrationRequest.swift in Sources */,
+				70D587C02885365B00872282 /* EditTypeItem.swift in Sources */,
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
 				70576E362865B54C000406DF /* SignOutRouter.swift in Sources */,
 				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,

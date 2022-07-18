@@ -12,8 +12,8 @@ protocol EditApplyOverallInteractable: Interactable {
     var listener: EditApplyOverallListener? { get set }
 }
 
-protocol EditApplyOverallViewControllable: NavigationContainerViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol EditApplyOverallViewControllable: NavigationViewControllable {
+
 }
 
 final class EditApplyOverallRouter: ViewableRouter<EditApplyOverallInteractable, EditApplyOverallViewControllable>, EditApplyOverallRouting {
@@ -22,5 +22,11 @@ final class EditApplyOverallRouter: ViewableRouter<EditApplyOverallInteractable,
     override init(interactor: EditApplyOverallInteractable, viewController: EditApplyOverallViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func detachThisRIB() {
+        detachChild(self)
+        
+        viewController.dismiss(nil, isTabBarShow: true)
     }
 }

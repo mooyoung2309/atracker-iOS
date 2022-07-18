@@ -15,6 +15,7 @@ protocol ApplyRouting: ViewableRouting {
     func attachMyPageRIB()
     func detachThisChildRIB()
     func reAttachApplyDetailRIB()
+    func detachWriteApplyOverallRIB()
 }
 
 protocol ApplyPresentable: Presentable {
@@ -24,13 +25,11 @@ protocol ApplyPresentable: Presentable {
 }
 
 protocol ApplyListener: AnyObject {
-    func showTabBar()
-    func hideTabBar()
     func didSignOut()
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
-
+    
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
     
@@ -71,7 +70,6 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         
         action.tapPlusButton
             .bind { [weak self] _ in
-                self?.listener?.hideTabBar()
                 self?.router?.attachWriteApplyOverall()
             }
             .disposeOnDeactivate(interactor: self)
@@ -96,22 +94,13 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     // MARK: From Child RIB
-    func tapBackButtonFromChildRIB() {
-        router?.detachThisChildRIB()
-        fetchApplies()
-        showTabBar()
-    }
-    
-    func showTabBar() {
-        listener?.showTabBar()
-    }
-    
-    func hideTabBar() {
-        listener?.hideTabBar()
-    }
     
     func didSignOut() {
         listener?.didSignOut()
+    }
+    
+    func didWriteApply() {
+        router?.detachWriteApplyOverallRIB()
     }
 }
 

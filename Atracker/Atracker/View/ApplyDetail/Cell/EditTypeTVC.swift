@@ -14,10 +14,9 @@ class EditTypeTVC: BaseTVC {
     let titleImageView = UIImageView()
     let titleLabel = UILabel()
     
-    func update(image: UIImage?, title: String) {
-        titleImageView.image = image
-        
-        titleLabel.text = title
+    func update(editTypeItem: EditTypeItem) {
+        titleImageView.image = UIImage(named: editTypeItem.imageName) 
+        titleLabel.text = editTypeItem.title
     }
     
     override func setupProperty() {

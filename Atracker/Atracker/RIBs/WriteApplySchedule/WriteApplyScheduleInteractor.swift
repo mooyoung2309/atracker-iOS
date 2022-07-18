@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol WriteApplyScheduleRouting: ViewableRouting {
-    
+    func detachThisRIB()
 }
 
 protocol WriteApplySchedulePresentable: Presentable {
@@ -22,6 +22,7 @@ protocol WriteApplySchedulePresentable: Presentable {
 
 protocol WriteApplyScheduleListener: AnyObject {
     func tapBackButtonFromChildRIB()
+    func didWriteApply()
 }
 
 final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedulePresentable>, WriteApplyScheduleInteractable, WriteApplySchedulePresentableListener {
@@ -69,7 +70,7 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
         
         action.tapBackButton
             .bind { [weak self] _ in
-                self?.listener?.tapBackButtonFromChildRIB()
+                self?.router?.detachThisRIB()
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -98,6 +99,7 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
             .bind { [weak self] _ in
                 guard let this = self else { return }
                 this.postApply(applyCreateRequest: this.applyCreateRequest)
+                self?.listener?.didWriteApply()
             }
             .disposeOnDeactivate(interactor: self)
         

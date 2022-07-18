@@ -11,20 +11,19 @@ import RxCocoa
 import UIKit
 
 protocol ApplyDetailPresentableAction: AnyObject {
-    
+    var tapBackButton: Observable<Void> { get }
+    var tapEditButton: Observable<Void> { get }
+    var tapEditTypeCell: Observable<EditTypeItem> { get }
 }
 
 protocol ApplyDetailPresentableHandler: AnyObject {
     var stageTitles: Observable<[String]> { get }
     var stageProgresses: Observable<[StageProgress]> { get }
+    var showEditTypeTableView: Observable<Bool> { get }
 }
 
 protocol ApplyDetailPresentableListener: AnyObject {
-    func tapBackButton()
-    func tapEditButton()
-    func tapEditApplyOverallButton()
-    func tapEditApplyStageProgressButton()
-    func tapDeleteApplyButton()
+    
 }
 
 final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetailPresentable, ApplyDetailViewControllable {
@@ -34,17 +33,16 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     }
     weak var handler: ApplyDetailPresentableHandler?
     
-    var thisView: UIView {
-        return containerView
-    }
     let selfView = ApplyDetailView()
     
     let mockUps = 0...30
-    let editTypes = ["지원 후기 수정하기", "전형 편집하기", "지원 후기 삭제하기"]
     
     private var apply: Apply?
     private var stageTitles: [String] = []
     private var stageProgresses: [StageProgress] = []
+    private let editTypes: [EditTypeItem] = EditTypeItem.list
+    
+    private let tapEditTypeCellSubject = PublishSubject<EditTypeItem>()
     
     func showEditTableView() {
         selfView.showEditTableView()
@@ -93,16 +91,15 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         selfView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Size.navigationBarHeight)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
+            $0.bottom.equalToSuperview()
         }
     }
     
     override func setupBind() {
         super.setupBind()
         
-        guard let action = action else { return }
         guard let handler = handler else { return }
-
+        
         handler.stageTitles
             .bind { [weak self] stageTitles in
                 self?.reloadStageTitleCollectionView(stageTitles: stageTitles)
@@ -115,15 +112,15 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
             }
             .disposed(by: disposeBag)
         
-        navigaionBar.backButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapBackButton()
-            }
-            .disposed(by: disposeBag)
-  
-        navigaionBar.trailingButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapEditButton()
+        handler.showEditTypeTableView
+            .bind { [weak self] bool in
+                if bool {
+                    self?.selfView.showEditTableView()
+                } else {
+                    self?.selfView.hideEditTableView()
+                }
+                
+                self?.tabBarController?.tabBar.isHidden = bool
             }
             .disposed(by: disposeBag)
     }
@@ -142,7 +139,17 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
 
 //MARK: PresentableAction
 extension ApplyDetailViewController: ApplyDetailPresentableAction {
+    var tapBackButton: Observable<Void> {
+        return navigaionBar.backButton.rx.tap.asObservable()
+    }
     
+    var tapEditButton: Observable<Void> {
+        return navigaionBar.trailingButton.rx.tap.asObservable()
+    }
+    
+    var tapEditTypeCell: Observable<EditTypeItem> {
+        return tapEditTypeCellSubject.asObservable()
+    }
 }
 
 //MARK: CollectionView
@@ -200,10 +207,12 @@ extension ApplyDetailViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         case selfView.editTableView:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EditTypeTVC.id, for: indexPath) as? EditTypeTVC else { return UITableViewCell() }
-            cell.update(image: UIImage(named: ImageName.trash), title: editTypes[indexPath.item])
+            cell.update(editTypeItem: editTypes[indexPath.item])
+            
             let tmpView = UIView()
             tmpView.backgroundColor = .gray6
             cell.selectedBackgroundView = tmpView
+            
             return cell
         default:
             return UITableViewCell()
@@ -213,13 +222,7 @@ extension ApplyDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case selfView.editTableView:
-            if indexPath.row == 0 {
-                listener?.tapEditApplyOverallButton()
-            } else if indexPath.row == 1 {
-                listener?.tapEditApplyStageProgressButton()
-            } else if indexPath.row == 2 {
-                listener?.tapDeleteApplyButton()
-            }
+            tapEditTypeCellSubject.onNext(editTypes[indexPath.item])
             return
         default:
             return

@@ -12,8 +12,8 @@ protocol SignUpNicknameInteractable: Interactable, SignUpPositionListener {
     var listener: SignUpNicknameListener? { get set }
 }
 
-protocol SignUpNicknameViewControllable: NavigationContainerViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+protocol SignUpNicknameViewControllable: NavigationViewControllable {
+    
 }
 
 final class SignUpNicknameRouter: ViewableRouter<SignUpNicknameInteractable, SignUpNicknameViewControllable>, SignUpNicknameRouting {
@@ -36,6 +36,6 @@ final class SignUpNicknameRouter: ViewableRouter<SignUpNicknameInteractable, Sig
         
         self.signUpPosition = signUpPosition
         attachChild(signUpPosition)
-        viewController.presentView(signUpPosition, animation: true)
+        viewController.present(signUpPosition.viewControllable, isTabBarShow: true)
     }
 }

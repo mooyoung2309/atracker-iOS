@@ -23,9 +23,6 @@ protocol SignUpPositionPresentableListener: AnyObject {
 }
 
 final class SignUpPositionViewController: BaseNavigationViewController, SignUpPositionPresentable, SignUpPositionViewControllable {
-    var thisView: UIView {
-        return mainView
-    }
     
     weak var listener: SignUpPositionPresentableListener?
     
@@ -117,7 +114,6 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
         
         selfView.careerUnderLineLabelView.rx.tapGesture().bind {
             [weak self] tap in
-//            Log("[D] \(tap.state)")
             if tap.state == .ended {
                 self?.listener?.tapCareerToggleButton()
             }

@@ -15,7 +15,7 @@ protocol BlogPresentableListener: AnyObject {
     // interactor class.
 }
 
-final class BlogViewController: BaseViewController, BlogPresentable, BlogViewControllable {
+final class BlogViewController: BaseNavigationViewController, BlogPresentable, BlogViewControllable {
 
     weak var listener: BlogPresentableListener?
     

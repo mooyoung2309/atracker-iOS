@@ -12,10 +12,8 @@ protocol RootInteractable: Interactable, SignInListener, SignOutListener {
     var listener: RootListener? { get set }
 }
 
-protocol RootViewControllable: ViewControllable {
-    func presentModal(viewController: ViewControllable)
-    func present(viewController: ViewControllable)
-    func dismiss(viewController: ViewControllable)
+protocol RootViewControllable: NavigationViewControllable {
+
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
@@ -49,14 +47,14 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     
     func attachSignOutRIB() {
         if let signOut = signOut {
-            viewController.dismiss(viewController: signOut.viewControllable)
+            viewController.dismiss(nil, isTabBarShow: true)
         }
         
         let signOut = signOutBuilder.build(withListener: interactor)
         
         detachChildRIB(child)
         attachChild(signOut)
-        viewController.present(viewController: signOut.viewControllable)
+        viewController.present(signOut.viewControllable, isTabBarShow: true)
         
         self.signOut = signOut
         self.child = signOut
@@ -64,7 +62,7 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     
     func attachSignInRIB() {
         if let signOut = signOut {
-            viewController.dismiss(viewController: signOut.viewControllable)
+            viewController.dismiss(nil, isTabBarShow: true)
         }
         
         let signIn = signInBuilder.build(withListener: interactor)

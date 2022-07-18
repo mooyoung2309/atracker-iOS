@@ -12,8 +12,8 @@ protocol ApplyInteractable: Interactable, ApplyDetailListener, WriteApplyOverall
     var listener: ApplyListener? { get set }
 }
 
-protocol ApplyViewControllable: NavigationContainerViewControllable {
-
+protocol ApplyViewControllable: NavigationViewControllable {
+    
 }
 
 final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable>, ApplyRouting {
@@ -43,9 +43,10 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
         self.applyDetail = applyDetail
         
-        detachChildRIB(child)
+//        detachChildRIB(child)
         attachChild(applyDetail)
-        viewController.presentView(applyDetail, animation: true, transitionSubType: .fromRight)
+    
+        viewController.present(applyDetail.viewControllable, isTabBarShow: true)
         
         child = applyDetail
     }
@@ -57,7 +58,9 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB(child)
         attachChild(writeApplyOverall)
-        viewController.presentView(writeApplyOverall, animation: true)
+        
+        viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
+        
         child = writeApplyOverall
     }
     
@@ -68,7 +71,6 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB(child)
         attachChild(myPage)
-        viewController.presentView(myPage, animation: true)
         
         child = myPage
     }
@@ -80,15 +82,23 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         detachChildRIB(child)
         attachChild(applyDetail)
-        viewController.presentView(applyDetail, transitionSubType: .fromLeft)
+//        viewController.presentView(applyDetail, transitionSubType: .fromLeft)
         
         child = applyDetail
     }
     
     func detachThisChildRIB() {
         detachChildRIB(child)
-        viewController.dismissView(animation: true)
+//        viewController.dismissView(animation: true)
         
         child = nil
+    }
+    
+    func detachWriteApplyOverallRIB() {
+        guard let writeApplyOverall = writeApplyOverall else { return }
+
+        detachChild(writeApplyOverall)
+        
+        viewController.dismiss(viewControllable, isTabBarShow: true)
     }
 }

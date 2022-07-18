@@ -18,8 +18,6 @@ protocol MyPagePresentable: Presentable {
 }
 
 protocol MyPageListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func tapBackButtonFromChildRIB()
     func didSignOut()
 }
 
@@ -46,15 +44,12 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
     }
     
     func tapBackButton() {
-        Log("[D] 뒤로가기")
-        listener?.tapBackButtonFromChildRIB()
+        
     }
     
     func tapSignOutButton() {
-        Log("[SIGNOUT] start")
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.accessToken)
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.refreshToken)
         listener?.didSignOut()
-        Log("[SIGNOUT] end")
     }
 }

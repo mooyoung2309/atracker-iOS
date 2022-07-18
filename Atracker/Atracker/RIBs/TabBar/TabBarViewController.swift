@@ -11,67 +11,76 @@ import UIKit
 import Then
 import SnapKit
 
+protocol TabBarPresentableAction: AnyObject {
+    var tapTabBar: Observable<Int> { get }
+}
+
+protocol TabBarPresentableHandler: AnyObject {
+    var selectedIndex: Observable<Int> { get }
+}
+
 protocol TabBarPresentableListener: AnyObject {
-    func tabBlogButton()
-    func tabApplyButton()
-    func tabScheduleButton()
+
 }
 
 final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarViewControllable {
-    func selectBlogButton() {
-        
-    }
-    
-    func selectApplyButton() {
-        
-    }
-    
-    func selectScheduleButton() {
-        
-    }
-    
-    func showTabBar() {
-        
-    }
-    
-    func hideTabBar() {
-        
-    }
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-        Log("[D] \(item.tag)")
-    }
-    
-//    var thisView: UIView {
-//        return mainView
-//    }
-//
     weak var listener: TabBarPresentableListener?
     
-    func present(viewController: ViewControllable) {
-        viewController.uiviewController.modalPresentationStyle = .fullScreen
-        present(viewController.uiviewController, animated: false, completion: nil)
+    var action: TabBarPresentableAction? {
+        return self
     }
-
-    func dismiss(viewController: ViewControllable) {
-        if presentedViewController === viewController.uiviewController {
-            dismiss(animated: false, completion: nil)
-        }
-    }
+    var handler: TabBarPresentableHandler?
+    
+    private var disposeBag = DisposeBag()
+    
+    private let tapTabBarSubject = PublishSubject<Int>()
     
     func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController) {
+        
         blogViewController.tabBarItem = UITabBarItem(title: "탐색", image: UIImage(named: ImageName.search), tag: 0)
         applyViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: ImageName.home), tag: 1)
         myPageViewController.tabBarItem = UITabBarItem(title: "마이", image: UIImage(named: ImageName.user), tag: 2)
         
-        self.viewControllers = [blogViewController, applyViewController, myPageViewController]
+        self.viewControllers = [UINavigationController(rootViewController: blogViewController), UINavigationController(rootViewController: applyViewController), UINavigationController(rootViewController: myPageViewController)]
+        
+        tapTabBarSubject.onNext(1)
+        selectedIndex = 1
+    }
+    
+    func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
+        present(viewController.uiviewController, animated: false, completion: nil)
+    }
+    
+    func dismiss(_ rootViewController: ViewControllable?, isTabBarShow: Bool) {
+        dismiss(animated: false, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBind()
+    }
+    
+    func setupBind() {
+        guard let handler = handler else { return }
+
+        handler.selectedIndex
+            .bind { [weak self] i in
+                self?.selectedIndex = i
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
+        tapTabBarSubject.onNext(item.tag)
+    }
+}
+
+extension TabBarViewController: TabBarPresentableAction {
+    var tapTabBar: Observable<Int> {
+        return tapTabBarSubject.asObservable()
     }
 }
 

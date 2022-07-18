@@ -12,19 +12,21 @@ protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, Schedule
     var listener: TabBarListener? { get set }
 }
 
-protocol TabBarViewControllable: ViewControllable {
+protocol TabBarViewControllable: NavigationViewControllable {
     func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController)
-    func present(viewController: ViewControllable)
-    func dismiss(viewController: ViewControllable)
 }
 
 final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControllable>, TabBarRouting {
+    
     func attachBlogRIB() {
         
     }
     
     func attachApplyRIB() {
-        
+        detachChildRIB()
+        attachChild(apply)
+
+        child = apply
     }
     
     func attachPlanRIB() {

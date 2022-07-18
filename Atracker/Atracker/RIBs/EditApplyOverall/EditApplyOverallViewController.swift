@@ -10,19 +10,28 @@ import RxSwift
 import UIKit
 import SnapKit
 
+protocol EditApplyOverallPresentableAction: AnyObject {
+    var tapBackButton: Observable<Void> { get }
+}
+
+protocol EditApplyOverallPresentableHandler: AnyObject {
+
+}
+
 protocol EditApplyOverallPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
-    func tapBackButton()
+    
 }
 
 final class EditApplyOverallViewController: BaseNavigationViewController, EditApplyOverallPresentable, EditApplyOverallViewControllable {
-    var thisView: UIView {
-        return containerView
-    }
     
     weak var listener: EditApplyOverallPresentableListener?
+    
+    var action: EditApplyOverallPresentableAction? {
+        return self
+    }
+    
+    var handler: EditApplyOverallPresentableHandler?
+    
     
     private let selfView = EditApplyOverallView()
     private var stages = ["서류", "1차면접", "2차면접", "3차면접"]
@@ -70,11 +79,12 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
     override func setupBind() {
         super.setupBind()
         
-        navigaionBar.backButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapBackButton()
-            }
-            .disposed(by: disposeBag)
+    }
+}
+
+extension EditApplyOverallViewController: EditApplyOverallPresentableAction {
+    var tapBackButton: Observable<Void> {
+        return navigaionBar.backButton.rx.tap.asObservable()
     }
 }
 

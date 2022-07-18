@@ -12,12 +12,10 @@ protocol SignInInteractable: Interactable, TabBarListener {
     var listener: SignInListener? { get set }
 }
 
-protocol SignInViewControllable: ViewControllable {
+protocol SignInViewControllable: NavigationViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy. Since
     // this RIB does not own its own view, this protocol is conformed to by one of this
     // RIB's ancestor RIBs' view.
-    func present(viewController: ViewControllable)
-    func dismiss(viewController: ViewControllable)
 }
 
 final class SignInRouter: Router<SignInInteractable>, SignInRouting {
@@ -46,14 +44,14 @@ final class SignInRouter: Router<SignInInteractable>, SignInRouting {
         
         self.tabBar = tabBar
         attachChild(tabBar)
-        viewController.present(viewController: tabBar.viewControllable)
+        viewController.present(tabBar.viewControllable, isTabBarShow: true)
     }
     
     func detachTabBarRIB() {
         Log("[SIGNOUT] start")
         if let tabBar = tabBar {
             detachChild(tabBar)
-            viewController.dismiss(viewController: tabBar.viewControllable)
+            viewController.dismiss(tabBar.viewControllable, isTabBarShow: true)
         }
         
         tabBar = nil
