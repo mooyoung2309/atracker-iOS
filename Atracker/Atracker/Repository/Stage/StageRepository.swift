@@ -11,14 +11,6 @@ import Alamofire
 class StageRepository {
     func get(completion: @escaping(Result<StageResponse, Error>) -> Void) {
         AF.request(StageAPI.get, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<[Stage]>) in
-//            print(response.data)
-//            print(response.response)
-//            print(response.result)
-//            print(response.error)
-//            print(response.request)
-//            print(response.debugDescription)
-//            print(response.description)
-//            print(response.value)
             switch response.result {
             case .success(let data):
                 Log("[D] 성공")

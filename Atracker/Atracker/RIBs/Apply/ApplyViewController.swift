@@ -17,6 +17,7 @@ protocol ApplyPresentableAction: AnyObject {
 
 protocol ApplyPresentableHandler: AnyObject {
     var applies: Observable<[Apply]> { get }
+    var myPage: Observable<MyPageResponse> { get }
 }
 
 protocol ApplyPresentableListener: AnyObject {
@@ -86,6 +87,24 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
                 self?.reloadApplyTableView(applies: applies)
             }
             .disposed(by: disposeBag)
+        
+        handler.myPage
+            .bind { [weak self] myPage in
+                self?.updateUserInfoView(myPage: myPage)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func updateUserInfoView(myPage: MyPageResponse) {
+        selfView.positionLabel.text = "\(myPage.jobPosition)"
+        
+        let titleString = "\(myPage.nickName)님의\n지원현황입니다!"
+        let titleAttributeString = NSMutableAttributedString(string: titleString)
+        titleAttributeString.addAttribute(.foregroundColor, value: UIColor.neonGreen, range: (titleString as NSString).range(of: "\(myPage.nickName)"))
+        
+        titleAttributeString.addAttribute(.font, value: UIFont.systemFont(ofSize: 28, weight: .bold), range: (titleString as NSString).range(of: "\(myPage.nickName)"))
+        
+        selfView.titleLabel.attributedText = titleAttributeString
     }
     
     func reloadApplyTableView(applies: [Apply]) {

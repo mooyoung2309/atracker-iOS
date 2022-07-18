@@ -14,9 +14,12 @@ protocol ApplyDependency: Dependency {
 
 final class ApplyComponent: Component<ApplyDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     var applyService: ApplyServiceProtocol {
         return ApplyService()
+    }
+    
+    var userService: UserServiceProtocol {
+        return UserService()
     }
     
 }
@@ -37,7 +40,7 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
         
         let component = ApplyComponent(dependency: dependency)
         let viewController = ApplyViewController()
-        let interactor = ApplyInteractor(presenter: viewController, applyService: component.applyService)
+        let interactor = ApplyInteractor(presenter: viewController, applyService: component.applyService, userService: component.userService)
         let applyWriteBuilder = WriteApplyOverallBuilder(dependency: component)
         let applyDetailBuilder = ApplyDetailBuilder(dependency: component)
         let myPageBuilder = MyPageBuilder(dependency: component)

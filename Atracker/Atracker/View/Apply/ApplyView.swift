@@ -28,11 +28,9 @@ class ApplyView: BaseView {
         
         scrollView.showsVerticalScrollIndicator = false
         
-        positionLabel.text = "신입 iOS 개발자"
         positionLabel.font = .systemFont(ofSize: 16, weight: .regular)
         positionLabel.textColor = .gray1
         
-        titleLabel.text = "이소진님의\n지원현황입니다!"
         titleLabel.font = .systemFont(ofSize: 28, weight: .regular)
         titleLabel.textColor = .white
         titleLabel.numberOfLines = 2

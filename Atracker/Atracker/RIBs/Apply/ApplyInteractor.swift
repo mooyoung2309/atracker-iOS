@@ -34,11 +34,14 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     weak var listener: ApplyListener?
     
     private let applyService: ApplyServiceProtocol
+    private let userService: UserServiceProtocol
     
     private let appliesRelay = BehaviorRelay<[Apply]>(value: [])
+    private let myPageRelay = PublishRelay<MyPageResponse>()
 
-    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocol) {
+    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocol, userService: UserServiceProtocol) {
         self.applyService = applyService
+        self.userService = userService
         
         super.init(presenter: presenter)
         
@@ -51,6 +54,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         
         setupBind()
         fetchApplies()
+        fetchMyPage()
     }
 
     override func willResignActive() {
@@ -93,6 +97,18 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         }
     }
     
+    func fetchMyPage() {
+        userService.myPage { [weak self] result in
+            switch result {
+            case .success(let data):
+                Log("[D] 마이페이지 가져오기 성공 \(data)")
+                self?.myPageRelay.accept(data)
+            case .failure(let error):
+                Log("[D] 마이페이지 가져오기 실패 \(error)")
+            }
+        }
+    }
+    
     // MARK: From Child RIB
     
     func didSignOut() {
@@ -107,5 +123,9 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
 extension ApplyInteractor: ApplyPresentableHandler {
     var applies: Observable<[Apply]> {
         return appliesRelay.asObservable()
+    }
+    
+    var myPage: Observable<MyPageResponse> {
+        return myPageRelay.asObservable()
     }
 }

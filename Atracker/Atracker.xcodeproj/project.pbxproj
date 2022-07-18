@@ -211,6 +211,10 @@
 		70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8828478B220098C742 /* BaseTVC.swift */; };
 		70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B9B2847AEC20098C742 /* ApplyView.swift */; };
 		70D587C02885365B00872282 /* EditTypeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587BF2885365B00872282 /* EditTypeItem.swift */; };
+		70D587C328854A7800872282 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587C228854A7800872282 /* UserAPI.swift */; };
+		70D587C528854A8100872282 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587C428854A8100872282 /* UserRepository.swift */; };
+		70D587C828854D6F00872282 /* MyPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587C728854D6F00872282 /* MyPageResponse.swift */; };
+		70D587CA28854E3600872282 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587C928854E3600872282 /* UserService.swift */; };
 		70D83747286BD70D0085DE43 /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83743286BD70D0085DE43 /* MyPageRouter.swift */; };
 		70D83748286BD70D0085DE43 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83744286BD70D0085DE43 /* MyPageViewController.swift */; };
 		70D83749286BD70D0085DE43 /* MyPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83745286BD70D0085DE43 /* MyPageBuilder.swift */; };
@@ -468,6 +472,10 @@
 		70CF5B8828478B220098C742 /* BaseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVC.swift; sourceTree = "<group>"; };
 		70CF5B9B2847AEC20098C742 /* ApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyView.swift; sourceTree = "<group>"; };
 		70D587BF2885365B00872282 /* EditTypeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTypeItem.swift; sourceTree = "<group>"; };
+		70D587C228854A7800872282 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		70D587C428854A8100872282 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		70D587C728854D6F00872282 /* MyPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageResponse.swift; sourceTree = "<group>"; };
+		70D587C928854E3600872282 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		70D83743286BD70D0085DE43 /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
 		70D83744286BD70D0085DE43 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		70D83745286BD70D0085DE43 /* MyPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageBuilder.swift; sourceTree = "<group>"; };
@@ -777,6 +785,7 @@
 			children = (
 				7027D3B12863269700F9C913 /* Base */,
 				7027D3C32863787D00F9C913 /* Auth */,
+				70D587C128854A5200872282 /* User */,
 				7027D3C62863862600F9C913 /* Company */,
 				70660467286AAF4C00A09427 /* Apply */,
 				702D86DB2874898D009682A4 /* Stage */,
@@ -1123,6 +1132,7 @@
 			children = (
 				70095FE4287E8D0F006933BC /* ContentSerialization.swift */,
 				7027D39D2862D08600F9C913 /* Auth */,
+				70D587C628854C6B00872282 /* User */,
 				7066045E286AACF500A09427 /* Apply */,
 				702D86D628748916009682A4 /* Stage */,
 				70934085287E6AEB00DAFB40 /* StageProgress */,
@@ -1142,6 +1152,7 @@
 				702D86D928748983009682A4 /* StageService.swift */,
 				701CE1B2288089D100D6E6CC /* StageProgressService.swift */,
 				70576DF22864222D000406DF /* CompanyService.swift */,
+				70D587C928854E3600872282 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1231,6 +1242,23 @@
 				7040964328600A23003EBCE4 /* WriteApplyOverallComponent+WriteApplySchedule.swift */,
 			);
 			path = WriteApplyOverall;
+			sourceTree = "<group>";
+		};
+		70D587C128854A5200872282 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				70D587C228854A7800872282 /* UserAPI.swift */,
+				70D587C428854A8100872282 /* UserRepository.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		70D587C628854C6B00872282 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				70D587C728854D6F00872282 /* MyPageResponse.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		70D83742286BD6F80085DE43 /* MyPage */ = {
@@ -1614,6 +1642,7 @@
 				700DBEC42868D1E500883A4F /* UnderLineLabelView.swift in Sources */,
 				70A88E6E2851A4A90027D673 /* BlogInteractor.swift in Sources */,
 				705CCCFF285C5B3700E79540 /* AlertStyle.swift in Sources */,
+				70D587C828854D6F00872282 /* MyPageResponse.swift in Sources */,
 				702D86E52875FA40009682A4 /* StageCreateRequest.swift in Sources */,
 				701CE1B3288089D100D6E6CC /* StageProgressService.swift in Sources */,
 				7027D3C2286377C100F9C913 /* MyAuthenticationCredential.swift in Sources */,
@@ -1765,6 +1794,7 @@
 				704096412860071D003EBCE4 /* WriteApplyScheduleBuilder.swift in Sources */,
 				70576E2A2865B2AA000406DF /* SignUpPositionInteractor.swift in Sources */,
 				70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */,
+				70D587C328854A7800872282 /* UserAPI.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
 				70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
@@ -1792,11 +1822,13 @@
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
 				70934084287E6A9B00DAFB40 /* StageProgressRepository.swift in Sources */,
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
+				70D587CA28854E3600872282 /* UserService.swift in Sources */,
 				70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */,
 				70660466286AAE8700A09427 /* ApplyService.swift in Sources */,
 				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
 				7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */,
 				70095FEC287E8E72006933BC /* TabBarItem.swift in Sources */,
+				70D587C528854A8100872282 /* UserRepository.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,
 				70D83761286C4CA90085DE43 /* ProgressBarView.swift in Sources */,
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
