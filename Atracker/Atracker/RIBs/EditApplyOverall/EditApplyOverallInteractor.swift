@@ -28,7 +28,6 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
     weak var router: EditApplyOverallRouting?
     weak var listener: EditApplyOverallListener?
     
-    
     private let applyService: ApplyServiceProtocol
     private let companyService: CompanyServiceProtocol
     private let apply: Apply
@@ -60,13 +59,11 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        
         setupBind()
     }
     
     override func willResignActive() {
         super.willResignActive()
-        
         presenter.handler = nil
     }
     
@@ -91,6 +88,13 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
         action.tapAddCompanyCell
             .bind { [weak self] companyName in
                 self?.addCompany(companyName: companyName)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapCompanyCell
+            .bind { [weak self] company in
+                self?.companyRelay.accept(company)
+                self?.hideCompanyTableViewRelay.accept(())
             }
             .disposeOnDeactivate(interactor: self)
         

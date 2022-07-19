@@ -52,25 +52,18 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
         
         self.writeApplyOverall = writeApplyOverall
-        
         detachChildRIB(child)
         attachChild(writeApplyOverall)
-        
         viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
-        
         child = writeApplyOverall
     }
     
-    func reAttachApplyDetailRIB() {
-        guard let apply = apply else { return }
-        let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
-        self.applyDetail = applyDetail
-        
-        detachChildRIB(child)
-        attachChild(applyDetail)
-//        viewController.presentView(applyDetail, transitionSubType: .fromLeft)
-        
-        child = applyDetail
+    func detachApplyDetailRIB() {
+        if let child = child {
+            detachChild(child)
+        }
+        viewController.dismiss(nil, isTabBarShow: true)
+        child = self
     }
     
     func detachThisChildRIB() {

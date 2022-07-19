@@ -13,20 +13,16 @@ protocol ApplyDetailRouting: ViewableRouting {
     func attachEditApplyOverallRIB(apply: Apply)
     func attachEditApplyStageProgressRIB(apply: Apply)
     func detachEditApplyOverallRIB()
-    func detachThisRIB()
 }
 
 protocol ApplyDetailPresentable: Presentable {
     var listener: ApplyDetailPresentableListener? { get set }
     var action: ApplyDetailPresentableAction? { get }
     var handler: ApplyDetailPresentableHandler? { get set }
-    func setNavigaionBarTitle(_ text: String)
-    func showEditTableView()
-    func hideEditTableView()
 }
 
 protocol ApplyDetailListener: AnyObject {
-    
+    func didBackFromApplyDetail()
 }
 
 final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>, ApplyDetailInteractable, ApplyDetailPresentableListener {
@@ -34,14 +30,18 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    private var apply: Apply
+    private let applyService: ApplyServiceProtocol
+    
+    private var thisApply: Apply
     private var isShowEditTableView = false
     
-    private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
-    private let showEditTypeTableViewRelay = BehaviorRelay<Bool>(value: false)
+    private lazy var applyRelay = BehaviorRelay<Apply>(value: thisApply)
+    private lazy var stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
+    private lazy var showEditTypeTableViewRelay = BehaviorRelay<Bool>(value: false)
     
-    init(presenter: ApplyDetailPresentable, apply: Apply) {
-        self.apply = apply
+    init(presenter: ApplyDetailPresentable, applyService: ApplyServiceProtocol, apply: Apply) {
+        self.applyService = applyService
+        self.thisApply = apply
         
         super.init(presenter: presenter)
         
@@ -51,9 +51,8 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        Log("[D] 지원 현황 디테일 페이지 \(apply.stageProgress)")
+        
         setupBind()
-        presenter.setNavigaionBarTitle(apply.companyName)
     }
 
     override func willResignActive() {
@@ -68,7 +67,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         // 액션 바인딩
         action.tapBackButton
             .bind { [weak self] in
-                self?.router?.detachThisRIB()
+                self?.listener?.didBackFromApplyDetail()
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -86,6 +85,19 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         
     }
     
+    private func fetchApply(appyID: Int) {
+        applyService.get(request: ApplyRequest(applyIds: appyID, includeContent: true)) { [weak self] result in
+            switch result {
+            case .success(let data):
+                if let apply = data.applies.first(where: { $0.applyID == appyID }) {
+                    self?.applyRelay.accept(apply)
+                }
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
     private func didTapEditButton() {
         let bool = !showEditTypeTableViewRelay.value
         showEditTypeTableViewRelay.accept(bool)
@@ -94,10 +106,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     private func didTapEditTypeCell(editTypeItem: EditTypeItem) {
         switch editTypeItem {
         case .apply:
-            router?.attachEditApplyOverallRIB(apply: apply)
+            router?.attachEditApplyOverallRIB(apply: thisApply)
             didTapEditButton()
         case .stage:
-            router?.attachEditApplyStageProgressRIB(apply: apply)
+            router?.attachEditApplyStageProgressRIB(apply: thisApply)
             didTapEditButton()
         case .delete:
             return
@@ -106,26 +118,19 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     
     // MARK: 자식 RIBs으로 부터
     func didEditApplyStageProgress() {
-//        router?.detachThisChildRIB()
         
-        presenter.hideEditTableView()
     }
     
     func didEditApplyOverall() {
         router?.detachEditApplyOverallRIB()
+        fetchApply(appyID: thisApply.applyID)
     }
 }
 
 // MARK: PresentableHandler
 extension ApplyDetailInteractor: ApplyDetailPresentableHandler {
-    var stageTitles: Observable<[String]> {
-        return Observable.just(apply.stageProgress.map({ (stageProgress: StageProgress) -> String in
-            return stageProgress.stageTitle
-        }))
-    }
-    
-    var stageProgresses: Observable<[StageProgress]> {
-        return Observable.just(apply.stageProgress)
+    var apply: Observable<Apply> {
+        return applyRelay.asObservable()
     }
     
     var showEditTypeTableView: Observable<Bool> {

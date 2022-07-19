@@ -8,7 +8,7 @@
 import Foundation
 
 struct ApplyRequest: Codable {
-    let applyIds: [Int]?
+    let applyIds: Int?
     let includeContent: Bool?
 }
 

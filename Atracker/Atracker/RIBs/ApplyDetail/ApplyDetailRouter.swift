@@ -66,9 +66,4 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         }
         viewController.dismiss(nil, isTabBarShow: true)
     }
-    
-    func detachThisRIB() {
-        detachChild(self)
-        viewController.dismiss(nil, isTabBarShow: true)
-    }
 }

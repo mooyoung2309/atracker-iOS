@@ -18,14 +18,14 @@ class ApplyRepository: ApplyRepositoryProtocol {
     
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
         AF.request(ApplyAPI.get(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<ApplyResponse>) in
-//            print(response.data)
-//            print(response.response)
-//            print(response.result)
-//            print(response.error)
-//            print(response.request)
-//            print(response.debugDescription)
-//            print(response.description)
-//            print(response.value)
+            print(response.data)
+            print(response.response)
+            print(response.result)
+            print(response.error)
+            print(response.request)
+            print(response.debugDescription)
+            print(response.description)
+            print(response.value)
             switch response.result {
             case .success(let data):
                 Log("[D] 지원 현황 가져오기 성공")

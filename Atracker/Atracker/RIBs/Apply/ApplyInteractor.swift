@@ -13,8 +13,8 @@ protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
     func attachWriteApplyOverall()
     func detachThisChildRIB()
-    func reAttachApplyDetailRIB()
     func detachWriteApplyOverallRIB()
+    func detachApplyDetailRIB()
 }
 
 protocol ApplyPresentable: Presentable {
@@ -110,6 +110,11 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     
     func didWriteApply() {
         router?.detachWriteApplyOverallRIB()
+    }
+    
+    func didBackFromApplyDetail() {
+        router?.detachApplyDetailRIB()
+        fetchApplies()
     }
 }
 

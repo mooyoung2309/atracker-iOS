@@ -17,8 +17,7 @@ protocol ApplyDetailPresentableAction: AnyObject {
 }
 
 protocol ApplyDetailPresentableHandler: AnyObject {
-    var stageTitles: Observable<[String]> { get }
-    var stageProgresses: Observable<[StageProgress]> { get }
+    var apply: Observable<Apply> { get }
     var showEditTypeTableView: Observable<Bool> { get }
 }
 
@@ -35,10 +34,6 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     
     let selfView = ApplyDetailView()
     
-    let mockUps = 0...30
-    
-    private var apply: Apply?
-    private var stageTitles: [String] = []
     private var stageProgresses: [StageProgress] = []
     private let editTypes: [EditTypeItem] = EditTypeItem.list
     
@@ -100,15 +95,9 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         
         guard let handler = handler else { return }
         
-        handler.stageTitles
-            .bind { [weak self] stageTitles in
-                self?.reloadStageTitleCollectionView(stageTitles: stageTitles)
-            }
-            .disposed(by: disposeBag)
-        
-        handler.stageProgresses
-            .bind { [weak self] stageProgresses in
-                self?.reloadApplyDetailTableView(stageProgresses: stageProgresses)
+        handler.apply
+            .bind { [weak self] apply in
+                self?.didUpdateApply(apply: apply)
             }
             .disposed(by: disposeBag)
         
@@ -125,13 +114,10 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
             .disposed(by: disposeBag)
     }
     
-    func reloadStageTitleCollectionView(stageTitles: [String]) {
-        self.stageTitles = stageTitles
+    func didUpdateApply(apply: Apply) {
+        self.stageProgresses = apply.stageProgress
+        setNavigaionBarTitle(apply.companyName)
         selfView.stageTitleCollectionView.reloadData()
-    }
-    
-    func reloadApplyDetailTableView(stageProgresses: [StageProgress]) {
-        self.stageProgresses = stageProgresses
         selfView.stageProgressTableView.reloadData()
         refreshTableView(tableView: selfView.stageProgressTableView)
     }
@@ -155,20 +141,20 @@ extension ApplyDetailViewController: ApplyDetailPresentableAction {
 //MARK: CollectionView
 extension ApplyDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stageTitles.count
+        return stageProgresses.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StageTitleCVC.id, for: indexPath) as? StageTitleCVC else { return UICollectionViewCell() }
         
-        cell.update(title: stageTitles[indexPath.item])
+        cell.update(title: stageProgresses[indexPath.item].stageTitle)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: stageTitles[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20,
+        return CGSize(width: stageProgresses[indexPath.item].stageTitle.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 20,
                       height: collectionView.frame.height)
     }
     

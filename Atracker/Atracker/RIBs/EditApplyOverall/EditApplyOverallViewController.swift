@@ -15,6 +15,7 @@ protocol EditApplyOverallPresentableAction: AnyObject {
     var tapBackButton: Observable<Void> { get }
     var tapNextButton: Observable<Void> { get }
     var tapAddCompanyCell: Observable<String> { get }
+    var tapCompanyCell: Observable<Company> { get }
     var tapJobType: Observable<Void> { get }
     var tapJobTypeCell: Observable<JobType> { get }
     var textCompanyName: Observable<String> { get }
@@ -51,6 +52,7 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
     private let selfView = EditApplyOverallView()
     
     private let tapAddCompanyButtonSubject = PublishSubject<String>()
+    private let tapCompanyCellSubject = PublishSubject<Company>()
     private let tapJobTypeSubject = PublishSubject<Void>()
     private let tapJobTypeCellSubject = PublishSubject<JobType>()
     private let changedStageProgressesSubject = PublishSubject<[StageProgress]>()
@@ -82,7 +84,6 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
     
     override func setupProperty() {
         super.setupProperty()
-        
         selfView.companyTableView.delegate = self
         selfView.companyTableView.dataSource = self
         selfView.jobTypeTableView.delegate = self
@@ -246,6 +247,10 @@ extension EditApplyOverallViewController: EditApplyOverallPresentableAction {
         return tapAddCompanyButtonSubject.asObservable()
     }
     
+    var tapCompanyCell: Observable<Company> {
+        return tapCompanyCellSubject.asObservable()
+    }
+    
     var tapJobTypeCell: Observable<JobType> {
         return tapJobTypeCellSubject.asObservable()
     }
@@ -359,8 +364,11 @@ extension EditApplyOverallViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case selfView.companyTableView:
-            Log("[D] \(indexPath.item)")
-            didUpdateTapAddCompanyButton()
+            if indexPath.item == companies.count {
+                didUpdateTapAddCompanyButton()
+            } else {
+                tapCompanyCellSubject.onNext(companies[indexPath.item])
+            }
         case selfView.jobTypeTableView:
             tapJobTypeCellSubject.onNext(jobTypes[indexPath.item])
         default:
