@@ -17,6 +17,11 @@ class SearchTVC: BaseTVC {
         titleLabel.text = title
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = ""
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         

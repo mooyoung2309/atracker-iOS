@@ -13,7 +13,7 @@ protocol RootInteractable: Interactable, SignInListener, SignOutListener {
 }
 
 protocol RootViewControllable: NavigationViewControllable {
-
+    func present(_ viewController: UIViewController)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
@@ -54,7 +54,8 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
         
         detachChildRIB(child)
         attachChild(signOut)
-        viewController.present(signOut.viewControllable, isTabBarShow: true)
+        let navigationViewController = UINavigationController(rootViewController: signOut.viewControllable.uiviewController)
+        viewController.present(navigationViewController)
         
         self.signOut = signOut
         self.child = signOut

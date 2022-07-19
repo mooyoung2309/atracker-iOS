@@ -9,10 +9,15 @@ import RIBs
 import RxSwift
 import UIKit
 
+protocol MyPagePresentableAction: AnyObject {
+    var tapSignOutButton: Observable<Void> { get }
+}
+
+protocol MyPagePresentableHandler: AnyObject {
+    var myPage: Observable<MyPageResponse> { get }
+}
+
 protocol MyPagePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
     func tapBackButton()
     func tapSignOutButton()
 }
@@ -21,14 +26,19 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
 
     weak var listener: MyPagePresentableListener?
     
+    weak var action: MyPagePresentableAction? {
+        return self
+    }
+    
+    weak var handler: MyPagePresentableHandler?
+    
     let selfView = MyPageView()
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
         
-        setNavigaionBarTitle("마이페이지")
-        showNavigationBarBackButton()
-        showNavigationBar()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        hideNavigationBar()
     }
     
     override func setupProperty() {
@@ -54,6 +64,14 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
     override func setupBind() {
         super.setupBind()
         
+        guard let handler = handler else { return }
+        
+        handler.myPage
+            .bind { [weak self] myPage in
+                self?.didUpdateMyPage(myPage: myPage)
+            }
+            .disposed(by: disposeBag)
+        
         navigaionBar.backButton.rx.tap
             .bind { [weak self] _ in
                 self?.listener?.tapBackButton()
@@ -65,5 +83,22 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
                 self?.listener?.tapSignOutButton()
             }
             .disposed(by: disposeBag)
+    }
+    
+    func didUpdateMyPage(myPage: MyPageResponse) {
+        selfView.positionLabel.text = "\(myPage.jobPosition)"
+        selfView.careerLabel.text = "\(myPage.jobPosition)"
+        
+        let titleString = "\(myPage.nickName)님, 안녕하세요!"
+        let titleAttributeString = NSMutableAttributedString(string: titleString)
+        titleAttributeString.addAttribute(.foregroundColor, value: UIColor.neonGreen, range: (titleString as NSString).range(of: "\(myPage.nickName)"))
+        
+        selfView.welcomeLabel.attributedText = titleAttributeString
+    }
+}
+
+extension MyPageViewController: MyPagePresentableAction {
+    var tapSignOutButton: Observable<Void> {
+        return selfView.signOutButton.rx.tap.asObservable()
     }
 }

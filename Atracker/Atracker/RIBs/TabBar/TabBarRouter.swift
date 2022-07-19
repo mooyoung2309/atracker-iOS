@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, ScheduleListener {
+protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, MyPageListener {
     var router: TabBarRouting? { get set }
     var listener: TabBarListener? { get set }
 }
@@ -18,30 +18,14 @@ protocol TabBarViewControllable: NavigationViewControllable {
 
 final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControllable>, TabBarRouting {
     
-    func attachBlogRIB() {
-        
-    }
-    
-    func attachApplyRIB() {
-        detachChildRIB()
-        attachChild(apply)
-
-        child = apply
-    }
-    
-    func attachPlanRIB() {
-        
-    }
-    
-    
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
-    private let scheduleBuilder: ScheduleBuildable
+    private let myPageBuilder: MyPageBuildable
     
     private var child: Routing?
     private var blog: ViewableRouting
     private var apply: ViewableRouting
-    private var schedule: ViewableRouting
+    private var myPage: ViewableRouting
     
     private var viewControllers: [UIViewController] = []
     
@@ -49,15 +33,15 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
          viewController: TabBarViewControllable,
          blogBuilder: BlogBuildable,
          applyBuilder: ApplyBuildable,
-         scheduleBuilder: ScheduleBuildable) {
+         myPageBuilder: MyPageBuildable) {
         
         self.blogBuilder = blogBuilder
         self.applyBuilder = applyBuilder
-        self.scheduleBuilder = scheduleBuilder
+        self.myPageBuilder = myPageBuilder
         
         blog = blogBuilder.build(withListener: interactor)
         apply = applyBuilder.build(withListener: interactor)
-        schedule = scheduleBuilder.build(withListener: interactor)
+        myPage = myPageBuilder.build(withListener: interactor)
         
         self.viewControllers.append(contentsOf: [])
         
@@ -65,66 +49,40 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         
         interactor.router = self
         
-        viewController.setupTabBar(blogViewController: blog.viewControllable.uiviewController, applyViewController: apply.viewControllable.uiviewController, myPageViewController: schedule.viewControllable.uiviewController)
+        viewController.setupTabBar(blogViewController: blog.viewControllable.uiviewController, applyViewController: apply.viewControllable.uiviewController, myPageViewController: myPage.viewControllable.uiviewController)
     }
     
-    func detachChildRIB() {
-        guard let child = child else { return }
+    func attachBlogRIB() {
+        if let child = child {
+            detachChild(child)
+        }
         
-        detachChild(child)
+        attachChild(blog)
+        child = blog
     }
-    //
-    //    func attachBlogRIB() {
-    //        detachChildRIB()
-    //
-    //        if let _ = blog { } else {
-    //            self.blog = blogBuilder.build(withListener: interactor)
-    //        }
-    //
-    //        guard let blog = blog else { return }
-    //
-    //        attachChild(blog)
-    //        viewController.presentView(blog, animation: false)
-    //        child = blog
-    //    }
-    //
-    //    func attachApplyRIB() {
-    //        detachChildRIB()
-    //
-    //        if let _ = apply { } else {
-    //            self.apply = applyBuilder.build(withListener: interactor)
-    //        }
-    //
-    //        guard let apply = apply else { return }
-    //
-    //        attachChild(apply)
-    //        viewController.presentView(apply, animation: false)
-    //
-    //        child = apply
-    //    }
-    //
-    //    func attachPlanRIB() {
-    //        detachChildRIB()
-    //
-    //        if let _ = schedule { } else {
-    //            self.schedule = scheduleBuilder.build(withListener: interactor)
-    //        }
-    //
-    //        guard let schedule = schedule else { return }
-    //
-    //        attachChild(schedule)
-    //        viewController.presentView(schedule, animation: false)
-    //
-    //        child = schedule
-    //    }
-    //
-    func detachApplyRIB() {
-        Log("[SIGNOUT] start")
-        detachChildRIB(apply)
-        //        viewController.dismiss(viewController: apply.viewControllable)
-        child = nil
+    
+    func attachApplyRIB() {
+        if let child = child {
+            detachChild(child)
+        }
         
-        Log("[SIGNOUT] end")
+        attachChild(apply)
+        child = apply
+    }
+    
+    func attachMyPageRIB() {
+        if let child = child {
+            detachChild(child)
+        }
+        
+        attachChild(myPage)
+        child = myPage
+    }
+    
+    
+    func detachApplyRIB() {
+        detachChildRIB(apply)
+        child = nil
     }
     
     //    func attachApplyWriteRIB() {

@@ -15,7 +15,7 @@ struct QNAContent: Codable {
 }
 
 struct FreeContent: Codable {
-    let t, c: String
+    let t, b: String
 }
 
 class ContentSerialization {
@@ -44,10 +44,10 @@ class ContentSerialization {
     }
     
     func toFreeContent(string: String?) -> FreeContent {
-        guard let string = string else { return FreeContent(t: "", c: "") }
+        guard let string = string else { return FreeContent(t: "", b: "") }
 
         do {
-            guard let dict = try JSONSerialization.jsonObject(with: Data(string.utf8), options: []) as? Dictionary<String, Any> else { return FreeContent(t: "", c: "") }
+            guard let dict = try JSONSerialization.jsonObject(with: Data(string.utf8), options: []) as? Dictionary<String, Any> else { return FreeContent(t: "", b: "") }
             let data = try JSONSerialization.data(withJSONObject: dict)
             let freeContent = try JSONDecoder().decode(FreeContent.self, from: data)
             Log("[D] 직렬화 성공 string -> questionContent")
@@ -56,7 +56,7 @@ class ContentSerialization {
             Log("[D] 직렬화 실패")
         }
         
-        return FreeContent(t: "", c: "")
+        return FreeContent(t: "", b: "")
     }
     
     func toOVERALLString(overallContent: OVERALLContent) -> String {

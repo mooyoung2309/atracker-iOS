@@ -19,7 +19,7 @@ class EditFREEContentTVC: BaseTVC {
     
     func update(freeContent: FreeContent) {
         titleTextView.text = freeContent.t
-        contextTextView.text = freeContent.c
+        contextTextView.text = freeContent.b
     }
     
     override func prepareForReuse() {
@@ -83,9 +83,9 @@ class EditFREEContentTVC: BaseTVC {
 extension EditFREEContentTVC: UITextViewDelegate, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         let t = titleTextView.text ?? ""
-        let c = contextTextView.text ?? ""
+        let b = contextTextView.text ?? ""
         
-        textChanged?(FreeContent(t: t, c: c))
+        textChanged?(FreeContent(t: t, b: b))
     }
     
     func textChanged(completion: @escaping (FreeContent) -> Void) {
@@ -94,8 +94,8 @@ extension EditFREEContentTVC: UITextViewDelegate, UITextFieldDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         let t = titleTextView.text ?? ""
-        let c = contextTextView.text ?? ""
+        let b = contextTextView.text ?? ""
         
-        textChanged?(FreeContent(t: t, c: c))
+        textChanged?(FreeContent(t: t, b: b))
     }
 }

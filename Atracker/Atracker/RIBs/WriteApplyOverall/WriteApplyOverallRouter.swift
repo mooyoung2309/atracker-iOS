@@ -61,6 +61,6 @@ final class WriteApplyOverallRouter: ViewableRouter<WriteApplyOverallInteractabl
     
     func testBackButton() {
         detachChild(self)
-        viewController.dismiss(nil, isTabBarShow: false)
+        viewController.dismiss(nil, isTabBarShow: true)
     }
 }

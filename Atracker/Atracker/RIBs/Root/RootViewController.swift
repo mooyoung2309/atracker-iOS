@@ -19,9 +19,15 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
     
     weak var listener: RootPresentableListener?
     
+    func present(_ viewController: UIViewController) {
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: false, completion: nil)
+    }
+    
     func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
-        viewController.uiviewController.modalPresentationStyle = .fullScreen
-        present(viewController.uiviewController, animated: false, completion: nil)
+        let navigationViewController = UINavigationController(rootViewController: viewController.uiviewController)
+        navigationViewController.modalPresentationStyle = .fullScreen
+        present(navigationViewController, animated: false, completion: nil)
     }
     
     func dismiss(_ rootViewController: ViewControllable?, isTabBarShow: Bool) {

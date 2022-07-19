@@ -11,6 +11,7 @@ import Alamofire
 enum ApplyAPI {
     case get(ApplyRequest)
     case post(ApplyCreateRequest)
+    case put(ApplyUpdateRequest)
 }
 
 extension ApplyAPI: BaseURLRequestConvertible {
@@ -24,6 +25,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
             return .get
         case .post:
             return .post
+        case .put:
+            return .put
         }
     }
     
@@ -33,6 +36,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
             return baseURL
         case .post:
             return baseURL
+        case .put:
+            return baseURL
         }
     }
     
@@ -41,6 +46,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
         case .get(let request):
             return .query(request)
         case .post(let request):
+            return .body(request)
+        case .put(let request):
             return .body(request)
         }
     }

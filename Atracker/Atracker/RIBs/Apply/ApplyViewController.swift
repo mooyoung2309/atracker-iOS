@@ -11,7 +11,6 @@ import UIKit
 
 protocol ApplyPresentableAction: AnyObject {
     var tapPlusButton: Observable<Void> { get }
-    var tapMyPageButton: Observable<Void> { get }
     var tapApplyTVC: Observable<Apply> { get }
 }
 
@@ -122,10 +121,6 @@ extension ApplyViewController: ApplyPresentableAction {
     
     var tapPlusButton: Observable<Void> {
         return selfView.plusButton.rx.tap.asObservable()
-    }
-    
-    var tapMyPageButton: Observable<Void> {
-        return selfView.myPageButton.rx.tap.asObservable()
     }
 }
 

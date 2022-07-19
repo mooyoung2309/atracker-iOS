@@ -12,7 +12,6 @@ import RxCocoa
 protocol ApplyRouting: ViewableRouting {
     func attachApplyDetailRIB(apply: Apply)
     func attachWriteApplyOverall()
-    func attachMyPageRIB()
     func detachThisChildRIB()
     func reAttachApplyDetailRIB()
     func detachWriteApplyOverallRIB()
@@ -75,12 +74,6 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         action.tapPlusButton
             .bind { [weak self] _ in
                 self?.router?.attachWriteApplyOverall()
-            }
-            .disposeOnDeactivate(interactor: self)
-        
-        action.tapMyPageButton
-            .bind { [weak self] _ in
-                self?.router?.attachMyPageRIB()
             }
             .disposeOnDeactivate(interactor: self)
     }

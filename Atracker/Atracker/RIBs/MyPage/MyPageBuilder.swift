@@ -8,13 +8,13 @@
 import RIBs
 
 protocol MyPageDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var userService: UserServiceProtocol { get }
 }
 
 final class MyPageComponent: Component<MyPageDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var userService: UserServiceProtocol {
+        return dependency.userService
+    }
 }
 
 // MARK: - Builder
@@ -32,7 +32,7 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     func build(withListener listener: MyPageListener) -> MyPageRouting {
         let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
-        let interactor = MyPageInteractor(presenter: viewController)
+        let interactor = MyPageInteractor(presenter: viewController, userService: component.userService)
         interactor.listener = listener
         return MyPageRouter(interactor: interactor, viewController: viewController)
     }

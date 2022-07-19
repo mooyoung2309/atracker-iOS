@@ -36,8 +36,8 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         interactor.router = self
     }
     
-    func attachEditApplyOverallRIB() {
-        let editApplyOverall = editApplyOverallBuilder.build(withListener: interactor)
+    func attachEditApplyOverallRIB(apply: Apply) {
+        let editApplyOverall = editApplyOverallBuilder.build(withListener: interactor, apply: apply)
         self.editApplyOverall = editApplyOverall
         
         detachChildRIB(child)
@@ -58,6 +58,13 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         viewController.present(editApplyStageProgress.viewControllable, isTabBarShow: false)
         
         child = editApplyStageProgress
+    }
+    
+    func detachEditApplyOverallRIB() {
+        if let child = child {
+            detachChild(child)
+        }
+        viewController.dismiss(nil, isTabBarShow: true)
     }
     
     func detachThisRIB() {

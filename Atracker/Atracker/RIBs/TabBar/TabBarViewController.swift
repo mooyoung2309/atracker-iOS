@@ -37,9 +37,9 @@ final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarV
     
     func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController) {
         
-        blogViewController.tabBarItem = UITabBarItem(title: "탐색", image: UIImage(named: ImageName.search), tag: 0)
-        applyViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: ImageName.home), tag: 1)
-        myPageViewController.tabBarItem = UITabBarItem(title: "마이", image: UIImage(named: ImageName.user), tag: 2)
+        blogViewController.tabBarItem = UITabBarItem(title: "탐색", image: UIImage(named: ImageName.search)?.withTintColor(.white), tag: 0)
+        applyViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: ImageName.home)?.withTintColor(.white), tag: 1)
+        myPageViewController.tabBarItem = UITabBarItem(title: "마이", image: UIImage(named: ImageName.user)?.withTintColor(.white), tag: 2)
         
         self.viewControllers = [UINavigationController(rootViewController: blogViewController), UINavigationController(rootViewController: applyViewController), UINavigationController(rootViewController: myPageViewController)]
         
@@ -73,7 +73,6 @@ final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarV
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
         tapTabBarSubject.onNext(item.tag)
     }
 }

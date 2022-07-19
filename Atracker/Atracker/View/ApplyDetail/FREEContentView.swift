@@ -20,7 +20,7 @@ class FREEContentView: BaseView {
         super.init(frame: .zero)
         
         titleLabel.text = freeContent.t
-        contextLabel.text = freeContent.c
+        contextLabel.text = freeContent.b
     }
     
     override func setupProperty() {

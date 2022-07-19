@@ -13,7 +13,6 @@ import UIKit
 import SnapKit
 
 // MARK: - Presenter
-
 protocol WriteApplyOverallPresentableAction: AnyObject {
     var tapBackButton: Observable<Void> { get }
     var tapNextButton: Observable<Void> { get }
@@ -56,7 +55,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     private var selectedIndexPathList: [IndexPath] = []
     private var stages: [Stage] = []
-    private let jobTypes: [String] = [JobType.fullTime.string, JobType.contract.string, JobType.intern.string]
+    private let jobTypes: [String] = [JobType.permanent.title, JobType.temporary.title, JobType.intern.title]
     private var companies: [Company] = []
     private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"

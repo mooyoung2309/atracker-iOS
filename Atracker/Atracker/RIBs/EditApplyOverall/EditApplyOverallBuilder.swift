@@ -14,13 +14,19 @@ protocol EditApplyOverallDependency: Dependency {
 
 final class EditApplyOverallComponent: Component<EditApplyOverallDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var applyService: ApplyServiceProtocol {
+        return ApplyService()
+    }
+    
+    var companyService: CompanyServiceProtocol {
+        return CompanyService()
+    }
 }
 
 // MARK: - Builder
 
 protocol EditApplyOverallBuildable: Buildable {
-    func build(withListener listener: EditApplyOverallListener) -> EditApplyOverallRouting
+    func build(withListener listener: EditApplyOverallListener, apply: Apply) -> EditApplyOverallRouting
 }
 
 final class EditApplyOverallBuilder: Builder<EditApplyOverallDependency>, EditApplyOverallBuildable {
@@ -29,10 +35,10 @@ final class EditApplyOverallBuilder: Builder<EditApplyOverallDependency>, EditAp
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: EditApplyOverallListener) -> EditApplyOverallRouting {
+    func build(withListener listener: EditApplyOverallListener, apply: Apply) -> EditApplyOverallRouting {
         let component = EditApplyOverallComponent(dependency: dependency)
         let viewController = EditApplyOverallViewController()
-        let interactor = EditApplyOverallInteractor(presenter: viewController)
+        let interactor = EditApplyOverallInteractor(presenter: viewController, applyService: component.applyService, companyService: component.companyService, apply: apply)
         interactor.listener = listener
         return EditApplyOverallRouter(interactor: interactor, viewController: viewController)
     }

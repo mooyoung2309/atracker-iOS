@@ -15,6 +15,9 @@ protocol TabBarDependency: Dependency {
 final class TabBarComponent: Component<TabBarDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var userService: UserServiceProtocol {
+        return UserService()
+    }
 }
 
 // MARK: - Builder
@@ -31,19 +34,15 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
 
     func build(withListener listener: TabBarListener) -> TabBarRouting {
         
-        let component                   = TabBarComponent(dependency: dependency)
-        let viewController              = TabBarViewController()
-        let interactor                  = TabBarInteractor(presenter: viewController)
-        let blogBuilder                 = BlogBuilder(dependency: component)
-        let applyBuilder                = ApplyBuilder(dependency: component)
-        let scheduleBuilder             = ScheduleBuilder(dependency: component)
+        let component = TabBarComponent(dependency: dependency)
+        let viewController = TabBarViewController()
+        let interactor = TabBarInteractor(presenter: viewController)
+        let blogBuilder = BlogBuilder(dependency: component)
+        let applyBuilder = ApplyBuilder(dependency: component)
+        let myPageBuilder = MyPageBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return TabBarRouter(interactor: interactor,
-                            viewController: viewController,
-                            blogBuilder: blogBuilder,
-                            applyBuilder: applyBuilder,
-                            scheduleBuilder: scheduleBuilder)
+        return TabBarRouter(interactor: interactor, viewController: viewController, blogBuilder: blogBuilder, applyBuilder: applyBuilder, myPageBuilder: myPageBuilder)
     }
 }

@@ -8,14 +8,10 @@
 import RIBs
 
 protocol WriteApplyOverallDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
     var applyService: ApplyServiceProtocol { get }
 }
 
 final class WriteApplyOverallComponent: Component<WriteApplyOverallDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     var applyService: ApplyServiceProtocol {
         return dependency.applyService
     }
@@ -30,7 +26,6 @@ final class WriteApplyOverallComponent: Component<WriteApplyOverallDependency> {
 }
 
 // MARK: - Builder
-
 protocol WriteApplyOverallBuildable: Buildable {
     func build(withListener listener: WriteApplyOverallListener) -> WriteApplyOverallRouting
 }

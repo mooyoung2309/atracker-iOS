@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 protocol MyPageRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -14,7 +15,8 @@ protocol MyPageRouting: ViewableRouting {
 
 protocol MyPagePresentable: Presentable {
     var listener: MyPagePresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    var action: MyPagePresentableAction? { get }
+    var handler: MyPagePresentableHandler? { get set }
 }
 
 protocol MyPageListener: AnyObject {
@@ -26,21 +28,29 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
     weak var router: MyPageRouting?
     weak var listener: MyPageListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: MyPagePresentable) {
+    private let userSerivce: UserServiceProtocol
+    
+    private let myPageRelay = PublishRelay<MyPageResponse>()
+    
+    init(presenter: MyPagePresentable, userService: UserServiceProtocol) {
+        self.userSerivce = userService
+        
         super.init(presenter: presenter)
+        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
+        fetchMyPage()
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        
+        presenter.handler = nil
     }
     
     func tapBackButton() {
@@ -51,5 +61,22 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.accessToken)
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.refreshToken)
         listener?.didSignOut()
+    }
+    
+    func fetchMyPage() {
+        userSerivce.myPage { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.myPageRelay.accept(data)
+            case .failure(let error):
+                return
+            }
+        }
+    }
+}
+
+extension MyPageInteractor: MyPagePresentableHandler {
+    var myPage: Observable<MyPageResponse> {
+        return myPageRelay.asObservable()
     }
 }

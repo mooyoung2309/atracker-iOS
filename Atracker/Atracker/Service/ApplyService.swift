@@ -10,13 +10,12 @@ import Foundation
 protocol ApplyServiceProtocol {
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void)
     func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void)
+    func put(request: ApplyUpdateRequest, completion: @escaping (Result<(Bool), Error>) -> Void)
 }
 
 class ApplyService: ApplyServiceProtocol {
-    let applyRepository = ApplyRepository()
-    
     func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
-        applyRepository.get(request: request) { result in
+        ApplyRepository.shared.get(request: request) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
@@ -27,7 +26,7 @@ class ApplyService: ApplyServiceProtocol {
     }
     
     func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void) {
-        applyRepository.post(request: request) { result in
+        ApplyRepository.shared.post(request: request) { result in
             switch result {
             case .success(let data):
                 completion(.success(()))
@@ -35,8 +34,17 @@ class ApplyService: ApplyServiceProtocol {
                 completion(.failure(error))
             }
         }
-        applyRepository.post(request: request) { result in
-            completion(result)
+    }
+    
+    func put(request: ApplyUpdateRequest, completion: @escaping (Result<(Bool), Error>) -> Void) {
+        ApplyRepository.shared.put(request: request) { result in
+            switch result {
+            case .success(let bool):
+                completion(.success(bool))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            
         }
     }
 }

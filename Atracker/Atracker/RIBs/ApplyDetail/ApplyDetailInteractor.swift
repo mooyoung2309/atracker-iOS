@@ -10,8 +10,9 @@ import RxSwift
 import RxCocoa
 
 protocol ApplyDetailRouting: ViewableRouting {
-    func attachEditApplyOverallRIB()
+    func attachEditApplyOverallRIB(apply: Apply)
     func attachEditApplyStageProgressRIB(apply: Apply)
+    func detachEditApplyOverallRIB()
     func detachThisRIB()
 }
 
@@ -33,7 +34,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    private let apply: Apply
+    private var apply: Apply
     private var isShowEditTableView = false
     
     private let stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
@@ -93,7 +94,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     private func didTapEditTypeCell(editTypeItem: EditTypeItem) {
         switch editTypeItem {
         case .apply:
-            router?.attachEditApplyOverallRIB()
+            router?.attachEditApplyOverallRIB(apply: apply)
             didTapEditButton()
         case .stage:
             router?.attachEditApplyStageProgressRIB(apply: apply)
@@ -103,25 +104,15 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         }
     }
     
-    func tapEditApplyOverallButton() {
-        Log("[D] 지원 후기 수정하기 버튼 클릭됨")
-        router?.attachEditApplyOverallRIB()
-    }
-    
-    func tapEditApplyStageProgressButton() {
-        Log("[D] 전형 편집하기 버튼 클릭됨")
-        router?.attachEditApplyStageProgressRIB(apply: apply)
-    }
-    
-    func tapDeleteApplyButton() {
-        Log("[D] 지원 후기 삭제하기 버튼 클릭됨")
-    }
-    
     // MARK: 자식 RIBs으로 부터
     func didEditApplyStageProgress() {
 //        router?.detachThisChildRIB()
         
         presenter.hideEditTableView()
+    }
+    
+    func didEditApplyOverall() {
+        router?.detachEditApplyOverallRIB()
     }
 }
 

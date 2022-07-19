@@ -48,12 +48,31 @@ class ApplyRepository: ApplyRepositoryProtocol {
 //            print(response.description)
 //            print(response.value)
             switch response.result {
-            case .success(_):
+            case .success(let data):
                 Log("[D] 지원 현황 생성 성공")
                 completion(.success(()))
             case .failure(let error):
                 Log("[D] 지원 현황 생성 실패")
                 completion(.failure(error))
+            }
+        }
+    }
+    
+    func put(request: ApplyUpdateRequest, completion: @escaping (Result<(Bool), Error>) -> Void) {
+        AF.request(ApplyAPI.put(request), interceptor: TokenInterceptor.shared.getInterceptor()).response { response in
+            print(response.data)
+            print(response.response)
+            print(response.result)
+            print(response.error)
+            print(response.request)
+            print(response.debugDescription)
+            print(response.description)
+            print(response.value)
+            
+            if response.response?.statusCode == 200 {
+                completion(.success(true))
+            } else {
+                completion(.failure(response.error ?? AFError.explicitlyCancelled))
             }
         }
     }

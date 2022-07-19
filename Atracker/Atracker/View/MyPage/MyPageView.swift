@@ -10,43 +10,36 @@ import SnapKit
 
 class MyPageView: BaseView {
     
-    let welcomeLabel        = UILabel()
-    let positionTagLabel    = UILabel()
-    let positionLabel       = UILabel()
-    let careerTagLabel      = UILabel()
-    let careerLabel         = UILabel()
-    let careerDivider       = BarChatView(.horizontal, cornerRadius: 0)
-    let accountTagLabel     = UILabel()
-    let accountDivider      = Divider(.gray6)
-    let signOutButton       = UIButton(type: .system)
-    let signOutDivider      = Divider(.backgroundLightGray)
-    let withDrawButton      = UIButton(type: .system)
-    let withDrawDivider     = Divider(.backgroundLightGray)
-    let helpTagLabel        = UILabel()
-    let helpDivider         = Divider(.gray6)
-    let connectButton       = UIButton(type: .system)
-    let connectDivider      = Divider(.backgroundLightGray)
+    let welcomeLabel = UILabel()
+    let positionTagLabel = UILabel()
+    let positionLabel = UILabel()
+    let careerTagLabel = UILabel()
+    let careerLabel = UILabel()
+    let careerDivider = BarChatView(.horizontal, cornerRadius: 0)
+    let accountTagLabel = UILabel()
+    let accountDivider = Divider(.gray6)
+    let signOutButton = UIButton(type: .system)
+    let signOutDivider = Divider(.backgroundLightGray)
+    let withDrawButton = UIButton(type: .system)
+    let withDrawDivider = Divider(.backgroundLightGray)
+    let helpTagLabel = UILabel()
+    let helpDivider = Divider(.gray6)
+    let connectButton = UIButton(type: .system)
+    let connectDivider = Divider(.backgroundLightGray)
     
-    var nickname = "이소진"
+    var nickname = ""
     
     override func setupProperty() {
         super.setupProperty()
         
-        let str = "\(nickname)님 안녕하세요!"
-        let attriStr = NSMutableAttributedString(string: str)
-        
-        attriStr.addAttribute(.foregroundColor, value: UIColor.neonGreen, range: (str as NSString).range(of: "\(nickname)"))
-        attriStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 24, weight: .bold), range: (str as NSString).range(of: "\(nickname)"))
-        
         welcomeLabel.font = .systemFont(ofSize: 24, weight: .regular)
         welcomeLabel.textColor = .white
-        welcomeLabel.attributedText = attriStr
+        welcomeLabel.numberOfLines = 0
         
         positionTagLabel.text = "포지션"
         positionTagLabel.font = .systemFont(ofSize: 14, weight: .medium)
         positionTagLabel.textColor = .gray3
         
-        positionLabel.text = "iOS 개발자"
         positionLabel.font = .systemFont(ofSize: 16, weight: .light)
         positionLabel.textColor = .white
         
@@ -54,7 +47,6 @@ class MyPageView: BaseView {
         careerTagLabel.font = .systemFont(ofSize: 14, weight: .medium)
         careerTagLabel.textColor = .gray3
         
-        careerLabel.text = "신입"
         careerLabel.font = .systemFont(ofSize: 16, weight: .light)
         careerLabel.textColor = .white
         
@@ -104,7 +96,7 @@ class MyPageView: BaseView {
         super.setupLayout()
         
         welcomeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(28)
         }
         

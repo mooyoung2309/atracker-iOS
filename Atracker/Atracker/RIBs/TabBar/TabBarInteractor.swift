@@ -10,10 +10,9 @@ import RxSwift
 import RxCocoa
 
 protocol TabBarRouting: ViewableRouting {
-    func detachChildRIB()
     func attachBlogRIB()
     func attachApplyRIB()
-    func attachPlanRIB()
+    func attachMyPageRIB()
     func detachApplyRIB()
 }
 
@@ -79,7 +78,7 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
         case 1:
             router?.attachApplyRIB()
         case 2:
-            router?.attachPlanRIB()
+            router?.attachMyPageRIB()
         default:
             return
         }
@@ -88,12 +87,8 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     // MARK: From Other RIBs
     
     func didSignOut() {
-        Log("[SIGNOUT] start")
-        
         router?.detachApplyRIB()
         listener?.didSignOut()
-        
-        Log("[SIGNOUT] end")
     }
 }
 
