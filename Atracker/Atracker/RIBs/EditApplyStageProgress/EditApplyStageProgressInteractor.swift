@@ -133,7 +133,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
                 guard let this = self else { return }
                 Log("[D] 현재 페이지 \(i)")
                 this.emitStageContentsRelay(contents: this.changedStageProgresses[i].stageContents)
-                this.emitProgressStatusRelay(progressStatusCode: this.changedStageProgressUpdateRequest.stageProgressUpdateContents[i].status)
+                this.emitProgressStatusRelay(progressStatusCode: this.changedStageProgresses[i].status)
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -194,6 +194,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     }
     
     private func updateProgressStatus(index: Int, progressStatus: ProgressStatus) {
+        changedStageProgresses[index].status = progressStatus.code
         changedStageProgressUpdateRequest.stageProgressUpdateContents[index].status = progressStatus.code
     }
     

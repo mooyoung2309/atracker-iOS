@@ -11,4 +11,3 @@ struct ApplyRequest: Codable {
     let applyIds: Int?
     let includeContent: Bool?
 }
-

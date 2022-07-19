@@ -38,7 +38,7 @@ struct Apply: Codable {
 // MARK: - StageProgress
 struct StageProgress: Codable {
     let id: Int
-    let status: String
+    var status: String
     let order: Int
     var stageContents: [StageContent]
     let stageID: Int

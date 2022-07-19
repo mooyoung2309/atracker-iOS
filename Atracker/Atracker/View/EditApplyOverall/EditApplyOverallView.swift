@@ -25,7 +25,7 @@ class EditApplyOverallView: BaseView {
         
         stageProgressCircleStackView.subviews.forEach({ $0.removeFromSuperview() })
         
-        for i in 1...max {
+        for i in 0..<max {
             let circle = UIView()
             let circleLabel = UILabel()
             

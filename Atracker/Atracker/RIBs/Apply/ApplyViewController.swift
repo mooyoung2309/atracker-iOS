@@ -45,12 +45,12 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
         hideNavigationBar()
     }
     
-    override func setupReload() {
-        super.setupReload()
-        
-        view.backgroundColor = .backgroundGray
-        refreshTableView(tableView: selfView.applyTableView)
-    }
+//    override func setupReload() {
+//        super.setupReload()
+//        
+//        view.backgroundColor = .backgroundGray
+//        refreshTableView(tableView: selfView.applyTableView)
+//    }
     
     override func setupProperty() {
         super.setupProperty()

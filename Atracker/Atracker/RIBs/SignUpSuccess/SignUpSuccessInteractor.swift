@@ -28,8 +28,6 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
     weak var router: SignUpSuccessRouting?
     weak var listener: SignUpSuccessListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: SignUpSuccessPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -37,7 +35,6 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.listener?.didSignUp()
@@ -46,6 +43,5 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
 }

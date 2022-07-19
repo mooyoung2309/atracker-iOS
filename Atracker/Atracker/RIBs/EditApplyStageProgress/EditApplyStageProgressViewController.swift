@@ -54,6 +54,7 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
     
     private var stageTitles: [String] = []
     private var stageContents: [StageContent] = []
+    private var currnetPageIndex: Int = 0
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -138,6 +139,12 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
             }
             .disposed(by: disposeBag)
         
+        handler.currentPageIndex
+            .bind { [weak self] index in
+                self?.didUpdateCurrentPageIndex(index: index)
+            }
+            .disposed(by: disposeBag)
+        
         handler.stageTitles
             .bind { [weak self] stageTitles in
                 self?.reloadStageTitleCollectionView(stageTitles: stageTitles)
@@ -152,6 +159,7 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         
         handler.progressStatus
             .bind { [weak self] progressStatus in
+                Log("[D] 변경 감지됨 \(progressStatus)")
                 self?.reloadProgressStatusButton(progressStatus: progressStatus)
             }
             .disposed(by: disposeBag)
@@ -169,6 +177,11 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
                 self?.selfView.deleteButtonBar.isHidden = false
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func didUpdateCurrentPageIndex(index: Int) {
+        currnetPageIndex = index
+        selfView.stageTitleCollectionView.reloadData()
     }
     
     func reloadProgressStatusButton(progressStatus: ProgressStatus) {
@@ -255,10 +268,12 @@ extension EditApplyStageProgressViewController: UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StageTitleCVC.id, for: indexPath) as? StageTitleCVC else { return UICollectionViewCell() }
         
         cell.update(title: stageTitles[indexPath.item])
+        if currnetPageIndex == indexPath.item {
+            cell.hightlight()
+        }
         
         return cell
     }
@@ -266,14 +281,6 @@ extension EditApplyStageProgressViewController: UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         emitUpdatedStageContentsSubject()
         selectedPageIndexSubject.onNext(indexPath.item)
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) as? StageTitleCVC else { return }
-        
-        for cell in collectionView.visibleCells {
-            cell.prepareForReuse()
-        }
-        
-        cell.hightlight()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

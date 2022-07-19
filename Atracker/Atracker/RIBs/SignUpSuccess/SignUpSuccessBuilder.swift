@@ -30,9 +30,9 @@ final class SignUpSuccessBuilder: Builder<SignUpSuccessDependency>, SignUpSucces
     }
 
     func build(withListener listener: SignUpSuccessListener) -> SignUpSuccessRouting {
-        let viewController  = SignUpSuccessViewController()
-        let component       = SignUpSuccessComponent(dependency: dependency)
-        let interactor      = SignUpSuccessInteractor(presenter: viewController)
+        let viewController = SignUpSuccessViewController()
+        let component = SignUpSuccessComponent(dependency: dependency)
+        let interactor = SignUpSuccessInteractor(presenter: viewController)
         
         interactor.listener = listener
         

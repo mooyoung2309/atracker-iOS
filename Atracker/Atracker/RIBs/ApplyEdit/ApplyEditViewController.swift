@@ -107,12 +107,6 @@ final class ApplyEditViewController: BaseNavigationViewController, ApplyEditPres
         showNavigationBarTrailingButton()
     }
     
-    override func setupReload() {
-        super.setupReload()
-        
-        refreshTableView(tableView: selfView.tableView)
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         

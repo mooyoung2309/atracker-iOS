@@ -12,6 +12,7 @@ enum ApplyAPI {
     case get(ApplyRequest)
     case post(ApplyCreateRequest)
     case put(ApplyUpdateRequest)
+    case delete(ApplyDeleteRequest)
 }
 
 extension ApplyAPI: BaseURLRequestConvertible {
@@ -27,6 +28,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
             return .post
         case .put:
             return .put
+        case .delete:
+            return .delete
         }
     }
     
@@ -38,6 +41,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
             return baseURL
         case .put:
             return baseURL
+        case .delete:
+            return baseURL + "applies/"
         }
     }
     
@@ -49,6 +54,8 @@ extension ApplyAPI: BaseURLRequestConvertible {
             return .body(request)
         case .put(let request):
             return .body(request)
+        case .delete(let request):
+            return .query(request)
         }
     }
 }

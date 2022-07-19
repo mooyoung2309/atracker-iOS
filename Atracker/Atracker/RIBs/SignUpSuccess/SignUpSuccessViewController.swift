@@ -46,14 +46,3 @@ final class SignUpSuccessViewController: BaseNavigationViewController, SignUpSuc
         }
     }
 }
-
-// MARK: LoggedInViewControllable
-
-//extension SignUpSuccessViewController: SignInViewControllable {
-//    func present(viewController: ViewControllable) {
-//        viewController.uiviewController.modalPresentationStyle = .fullScreen
-//        present(viewController.uiviewController, animated: false, completion: nil)
-//    }
-//    
-//    func 
-//}

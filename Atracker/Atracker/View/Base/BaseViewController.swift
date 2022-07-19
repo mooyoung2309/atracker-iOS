@@ -24,24 +24,19 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .backgroundGray
-        
         setupProperty()
         setupHierarchy()
         setupLayout()
-        setupBind()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        setupReload()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupBind()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){      self.view.endEditing(true)}
     
-    func setupReload() { }
     func setupProperty() { }
     func setupHierarchy() { }
     func setupLayout() { }

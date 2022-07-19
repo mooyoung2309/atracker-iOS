@@ -112,7 +112,20 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
             router?.attachEditApplyStageProgressRIB(apply: thisApply)
             didTapEditButton()
         case .delete:
-            return
+            deleteApply(applyID: thisApply.applyID) { [weak self] in
+                self?.listener?.didBackFromApplyDetail()
+            }
+        }
+    }
+    
+    private func deleteApply(applyID: Int, completion: @escaping () -> Void) {
+        applyService.delete(request: ApplyDeleteRequest(ids: applyID)) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(_):
+                completion()
+            }
         }
     }
     
