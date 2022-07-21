@@ -76,29 +76,36 @@ extension UIView {
         views.forEach { addSubview($0) }
     }
     
-    func addShadow(_ edge: UIRectEdge) {
-        let radius = 2.5
+    func addShadow(_ edge: UIRectEdge?) {
+        if let edge = edge {
+            let radius = 2.5
 
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowRadius = radius
-        layer.shadowOpacity = 0.1
-        
-        switch edge {
-        case .top:
-            layer.shadowOffset = CGSize(width: 0, height: -radius * 2)
-        case .bottom:
-            layer.shadowOffset = CGSize(width: 0, height: radius * 2)
-        case .left:
-            layer.shadowOffset = CGSize(width: -radius * 2, height: 0)
-        case .right:
-            layer.shadowOffset = CGSize(width: radius * 2, height: 0)
-        case .all:
-            layer.shadowOffset = .zero
-        default:
-            layer.shadowOffset = .zero
+            layer.shadowColor = UIColor.black.cgColor
+            layer.shadowRadius = radius
+            layer.shadowOpacity = 0.1
+            
+            switch edge {
+            case .top:
+                layer.shadowOffset = CGSize(width: 0, height: -radius * 2)
+            case .bottom:
+                layer.shadowOffset = CGSize(width: 0, height: radius * 2)
+            case .left:
+                layer.shadowOffset = CGSize(width: -radius * 2, height: 0)
+            case .right:
+                layer.shadowOffset = CGSize(width: radius * 2, height: 0)
+            case .all:
+                layer.shadowOffset = .zero
+            default:
+                layer.shadowOffset = .zero
+            }
+            
+            layer.masksToBounds = false
+        } else {
+            layer.shadowColor = UIColor.clear.cgColor
+            layer.shadowRadius = 0
+            layer.shadowOpacity = 0
+            layer.masksToBounds = false
         }
-        
-        layer.masksToBounds = false
     }
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {

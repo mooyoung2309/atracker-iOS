@@ -49,8 +49,8 @@ final class SignUpPositionViewController: BaseNavigationViewController, SignUpPo
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
-        
-        hideNavigationBar()
+        showNavigationBar()
+        hideNavigationBarShadow()
     }
     
     override func setupProperty() {

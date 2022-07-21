@@ -33,12 +33,12 @@ final class SignOutBuilder: Builder<SignOutDependency>, SignOutBuildable {
     }
 
     func build(withListener listener: SignOutListener) -> SignOutRouting {
-        let component               = SignOutComponent(dependency: dependency)
-        let viewController          = SignOutViewController()
-        let interactor              = SignOutInteractor(presenter: viewController, authService: component.authService)
-        let signUpNicknameBuilder   = SignUpNicknameBuilder(dependency: component)
+        let component = SignOutComponent(dependency: dependency)
+        let viewController = SignOutViewController()
+        let interactor = SignOutInteractor(presenter: viewController, authService: component.authService)
+        let signUpAgreementBuilder = SignUpAgreementBuilder(dependency: component)
         
         interactor.listener = listener
-        return SignOutRouter(interactor: interactor, viewController: viewController, signUpNicknameBuilder: signUpNicknameBuilder)
+        return SignOutRouter(interactor: interactor, viewController: viewController, signUpAgreementBuilder: signUpAgreementBuilder)
     }
 }

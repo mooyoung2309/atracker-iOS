@@ -9,26 +9,38 @@ import RIBs
 import RxSwift
 import UIKit
 import SnapKit
+import GoogleSignIn
+
+protocol SignOutPresentableAction: AnyObject {
+    var tapGoogleButton: Observable<Void> { get }
+    var tapAppleButton: Observable<Void> { get }
+    var tapTestButton: Observable<Void> { get }
+}
+
+protocol SignOutPresentableHandler: AnyObject {
+    
+}
 
 protocol SignOutPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
-    func tapGoogleSignUpButton()
-    func tapAppleSignUpButton()
-    func tapTestSignUpButton()
+    func signUp(idToken: String)
 }
 
 final class SignOutViewController: BaseNavigationViewController, SignOutPresentable, SignOutViewControllable {
     
     weak var listener: SignOutPresentableListener?
+    weak var action: SignOutPresentableAction? {
+        return self
+    }
+    weak var handler: SignOutPresentableHandler?
     
     let selfView = SignOutView()
     
-    func present(viewController: UIViewController) {
-        viewController.modalPresentationStyle = .fullScreen
-        present(viewController, animated: true, completion: nil)
-    }
+    private let googleSignInConfig = GIDConfiguration(clientID: Key.googleClientID)
+    
+//    func present(viewController: UIViewController) {
+//        viewController.modalPresentationStyle = .fullScreen
+//        present(viewController, animated: true, completion: nil)
+//    }
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -55,23 +67,37 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     
     override func setupBind() {
         super.setupBind()
-        
-        selfView.googleSignUpButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapGoogleSignUpButton()
+
+    }
+    
+    private func tmp() {
+        GIDSignIn.sharedInstance.signIn(with: googleSignInConfig, presenting: self) { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            
+            user.authentication.do { [weak self] authentication, error in
+                guard error == nil else { Log("[D] 구글 로그인 에러 \(error)"); return }
+                guard let authentication = authentication else { return }
+                
+                let idToken = authentication.idToken
+                
+                Log("[D] \(idToken)")
             }
-            .disposed(by: disposeBag)
-        
-        selfView.appleSignUpButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapAppleSignUpButton()
-            }
-            .disposed(by: disposeBag)
-        
-        selfView.testSignUpButton.rx.tap
-            .bind { [weak self] _ in
-                self?.listener?.tapTestSignUpButton()
-            }
-            .disposed(by: disposeBag)
+            
+        }
+    }
+}
+
+extension SignOutViewController: SignOutPresentableAction {
+    var tapGoogleButton: Observable<Void> {
+        return selfView.googleSignUpButton.rx.tap.asObservable()
+    }
+    
+    var tapAppleButton: Observable<Void> {
+        return selfView.appleSignUpButton.rx.tap.asObservable()
+    }
+    
+    var tapTestButton: Observable<Void> {
+        return selfView.testSignUpButton.rx.tap.asObservable()
     }
 }

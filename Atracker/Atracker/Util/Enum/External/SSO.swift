@@ -7,16 +7,7 @@
 
 import Foundation
 
-enum SSO {
-    case apple
-    case google
-    
-    var code: String {
-        switch self {
-        case .apple:
-            return "APPLE"
-        case .google:
-            return "GOOGLE"
-        }
-    }
+enum SSO: String, Codable {
+    case apple = "APPLE"
+    case google = "GOOGLE"
 }

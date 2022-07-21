@@ -49,7 +49,7 @@ class SignUpPositionView: BaseView {
         super.setupLayout()
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(17)
             $0.leading.equalToSuperview().inset(28)
         }
         

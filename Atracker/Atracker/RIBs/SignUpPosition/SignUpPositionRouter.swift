@@ -32,8 +32,8 @@ final class SignUpPositionRouter: ViewableRouter<SignUpPositionInteractable, Sig
         interactor.router = self
     }
     
-    func attachSignUpSuccessRIB() {
-        let signUpSuccess = signUpSuccessBuilder.build(withListener: interactor)
+    func attachSignUpSuccessRIB(nickName: String, jobPosition: String, jobType: String) {
+        let signUpSuccess = signUpSuccessBuilder.build(withListener: interactor, nickName: nickName, jobPosition: jobPosition, jobType: jobType)
         
         self.signUpSuccess = signUpSuccess
         attachChild(signUpSuccess)

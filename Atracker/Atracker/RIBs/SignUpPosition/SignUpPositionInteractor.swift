@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol SignUpPositionRouting: ViewableRouting {
-    func attachSignUpSuccessRIB()
+    func attachSignUpSuccessRIB(nickName: String, jobPosition: String, jobType: String)
 }
 
 protocol SignUpPositionPresentable: Presentable {
@@ -32,8 +32,8 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     private let authService: AuthServiceProtocol
     private let nickname: String
     
-    private var position: String?
-    private var career: String?
+    private var jobPosition: String?
+    private var jobType: String?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
@@ -57,34 +57,35 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     }
     
     func inputPositionTextField(text: String) {
-        self.position = text
+        self.jobPosition = text
     }
     
     func inputCareerTextField(text: String) {
-        self.career = text
+        self.jobType = text
     }
     
     func tapCareerTableView(career: String) {
-        self.career = career
+        self.jobType = career
         presenter.updateCareerLabel(title: career)
         presenter.switchCareerTableView()
     }
     
     func tapNextButton() {
-        guard let position = position else { return }
-        guard let career = career else { return }
+        guard let jobPosition = jobPosition else { return }
+        guard let jobType = jobType else { return }
         
-        if position.isEmpty || career.isEmpty { return }
+        if jobPosition.isEmpty || jobType.isEmpty { return }
         
-        authService.testSignUp(email: "TEST1", gender: Gender.male.code, jobPosition: position, nickName: nickname, sso: SSO.apple.code) { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.router?.attachSignUpSuccessRIB()
-                Log("[D] 테스트 회원가입 성공")
-            case .failure(_):
-                Log("[D] 테스트 회원가입 실패")
-            }
-        }
+//        authService.testSignUp(email: "TEST\(Int.random(in: 0...100))", gender: Gender.male.code, jobPosition: jobPosition, nickName: nickname, sso: SSO.apple.code) { [weak self] result in
+//            guard let this = self else { return }
+//            switch result {
+//            case .success(_):
+//                this.router?.attachSignUpSuccessRIB(nickName: this.nickname, jobPosition: jobPosition, jobType: jobType)
+//                Log("[D] 테스트 회원가입 성공")
+//            case .failure(_):
+//                Log("[D] 테스트 회원가입 실패")
+//            }
+//        }
     }
     
     func tapCareerToggleButton() {

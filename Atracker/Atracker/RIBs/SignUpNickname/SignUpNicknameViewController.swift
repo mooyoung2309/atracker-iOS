@@ -25,18 +25,15 @@ final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNi
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
-        
-        hideNavigationBar()
+        hideNavigationBarShadow()
     }
     
     override func setupProperty() {
         super.setupProperty()
-        
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
         contentView.addSubview(selfView)
     }
     

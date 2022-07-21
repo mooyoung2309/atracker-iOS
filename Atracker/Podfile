@@ -13,6 +13,7 @@ target 'Atracker' do
   pod 'SnapKit'
   pod 'Then'
   pod 'Alamofire'
+  pod 'GoogleSignIn'
   target 'AtrackerTests' do
     inherit! :search_paths
     # Pods for testing

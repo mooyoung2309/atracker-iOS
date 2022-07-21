@@ -33,6 +33,7 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
     func hideNavigationBarTrailingButton()
     func setNavigationBarTrailingButtonTitle(_ text: String)
     func setNavigationBarTrailingButtonImage(_ image: UIImage?)
+    func hideNavigationBarShadow()
 }
 
 class BaseNavigationViewController: BaseViewController, BaseNavigationViewControllerProtocol {
@@ -98,6 +99,10 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func hideBlurView() {
         blurView.removeFromSuperview()
+    }
+    
+    func hideNavigationBarShadow() {
+        navigaionBar.addShadow(nil)
     }
     
     override func viewDidLoad() {

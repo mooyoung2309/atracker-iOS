@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-enum AuthRouter{
-    case sign(UserRegistrationRequest)
+enum AuthAPI{
+    case sign(SignRequest)
     case testSign(TestUserRegistrationRequest)
     case testToken(email: String, id: Int)
     case tokenRefresh(TokenRefreshRequest)
 }
 
-extension AuthRouter: BaseURLRequestConvertible {
+extension AuthAPI: BaseURLRequestConvertible {
     var baseURL: String {
         return Key.baseURL + "/auth"
     }

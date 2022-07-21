@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol SignOutInteractable: Interactable, SignUpNicknameListener {
+protocol SignOutInteractable: Interactable, SignUpAgreementListener {
     var router: SignOutRouting? { get set }
     var listener: SignOutListener? { get set }
 }
@@ -18,35 +18,28 @@ protocol SignOutViewControllable: NavigationViewControllable {
 
 final class SignOutRouter: ViewableRouter<SignOutInteractable, SignOutViewControllable>, SignOutRouting {
     
-    private var signUpNicknameBuilder: SignUpNicknameBuildable
+    private var signUpAgreementBuilder: SignUpAgreementBuildable
     
-    private var signUpNickname: ViewableRouting?
+    private var signUpAgreement: ViewableRouting?
     
-    init(interactor: SignOutInteractable, viewController: SignOutViewControllable, signUpNicknameBuilder: SignUpNicknameBuildable) {
-        self.signUpNicknameBuilder = signUpNicknameBuilder
-        
+    init(interactor: SignOutInteractable, viewController: SignOutViewControllable, signUpAgreementBuilder: SignUpAgreementBuildable) {
+        self.signUpAgreementBuilder = signUpAgreementBuilder
         super.init(interactor: interactor, viewController: viewController)
-        
         interactor.router = self
     }
     
-    func attachSignUpNicknameRIB() {
-        let signUpNickname = signUpNicknameBuilder.build(withListener: interactor)
+    func attachSignUpAgreementRIB() {
+        let signUpAgreement = signUpAgreementBuilder.build(withListener: interactor)
         
-        self.signUpNickname = signUpNickname
-        
-        viewController.present(signUpNickname.viewControllable, isTabBarShow: true)
+        self.signUpAgreement = signUpAgreement
+        attachChild(signUpAgreement)
+        viewController.present(signUpAgreement.viewControllable, isTabBarShow: false)
     }
-//
-//    func attachWriteApplyOverall() {
-//        let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
-//
-//        self.writeApplyOverall = writeApplyOverall
-//
-//        detachChildRIB(child)
-//        attachChild(writeApplyOverall)
-////        Log("[D] 탭바 안보이게")
-//        viewController.presentView(writeApplyOverall, animation: true)
-//        child = writeApplyOverall
-//    }
+    
+    func detachSignUpAgreementRIB() {
+        if let signUpAgreement = signUpAgreement {
+            detachChild(signUpAgreement)
+        }
+        viewController.dismiss(nil, isTabBarShow: false)
+    }
 }

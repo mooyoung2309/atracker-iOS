@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ProgressContentType {
+enum StageContentType {
     case OVERALL
     case QNA
     case FREE

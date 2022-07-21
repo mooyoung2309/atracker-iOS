@@ -29,4 +29,7 @@ struct ImageName {
     static let list = "List"
     static let pen = "Pen"
     static let more = "More"
+    static let unCheckedCircle = "UnCheckedCircle"
+    static let checkedCircle = "CheckedCircle"
+    static let chevronRight = "ChevronRight"
 }

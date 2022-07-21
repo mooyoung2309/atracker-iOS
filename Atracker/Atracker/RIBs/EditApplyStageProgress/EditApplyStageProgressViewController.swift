@@ -306,7 +306,7 @@ extension EditApplyStageProgressViewController: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch stageContents[indexPath.item].contentType {
-        case ProgressContentType.OVERALL.code:
+        case StageContentType.OVERALL.code:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EditOVERALLContentTVC.id, for: indexPath) as? EditOVERALLContentTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none
@@ -323,7 +323,7 @@ extension EditApplyStageProgressViewController: UITableViewDelegate, UITableView
             }
             
             return cell
-        case ProgressContentType.QNA.code:
+        case StageContentType.QNA.code:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EditQNAContentTVC.id, for: indexPath) as? EditQNAContentTVC else { return UITableViewCell() }
             cell.selectionStyle = .none
             
@@ -339,7 +339,7 @@ extension EditApplyStageProgressViewController: UITableViewDelegate, UITableView
             }
             
             return cell
-        case ProgressContentType.FREE.code:
+        case StageContentType.FREE.code:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EditFREEContentTVC.id, for: indexPath) as? EditFREEContentTVC else { return UITableViewCell() }
             
             cell.selectionStyle = .none

@@ -99,13 +99,13 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         
         action.addQNAContentButton
             .bind { [weak self] _ in
-                self?.addNewContent(type: ProgressContentType.QNA)
+                self?.addNewContent(type: StageContentType.QNA)
             }
             .disposeOnDeactivate(interactor: self)
         
         action.addFreeContentButton
             .bind { [weak self] _ in
-                self?.addNewContent(type: ProgressContentType.FREE)
+                self?.addNewContent(type: StageContentType.FREE)
             }
             .disposeOnDeactivate(interactor: self)
         
@@ -210,7 +210,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         var validatedContents: [StageContent] = contents
         
         // 종합 후기는 필수 항목.
-        if contents.contains(where: { $0.contentType == ProgressContentType.OVERALL.code }) == false {
+        if contents.contains(where: { $0.contentType == StageContentType.OVERALL.code }) == false {
             validatedContents.append(makeNewContent(type: .OVERALL))
         }
         
@@ -273,7 +273,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     // 변환 함수
     private func convertNewContents(contents: [StageContent]) -> [NewContent] {
         return contents.map({ (content: StageContent) -> NewContent in
-            NewContent(content: content.content ?? "", contentType: content.contentType ?? ProgressContentType.FREE.code, order: content.order)
+            NewContent(content: content.content ?? "", contentType: content.contentType ?? StageContentType.FREE.code, order: content.order)
         })
     }
     
@@ -289,28 +289,28 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         })
     }
     
-    private func makeNewContent(type: ProgressContentType) -> StageContent {
+    private func makeNewContent(type: StageContentType) -> StageContent {
         switch type {
         case .OVERALL:
-            return StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.OVERALL.code)
+            return StageContent(id: -1, order: 0, content: "", contentType: StageContentType.OVERALL.code)
         case .QNA:
-            return StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.QNA.code)
+            return StageContent(id: -1, order: 0, content: "", contentType: StageContentType.QNA.code)
         case .FREE:
-            return StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.FREE.code)
+            return StageContent(id: -1, order: 0, content: "", contentType: StageContentType.FREE.code)
         }
     }
     
-    func addNewContent(type: ProgressContentType) {
+    func addNewContent(type: StageContentType) {
         var contents = stageContentsRelay.value
         var newContent: StageContent
         
         switch type {
         case .OVERALL:
-            newContent = StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.OVERALL.code)
+            newContent = StageContent(id: -1, order: 0, content: "", contentType: StageContentType.OVERALL.code)
         case .QNA:
-            newContent = StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.QNA.code)
+            newContent = StageContent(id: -1, order: 0, content: "", contentType: StageContentType.QNA.code)
         case .FREE:
-            newContent = StageContent(id: -1, order: 0, content: "", contentType: ProgressContentType.FREE.code)
+            newContent = StageContent(id: -1, order: 0, content: "", contentType: StageContentType.FREE.code)
         }
         
         contents.append(newContent)

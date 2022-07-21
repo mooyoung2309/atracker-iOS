@@ -64,14 +64,6 @@ class ApplyRepository: ApplyRepositoryProtocol {
     
     func delete(request: ApplyDeleteRequest, completion: @escaping (Result<(Bool), Error>) -> Void) {
         AF.request(ApplyAPI.delete(request), interceptor: TokenInterceptor.shared.getInterceptor()).response { response in
-            print(response.data)
-            print(response.response)
-            print(response.result)
-            print(response.error)
-            print(response.request)
-            print(response.debugDescription)
-            print(response.description)
-            print(response.value)
             if response.response?.statusCode == 200 {
                 Log("[D] 지원 현황 삭제 성공")
                 completion(.success(true))

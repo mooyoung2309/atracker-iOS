@@ -26,15 +26,15 @@ class StageProgressTVC: BaseTVC {
         
         for stageContent in stageProgress.stageContents {
             switch stageContent.contentType {
-            case ProgressContentType.OVERALL.code:
+            case StageContentType.OVERALL.code:
                 let overallContentView = OVERALLContentView(overallContent: ContentSerialization.shared.toOVERALLContent(string: stageContent.content))
                 
                 contentStackView.addArrangedSubview(overallContentView)
-            case ProgressContentType.FREE.code:
+            case StageContentType.FREE.code:
                 let freeContentView = FREEContentView(freeContent: ContentSerialization.shared.toFreeContent(string: stageContent.content))
                 
                 contentStackView.addArrangedSubview(freeContentView)
-            case ProgressContentType.QNA.code:
+            case StageContentType.QNA.code:
                 let qnaContentView = QNAContentView(qnaContent: ContentSerialization.shared.toQNAContent(string: stageContent.content))
                 
                 contentStackView.addArrangedSubview(qnaContentView)

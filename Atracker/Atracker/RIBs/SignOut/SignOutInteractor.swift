@@ -9,13 +9,14 @@ import RIBs
 import RxSwift
 
 protocol SignOutRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func attachSignUpNicknameRIB()
+    func attachSignUpAgreementRIB()
+    func detachSignUpAgreementRIB()
 }
 
 protocol SignOutPresentable: Presentable {
     var listener: SignOutPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    var action: SignOutPresentableAction? { get }
+    var handler: SignOutPresentableHandler? { get set }
 }
 
 protocol SignOutListener: AnyObject {
@@ -30,40 +31,62 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     
     private let authService: AuthService
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     init(presenter: SignOutPresentable, authService: AuthService) {
         self.authService = authService
-        
         super.init(presenter: presenter)
-        
         presenter.listener = self
+        presenter.handler = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        setupBind()
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        presenter.handler = nil
     }
     
-    func tapGoogleSignUpButton() {
-        Log("[D] 구글 회원가입 버튼 클릭")
+    func setupBind() {
+        guard let action = presenter.action else { return }
+        
+        action.tapGoogleButton
+            .bind { [weak self] in
+                self?.didTapTestButton()
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapTestButton
+            .bind { [weak self] in
+                self?.didTapTestButton()
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
-    func tapAppleSignUpButton() {
-        Log("[D] 애플 회원가입 버튼 클릭")
+    private func didTapGoogleButton() {
+        
     }
     
-    func tapTestSignUpButton() {
-        Log("[D] 테스트 회원가입 버튼 클릭")
-        router?.attachSignUpNicknameRIB()
+    private func didTapTestButton() {
+        router?.attachSignUpAgreementRIB()
     }
+    
+    func signUp(idToken: String) {
+        
+    }
+    
+    // 자식 RIB으로 부터
     
     func didSignUp() {
         listener?.didSignUp()
     }
+    
+    func didBackFromSignUpAgreement() {
+        router?.detachSignUpAgreementRIB()
+    }
+}
+
+extension SignOutInteractor: SignOutPresentableHandler {
+    
 }

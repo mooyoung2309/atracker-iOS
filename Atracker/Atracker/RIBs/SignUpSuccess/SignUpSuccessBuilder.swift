@@ -20,7 +20,7 @@ final class SignUpSuccessComponent: Component<SignUpSuccessDependency> {
 // MARK: - Builder
 
 protocol SignUpSuccessBuildable: Buildable {
-    func build(withListener listener: SignUpSuccessListener) -> SignUpSuccessRouting
+    func build(withListener listener: SignUpSuccessListener, nickName: String, jobPosition: String, jobType: String) -> SignUpSuccessRouting
 }
 
 final class SignUpSuccessBuilder: Builder<SignUpSuccessDependency>, SignUpSuccessBuildable {
@@ -29,7 +29,7 @@ final class SignUpSuccessBuilder: Builder<SignUpSuccessDependency>, SignUpSucces
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SignUpSuccessListener) -> SignUpSuccessRouting {
+    func build(withListener listener: SignUpSuccessListener, nickName: String, jobPosition: String, jobType: String) -> SignUpSuccessRouting {
         let viewController = SignUpSuccessViewController()
         let component = SignUpSuccessComponent(dependency: dependency)
         let interactor = SignUpSuccessInteractor(presenter: viewController)
