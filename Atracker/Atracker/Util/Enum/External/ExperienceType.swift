@@ -8,6 +8,8 @@
 import Foundation
 
 enum ExperienceType: String, Codable {
+    static let list = [ExperienceType.notExperienced, ExperienceType.experienced]
+    
     case notExperienced = "NOT_EXPERIENCED"
     case experienced = "EXPERIENCED"
     

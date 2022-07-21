@@ -10,7 +10,7 @@ import RxSwift
 
 protocol SignUpNicknameRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func attachSignUpPositionRIB(nickname: String)
+    func attachSignUpPositionRIB(idToken: String, sso: SSO, nickname: String)
 }
 
 protocol SignUpNicknamePresentable: Presentable {
@@ -28,11 +28,15 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     weak var router: SignUpNicknameRouting?
     weak var listener: SignUpNicknameListener?
     
+    private let idToken: String
+    private let sso: SSO
     private var nickname: String?
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: SignUpNicknamePresentable) {
+    init(presenter: SignUpNicknamePresentable, idToken: String, sso: SSO) {
+        self.idToken = idToken
+        self.sso = sso
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -51,7 +55,7 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
         guard let nickname = nickname else { return }
         
         if nickname.isEmpty == false {
-            router?.attachSignUpPositionRIB(nickname: nickname)
+            router?.attachSignUpPositionRIB(idToken: idToken, sso: sso, nickname: nickname)
         }
     }
     

@@ -24,11 +24,13 @@ protocol SignUpSuccessListener: AnyObject {
 
 final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresentable>, SignUpSuccessInteractable, SignUpSuccessPresentableListener {
     
-
     weak var router: SignUpSuccessRouting?
     weak var listener: SignUpSuccessListener?
 
-    override init(presenter: SignUpSuccessPresentable) {
+    private let nickName: String
+    
+    init(presenter: SignUpSuccessPresentable, nickName: String) {
+        self.nickName = nickName
         super.init(presenter: presenter)
         presenter.listener = self
     }

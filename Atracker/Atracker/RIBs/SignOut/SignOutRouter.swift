@@ -28,8 +28,8 @@ final class SignOutRouter: ViewableRouter<SignOutInteractable, SignOutViewContro
         interactor.router = self
     }
     
-    func attachSignUpAgreementRIB() {
-        let signUpAgreement = signUpAgreementBuilder.build(withListener: interactor)
+    func attachSignUpAgreementRIB(idToken: String, sso: SSO) {
+        let signUpAgreement = signUpAgreementBuilder.build(withListener: interactor, idToken: idToken, sso: sso)
         
         self.signUpAgreement = signUpAgreement
         attachChild(signUpAgreement)

@@ -15,14 +15,15 @@ protocol SignOutPresentableAction: AnyObject {
     var tapGoogleButton: Observable<Void> { get }
     var tapAppleButton: Observable<Void> { get }
     var tapTestButton: Observable<Void> { get }
+    var fetchIdToken: Observable<(SSO, String)> { get }
 }
 
 protocol SignOutPresentableHandler: AnyObject {
-    
+
 }
 
 protocol SignOutPresentableListener: AnyObject {
-    func signUp(idToken: String)
+    
 }
 
 final class SignOutViewController: BaseNavigationViewController, SignOutPresentable, SignOutViewControllable {
@@ -35,12 +36,10 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     
     let selfView = SignOutView()
     
-    private let googleSignInConfig = GIDConfiguration(clientID: Key.googleClientID)
+    private let fetchIdTokenSubject = PublishSubject<(SSO, String)>()
+    private let fetchSSOSubject = PublishSubject<SSO>()
     
-//    func present(viewController: UIViewController) {
-//        viewController.modalPresentationStyle = .fullScreen
-//        present(viewController, animated: true, completion: nil)
-//    }
+    private let googleSignInConfig = GIDConfiguration(clientID: Key.googleClientID)
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -67,10 +66,16 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     
     override func setupBind() {
         super.setupBind()
-
+        
+        // 바인딩 액션
+        action?.tapGoogleButton
+            .bind { [weak self] in
+                self?.openGoogleSignUp()
+            }
+            .disposed(by: disposeBag)
     }
     
-    private func tmp() {
+    private func openGoogleSignUp() {
         GIDSignIn.sharedInstance.signIn(with: googleSignInConfig, presenting: self) { user, error in
             guard error == nil else { return }
             guard let user = user else { return }
@@ -79,16 +84,19 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
                 guard error == nil else { Log("[D] 구글 로그인 에러 \(error)"); return }
                 guard let authentication = authentication else { return }
                 
-                let idToken = authentication.idToken
-                
-                Log("[D] \(idToken)")
+                if let idToken = authentication.idToken {
+                    self?.fetchIdTokenSubject.onNext((SSO.google, idToken))
+                }
             }
-            
         }
     }
 }
 
 extension SignOutViewController: SignOutPresentableAction {
+    var fetchIdToken: Observable<(SSO, String)> {
+        return fetchIdTokenSubject.asObservable()
+    }
+    
     var tapGoogleButton: Observable<Void> {
         return selfView.googleSignUpButton.rx.tap.asObservable()
     }

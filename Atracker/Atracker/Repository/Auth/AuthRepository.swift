@@ -14,21 +14,31 @@ protocol AuthRepositoryProtocol {
 }
 
 class AuthRepository {
+    static let shared = AuthRepository()
+    
     func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
         AF.request(AuthAPI.sign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
+            print(response.data)
+            print(response.response)
+            print(response.result)
+            print(response.error)
+            print(response.request)
+            print(response.debugDescription)
+            print(response.description)
+            print(response.value)
             switch response.result {
             case .success(let data):
+                Log("[D] 회원가입 성공 \(data)")
                 completion(.success(data))
             case .failure(let error):
+                Log("[D] 회원가입 실패 \(error)")
                 completion(.failure(error))
             }
         }
     }
     
     func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        
         AF.request(AuthAPI.testSign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
-            
             switch response.result {
             case .success(let data):
                 completion(.success(data))
@@ -40,7 +50,6 @@ class AuthRepository {
     }
     
     static func postTokenRefresh(request: TokenRefreshRequest, completion: @escaping (Result<TokenRefreshResponse, Error>) -> Void) {
-        
         AF.request(AuthAPI.tokenRefresh(request)).responseDecodable { (response: AFDataResponse<TokenRefreshResponse>) in
             switch response.result {
             case .success(let data):

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol SignUpAgreementRouting: ViewableRouting {
-    func attachSignUpNicknameRIB()
+    func attachSignUpNicknameRIB(idToken: String, sso: SSO)
 }
 
 protocol SignUpAgreementPresentable: Presentable {
@@ -28,6 +28,9 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
     
     weak var router: SignUpAgreementRouting?
     weak var listener: SignUpAgreementListener?
+    
+    private let idToken: String
+    private let sso: SSO
 
     private let isSelectedAllAgreementRelay = BehaviorRelay<Bool>(value: false)
     private let isSelectedServiceAgreementRelay = BehaviorRelay<Bool>(value: false)
@@ -35,7 +38,9 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
     private let isSelectedMarketingAgreementRelay = BehaviorRelay<Bool>(value: false)
     private let isSelectedNextButtonRelay = BehaviorRelay<Bool>(value: false)
     
-    override init(presenter: SignUpAgreementPresentable) {
+    init(presenter: SignUpAgreementPresentable, idToken: String, sso: SSO) {
+        self.idToken = idToken
+        self.sso = sso
         super.init(presenter: presenter)
         presenter.listener = self
         presenter.handler = self
@@ -92,7 +97,7 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
 
     func didTapNextButton() {
         if isSelectedNextButtonRelay.value {
-            router?.attachSignUpNicknameRIB()
+            router?.attachSignUpNicknameRIB(idToken: idToken, sso: sso)
         }
     }
     

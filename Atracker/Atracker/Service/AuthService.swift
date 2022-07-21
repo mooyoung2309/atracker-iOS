@@ -8,11 +8,23 @@
 import Alamofire
 
 protocol AuthServiceProtocol {
+    func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
     func testSignUp(email: String, gender: String, jobPosition: String, nickName: String, sso: String, completion: @escaping (Result<SignResponse, Error>) -> Void)
 }
 
 class AuthService: AuthServiceProtocol {
     let authRepository = AuthRepository()
+    
+    func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
+        AuthRepository.shared.sign(request: request) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     func signOut() {
         UserDefaults.standard.string(forKey: UserDefaultKey.accessToken)

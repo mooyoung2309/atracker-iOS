@@ -29,8 +29,8 @@ final class SignUpAgreementRouter: ViewableRouter<SignUpAgreementInteractable, S
         interactor.router = self
     }
     
-    func attachSignUpNicknameRIB() {
-        let signUpNickname = signUpNicknameBuilder.build(withListener: interactor)
+    func attachSignUpNicknameRIB(idToken: String, sso: SSO) {
+        let signUpNickname = signUpNicknameBuilder.build(withListener: interactor, idToken: idToken, sso: sso)
         
         self.signUpNickname = signUpNickname
         attachChild(signUpNickname)

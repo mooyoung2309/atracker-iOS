@@ -30,7 +30,7 @@ final class SignUpPositionComponent: Component<SignUpPositionDependency> {
 // MARK: - Builder
 
 protocol SignUpPositionBuildable: Buildable {
-    func build(withListener listener: SignUpPositionListener, nickname: String) -> SignUpPositionRouting
+    func build(withListener listener: SignUpPositionListener, idToken: String, sso: SSO, nickname: String) -> SignUpPositionRouting
 }
 
 final class SignUpPositionBuilder: Builder<SignUpPositionDependency>, SignUpPositionBuildable {
@@ -39,10 +39,10 @@ final class SignUpPositionBuilder: Builder<SignUpPositionDependency>, SignUpPosi
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SignUpPositionListener, nickname: String) -> SignUpPositionRouting {
+    func build(withListener listener: SignUpPositionListener, idToken: String, sso: SSO, nickname: String) -> SignUpPositionRouting {
         let component = SignUpPositionComponent(dependency: dependency, nickname: nickname)
         let viewController = SignUpPositionViewController()
-        let interactor = SignUpPositionInteractor(presenter: viewController, nickname: nickname, authService: component.authService)
+        let interactor = SignUpPositionInteractor(presenter: viewController, authService: component.authService, idToken: idToken, sso: sso, nickname: nickname)
         let signUpSuccessBuilder = SignUpSuccessBuilder(dependency: component)
         
         interactor.listener = listener

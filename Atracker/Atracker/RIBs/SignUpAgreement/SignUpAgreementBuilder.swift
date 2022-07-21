@@ -20,7 +20,7 @@ final class SignUpAgreementComponent: Component<SignUpAgreementDependency> {
 // MARK: - Builder
 
 protocol SignUpAgreementBuildable: Buildable {
-    func build(withListener listener: SignUpAgreementListener) -> SignUpAgreementRouting
+    func build(withListener listener: SignUpAgreementListener, idToken: String, sso: SSO) -> SignUpAgreementRouting
 }
 
 final class SignUpAgreementBuilder: Builder<SignUpAgreementDependency>, SignUpAgreementBuildable {
@@ -29,10 +29,10 @@ final class SignUpAgreementBuilder: Builder<SignUpAgreementDependency>, SignUpAg
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SignUpAgreementListener) -> SignUpAgreementRouting {
+    func build(withListener listener: SignUpAgreementListener, idToken: String, sso: SSO) -> SignUpAgreementRouting {
         let component = SignUpAgreementComponent(dependency: dependency)
         let viewController = SignUpAgreementViewController()
-        let interactor = SignUpAgreementInteractor(presenter: viewController)
+        let interactor = SignUpAgreementInteractor(presenter: viewController, idToken: idToken, sso: sso)
         let signUpNicknameBuilder = SignUpNicknameBuilder(dependency: component)
         interactor.listener = listener
         return SignUpAgreementRouter(interactor: interactor, viewController: viewController, signUpNicknameBuilder: signUpNicknameBuilder)

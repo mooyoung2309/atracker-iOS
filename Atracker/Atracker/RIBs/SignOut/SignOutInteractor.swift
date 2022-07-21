@@ -7,9 +7,10 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 protocol SignOutRouting: ViewableRouting {
-    func attachSignUpAgreementRIB()
+    func attachSignUpAgreementRIB(idToken: String, sso: SSO)
     func detachSignUpAgreementRIB()
 }
 
@@ -30,6 +31,9 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     weak var listener: SignOutListener?
     
     private let authService: AuthService
+    
+    private let idTokenRelay = PublishRelay<String>()
+    private let ssoRelay = PublishRelay<SSO>()
 
     init(presenter: SignOutPresentable, authService: AuthService) {
         self.authService = authService
@@ -50,30 +54,25 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     
     func setupBind() {
         guard let action = presenter.action else { return }
+        guard let handler = presenter.handler else { return }
         
         action.tapGoogleButton
             .bind { [weak self] in
-                self?.didTapTestButton()
+                self?.ssoRelay.accept(SSO.google)
             }
             .disposeOnDeactivate(interactor: self)
         
-        action.tapTestButton
+        action.tapAppleButton
             .bind { [weak self] in
-                self?.didTapTestButton()
+                self?.ssoRelay.accept(SSO.apple)
             }
             .disposeOnDeactivate(interactor: self)
-    }
-    
-    private func didTapGoogleButton() {
         
-    }
-    
-    private func didTapTestButton() {
-        router?.attachSignUpAgreementRIB()
-    }
-    
-    func signUp(idToken: String) {
-        
+        action.fetchIdToken
+            .bind { [weak self] (sso, idToken) in
+                self?.router?.attachSignUpAgreementRIB(idToken: idToken, sso: sso)
+            }
+            .disposeOnDeactivate(interactor: self)
     }
     
     // 자식 RIB으로 부터
@@ -88,5 +87,11 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
 }
 
 extension SignOutInteractor: SignOutPresentableHandler {
+    var idToken: Observable<String> {
+        return idTokenRelay.asObservable()
+    }
     
+    var sso: Observable<SSO> {
+        return ssoRelay.asObservable()
+    }
 }
