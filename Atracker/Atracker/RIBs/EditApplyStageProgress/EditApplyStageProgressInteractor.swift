@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol EditApplyStageProgressRouting: ViewableRouting {
-    func detachThisRIB()
 }
 
 protocol EditApplyStageProgressPresentable: Presentable {
@@ -20,6 +19,7 @@ protocol EditApplyStageProgressPresentable: Presentable {
 }
 
 protocol EditApplyStageProgressListener: AnyObject {
+    func didTapBackButtonFromEditApplyStageProgressRIB()
     func didEditApplyStageProgress()
 }
 
@@ -77,7 +77,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
         // bind action
         action.tapBackButton
             .bind { [weak self] in
-                self?.router?.detachThisRIB()
+                self?.listener?.didTapBackButtonFromEditApplyStageProgressRIB()
             }
             .disposeOnDeactivate(interactor: self)
         

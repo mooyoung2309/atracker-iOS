@@ -148,6 +148,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     }
     
     func didTapBackButtonFromEditApplyOverallRIB() {
+        router?.detachEditApplyOverallRIB()
+    }
+    
+    func didTapBackButtonFromEditApplyStageProgressRIB() {
         router?.detachEditApplyStageProgressRIB()
     }
 }

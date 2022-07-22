@@ -87,7 +87,7 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
     
     func didUpdateMyPage(myPage: MyPageResponse) {
         selfView.positionLabel.text = "\(myPage.jobPosition)"
-        selfView.careerLabel.text = "\(myPage.jobPosition)"
+        selfView.careerLabel.text = "\(myPage.experienceType.title)"
         
         let titleString = "\(myPage.nickName)님, 안녕하세요!"
         let titleAttributeString = NSMutableAttributedString(string: titleString)
