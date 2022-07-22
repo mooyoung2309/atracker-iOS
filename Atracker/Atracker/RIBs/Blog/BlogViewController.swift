@@ -19,11 +19,13 @@ final class BlogViewController: BaseNavigationViewController, BlogPresentable, B
 
     weak var listener: BlogPresentableListener?
     
+    override func setupNavigaionBar() {
+        super.setupNavigaionBar()
+        hideNavigationBar()
+    }
+    
     override func setupProperty() {
         super.setupProperty()
-        
-        self.view.backgroundColor = .white
-        self.preferredContentSize = CGSize(width: 100, height: 100)
     }
     
     override func setupHierarchy() {

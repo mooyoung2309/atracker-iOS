@@ -53,8 +53,8 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         
         self.writeApplyOverall = writeApplyOverall
         detachChildRIB(child)
-        attachChild(writeApplyOverall)
         viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
+        attachChild(writeApplyOverall)
         child = writeApplyOverall
     }
     
@@ -74,9 +74,9 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     }
     
     func detachWriteApplyOverallRIB() {
-        guard let writeApplyOverall = writeApplyOverall else { return }
-
-        detachChild(writeApplyOverall)
+        if let writeApplyOverall = writeApplyOverall {
+            detachChild(writeApplyOverall)
+        }
         
         viewController.dismiss(viewControllable, isTabBarShow: true)
     }

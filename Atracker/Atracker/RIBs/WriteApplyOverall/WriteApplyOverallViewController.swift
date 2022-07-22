@@ -16,7 +16,7 @@ import SnapKit
 protocol WriteApplyOverallPresentableAction: AnyObject {
     var tapBackButton: Observable<Void> { get }
     var tapNextButton: Observable<Void> { get }
-    var tapAddCompanyButton: Observable<Void> { get }
+    var tapAddCompanyButton: Observable<String> { get }
     var tapJobTypeButton: Observable<Void> { get }
     var textCompanyName: Observable<String> { get }
     var textPositionName: Observable<String> { get }
@@ -48,8 +48,9 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     let selfView = WriteApplyOverallView()
     
-    private let tapAddCompanyButtonSubject = PublishSubject<Void>()
+    private let tapAddCompanyButtonSubject = PublishSubject<String>()
     private let textJobTypeNameSubject = PublishSubject<String>()
+    private let textCompanyNameSubject = BehaviorRelay<String>(value: "")
     private let selectedCompanySubject = PublishSubject<Company>()
     private let selectedStagesSubject = BehaviorSubject<[Stage]>(value: [])
     
@@ -148,7 +149,11 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
         
         guard let action = action else { return }
         guard let handler = handler else { return }
-
+        
+        selfView.companyUnderLineTextFieldView.textField.rx.text.orEmpty
+            .bind(to: textCompanyNameSubject)
+            .disposed(by: disposeBag)
+        
         action.selectedCompany
             .bind { [weak self] company in
                 self?.selfView.companyUnderLineTextFieldView.textField.text = company.name
@@ -163,6 +168,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
 
         handler.companies
             .bind { [weak self] companies in
+                Log("[D] 회사 결과들 \(companies)")
                 self?.reloadCompanySearchTableView(companies: companies)
             }
             .disposed(by: disposeBag)
@@ -215,7 +221,7 @@ extension WriteApplyOverallViewController: WriteApplyOverallPresentableAction {
         return selfView.nextButton.rx.tap.asObservable()
     }
     
-    var tapAddCompanyButton: Observable<Void> {
+    var tapAddCompanyButton: Observable<String> {
         return tapAddCompanyButtonSubject.asObservable()
     }
     
@@ -224,7 +230,7 @@ extension WriteApplyOverallViewController: WriteApplyOverallPresentableAction {
     }
     
     var textCompanyName: Observable<String> {
-        return selfView.companyUnderLineTextFieldView.textField.rx.text.orEmpty.distinctUntilChanged().asObservable()
+        return textCompanyNameSubject.asObservable()
     }
     
     var textPositionName: Observable<String> {
@@ -357,7 +363,7 @@ extension WriteApplyOverallViewController: UITableViewDelegate, UITableViewDataS
         switch tableView {
         case selfView.companySearchTableView:
             if indexPath.item == companies.count {
-                tapAddCompanyButtonSubject.onNext(())
+                tapAddCompanyButtonSubject.onNext(textCompanyNameSubject.value)
             } else {
                 selectedCompanySubject.onNext(companies[indexPath.item])
             }

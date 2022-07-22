@@ -319,6 +319,7 @@
 		7013127E2886EC1400A5C588 /* SignOutComponent+SignUpAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignOutComponent+SignUpAgreement.swift"; sourceTree = "<group>"; };
 		701312802886EF4800A5C588 /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		7016B9FB28891E9C009E9E59 /* SignUpAgreementComponent+SignUpNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpAgreementComponent+SignUpNickname.swift"; sourceTree = "<group>"; };
+		7016B9FD28898EB6009E9E59 /* Atracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Atracker.entitlements; sourceTree = "<group>"; };
 		701CE1B2288089D100D6E6CC /* StageProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressService.swift; sourceTree = "<group>"; };
 		701CE21B2849C197009230CE /* ApplyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRouter.swift; sourceTree = "<group>"; };
 		701CE21C2849C197009230CE /* ApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyViewController.swift; sourceTree = "<group>"; };
@@ -1142,6 +1143,7 @@
 		70A2F67D2834BFCB00E6B95B /* Atracker */ = {
 			isa = PBXGroup;
 			children = (
+				7016B9FD28898EB6009E9E59 /* Atracker.entitlements */,
 				7027D3A12862D22C00F9C913 /* Secret */,
 				701CE2242849CC36009230CE /* App */,
 				70A2F6B72834C53200E6B95B /* Extension */,
@@ -2075,6 +2077,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Atracker/Atracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = X64MATB2CC;
@@ -2105,6 +2108,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Atracker/Atracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = X64MATB2CC;

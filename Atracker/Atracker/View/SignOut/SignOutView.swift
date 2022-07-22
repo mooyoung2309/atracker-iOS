@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import SnapKit
+import AuthenticationServices
 
 class SignOutView: BaseView {
     
-    let googleSignUpButton  = UIButton(type: .custom)
-    let appleSignUpButton   = UIButton(type: .custom)
-    let testSignUpButton    = UIButton(type: .custom)
+    let googleSignUpButton = UIButton(type: .custom)
+    let appleSignUpButton = ASAuthorizationAppleIDButton()
+    let testSignUpButton = UIButton(type: .custom)
     
     override func setupProperty() {
         super.setupProperty()
@@ -25,12 +26,12 @@ class SignOutView: BaseView {
         googleSignUpButton.setTitle("  Google로 시작하기", for: .normal)
         googleSignUpButton.setImage(UIImage(named: ImageName.google), for: .normal)
         
-        appleSignUpButton.backgroundColor     = .backgroundLightGray
-        appleSignUpButton.layer.borderWidth   = 1
-        appleSignUpButton.layer.borderColor   = UIColor.gray7.cgColor
-        appleSignUpButton.layer.cornerRadius  = 25
-        appleSignUpButton.setTitle("  Apple로 시작하기", for: .normal)
-        appleSignUpButton.setImage(UIImage(named: ImageName.apple), for: .normal)
+//        appleSignUpButton.backgroundColor     = .backgroundLightGray
+//        appleSignUpButton.layer.borderWidth   = 1
+//        appleSignUpButton.layer.borderColor   = UIColor.gray7.cgColor
+//        appleSignUpButton.layer.cornerRadius  = 25
+//        appleSignUpButton.setTitle("  Apple로 시작하기", for: .normal)
+//        appleSignUpButton.setImage(UIImage(named: ImageName.apple), for: .normal)
         
         testSignUpButton.backgroundColor     = .backgroundLightGray
         testSignUpButton.layer.borderWidth   = 1

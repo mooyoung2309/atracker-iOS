@@ -82,9 +82,6 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
                 guard let this = self else { return }
                 if let applyCreateRequest = this.applyCreateRequest {
                     this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest)
-                } else {
-                    Log("[D] 테스트 용")
-                    this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest(company: Company(id: 0, name: "이소진"), jobPosition: "이소진", jobType: "테스트",stages: [ApplyCreateStage(eventAt: nil, order: 0, stageID: 0)]))
                 }
             }
             .disposeOnDeactivate(interactor: self)
@@ -100,8 +97,8 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             }
             .disposeOnDeactivate(interactor: self)
         
-        Observable.combineLatest(action.tapAddCompanyButton, action.textCompanyName)
-            .bind { [weak self] _, companyName in
+        action.tapAddCompanyButton
+            .bind { [weak self] companyName in
                 self?.addCompany(companyName: companyName)
                 self?.isShowCompanyTableViewRelay.accept(false)
                 self?.isShowJobTypeTableViewRelay.accept(false)
@@ -210,141 +207,6 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     func didWriteApply() {
         listener?.didWriteApply()
     }
-    
-    //    func setBind() {
-    //        companyResponseSubject.bind { [weak self] companyResponse in
-    //
-    //        }
-    //        .disposeOnDeactivate(interactor: self)
-    //    }
-    //
-    //    func tapBackButton() {
-    //        listener?.showTabBar()
-    //        listener?.tapBackButtonFromChildRIB()
-    //    }
-    //
-    //    func tapNextButton() {
-    //        router?.attachWriteApplyScheduleRIB()
-    //    }
-    //
-    //    func tapResetButton() {
-    //        presenter.resetCollectionView()
-    //    }
-    //
-    //    func tapJobTypeSearchButton() {
-    //        presenter.switchJobTypeSearchTableView()
-    //    }
-    //
-    //    func tapJobTypeTableView(text: String) {
-    //        presenter.updateJobTypeLabel(text: text)
-    //        presenter.switchJobTypeSearchTableView()
-    //    }
-    //
-    //    func searchCompanyName(text: String? = nil) {
-    //        var companName = ""
-    //
-    //        if let text = text {
-    //            companName = text
-    //        } else {
-    //            companName = self.companyName
-    //        }
-    //
-    //        if companName.isEmpty {
-    //            presenter.hideCompanySearchTableView()
-    //            presenter.unSelectCompanySearchButton()
-    //        } else {
-    //            searchCompany(companyName: companName)
-    //        }
-    //    }
-    //
-    //    func tapCompanySearchButton() {
-    //
-    //    }
-    //
-    //    func tapCompanyTableView(company: Company) {
-    //        Log("[D] 회사 테이블 뷰 탭")
-    //        presenter.updateCompanyLabel(text: company.name)
-    //        presenter.hideCompanySearchTableView()
-    //    }
-    
-    //    func tapPlusCompay() {
-    //        companyService.add(name: self.companyName) { [weak self] result in
-    //            guard let this = self else { return }
-    //            switch result {
-    //            case .success(let data):
-    //                Log("[D] 회사 추가 성공 \(data.companies)")
-    ////                data.companies.first
-    //                return
-    //            case .failure(let error):
-    //                Log("[D] 회사 추가 실패 \(error)")
-    //                return
-    //            }
-    //        }
-    //        presenter.hideCompanySearchTableView()
-    //    }
-    //
-    //    func refreshStage() {
-    //        stageService.get { [weak self] result in
-    //            switch result {
-    //            case .success(let data):
-    //                Log("[D] 스테이지 얻기 성공 \(data)")
-    //                self?.presenter.updateStageCollectionView(stages: data)
-    //                return
-    //            case .failure(let error):
-    //                Log("[D] 스테이지 얻기 실패")
-    //                return
-    //            }
-    //
-    //        }
-    //    }
-    //
-    //    private func searchCompany(companyName: String) {
-    //        if prevCompanyName == companyName {
-    //            companyPage += 1
-    //        } else {
-    //            companyPage = 1
-    //            companies.removeAll()
-    //        }
-    //
-    //        companyService.search(title: companyName, page: companyPage) { [weak self] result in
-    //            switch result {
-    //            case .success(let data):
-    //                self?.companyResponseSubject.onNext(data)
-    //            case  .failure(let error):
-    //                break
-    //            }
-    //
-    //        }
-    //    }
-    //
-    //    // MARK: Private
-    //    private func searchCompany(companyName: String) {
-    //        if self.companyName == companyName {
-    //            companyPage += 1
-    //        } else {
-    //            companyPage = 1
-    //            companies.removeAll()
-    //        }
-    //        Log("[D] \(companyPage)")
-    //        self.companyName = companyName
-    //
-    //        companyService.search(title: companyName, page: companyPage) { [weak self] result in
-    //            Log("[D] API 호출 \(companyName)")
-    //            guard let this = self else { return }
-    //            switch result {
-    //            case .success(let data):
-    //                Log("[D] \(data.contents)")
-    //                this.companies.append(contentsOf: data.contents)
-    //                this.presenter.reloadCompanySearchTableView(companies: this.companies)
-    //                this.presenter.showCompanySearchTableView()
-    //                this.presenter.selectCompanySearchButton()
-    //                return
-    //            case .failure(let error):
-    //                Log("[D] 검색 실패 \(error)")
-    //                return
-    //            }
-    //        }
-    //    }
     
     // MARK: From Child RIBs
     func tapBackButtonFromChildRIB() {

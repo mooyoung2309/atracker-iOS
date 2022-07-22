@@ -98,21 +98,22 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
         action.tapNextButton
             .bind { [weak self] _ in
                 guard let this = self else { return }
-                this.postApply(applyCreateRequest: this.applyCreateRequest)
-                self?.listener?.didWriteApply()
+                this.postApply(applyCreateRequest: this.applyCreateRequest) {
+                    self?.listener?.didWriteApply()
+                }
             }
             .disposeOnDeactivate(interactor: self)
         
         applyCreateStagesRelay.accept(applyCreateRequest.stages)
     }
     
-    func postApply(applyCreateRequest: ApplyCreateRequest) {
+    func postApply(applyCreateRequest: ApplyCreateRequest, completion: @escaping () -> Void) {
         applyService.post(request: applyCreateRequest) { [weak self] result in
             switch result {
             case .success():
-                return
+                completion()
             case .failure(let error):
-                return
+                completion()
             }
         }
     }

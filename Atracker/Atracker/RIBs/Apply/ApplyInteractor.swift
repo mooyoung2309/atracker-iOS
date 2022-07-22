@@ -110,6 +110,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     
     func didWriteApply() {
         router?.detachWriteApplyOverallRIB()
+        fetchApplies()
     }
     
     func didBackFromApplyDetail() {
