@@ -30,8 +30,14 @@ class ApplyRepository: ApplyRepositoryProtocol {
 //            print(response.value)
             switch response.result {
             case .success(let data):
+                var applies: [Apply] = []
+                for apply in data.applies {
+                    var newApply = apply
+                    newApply.stageProgress = newApply.stageProgress.sorted(by: { $0.order < $1.order })
+                    applies.append(newApply)
+                }
                 Log("[D] 지원 현황 가져오기 성공")
-                completion(.success(data))
+                completion(.success(ApplyResponse(applies: applies)))
             case .failure(let error):
                 Log("[D] 지원 현황 가져오기 실패")
                 completion(.failure(error))

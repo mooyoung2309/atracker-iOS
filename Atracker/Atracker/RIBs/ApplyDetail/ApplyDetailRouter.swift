@@ -64,6 +64,6 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         if let child = child {
             detachChild(child)
         }
-        viewController.dismiss(nil, isTabBarShow: true)
+        viewController.dismiss(nil, isTabBarShow: false)
     }
 }

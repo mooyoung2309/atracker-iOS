@@ -23,7 +23,7 @@ struct Apply: Codable {
     let jobPosition, jobType: String
     let companyID: Int
     let companyName: String
-    let stageProgress: [StageProgress]
+    var stageProgress: [StageProgress]
 
     enum CodingKeys: String, CodingKey {
         case applyID = "apply_id"

@@ -240,7 +240,9 @@ extension EditApplyOverallViewController: EditApplyOverallPresentableAction {
     }
     
     var tapNextButton: Observable<Void> {
-        return selfView.nextButton.rx.tap.asObservable()
+        return selfView.nextButton.rx.tap.do(onNext: {
+            self.updateStageProgressesForHandler()
+        }).asObservable()
     }
     
     var tapAddCompanyCell: Observable<String> {

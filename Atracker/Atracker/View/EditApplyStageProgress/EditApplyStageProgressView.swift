@@ -46,7 +46,14 @@ class EditApplyStageProgressView: BaseView {
         addButtonStackView.distribution = .fillEqually
         
         addQNAContentButton.setTitle("+ Q&A 양식", for: .normal)
+        addQNAContentButton.setTitleColor(.white, for: .normal)
+        addQNAContentButton.layer.cornerRadius = 5
+        addQNAContentButton.backgroundColor = .backgroundLightGray
+        
         addFreeContentButton.setTitle("+ 자유 양식", for: .normal)
+        addFreeContentButton.setTitleColor(.white, for: .normal)
+        addFreeContentButton.backgroundColor = .backgroundLightGray
+        addFreeContentButton.layer.cornerRadius = 5
         
         deleteButtonBar.isHidden.toggle()
         
@@ -105,7 +112,7 @@ class EditApplyStageProgressView: BaseView {
         
         addButtonStackView.snp.makeConstraints {
             $0.top.equalTo(editProgressTableView.snp.bottom)
-            $0.leading.trailing.equalTo(self)
+            $0.leading.trailing.equalTo(self).inset(16)
             $0.bottom.equalToSuperview()
         }
         

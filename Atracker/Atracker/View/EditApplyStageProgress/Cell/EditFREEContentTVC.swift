@@ -37,10 +37,10 @@ class EditFREEContentTVC: BaseTVC {
         
         backgroundColor = .clear
         
+        titleTextView.attributedPlaceholder = NSAttributedString(string: "제목을 입력하세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor.neonGreen])
         titleTextView.delegate = self
         titleTextView.backgroundColor = .clear
         titleTextView.font = .systemFont(ofSize: 16, weight: .regular)
-        titleTextView.text = "제목"
         titleTextView.textColor = .neonGreen
         
         contextTextView.delegate = self

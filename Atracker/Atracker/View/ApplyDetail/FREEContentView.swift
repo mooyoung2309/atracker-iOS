@@ -37,7 +37,7 @@ class FREEContentView: BaseView {
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
+        addSubview(titleLabel)
         addSubview(contextLabel)
     }
     

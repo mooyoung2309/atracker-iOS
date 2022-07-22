@@ -43,7 +43,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
 //        detachChildRIB(child)
         attachChild(applyDetail)
     
-        viewController.present(applyDetail.viewControllable, isTabBarShow: true)
+        viewController.present(applyDetail.viewControllable, isTabBarShow: false)
         
         child = applyDetail
     }

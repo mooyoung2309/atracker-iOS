@@ -63,6 +63,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     
     func setupBind() {
         guard let action = presenter.action else { return }
+        guard let handler = presenter.handler else { return }
         
         // 액션 바인딩
         action.tapBackButton
@@ -80,6 +81,12 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
         action.tapEditTypeCell
             .bind { [weak self] editTypeItem in
                 self?.didTapEditTypeCell(editTypeItem: editTypeItem)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        handler.apply
+            .bind { [weak self] apply in
+                self?.thisApply = apply
             }
             .disposeOnDeactivate(interactor: self)
         
