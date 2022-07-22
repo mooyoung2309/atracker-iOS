@@ -10,9 +10,8 @@ import RxSwift
 import RxCocoa
 
 protocol WriteApplyOverallRouting: ViewableRouting {
-    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest)
-    func detachThisChildRIB()
-    func testBackButton()
+    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest, stages: [Stage])
+    func detachWriteApplyScheduleRIB()
 }
 
 protocol WriteApplyOverallPresentable: Presentable {
@@ -22,6 +21,7 @@ protocol WriteApplyOverallPresentable: Presentable {
 }
 
 protocol WriteApplyOverallListener: AnyObject {
+    func didTapBackButtonFromWriteApplyOverallRIB()
     func didWriteApply()
 }
 
@@ -35,7 +35,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     private let stageService: StageServiceProtocol
     
     private let companiesRelay = PublishRelay<[Company]>()
-    private let stagesRelay = PublishRelay<[Stage]>()
+    private let stagesRelay = BehaviorRelay<[Stage]>(value: [])
     private let isShowCompanyTableViewRelay = PublishRelay<Bool>()
     private let isShowJobTypeTableViewRelay = BehaviorRelay<Bool>(value: false)
     
@@ -44,6 +44,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     private var searchCompanyPage = 1
     
     private var applyCreateRequest: ApplyCreateRequest?
+    private var selectedStages: [Stage] = []
     private var disposBag = DisposeBag()
     
     init(presenter: WriteApplyOverallPresentable, applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, stageService: StageServiceProtocol) {
@@ -73,15 +74,17 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
         
         action.tapBackButton
             .bind { [weak self] in
-                self?.router?.testBackButton()
+                Log("[D] 뒤로가기 버튼 클릭")
+                self?.listener?.didTapBackButtonFromWriteApplyOverallRIB()
             }
             .disposeOnDeactivate(interactor: self)
         
         action.tapNextButton
             .bind { [weak self] in
+                Log("[D] 다음 버튼 클릭")
                 guard let this = self else { return }
                 if let applyCreateRequest = this.applyCreateRequest {
-                    this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest)
+                    this.router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest, stages: this.selectedStages)
                 }
             }
             .disposeOnDeactivate(interactor: self)
@@ -143,7 +146,7 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
             .disposeOnDeactivate(interactor: self)
         
         Observable.combineLatest(action.selectedCompany, action.textPositionName, action.textJobTypeName, action.selectedStages).bind { [weak self] company, position, jobType, stages in
-            
+            self?.selectedStages = stages
             var applyCreateStages: [ApplyCreateStage] = []
             for (i, stage) in stages.enumerated() {
                 let applyCreateStage = ApplyCreateStage(eventAt: nil, order: i, stageID: stage.id)
@@ -209,8 +212,8 @@ final class WriteApplyOverallInteractor: PresentableInteractor<WriteApplyOverall
     }
     
     // MARK: From Child RIBs
-    func tapBackButtonFromChildRIB() {
-        router?.detachThisChildRIB()
+    func didTapBackButtonFromWriteApplyScheduleRIB() {
+        router?.detachWriteApplyScheduleRIB()
     }
 }
 

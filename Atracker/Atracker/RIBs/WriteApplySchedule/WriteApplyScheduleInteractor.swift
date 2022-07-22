@@ -21,7 +21,7 @@ protocol WriteApplySchedulePresentable: Presentable {
 }
 
 protocol WriteApplyScheduleListener: AnyObject {
-    func tapBackButtonFromChildRIB()
+    func didTapBackButtonFromWriteApplyScheduleRIB()
     func didWriteApply()
 }
 
@@ -31,14 +31,17 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
     weak var listener: WriteApplyScheduleListener?
     
     private let applyService: ApplyServiceProtocol
+    private let thisStages: [Stage]
     private var applyCreateRequest: ApplyCreateRequest
+    
     
     private let dateRelay = BehaviorRelay(value: Date())
     private let applyCreateStagesRelay = BehaviorRelay<[ApplyCreateStage]>(value: [])
     
-    init(presenter: WriteApplySchedulePresentable, applyService: ApplyServiceProtocol, applyCreateRequest: ApplyCreateRequest) {
+    init(presenter: WriteApplySchedulePresentable, applyService: ApplyServiceProtocol, applyCreateRequest: ApplyCreateRequest, stages: [Stage]) {
         self.applyService = applyService
         self.applyCreateRequest = applyCreateRequest
+        self.thisStages = stages
         
         super.init(presenter: presenter)
         
@@ -126,5 +129,9 @@ extension WriteApplyScheduleInteractor: WriteApplySchedulePresentableHandler {
     
     var applyCreateStages: Observable<[ApplyCreateStage]> {
         return applyCreateStagesRelay.asObservable()
+    }
+    
+    var stages: Observable<[Stage]> {
+        return Observable.just(thisStages).asObservable()
     }
 }

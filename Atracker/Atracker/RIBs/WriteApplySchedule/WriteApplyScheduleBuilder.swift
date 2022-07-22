@@ -25,7 +25,7 @@ final class WriteApplyScheduleComponent: Component<WriteApplyScheduleDependency>
 // MARK: - Builder
 
 protocol WriteApplyScheduleBuildable: Buildable {
-    func build(withListener listener: WriteApplyScheduleListener, applyCreateRequest: ApplyCreateRequest) -> WriteApplyScheduleRouting
+    func build(withListener listener: WriteApplyScheduleListener, applyCreateRequest: ApplyCreateRequest, stages: [Stage]) -> WriteApplyScheduleRouting
 }
 
 final class WriteApplyScheduleBuilder: Builder<WriteApplyScheduleDependency>, WriteApplyScheduleBuildable {
@@ -34,10 +34,10 @@ final class WriteApplyScheduleBuilder: Builder<WriteApplyScheduleDependency>, Wr
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: WriteApplyScheduleListener, applyCreateRequest: ApplyCreateRequest) -> WriteApplyScheduleRouting {
+    func build(withListener listener: WriteApplyScheduleListener, applyCreateRequest: ApplyCreateRequest, stages: [Stage]) -> WriteApplyScheduleRouting {
         let component = WriteApplyScheduleComponent(dependency: dependency)
         let viewController = WriteApplyScheduleViewController()
-        let interactor = WriteApplyScheduleInteractor(presenter: viewController, applyService: component.applyService, applyCreateRequest: applyCreateRequest)
+        let interactor = WriteApplyScheduleInteractor(presenter: viewController, applyService: component.applyService, applyCreateRequest: applyCreateRequest, stages: stages)
         
         interactor.listener = listener
         

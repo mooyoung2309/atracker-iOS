@@ -14,14 +14,23 @@ class WriteApplyScheduleTVC: BaseTVC {
     static let id = "WriteApplyScheduleTVC"
     var disposeBag = DisposeBag()
     
-    let circle          = UIView()
-    let titleLabel      = UILabel()
-    let datePicker      = UIDatePicker()
-    let dateLabel       = UILabel()
-    let divisionLabel   = UILabel()
-    let timeLabel       = UILabel()
+    let circle = UIView()
+    let titleLabel = UILabel()
+    let datePicker = UIDatePicker()
+    let dateLabel = UILabel()
+    let divisionLabel = UILabel()
+    let timeLabel = UILabel()
     
     var dateChanged: ((Date) -> Void)?
+    
+    func update(title: String, order: Int, date: Date?) {
+        if let date = date {
+            dateLabel.text = date.getKRString()
+            datePicker.date = date
+        }
+        titleLabel.text = title
+        circle.backgroundColor = .progressColors[order < UIColor.progressColors.count ? order : UIColor.progressColors.count - 1]
+    }
     
     func showDatePicker() {
         datePicker.isHidden = false
@@ -37,15 +46,6 @@ class WriteApplyScheduleTVC: BaseTVC {
         }
     }
     
-    func update(date: Date?) {
-        guard let date = date else {
-            return
-        }
-        
-        dateLabel.text = date.getKRString()
-        datePicker.date = date
-    }
-    
     func dateChanged(completion: @escaping (Date) -> Void) {
         self.dateChanged = completion
     }
@@ -53,7 +53,7 @@ class WriteApplyScheduleTVC: BaseTVC {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        titleLabel.text = ""
         dateLabel.text = "+"
         datePicker.date = Date()
         
@@ -84,7 +84,6 @@ class WriteApplyScheduleTVC: BaseTVC {
         }
         
         circle.backgroundColor  = .neonGreen
-        titleLabel.text         = "서류"
 //        dateLabel.text          = "2022  03  12     오후  12 : 00"
         dateLabel.text = "+"
         dateLabel.textAlignment = .center

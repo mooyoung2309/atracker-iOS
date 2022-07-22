@@ -60,10 +60,6 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     private var companies: [Company] = []
     private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"
-
-    func dismiss() {
-        navigationController?.popViewController(animated: true)
-    }
     
     func reloadCompanySearchTableView(companies: [Company]) {
         self.companies = companies

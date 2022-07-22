@@ -32,4 +32,6 @@ struct ImageName {
     static let unCheckedCircle = "UnCheckedCircle"
     static let checkedCircle = "CheckedCircle"
     static let chevronRight = "ChevronRight"
+    static let splashImage = "SplashImage"
+    static let logoImage = "LogoImage"
 }

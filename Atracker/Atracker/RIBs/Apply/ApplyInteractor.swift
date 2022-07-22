@@ -116,6 +116,10 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         router?.detachApplyDetailRIB()
         fetchApplies()
     }
+    
+    func didTapBackButtonFromWriteApplyOverallRIB() {
+        router?.detachWriteApplyOverallRIB()
+    }
 }
 
 extension ApplyInteractor: ApplyPresentableHandler {

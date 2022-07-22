@@ -16,7 +16,6 @@ import AuthenticationServices
 protocol SignOutPresentableAction: AnyObject {
     var tapGoogleButton: Observable<Void> { get }
     var tapAppleButton: Observable<Void> { get }
-    var tapTestButton: Observable<Void> { get }
     var fetchIdToken: Observable<(SSO, String)> { get }
 }
 
@@ -164,9 +163,5 @@ extension SignOutViewController: SignOutPresentableAction {
     
     var tapAppleButton: Observable<Void> {
         return tapAppleButtonSubject.asObservable()
-    }
-    
-    var tapTestButton: Observable<Void> {
-        return selfView.testSignUpButton.rx.tap.asObservable()
     }
 }

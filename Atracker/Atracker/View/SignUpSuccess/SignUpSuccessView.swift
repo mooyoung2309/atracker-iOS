@@ -10,18 +10,13 @@ import SnapKit
 
 class SignUpSuccessView: BaseView {
     
-    let gifImageView    = UILabel()
-    let titleLabel      = UILabel()
-    let messageLabel    = UILabel()
+    let imageView = UIImageView(image: UIImage(named: ImageName.logoImage))
+    let titleLabel = UILabel()
+    let messageLabel = UILabel()
     
     override func setupProperty() {
         super.setupProperty()
         
-        gifImageView.text = "3초 뒤에 화면이 이동 됩니다."
-        gifImageView.font = .systemFont(ofSize: 15)
-        gifImageView.textColor = .white
-        
-        titleLabel.text = "이소진님,\n반갑습니다!"
         titleLabel.font = .systemFont(ofSize: 26, weight: .regular)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
@@ -35,7 +30,7 @@ class SignUpSuccessView: BaseView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(gifImageView)
+        addSubview(imageView)
         addSubview(titleLabel)
         addSubview(messageLabel)
     }
@@ -43,8 +38,11 @@ class SignUpSuccessView: BaseView {
     override func setupLayout() {
         super.setupLayout()
         
-        gifImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        imageView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(274)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(88)
+            $0.height.equalTo(91)
         }
         
         titleLabel.snp.makeConstraints {

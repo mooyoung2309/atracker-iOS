@@ -37,8 +37,8 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
         
         self.writeApplyOverall = writeApplyOverall
-        viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
         attachChild(writeApplyOverall)
+        viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
     }
     
     func attachApplyDetailRIB(apply: Apply) {

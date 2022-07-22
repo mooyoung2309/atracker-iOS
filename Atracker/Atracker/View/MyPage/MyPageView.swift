@@ -66,7 +66,7 @@ class MyPageView: BaseView {
         helpTagLabel.font = .systemFont(ofSize: 16, weight: .light)
         helpTagLabel.textColor = .white
         
-        connectButton.setTitle("연락하기", for: .normal)
+        connectButton.setTitle("연락하기           brianrudder@naver.com", for: .normal)
         connectButton.setTitleColor(.gray3, for: .normal)
         connectButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
     }

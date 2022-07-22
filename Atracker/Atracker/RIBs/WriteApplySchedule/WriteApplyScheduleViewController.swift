@@ -20,6 +20,7 @@ protocol WriteApplySchedulePresentableAction: AnyObject {
 protocol WriteApplySchedulePresentableHandler: AnyObject {
     var date: Observable<Date> { get }
     var applyCreateStages: Observable<[ApplyCreateStage]> { get }
+    var stages: Observable<[Stage]> { get }
 }
 
 protocol WriteApplySchedulePresentableListener: AnyObject {
@@ -50,6 +51,7 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
     
     private var selectedCellIndexPath: IndexPath?
     private var applyCreateStages: [ApplyCreateStage] = []
+    private var stages: [Stage] = []
     
     func dismiss() {
         navigationController?.popViewController(animated: true)
@@ -69,7 +71,8 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
         selfView.nextCollectionView.reloadData()
     }
     
-    func reloadApplyStageEventAtTableView(applyCreateStages: [ApplyCreateStage]) {
+    func reloadApplyStageEventAtTableView(stages: [Stage], applyCreateStages: [ApplyCreateStage]) {
+        self.stages = stages
         self.applyCreateStages = applyCreateStages
         selfView.tableView.reloadData()
     }
@@ -135,9 +138,18 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
             }
             .disposed(by: disposeBag)
         
-        handler.applyCreateStages
-            .bind { [weak self] applyCreateStages in
-                self?.reloadApplyStageEventAtTableView(applyCreateStages: applyCreateStages)
+//        handler.applyCreateStages
+//            .bind { [weak self] applyCreateStages in
+//                self?.reloadApplyStageEventAtTableView(applyCreateStages: applyCreateStages)
+//            }
+//            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(handler.stages, handler.applyCreateStages)
+            .bind { [weak self] stages, applyCreateStages in
+                Log("[D] \(stages), \(applyCreateStages)")
+                if stages.count == applyCreateStages.count {
+                    self?.reloadApplyStageEventAtTableView(stages: stages, applyCreateStages: applyCreateStages)
+                }
             }
             .disposed(by: disposeBag)
         
@@ -260,8 +272,6 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
         case selfView.tableView:
             cell.selectionStyle = .none
             
-            cell.update(date: Date().getDateFromISO8601String(iso8601: applyCreateStages[indexPath.item].eventAt))
-            
             if let selectedCellIndexPath = selectedCellIndexPath {
                 if selectedCellIndexPath == indexPath {
                     cell.showDatePicker()
@@ -275,6 +285,9 @@ extension WriteApplyScheduleViewController: UITableViewDelegate, UITableViewData
                     self?.changedApplyCreateStagesSubject.onNext(applyCreateStages)
                 }
             }
+            
+            cell.update(title: stages[indexPath.item].title, order: indexPath.item, date: Date().getDateFromISO8601String(iso8601: applyCreateStages[indexPath.item].eventAt))
+            
             return cell
         default:
             return UITableViewCell()
