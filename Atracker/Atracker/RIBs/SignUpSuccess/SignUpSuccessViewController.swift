@@ -10,9 +10,7 @@ import RxSwift
 import UIKit
 
 protocol SignUpSuccessPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    
 }
 
 final class SignUpSuccessViewController: BaseNavigationViewController, SignUpSuccessPresentable, SignUpSuccessViewControllable {
@@ -44,5 +42,9 @@ final class SignUpSuccessViewController: BaseNavigationViewController, SignUpSuc
             $0.top.equalToSuperview().inset(Size.navigationBarHeight)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    func showNickname(nickname: String) {
+        selfView.titleLabel.text = "\(nickname)님,\n반갑습니다!"
     }
 }

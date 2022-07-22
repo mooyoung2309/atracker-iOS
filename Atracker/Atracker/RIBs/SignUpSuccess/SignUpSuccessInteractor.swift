@@ -9,16 +9,15 @@ import RIBs
 import RxSwift
 
 protocol SignUpSuccessRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    
 }
 
 protocol SignUpSuccessPresentable: Presentable {
     var listener: SignUpSuccessPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showNickname(nickname: String)
 }
 
 protocol SignUpSuccessListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func didSignUp()
 }
 
@@ -37,6 +36,8 @@ final class SignUpSuccessInteractor: PresentableInteractor<SignUpSuccessPresenta
 
     override func didBecomeActive() {
         super.didBecomeActive()
+        
+        presenter.showNickname(nickname: nickName)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             self?.listener?.didSignUp()

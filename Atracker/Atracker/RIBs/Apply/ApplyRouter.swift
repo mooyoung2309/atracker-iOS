@@ -21,10 +21,8 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private let writeApplyOverallBuilder: WriteApplyOverallBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
     
-    private var child: ViewableRouting?
     private var writeApplyOverall: ViewableRouting?
     private var applyDetail: ViewableRouting?
-    private var apply: Apply?
     
     init(interactor: ApplyInteractable, viewController: ApplyViewControllable, applyWriteBuilder: WriteApplyOverallBuildable, applyDetailBuilder: ApplyDetailBuildable) {
         self.writeApplyOverallBuilder  = applyWriteBuilder
@@ -35,49 +33,33 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
         interactor.router = self
     }
     
-    func attachApplyDetailRIB(apply: Apply) {
-        self.apply = apply
-        let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
-        self.applyDetail = applyDetail
-        
-//        detachChildRIB(child)
-        attachChild(applyDetail)
-    
-        viewController.present(applyDetail.viewControllable, isTabBarShow: false)
-        
-        child = applyDetail
-    }
-    
-    func attachWriteApplyOverall() {
+    func attachWriteApplyOverallRIB() {
         let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
         
         self.writeApplyOverall = writeApplyOverall
-        detachChildRIB(child)
         viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
         attachChild(writeApplyOverall)
-        child = writeApplyOverall
+    }
+    
+    func attachApplyDetailRIB(apply: Apply) {
+        let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
+        
+        self.applyDetail = applyDetail
+        attachChild(applyDetail)
+        viewController.present(applyDetail.viewControllable, isTabBarShow: false)
     }
     
     func detachApplyDetailRIB() {
-        if let child = child {
-            detachChild(child)
+        if let applyDetail = applyDetail {
+            detachChild(applyDetail)
         }
         viewController.dismiss(nil, isTabBarShow: true)
-        child = self
-    }
-    
-    func detachThisChildRIB() {
-        detachChildRIB(child)
-//        viewController.dismissView(animation: true)
-        
-        child = nil
     }
     
     func detachWriteApplyOverallRIB() {
         if let writeApplyOverall = writeApplyOverall {
             detachChild(writeApplyOverall)
         }
-        
-        viewController.dismiss(viewControllable, isTabBarShow: true)
+        viewController.dismiss(nil, isTabBarShow: true)
     }
 }
