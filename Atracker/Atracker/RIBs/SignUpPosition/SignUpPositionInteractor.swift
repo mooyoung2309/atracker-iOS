@@ -17,12 +17,9 @@ protocol SignUpPositionPresentable: Presentable {
     var listener: SignUpPositionPresentableListener? { get set }
     var action: SignUpPositionPresentableAction? { get }
     var handler: SignUpPositionPresentableHandler? { get set }
-//    func switchCareerTableView()
-//    func updateCareerLabel(title: String)
 }
 
 protocol SignUpPositionListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func didSignUp()
 }
 
@@ -114,38 +111,6 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
             }
         }
     }
-//
-//    func inputPositionTextField(text: String) {
-//        self.jobPosition = text
-//    }
-//
-//    func inputCareerTextField(text: String) {
-//        self.jobType = text
-//    }
-//
-//    func tapCareerTableView(career: String) {
-//        self.jobType = career
-//        presenter.updateCareerLabel(title: career)
-//        presenter.switchCareerTableView()
-//    }
-//
-//    func tapNextButton() {
-//        guard let jobPosition = jobPosition else { return }
-//        guard let jobType = jobType else { return }
-//        
-//        if jobPosition.isEmpty || jobType.isEmpty { return }
-//        
-//        authService.testSignUp(email: "TEST\(Int.random(in: 0...100))", gender: Gender.male.code, jobPosition: jobPosition, nickName: nickname, sso: SSO.apple.code) { [weak self] result in
-//            guard let this = self else { return }
-//            switch result {
-//            case .success(_):
-//                this.router?.attachSignUpSuccessRIB(nickName: this.nickname, jobPosition: jobPosition, jobType: jobType)
-//                Log("[D] 테스트 회원가입 성공")
-//            case .failure(_):
-//                Log("[D] 테스트 회원가입 실패")
-//            }
-//        }
-//    }
     
     func didSignUp() {
         listener?.didSignUp()

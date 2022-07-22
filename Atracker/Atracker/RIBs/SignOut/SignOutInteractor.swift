@@ -81,7 +81,7 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
         listener?.didSignUp()
     }
     
-    func didBackFromSignUpAgreement() {
+    func didTapBackButtonFromSignUpAgreementRIB() {
         router?.detachSignUpAgreementRIB()
     }
 }

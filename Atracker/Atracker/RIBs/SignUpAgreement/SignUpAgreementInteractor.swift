@@ -11,6 +11,7 @@ import RxCocoa
 
 protocol SignUpAgreementRouting: ViewableRouting {
     func attachSignUpNicknameRIB(idToken: String, sso: SSO)
+    func detachSignUpNicknameRIB()
 }
 
 protocol SignUpAgreementPresentable: Presentable {
@@ -20,12 +21,11 @@ protocol SignUpAgreementPresentable: Presentable {
 }
 
 protocol SignUpAgreementListener: AnyObject {
-    func didBackFromSignUpAgreement()
+    func didTapBackButtonFromSignUpAgreementRIB()
     func didSignUp()
 }
 
 final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPresentable>, SignUpAgreementInteractable, SignUpAgreementPresentableListener {
-    
     weak var router: SignUpAgreementRouting?
     weak var listener: SignUpAgreementListener?
     
@@ -63,23 +63,28 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
         // 바인딩 액션
         action.tapBackButton
             .bind { [weak self] in
-                self?.listener?.didBackFromSignUpAgreement()
+                self?.listener?.didTapBackButtonFromSignUpAgreementRIB()
             }
             .disposeOnDeactivate(interactor: self)
+        
         action.tapNextButton
             .bind { [weak self] in
                 self?.didTapNextButton()
             }
             .disposeOnDeactivate(interactor: self)
+        
         action.selectAllAgreement
             .bind(to: isSelectedAllAgreementRelay)
             .disposeOnDeactivate(interactor: self)
+        
         action.selectServiceAgreement
             .bind(to: isSelectedServiceAgreementRelay)
             .disposeOnDeactivate(interactor: self)
+        
         action.selectPersonalAgreement
             .bind(to: isSelectedPersonalAgreementRelay)
             .disposeOnDeactivate(interactor: self)
+        
         action.selectMarketingAgreement
             .bind(to: isSelectedMarketingAgreementRelay)
             .disposeOnDeactivate(interactor: self)
@@ -101,8 +106,13 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
         }
     }
     
+    // MARK: 자식 RIB으로 부터
     func didSignUp() {
         listener?.didSignUp()
+    }
+    
+    func didTapBackButtonFromSignUpNicknameRIB() {
+        router?.detachSignUpNicknameRIB()
     }
 }
 

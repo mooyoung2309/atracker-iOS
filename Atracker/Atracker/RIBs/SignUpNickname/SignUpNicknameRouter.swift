@@ -36,10 +36,13 @@ final class SignUpNicknameRouter: ViewableRouter<SignUpNicknameInteractable, Sig
         
         self.signUpPosition = signUpPosition
         attachChild(signUpPosition)
-        viewController.present(signUpPosition.viewControllable, isTabBarShow: true)
+        viewController.present(signUpPosition.viewControllable, isTabBarShow: false)
     }
     
-    func detachThisRIB() {
-        detachChild(self)
+    func detachSignUpPositionRIB() {
+        if let signUpPosition = signUpPosition {
+            detachChild(signUpPosition)
+        }
+        viewController.dismiss(nil, isTabBarShow: false)
     }
 }

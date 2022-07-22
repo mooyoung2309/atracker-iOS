@@ -10,9 +10,7 @@ import RxSwift
 import UIKit
 
 protocol SignUpNicknamePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func tapBackButton()
     func tapNextButton()
     func inputNicknameTextField(text: String)
 }
@@ -48,6 +46,12 @@ final class SignUpNicknameViewController: BaseNavigationViewController, SignUpNi
     
     override func setupBind() {
         super.setupBind()
+        
+        navigaionBar.backButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.tapBackButton()
+            }
+            .disposed(by: disposeBag)
         
         selfView.bottomNextButtonView.button.rx.tap
             .bind { [weak self] _ in

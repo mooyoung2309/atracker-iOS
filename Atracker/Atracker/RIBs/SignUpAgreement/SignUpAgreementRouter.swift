@@ -36,4 +36,11 @@ final class SignUpAgreementRouter: ViewableRouter<SignUpAgreementInteractable, S
         attachChild(signUpNickname)
         viewController.present(signUpNickname.viewControllable, isTabBarShow: false)
     }
+    
+    func detachSignUpNicknameRIB() {
+        if let signUpNickname = signUpNickname {
+            detachChild(signUpNickname)
+        }
+        viewController.dismiss(nil, isTabBarShow: false)
+    }
 }

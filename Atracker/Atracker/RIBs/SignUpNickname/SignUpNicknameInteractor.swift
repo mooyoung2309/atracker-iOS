@@ -9,17 +9,16 @@ import RIBs
 import RxSwift
 
 protocol SignUpNicknameRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
     func attachSignUpPositionRIB(idToken: String, sso: SSO, nickname: String)
+    func detachSignUpPositionRIB()
 }
 
 protocol SignUpNicknamePresentable: Presentable {
     var listener: SignUpNicknamePresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol SignUpNicknameListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func didTapBackButtonFromSignUpNicknameRIB()
     func didSignUp()
 }
 
@@ -48,7 +47,10 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+    }
+    
+    func tapBackButton() {
+        listener?.didTapBackButtonFromSignUpNicknameRIB()
     }
     
     func tapNextButton() {
