@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol EditApplyOverallRouting: ViewableRouting {
-    func detachThisRIB()
+    
 }
 
 protocol EditApplyOverallPresentable: Presentable {
@@ -20,6 +20,7 @@ protocol EditApplyOverallPresentable: Presentable {
 }
 
 protocol EditApplyOverallListener: AnyObject {
+    func didTapBackButtonFromEditApplyOverallRIB()
     func didEditApplyOverall()
 }
 
@@ -73,7 +74,7 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
         
         action.tapBackButton
             .bind { [weak self] in
-                self?.router?.detachThisRIB()
+                self?.listener?.didTapBackButtonFromEditApplyOverallRIB()
             }
             .disposeOnDeactivate(interactor: self)
         

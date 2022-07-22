@@ -23,10 +23,4 @@ final class EditApplyOverallRouter: ViewableRouter<EditApplyOverallInteractable,
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
-    
-    func detachThisRIB() {
-        detachChild(self)
-        
-        viewController.dismiss(nil, isTabBarShow: false)
-    }
 }

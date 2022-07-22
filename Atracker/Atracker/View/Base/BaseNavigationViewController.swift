@@ -48,10 +48,8 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     var isAlertNext: ((Bool) -> Void)?
     
     func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
-        viewController.uiviewController.hidesBottomBarWhenPushed = !isTabBarShow
         navigationController?.pushViewController(viewController.uiviewController, animated: true)
-        
-        tabBarController?.tabBar.isHidden = !isTabBarShow
+        tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
     }
     
     func dismiss(_ rootViewController: ViewControllable? = nil, isTabBarShow: Bool) {
@@ -60,8 +58,7 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         } else {
             navigationController?.popViewController(animated: true)
         }
-        
-        tabBarController?.tabBar.isHidden = !isTabBarShow
+        tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
     }
     
     func showAlertView(style: AlertStyle) {

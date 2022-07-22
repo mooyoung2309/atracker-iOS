@@ -13,6 +13,7 @@ protocol ApplyDetailRouting: ViewableRouting {
     func attachEditApplyOverallRIB(apply: Apply)
     func attachEditApplyStageProgressRIB(apply: Apply)
     func detachEditApplyOverallRIB()
+    func detachEditApplyStageProgressRIB()
 }
 
 protocol ApplyDetailPresentable: Presentable {
@@ -144,6 +145,10 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     func didEditApplyOverall() {
         router?.detachEditApplyOverallRIB()
         fetchApply(appyID: thisApply.applyID)
+    }
+    
+    func didTapBackButtonFromEditApplyOverallRIB() {
+        router?.detachEditApplyStageProgressRIB()
     }
 }
 

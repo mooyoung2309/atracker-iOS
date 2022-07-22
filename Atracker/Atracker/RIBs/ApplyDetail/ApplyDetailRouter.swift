@@ -21,7 +21,7 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
     private let editApplyOverallBuilder: EditApplyOverallBuildable
     private let editApplyStageProgressBuilder: EditApplyStageProgressBuildable
     
-    private var child: ViewableRouting?
+//    private var child: ViewableRouting?
     private var editApplyOverall: ViewableRouting?
     private var editApplyStageProgress: ViewableRouting?
     
@@ -40,29 +40,28 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         let editApplyOverall = editApplyOverallBuilder.build(withListener: interactor, apply: apply)
         self.editApplyOverall = editApplyOverall
         
-        detachChildRIB(child)
         attachChild(editApplyOverall)
-        
         viewController.present(editApplyOverall.viewControllable, isTabBarShow: false)
-        
-        child = editApplyOverall
     }
     
     func attachEditApplyStageProgressRIB(apply: Apply) {
         let editApplyStageProgress = editApplyStageProgressBuilder.build(withListener: interactor, apply: apply)
         self.editApplyStageProgress = editApplyStageProgress
         
-        detachChildRIB(child)
         attachChild(editApplyStageProgress)
-        
         viewController.present(editApplyStageProgress.viewControllable, isTabBarShow: false)
-        
-        child = editApplyStageProgress
     }
     
     func detachEditApplyOverallRIB() {
-        if let child = child {
-            detachChild(child)
+        if let editApplyOverall = editApplyOverall {
+            detachChild(editApplyOverall)
+        }
+        viewController.dismiss(nil, isTabBarShow: false)
+    }
+    
+    func detachEditApplyStageProgressRIB() {
+        if let editApplyStageProgress = editApplyStageProgress {
+            detachChild(editApplyStageProgress)
         }
         viewController.dismiss(nil, isTabBarShow: false)
     }
