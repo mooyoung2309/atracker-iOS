@@ -13,6 +13,7 @@ protocol TabBarRouting: ViewableRouting {
     func attachBlogRIB()
     func attachApplyRIB()
     func attachMyPageRIB()
+    func attachScheduleRIB()
     func detachApplyRIB()
 }
 
@@ -79,6 +80,8 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
             router?.attachApplyRIB()
         case 2:
             router?.attachMyPageRIB()
+//        case 3:
+//            router?.attachScheduleRIB()
         default:
             return
         }

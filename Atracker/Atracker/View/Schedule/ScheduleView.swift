@@ -77,6 +77,8 @@ class ScheduleView: BaseView {
         
         bottomTableView.backgroundColor = .clear
         bottomTableView.register(ScheduleTVC.self, forCellReuseIdentifier: ScheduleTVC.id)
+//        bottomTableView.rowHeight = UITableView.automaticDimension
+//        bottomTableView.estimatedRowHeight = 44
     }
     
     override func setupHierarchy() {

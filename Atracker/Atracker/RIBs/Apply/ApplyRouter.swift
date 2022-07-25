@@ -21,6 +21,7 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     private let writeApplyOverallBuilder: WriteApplyOverallBuildable
     private let applyDetailBuilder: ApplyDetailBuildable
     
+    private var child: ViewableRouting?
     private var writeApplyOverall: ViewableRouting?
     private var applyDetail: ViewableRouting?
     
@@ -34,32 +35,42 @@ final class ApplyRouter: ViewableRouter<ApplyInteractable, ApplyViewControllable
     }
     
     func attachWriteApplyOverallRIB() {
+        if let child = child {
+            detachChild(child)
+        }
         let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
         
         self.writeApplyOverall = writeApplyOverall
         attachChild(writeApplyOverall)
         viewController.present(writeApplyOverall.viewControllable, isTabBarShow: false)
+        
+        child = writeApplyOverall
     }
     
     func attachApplyDetailRIB(apply: Apply) {
+        if let child = child {
+            detachChild(child)
+        }
         let applyDetail = applyDetailBuilder.build(withListener: interactor, apply: apply)
         
         self.applyDetail = applyDetail
         attachChild(applyDetail)
         viewController.present(applyDetail.viewControllable, isTabBarShow: false)
+        
+        child = applyDetail
     }
     
     func detachApplyDetailRIB() {
-        if let applyDetail = applyDetail {
-            detachChild(applyDetail)
+        if let child = child {
+            detachChild(child)
         }
-        viewController.dismiss(nil, isTabBarShow: true)
+        viewController.dismiss(viewControllable, isTabBarShow: true)
     }
     
     func detachWriteApplyOverallRIB() {
-        if let writeApplyOverall = writeApplyOverall {
-            detachChild(writeApplyOverall)
+        if let child = child {
+            detachChild(child)
         }
-        viewController.dismiss(nil, isTabBarShow: true)
+        viewController.dismiss(viewControllable, isTabBarShow: true)
     }
 }

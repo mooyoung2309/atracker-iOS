@@ -170,8 +170,8 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     
     private func emitProgressStatusRelay(progressStatusCode: String) {
         switch progressStatusCode {
-        case ProgressStatus.notStarted.code:
-            progressStatusRelay.accept(ProgressStatus.notStarted)
+        case ProgressStatus.inProgress.code:
+            progressStatusRelay.accept(ProgressStatus.inProgress)
             return
         case ProgressStatus.fail.code:
             progressStatusRelay.accept(ProgressStatus.fail)

@@ -15,7 +15,7 @@ class MyPageView: BaseView {
     let positionLabel = UILabel()
     let careerTagLabel = UILabel()
     let careerLabel = UILabel()
-    let careerDivider = BarChatView(.horizontal, cornerRadius: 0)
+    let careerDivider = BarChatView(axis: .horizontal, cornerRadius: 0, colors: UIColor.passColors)
     let accountTagLabel = UILabel()
     let accountDivider = Divider(.gray6)
     let signOutButton = UIButton(type: .system)
@@ -24,7 +24,7 @@ class MyPageView: BaseView {
     let withDrawDivider = Divider(.backgroundLightGray)
     let helpTagLabel = UILabel()
     let helpDivider = Divider(.gray6)
-    let connectButton = UIButton(type: .system)
+    let connectLabel = UILabel()
     let connectDivider = Divider(.backgroundLightGray)
     
     var nickname = ""
@@ -66,9 +66,9 @@ class MyPageView: BaseView {
         helpTagLabel.font = .systemFont(ofSize: 16, weight: .light)
         helpTagLabel.textColor = .white
         
-        connectButton.setTitle("연락하기           brianrudder@naver.com", for: .normal)
-        connectButton.setTitleColor(.gray3, for: .normal)
-        connectButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        connectLabel.text = "연락하기           brianrudder@naver.com"
+        connectLabel.textColor = .gray3
+        connectLabel.font = .systemFont(ofSize: 14, weight: .medium)
     }
     
     override func setupHierarchy() {
@@ -88,7 +88,7 @@ class MyPageView: BaseView {
         addSubview(withDrawDivider)
         addSubview(helpTagLabel)
         addSubview(helpDivider)
-        addSubview(connectButton)
+        addSubview(connectLabel)
         addSubview(connectDivider)
     }
     
@@ -167,13 +167,13 @@ class MyPageView: BaseView {
             $0.leading.trailing.equalToSuperview()
         }
         
-        connectButton.snp.makeConstraints {
+        connectLabel.snp.makeConstraints {
             $0.top.equalTo(helpDivider.snp.bottom).inset(-13)
             $0.leading.equalToSuperview().inset(28)
         }
         
         connectDivider.snp.makeConstraints {
-            $0.top.equalTo(connectButton.snp.bottom).inset(-13)
+            $0.top.equalTo(connectLabel.snp.bottom).inset(-13)
             $0.leading.trailing.equalToSuperview()
         }
     }

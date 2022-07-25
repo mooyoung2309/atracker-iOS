@@ -7,13 +7,13 @@
 
 import RIBs
 
-protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, MyPageListener {
+protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, MyPageListener, ScheduleListener {
     var router: TabBarRouting? { get set }
     var listener: TabBarListener? { get set }
 }
 
 protocol TabBarViewControllable: NavigationViewControllable {
-    func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController)
+    func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController, scheduleViewController: UIViewController)
 }
 
 final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControllable>, TabBarRouting {
@@ -21,27 +21,27 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
     private let myPageBuilder: MyPageBuildable
+    private let scheduleBuilder: ScheduleBuildable
     
     private var child: Routing?
     private var blog: ViewableRouting
     private var apply: ViewableRouting
     private var myPage: ViewableRouting
+    private var schedule: ViewableRouting
     
     private var viewControllers: [UIViewController] = []
     
-    init(interactor: TabBarInteractable,
-         viewController: TabBarViewControllable,
-         blogBuilder: BlogBuildable,
-         applyBuilder: ApplyBuildable,
-         myPageBuilder: MyPageBuildable) {
+    init(interactor: TabBarInteractable, viewController: TabBarViewControllable, blogBuilder: BlogBuildable, applyBuilder: ApplyBuildable, myPageBuilder: MyPageBuildable, scheduleBuilder: ScheduleBuildable) {
         
         self.blogBuilder = blogBuilder
         self.applyBuilder = applyBuilder
         self.myPageBuilder = myPageBuilder
+        self.scheduleBuilder = scheduleBuilder
         
         blog = blogBuilder.build(withListener: interactor)
         apply = applyBuilder.build(withListener: interactor)
         myPage = myPageBuilder.build(withListener: interactor)
+        schedule = scheduleBuilder.build(withListener: interactor)
         
         self.viewControllers.append(contentsOf: [])
         
@@ -49,14 +49,13 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         
         interactor.router = self
         
-        viewController.setupTabBar(blogViewController: blog.viewControllable.uiviewController, applyViewController: apply.viewControllable.uiviewController, myPageViewController: myPage.viewControllable.uiviewController)
+        viewController.setupTabBar(blogViewController: blog.viewControllable.uiviewController, applyViewController: apply.viewControllable.uiviewController, myPageViewController: myPage.viewControllable.uiviewController, scheduleViewController: schedule.viewControllable.uiviewController)
     }
     
     func attachBlogRIB() {
         if let child = child {
             detachChild(child)
         }
-        
         attachChild(blog)
         child = blog
     }
@@ -65,7 +64,6 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         if let child = child {
             detachChild(child)
         }
-        
         attachChild(apply)
         child = apply
     }
@@ -74,11 +72,17 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         if let child = child {
             detachChild(child)
         }
-        
         attachChild(myPage)
         child = myPage
     }
     
+    func attachScheduleRIB() {
+        if let child = child {
+            detachChild(child)
+        }
+        attachChild(schedule)
+        child = schedule
+    }
     
     func detachApplyRIB() {
         detachChildRIB(apply)

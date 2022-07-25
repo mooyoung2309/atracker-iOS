@@ -40,9 +40,10 @@ final class TabBarBuilder: Builder<TabBarDependency>, TabBarBuildable {
         let blogBuilder = BlogBuilder(dependency: component)
         let applyBuilder = ApplyBuilder(dependency: component)
         let myPageBuilder = MyPageBuilder(dependency: component)
+        let scheduleBuilder = ScheduleBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return TabBarRouter(interactor: interactor, viewController: viewController, blogBuilder: blogBuilder, applyBuilder: applyBuilder, myPageBuilder: myPageBuilder)
+        return TabBarRouter(interactor: interactor, viewController: viewController, blogBuilder: blogBuilder, applyBuilder: applyBuilder, myPageBuilder: myPageBuilder, scheduleBuilder: scheduleBuilder)
     }
 }

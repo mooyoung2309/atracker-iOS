@@ -10,6 +10,7 @@ target 'Atracker' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxGesture'
+  pod 'RxKeyboard'
   pod 'SnapKit'
   pod 'Then'
   pod 'Alamofire'

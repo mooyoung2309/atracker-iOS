@@ -163,6 +163,12 @@
 		7066046B286AAF6100A09427 /* ApplyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7066046A286AAF6100A09427 /* ApplyRepository.swift */; };
 		70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660470286AC21D00A09427 /* ApplyAnalysisView.swift */; };
 		70660473286AC9E300A09427 /* RootComponent+SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70660472286AC9E300A09427 /* RootComponent+SignIn.swift */; };
+		706B52A3288C2331000BA4D1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52A2288C2331000BA4D1 /* Config.swift */; };
+		706B52AE288C501E000BA4D1 /* SignUpAgreementDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52AA288C501E000BA4D1 /* SignUpAgreementDetailRouter.swift */; };
+		706B52AF288C501E000BA4D1 /* SignUpAgreementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52AB288C501E000BA4D1 /* SignUpAgreementDetailViewController.swift */; };
+		706B52B0288C501E000BA4D1 /* SignUpAgreementDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52AC288C501E000BA4D1 /* SignUpAgreementDetailBuilder.swift */; };
+		706B52B1288C501E000BA4D1 /* SignUpAgreementDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52AD288C501E000BA4D1 /* SignUpAgreementDetailInteractor.swift */; };
+		706B52B3288C5321000BA4D1 /* SignUpAgreementComponent+SignUpAgreementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706B52B2288C5321000BA4D1 /* SignUpAgreementComponent+SignUpAgreementDetail.swift */; };
 		706CAFA4287D29740032C281 /* ApplyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CAFA3287D29740032C281 /* ApplyTVC.swift */; };
 		706CAFA8287D47EE0032C281 /* ProgressStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CAFA7287D47EE0032C281 /* ProgressStatus.swift */; };
 		707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */; };
@@ -213,13 +219,13 @@
 		70BDD358285F160D00E09821 /* WriteApplyOverallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */; };
 		70BDD35A285F237D00E09821 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD359285F237D00E09821 /* Divider.swift */; };
 		70BDD365285F6E4A00E09821 /* WriteApplyScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */; };
+		70C3511F288E70A0009A4E40 /* TabBarComponent+Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3511E288E70A0009A4E40 /* TabBarComponent+Schedule.swift */; };
 		70CAB8EE286EC7D9000B5A05 /* ApplyEditTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CAB8ED286EC7D9000B5A05 /* ApplyEditTVC.swift */; };
 		70CAB8F0286ECB5B000B5A05 /* QNAEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CAB8EF286ECB5B000B5A05 /* QNAEditView.swift */; };
 		70CB0691285EF70000BE89B7 /* WriteApplyOverallRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB068D285EF70000BE89B7 /* WriteApplyOverallRouter.swift */; };
 		70CB0692285EF70000BE89B7 /* WriteApplyOverallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB068E285EF70000BE89B7 /* WriteApplyOverallViewController.swift */; };
 		70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB068F285EF70000BE89B7 /* WriteApplyOverallBuilder.swift */; };
 		70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CB0690285EF70000BE89B7 /* WriteApplyOverallInteractor.swift */; };
-		70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */; };
 		70CF5B8928478B220098C742 /* BaseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B8828478B220098C742 /* BaseTVC.swift */; };
 		70CF5B9C2847AEC20098C742 /* ApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CF5B9B2847AEC20098C742 /* ApplyView.swift */; };
 		70D587C02885365B00872282 /* EditTypeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D587BF2885365B00872282 /* EditTypeItem.swift */; };
@@ -234,7 +240,6 @@
 		70D8374D286BD80B0085DE43 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8374C286BD80B0085DE43 /* MyPageView.swift */; };
 		70D8374F286BDAA70085DE43 /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8374E286BDAA70085DE43 /* CGFloat+Ext.swift */; };
 		70D8375D286C1C5D0085DE43 /* RootComponent+SignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */; };
-		70D83761286C4CA90085DE43 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83760286C4CA90085DE43 /* ProgressBarView.swift */; };
 		70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D83762286CB87D0085DE43 /* CompanyCreateResponse.swift */; };
 		70EBE7B52881A6BC00D605CE /* StageProgressTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7B42881A6BC00D605CE /* StageProgressTVC.swift */; };
 		70EBE7B72881A8F900D605CE /* OVERALLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7B62881A8F900D605CE /* OVERALLContentView.swift */; };
@@ -242,10 +247,6 @@
 		70EBE7BB2881B03100D605CE /* QNAContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBE7BA2881B03100D605CE /* QNAContentView.swift */; };
 		70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */; };
 		70FBE5122852E58B00455A4B /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5112852E58B00455A4B /* Size.swift */; };
-		70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */; };
-		70FBE51A2852EC5D00455A4B /* ApplyEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5162852EC5D00455A4B /* ApplyEditViewController.swift */; };
-		70FBE51B2852EC5D00455A4B /* ApplyEditBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5172852EC5D00455A4B /* ApplyEditBuilder.swift */; };
-		70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE5182852EC5D00455A4B /* ApplyEditInteractor.swift */; };
 		70FBE5202852FB8100455A4B /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE51F2852FB8100455A4B /* BaseNavigationViewController.swift */; };
 		70FBE52228530FFB00455A4B /* ApplyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52128530FFB00455A4B /* ApplyResponse.swift */; };
 		70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE523285312A300455A4B /* ApplyServiceISOLDCODE.swift */; };
@@ -432,6 +433,12 @@
 		7066046A286AAF6100A09427 /* ApplyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRepository.swift; sourceTree = "<group>"; };
 		70660470286AC21D00A09427 /* ApplyAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAnalysisView.swift; sourceTree = "<group>"; };
 		70660472286AC9E300A09427 /* RootComponent+SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignIn.swift"; sourceTree = "<group>"; };
+		706B52A2288C2331000BA4D1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		706B52AA288C501E000BA4D1 /* SignUpAgreementDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementDetailRouter.swift; sourceTree = "<group>"; };
+		706B52AB288C501E000BA4D1 /* SignUpAgreementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementDetailViewController.swift; sourceTree = "<group>"; };
+		706B52AC288C501E000BA4D1 /* SignUpAgreementDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementDetailBuilder.swift; sourceTree = "<group>"; };
+		706B52AD288C501E000BA4D1 /* SignUpAgreementDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementDetailInteractor.swift; sourceTree = "<group>"; };
+		706B52B2288C5321000BA4D1 /* SignUpAgreementComponent+SignUpAgreementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpAgreementComponent+SignUpAgreementDetail.swift"; sourceTree = "<group>"; };
 		706CAFA3287D29740032C281 /* ApplyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTVC.swift; sourceTree = "<group>"; };
 		706CAFA7287D47EE0032C281 /* ProgressStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStatus.swift; sourceTree = "<group>"; };
 		707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyContentTypeCVC.swift; sourceTree = "<group>"; };
@@ -486,13 +493,13 @@
 		70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallView.swift; sourceTree = "<group>"; };
 		70BDD359285F237D00E09821 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		70BDD364285F6E4A00E09821 /* WriteApplyScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyScheduleView.swift; sourceTree = "<group>"; };
+		70C3511E288E70A0009A4E40 /* TabBarComponent+Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarComponent+Schedule.swift"; sourceTree = "<group>"; };
 		70CAB8ED286EC7D9000B5A05 /* ApplyEditTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditTVC.swift; sourceTree = "<group>"; };
 		70CAB8EF286ECB5B000B5A05 /* QNAEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QNAEditView.swift; sourceTree = "<group>"; };
 		70CB068D285EF70000BE89B7 /* WriteApplyOverallRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallRouter.swift; sourceTree = "<group>"; };
 		70CB068E285EF70000BE89B7 /* WriteApplyOverallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallViewController.swift; sourceTree = "<group>"; };
 		70CB068F285EF70000BE89B7 /* WriteApplyOverallBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallBuilder.swift; sourceTree = "<group>"; };
 		70CB0690285EF70000BE89B7 /* WriteApplyOverallInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteApplyOverallInteractor.swift; sourceTree = "<group>"; };
-		70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProgressTVC.swift; sourceTree = "<group>"; };
 		70CF5B8828478B220098C742 /* BaseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTVC.swift; sourceTree = "<group>"; };
 		70CF5B9B2847AEC20098C742 /* ApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyView.swift; sourceTree = "<group>"; };
 		70D587BF2885365B00872282 /* EditTypeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTypeItem.swift; sourceTree = "<group>"; };
@@ -507,7 +514,6 @@
 		70D8374C286BD80B0085DE43 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		70D8374E286BDAA70085DE43 /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
 		70D8375C286C1C5D0085DE43 /* RootComponent+SignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+SignOut.swift"; sourceTree = "<group>"; };
-		70D83760286C4CA90085DE43 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		70D83762286CB87D0085DE43 /* CompanyCreateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCreateResponse.swift; sourceTree = "<group>"; };
 		70EBE7B42881A6BC00D605CE /* StageProgressTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressTVC.swift; sourceTree = "<group>"; };
 		70EBE7B62881A8F900D605CE /* OVERALLContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OVERALLContentView.swift; sourceTree = "<group>"; };
@@ -515,10 +521,6 @@
 		70EBE7BA2881B03100D605CE /* QNAContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QNAContentView.swift; sourceTree = "<group>"; };
 		70EE86CC283DECE900DBC592 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		70FBE5112852E58B00455A4B /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditRouter.swift; sourceTree = "<group>"; };
-		70FBE5162852EC5D00455A4B /* ApplyEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditViewController.swift; sourceTree = "<group>"; };
-		70FBE5172852EC5D00455A4B /* ApplyEditBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditBuilder.swift; sourceTree = "<group>"; };
-		70FBE5182852EC5D00455A4B /* ApplyEditInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyEditInteractor.swift; sourceTree = "<group>"; };
 		70FBE51F2852FB8100455A4B /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
 		70FBE52128530FFB00455A4B /* ApplyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyResponse.swift; sourceTree = "<group>"; };
 		70FBE523285312A300455A4B /* ApplyServiceISOLDCODE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyServiceISOLDCODE.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				701312792886E90B00A5C588 /* SignUpAgreementInteractor.swift */,
 				701312772886E90B00A5C588 /* SignUpAgreementViewController.swift */,
 				7016B9FB28891E9C009E9E59 /* SignUpAgreementComponent+SignUpNickname.swift */,
+				706B52B2288C5321000BA4D1 /* SignUpAgreementComponent+SignUpAgreementDetail.swift */,
 			);
 			path = SignUpAgreement;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				701CE2272849D0E7009230CE /* Root */,
 				70576E312865B53B000406DF /* SignOut */,
 				7013126A2886E7DF00A5C588 /* SignUpAgreement */,
+				706B52A9288C4FFE000BA4D1 /* SignUpAgreementDetail */,
 				70576E192865B257000406DF /* SignUpNickname */,
 				70576E1A2865B281000406DF /* SignUpPosition */,
 				700DBEC52868D7FD00883A4F /* SignUpSuccess */,
@@ -747,7 +751,6 @@
 				70CB068C285EF6C800BE89B7 /* WriteApplyOverall */,
 				7040963A286006FC003EBCE4 /* WriteApplySchedule */,
 				70FBE52528537A6A00455A4B /* ApplyDetail */,
-				70FBE5142852EC4600455A4B /* ApplyEdit */,
 				70091B952873D44F005D2627 /* EditApplyOverall */,
 				70091BA32873DA60005D2627 /* EditApplyStageProgress */,
 				7040964A28604085003EBCE4 /* Schedule */,
@@ -921,7 +924,6 @@
 			children = (
 				707CD24D283C8C03000E7EE7 /* ApplyContentTypeCVC.swift */,
 				707CD255283CADB2000E7EE7 /* ApplyContentTVC.swift */,
-				70CF5B8628478AE20098C742 /* ApplyProgressTVC.swift */,
 				706CAFA3287D29740032C281 /* ApplyTVC.swift */,
 			);
 			path = Cell;
@@ -1090,6 +1092,25 @@
 			path = Apply;
 			sourceTree = "<group>";
 		};
+		706B52A1288C2325000BA4D1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				706B52A2288C2331000BA4D1 /* Config.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		706B52A9288C4FFE000BA4D1 /* SignUpAgreementDetail */ = {
+			isa = PBXGroup;
+			children = (
+				706B52AC288C501E000BA4D1 /* SignUpAgreementDetailBuilder.swift */,
+				706B52AA288C501E000BA4D1 /* SignUpAgreementDetailRouter.swift */,
+				706B52AD288C501E000BA4D1 /* SignUpAgreementDetailInteractor.swift */,
+				706B52AB288C501E000BA4D1 /* SignUpAgreementDetailViewController.swift */,
+			);
+			path = SignUpAgreementDetail;
+			sourceTree = "<group>";
+		};
 		7093407F287E66F400DAFB40 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1228,6 +1249,7 @@
 		70A2F6BB2834C56900E6B95B /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				706B52A1288C2325000BA4D1 /* Config */,
 				70095FE9287E8DC8006933BC /* Func */,
 				70095FEA287E8DD2006933BC /* Const */,
 				705CCD00285C5B4500E79540 /* Enum */,
@@ -1268,6 +1290,7 @@
 				70A88E7A2851B93D0027D673 /* TabBarComponent+Blog.swift */,
 				70A88E7C2851B94A0027D673 /* TabBarComponent+Apply.swift */,
 				70B91DE3288552F800BDB7B9 /* TabBarComponent+MyPage.swift */,
+				70C3511E288E70A0009A4E40 /* TabBarComponent+Schedule.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -1364,20 +1387,8 @@
 				70970022283D363B000F4B89 /* QAWriteView.swift */,
 				70970024283D365E000F4B89 /* ReviewWriteView.swift */,
 				7005BD182835548C008E380A /* ApplicationReviewTableViewCell.swift */,
-				70D83760286C4CA90085DE43 /* ProgressBarView.swift */,
 			);
 			path = Apply;
-			sourceTree = "<group>";
-		};
-		70FBE5142852EC4600455A4B /* ApplyEdit */ = {
-			isa = PBXGroup;
-			children = (
-				70FBE5172852EC5D00455A4B /* ApplyEditBuilder.swift */,
-				70FBE5152852EC5D00455A4B /* ApplyEditRouter.swift */,
-				70FBE5182852EC5D00455A4B /* ApplyEditInteractor.swift */,
-				70FBE5162852EC5D00455A4B /* ApplyEditViewController.swift */,
-			);
-			path = ApplyEdit;
 			sourceTree = "<group>";
 		};
 		70FBE52528537A6A00455A4B /* ApplyDetail */ = {
@@ -1669,6 +1680,7 @@
 			files = (
 				7093407E287E66BE00DAFB40 /* EditQNAContentTVC.swift in Sources */,
 				70443B2E285899A3009EE223 /* RoundButton.swift in Sources */,
+				706B52B1288C501E000BA4D1 /* SignUpAgreementDetailInteractor.swift in Sources */,
 				70322DF12854E2C800EA0EF7 /* ApplyDetailView.swift in Sources */,
 				70A88E63285193910027D673 /* LoggedInBuilder.swift in Sources */,
 				700DBECC2868D82D00883A4F /* SignUpSuccessBuilder.swift in Sources */,
@@ -1700,14 +1712,12 @@
 				7013127C2886E90B00A5C588 /* SignUpAgreementBuilder.swift in Sources */,
 				701CE1B3288089D100D6E6CC /* StageProgressService.swift in Sources */,
 				7027D3C2286377C100F9C913 /* MyAuthenticationCredential.swift in Sources */,
-				70FBE51A2852EC5D00455A4B /* ApplyEditViewController.swift in Sources */,
 				7027D3BD28636FE200F9C913 /* UserDefaultKey.swift in Sources */,
 				702D86E72875FA65009682A4 /* StageCreateResponse.swift in Sources */,
 				70576DFB2864EBB4000406DF /* Period.swift in Sources */,
 				703F4A3A28521B8F00C8BEC0 /* BaseTabViewController.swift in Sources */,
 				701CE2222849C197009230CE /* ApplyInteractor.swift in Sources */,
 				70CB0693285EF70000BE89B7 /* WriteApplyOverallBuilder.swift in Sources */,
-				70FBE51B2852EC5D00455A4B /* ApplyEditBuilder.swift in Sources */,
 				7092C89F2858C8A900C57AD1 /* ImageName.swift in Sources */,
 				700DBEB828684DF200883A4F /* ApplyComponent+WriteApplyOverall.swift in Sources */,
 				701CE2212849C197009230CE /* ApplyBuilder.swift in Sources */,
@@ -1755,17 +1765,20 @@
 				7046E3C6283B3F590048C068 /* SummaryBoxView.swift in Sources */,
 				70223C5828437354009B7F0A /* ApplyISOLDCODE.swift in Sources */,
 				70091BA82873DA76005D2627 /* EditApplyStageProgressRouter.swift in Sources */,
+				706B52AE288C501E000BA4D1 /* SignUpAgreementDetailRouter.swift in Sources */,
 				70D8374F286BDAA70085DE43 /* CGFloat+Ext.swift in Sources */,
 				70FBE5122852E58B00455A4B /* Size.swift in Sources */,
 				704096522860409A003EBCE4 /* ScheduleInteractor.swift in Sources */,
 				70223C5628434F89009B7F0A /* BaseViewController.swift in Sources */,
 				70576E1F2865B2A1000406DF /* SignUpNicknameRouter.swift in Sources */,
 				70443B29285877B0009EE223 /* BaseCVC.swift in Sources */,
+				706B52A3288C2331000BA4D1 /* Config.swift in Sources */,
 				70091BA22873D99B005D2627 /* ApplyDetailComponent+EditApplyOverall.swift in Sources */,
 				70091BA02873D555005D2627 /* EditApplyOverallView.swift in Sources */,
 				7016B9FC28891E9C009E9E59 /* SignUpAgreementComponent+SignUpNickname.swift in Sources */,
 				7088413C2835F6150024135D /* CalendarCVC.swift in Sources */,
 				70EBE7B72881A8F900D605CE /* OVERALLContentView.swift in Sources */,
+				706B52B0288C501E000BA4D1 /* SignUpAgreementDetailBuilder.swift in Sources */,
 				70095FF0287EB37A006933BC /* EditOVERALLContentTVC.swift in Sources */,
 				701CE2392849D3B9009230CE /* LoggedOutInteractor.swift in Sources */,
 				7027D39A2862B44800F9C913 /* Gender.swift in Sources */,
@@ -1782,7 +1795,6 @@
 				70FBE52228530FFB00455A4B /* ApplyResponse.swift in Sources */,
 				701CE21F2849C197009230CE /* ApplyRouter.swift in Sources */,
 				7040964428600A23003EBCE4 /* WriteApplyOverallComponent+WriteApplySchedule.swift in Sources */,
-				70CF5B8728478AE20098C742 /* ApplyProgressTVC.swift in Sources */,
 				70EBE7BB2881B03100D605CE /* QNAContentView.swift in Sources */,
 				700DBEBE2868C0BB00883A4F /* UnderLineTextFieldView.swift in Sources */,
 				70576DF72864E09A000406DF /* JobType.swift in Sources */,
@@ -1853,6 +1865,7 @@
 				70576E2A2865B2AA000406DF /* SignUpPositionInteractor.swift in Sources */,
 				70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */,
 				70D587C328854A7800872282 /* UserAPI.swift in Sources */,
+				70C3511F288E70A0009A4E40 /* TabBarComponent+Schedule.swift in Sources */,
 				707CD24E283C8C03000E7EE7 /* ApplyContentTypeCVC.swift in Sources */,
 				70FBE524285312A300455A4B /* ApplyServiceISOLDCODE.swift in Sources */,
 				7046E3C2283B36F20048C068 /* UIColor+Ext.swift in Sources */,
@@ -1861,6 +1874,7 @@
 				70A88E792851A6E60027D673 /* LoggedInComponent+TabBar.swift in Sources */,
 				70576E362865B54C000406DF /* SignOutRouter.swift in Sources */,
 				70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */,
+				706B52AF288C501E000BA4D1 /* SignUpAgreementDetailViewController.swift in Sources */,
 				706CAFA8287D47EE0032C281 /* ProgressStatus.swift in Sources */,
 				70A88E64285193910027D673 /* LoggedInInteractor.swift in Sources */,
 				70D8374D286BD80B0085DE43 /* MyPageView.swift in Sources */,
@@ -1884,15 +1898,14 @@
 				70CB0694285EF70000BE89B7 /* WriteApplyOverallInteractor.swift in Sources */,
 				70934084287E6A9B00DAFB40 /* StageProgressRepository.swift in Sources */,
 				70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */,
+				706B52B3288C5321000BA4D1 /* SignUpAgreementComponent+SignUpAgreementDetail.swift in Sources */,
 				70D587CA28854E3600872282 /* UserService.swift in Sources */,
 				70D83763286CB87D0085DE43 /* CompanyCreateResponse.swift in Sources */,
 				70660466286AAE8700A09427 /* ApplyService.swift in Sources */,
-				70FBE51C2852EC5D00455A4B /* ApplyEditInteractor.swift in Sources */,
 				7027D3AE2863255C00F9C913 /* Encodable+Ext.swift in Sources */,
 				70095FEC287E8E72006933BC /* TabBarItem.swift in Sources */,
 				70D587C528854A8100872282 /* UserRepository.swift in Sources */,
 				70A88E7B2851B93D0027D673 /* TabBarComponent+Blog.swift in Sources */,
-				70D83761286C4CA90085DE43 /* ProgressBarView.swift in Sources */,
 				7027D3942861921E00F9C913 /* WriteApplyOverallCVC.swift in Sources */,
 				70EE86CD283DECE900DBC592 /* UITextView+Ext.swift in Sources */,
 				704096512860409A003EBCE4 /* ScheduleBuilder.swift in Sources */,
@@ -1902,7 +1915,6 @@
 				704096422860071D003EBCE4 /* WriteApplyScheduleInteractor.swift in Sources */,
 				70A88E62285193910027D673 /* LoggedInRouter.swift in Sources */,
 				70091B932871EC39005D2627 /* EditTypeTVC.swift in Sources */,
-				70FBE5192852EC5D00455A4B /* ApplyEditRouter.swift in Sources */,
 				7013127D2886E90B00A5C588 /* SignUpAgreementInteractor.swift in Sources */,
 				70443B2728587761009EE223 /* StageTitleCVC.swift in Sources */,
 				70CAB8EE286EC7D9000B5A05 /* ApplyEditTVC.swift in Sources */,

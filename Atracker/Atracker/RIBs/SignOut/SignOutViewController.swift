@@ -99,7 +99,7 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     private func openAppleSignUp() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
+        request.requestedScopes = [.email]
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -126,22 +126,12 @@ extension SignOutViewController: ASAuthorizationControllerDelegate, ASAuthorizat
             let email = appleIDCredential.email
             
             if let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let authString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) {
-                print("authorizationCode: \(authorizationCode)")
-                print("identityToken: \(identityToken)")
-                print("authString: \(authString)")
-                print("tokenString: \(tokenString)")
+                
                 fetchIdTokenSubject.onNext((SSO.apple, tokenString))
             }
-            
-            print("useridentifier: \(userIdentifier)")
-            print("fullName: \(fullName)")
-            print("email: \(email)")
         case let passwordCredential as ASPasswordCredential:
             let username = passwordCredential.user
             let password = passwordCredential.password
-            
-            print("username: \(username)")
-            print("password: \(password)")
         default:
             break
         }

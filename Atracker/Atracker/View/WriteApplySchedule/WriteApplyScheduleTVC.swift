@@ -29,7 +29,7 @@ class WriteApplyScheduleTVC: BaseTVC {
             datePicker.date = date
         }
         titleLabel.text = title
-        circle.backgroundColor = .progressColors[order < UIColor.progressColors.count ? order : UIColor.progressColors.count - 1]
+        circle.backgroundColor = .passColors[order < UIColor.passColors.count ? order : UIColor.passColors.count - 1]
     }
     
     func showDatePicker() {

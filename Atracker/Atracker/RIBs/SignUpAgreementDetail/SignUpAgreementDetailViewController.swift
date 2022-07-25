@@ -1,8 +1,8 @@
 //
-//  BlogViewController.swift
+//  SignUpAgreementDetailViewController.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/09.
+//  Created by 송영모 on 2022/07/24.
 //
 
 import RIBs
@@ -10,26 +10,19 @@ import RxSwift
 import UIKit
 import WebKit
 
-protocol BlogPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+protocol SignUpAgreementDetailPresentableListener: AnyObject {
+    func tapBackButton()
 }
 
-final class BlogViewController: BaseNavigationViewController, BlogPresentable, BlogViewControllable {
+final class SignUpAgreementDetailViewController: BaseNavigationViewController, SignUpAgreementDetailPresentable, SignUpAgreementDetailViewControllable {
 
-    weak var listener: BlogPresentableListener?
+    weak var listener: SignUpAgreementDetailPresentableListener?
     
     let webView = WKWebView()
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
-        hideNavigationBar()
-    }
-    
-    override func setupProperty() {
-        super.setupProperty()
-        loadWebView(url: "https://www.youtube.com/watch?v=s716iQ0JCGg&ab_channel=JANNABI-Topic")
+        showNavigationBarBackButton()
     }
     
     override func setupHierarchy() {
@@ -42,8 +35,17 @@ final class BlogViewController: BaseNavigationViewController, BlogPresentable, B
         webView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Size.navigationBarHeight)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
+            $0.bottom.equalToSuperview()
         }
+    }
+    
+    override func setupBind() {
+        super.setupBind()
+        navigaionBar.backButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.tapBackButton()
+            }
+            .disposed(by: disposeBag)
     }
     
     func loadWebView(url: String) {

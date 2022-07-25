@@ -32,11 +32,11 @@ enum AgreementType {
         case .all:
             return nil
         case .service:
-            return ""
+            return "https://www.naver.com/"
         case .personal:
-            return ""
+            return "https://www.google.co.kr/"
         case .marketing:
-            return ""
+            return "https://www.leagueoflegends.com/ko-kr/"
         }
     }
     

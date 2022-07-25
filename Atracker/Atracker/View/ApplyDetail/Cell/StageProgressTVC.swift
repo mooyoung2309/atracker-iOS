@@ -20,9 +20,9 @@ class StageProgressTVC: BaseTVC {
         
         titleLabel.text = stageProgress.stageTitle
         
-        circle.backgroundColor = .progressColors[stageProgress.order < UIColor.progressColors.count ? stageProgress.order : UIColor.progressColors.count - 1]
+        circle.backgroundColor = .passColors[stageProgress.order < UIColor.passColors.count ? stageProgress.order : UIColor.passColors.count - 1]
         
-        divider.update(.progressColors[stageProgress.order < UIColor.progressColors.count ? stageProgress.order : UIColor.progressColors.count - 1])
+        divider.update(.passColors[stageProgress.order < UIColor.passColors.count ? stageProgress.order : UIColor.passColors.count - 1])
         
         for stageContent in stageProgress.stageContents {
             switch stageContent.contentType {

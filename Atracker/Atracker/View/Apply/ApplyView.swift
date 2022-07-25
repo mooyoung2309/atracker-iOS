@@ -30,7 +30,7 @@ class ApplyView: BaseView {
         
         analysisView.backgroundColor = .backgroundLightGray
         analysisView.layer.cornerRadius = 10
-        analysisView.update(data: [10, 20, 30, 40])
+        analysisView.update(data: [0, 0, 0, 0])
         
         applyTableView.register(ApplyTVC.self, forCellReuseIdentifier: ApplyTVC.id)
         applyTableView.isScrollEnabled = false

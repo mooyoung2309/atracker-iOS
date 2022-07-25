@@ -28,10 +28,6 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         setupProperty()
         setupHierarchy()
         setupLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupBind()
     }
     

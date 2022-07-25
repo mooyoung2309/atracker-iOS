@@ -11,7 +11,9 @@ import RxCocoa
 
 protocol SignUpAgreementRouting: ViewableRouting {
     func attachSignUpNicknameRIB(idToken: String, sso: SSO)
+    func attachSignUpAgreementDetailRIB(agreementType: AgreementType)
     func detachSignUpNicknameRIB()
+    func detachSignUpAgreementDetailRIB()
 }
 
 protocol SignUpAgreementPresentable: Presentable {
@@ -49,10 +51,12 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
     override func didBecomeActive() {
         super.didBecomeActive()
         self.setupBind()
+        Log("[D] 액티브 댐")
     }
 
     override func willResignActive() {
         super.willResignActive()
+        Log("[D] 끊어짐")
         presenter.handler = nil
     }
     
@@ -73,8 +77,30 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
             }
             .disposeOnDeactivate(interactor: self)
         
+        action.tapServiceAgreementButton
+            .bind { [weak self] in
+                Log("[D] 서비스 동의 버튼 클릭")
+                self?.router?.attachSignUpAgreementDetailRIB(agreementType: AgreementType.service)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapPersonalAgreementButton
+            .bind { [weak self] in
+                self?.router?.attachSignUpAgreementDetailRIB(agreementType: AgreementType.personal)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
+        action.tapMarketingAgreementButton
+            .bind { [weak self] in
+                self?.router?.attachSignUpAgreementDetailRIB(agreementType: AgreementType.marketing)
+            }
+            .disposeOnDeactivate(interactor: self)
+        
         action.selectAllAgreement
-            .bind(to: isSelectedAllAgreementRelay)
+            .bind { [weak self] bool in
+                Log("[D] 인터렉터 부분 \(bool)")
+                self?.isSelectedAllAgreementRelay.accept(bool)
+            }
             .disposeOnDeactivate(interactor: self)
         
         action.selectServiceAgreement
@@ -113,6 +139,10 @@ final class SignUpAgreementInteractor: PresentableInteractor<SignUpAgreementPres
     
     func didTapBackButtonFromSignUpNicknameRIB() {
         router?.detachSignUpNicknameRIB()
+    }
+    
+    func didTabBackButtonFromSignUpAgreementDetailRIB() {
+        router?.detachSignUpAgreementDetailRIB()
     }
 }
 

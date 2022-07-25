@@ -20,6 +20,7 @@ protocol SignUpPositionPresentable: Presentable {
 }
 
 protocol SignUpPositionListener: AnyObject {
+    func didTapBackButtonFromSignUpPositionRIB()
     func didSignUp()
 }
 
@@ -64,6 +65,12 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     
     func setupBind() {
         guard let action = presenter.action else { return }
+        
+        action.tapBackButton
+            .bind { [weak self] in
+                self?.listener?.didTapBackButtonFromSignUpPositionRIB()
+            }
+            .disposeOnDeactivate(interactor: self)
         
         action.tapNextButton
             .bind { [weak self] in

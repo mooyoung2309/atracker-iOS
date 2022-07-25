@@ -48,5 +48,6 @@ extension UIColor {
     class var gray6: UIColor { UIColor(hex: 0x555B70) }
     class var gray7: UIColor { UIColor(hex: 0x40475C) }
     
-    class var progressColors: [UIColor] { [UIColor.blue7, UIColor.blue6, UIColor.blue5, UIColor.blue4, UIColor.blue3, UIColor.blue2, UIColor.neonGreen] }
+    class var passColors: [UIColor] { [UIColor.blue7, UIColor.blue6, UIColor.blue5, UIColor.blue4, UIColor.blue3, UIColor.blue2, UIColor.neonGreen] }
+    class var failColors: [UIColor] { [UIColor(hex: 0x444752), UIColor(hex: 0xBABDC8)] }
 }

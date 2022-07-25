@@ -59,7 +59,7 @@ class StageStatusButtonBar: BaseView {
         buttonStackView.distribution  = .fillEqually
         buttonStackView.addArrangedSubviews([notStartedButton, failButton, passButton])
         
-        notStartedButton.setTitle(ProgressStatus.notStarted.title, for: .normal)
+        notStartedButton.setTitle(ProgressStatus.inProgress.title, for: .normal)
         
         failButton.setTitle(ProgressStatus.fail.title, for: .normal)
         

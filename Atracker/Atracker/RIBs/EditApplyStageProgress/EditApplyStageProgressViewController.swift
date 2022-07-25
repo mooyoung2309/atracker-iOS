@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxKeyboard
 import UIKit
 
 protocol EditApplyStageProgressPresentableAction: AnyObject {
@@ -93,6 +94,15 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         guard let action = action else { return }
         guard let handler = handler else { return }
         
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { [weak self] keyboardVisibleHeight in
+                self?.selfView.addButtonStackView.snp.updateConstraints {
+                    $0.bottom.equalToSuperview().inset(keyboardVisibleHeight)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         selfView.nextButton.rx.tap
             .bind { [weak self] in
                 self?.emitUpdatedStageContentsSubject()
@@ -102,7 +112,7 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         
         selfView.statusButtonBar.notStartedButton.rx.tap
             .bind { [weak self] in
-                self?.tapProgressStatusButtonSubject.onNext(.notStarted)
+                self?.tapProgressStatusButtonSubject.onNext(.inProgress)
             }
             .disposed(by: disposeBag)
         
@@ -190,12 +200,14 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         selfView.statusButtonBar.passButton.isSelected = false
         
         switch progressStatus {
-        case .notStarted:
+        case .inProgress:
             selfView.statusButtonBar.notStartedButton.isSelected = true
         case .pass:
             selfView.statusButtonBar.passButton.isSelected = true
         case .fail:
             selfView.statusButtonBar.failButton.isSelected = true
+        case .notStarted:
+            break
         }
     }
     

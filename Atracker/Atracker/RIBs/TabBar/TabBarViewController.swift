@@ -35,11 +35,14 @@ final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarV
     
     private let tapTabBarSubject = PublishSubject<Int>()
     
-    func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController) {
+    func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController, scheduleViewController: UIViewController) {
         
         blogViewController.tabBarItem = UITabBarItem(title: "탐색", image: UIImage(named: ImageName.search)?.withTintColor(.white), tag: 0)
         applyViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: ImageName.home)?.withTintColor(.white), tag: 1)
         myPageViewController.tabBarItem = UITabBarItem(title: "마이", image: UIImage(named: ImageName.user)?.withTintColor(.white), tag: 2)
+        
+        // FIXME: 다음 버전 출시
+//        scheduleViewController.tabBarItem = UITabBarItem(title: "스케쥴", image: UIImage(named: ImageName.user)?.withTintColor(.white), tag: 3)
         
         self.viewControllers = [UINavigationController(rootViewController: blogViewController), UINavigationController(rootViewController: applyViewController), UINavigationController(rootViewController: myPageViewController)]
         
@@ -58,7 +61,6 @@ final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBind()
     }
     

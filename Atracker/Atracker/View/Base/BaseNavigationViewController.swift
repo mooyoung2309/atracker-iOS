@@ -18,6 +18,18 @@ class NavigationBar: UIView {
     var trailingButton  = UIButton()
 }
 
+extension UITabBar {
+func tabsVisiblty(_ isVisiblty: Bool = true){
+    if isVisiblty {
+        self.isHidden = false
+        self.layer.zPosition = 0
+    } else {
+        self.isHidden = true
+        self.layer.zPosition = -1
+    }
+}
+}
+
 protocol BaseNavigationViewControllerProtocol: AnyObject {
     var statusBar: UIView { get }
     var navigaionBar: NavigationBar { get }
@@ -48,20 +60,21 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     var isAlertNext: ((Bool) -> Void)?
     
     func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
-        tabBarController?.tabBarController?.hidesBottomBarWhenPushed = !isTabBarShow
-        navigationController?.pushViewController(viewController.uiviewController, animated: true)
+        Log("[D] 화면 전환됨")
         tabBarController?.tabBar.isHidden = !isTabBarShow
         tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
+        navigationController?.pushViewController(viewController.uiviewController, animated: true)
+        
     }
     
     func dismiss(_ rootViewController: ViewControllable? = nil, isTabBarShow: Bool) {
+        tabBarController?.tabBar.isHidden = !isTabBarShow
+        tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
         if let rootViewController = rootViewController {
             navigationController?.popToViewController(rootViewController.uiviewController, animated: true)
         } else {
             navigationController?.popViewController(animated: true)
         }
-        tabBarController?.tabBar.isHidden = !isTabBarShow
-        tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
     }
     
     func showAlertView(style: AlertStyle) {

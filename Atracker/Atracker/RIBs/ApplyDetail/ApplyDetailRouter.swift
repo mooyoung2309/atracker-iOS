@@ -49,6 +49,7 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         self.editApplyStageProgress = editApplyStageProgress
         
         attachChild(editApplyStageProgress)
+//        Log("[D] 탭바 있나요 ? \()")
         viewController.present(editApplyStageProgress.viewControllable, isTabBarShow: false)
     }
     
@@ -56,13 +57,13 @@ final class ApplyDetailRouter: ViewableRouter<ApplyDetailInteractable, ApplyDeta
         if let editApplyOverall = editApplyOverall {
             detachChild(editApplyOverall)
         }
-        viewController.dismiss(nil, isTabBarShow: false)
+        viewController.dismiss(viewControllable, isTabBarShow: false)
     }
     
     func detachEditApplyStageProgressRIB() {
         if let editApplyStageProgress = editApplyStageProgress {
             detachChild(editApplyStageProgress)
         }
-        viewController.dismiss(nil, isTabBarShow: false)
+        viewController.dismiss(viewControllable, isTabBarShow: false)
     }
 }

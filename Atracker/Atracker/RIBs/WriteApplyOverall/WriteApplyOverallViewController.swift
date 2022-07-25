@@ -56,7 +56,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     private var selectedIndexPathList: [IndexPath] = []
     private var stages: [Stage] = []
-    private let jobTypes: [String] = [JobType.permanent.title, JobType.temporary.title, JobType.intern.title]
+    private var jobTypes: [String] = []
     private var companies: [Company] = []
     private var tmpSelectedStages: [Stage] = []
     private let plusCompany = "+ 직접 추가"
@@ -98,9 +98,14 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
         setupNavigaionBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        jobTypes = [JobType.permanent.title, JobType.temporary.title, JobType.intern.title]
         selfView.jobSearchTableView.reloadData()
         refreshTableView(tableView: selfView.jobSearchTableView)
         selfView.jobSearchTableView.isHidden = true
@@ -127,7 +132,6 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        view.layer.zPosition = 1
         contentView.addSubview(selfView)
     }
     

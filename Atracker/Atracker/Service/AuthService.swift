@@ -13,8 +13,6 @@ protocol AuthServiceProtocol {
 }
 
 class AuthService: AuthServiceProtocol {
-    let authRepository = AuthRepository()
-    
     func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
         AuthRepository.shared.sign(request: request) { result in
             switch result {
@@ -33,7 +31,7 @@ class AuthService: AuthServiceProtocol {
     }
     
     func testSignUp(email: String, gender: String, jobPosition: String, nickName: String, sso: String, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        authRepository.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
+        AuthRepository.shared.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
             switch result {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: "accessToken")

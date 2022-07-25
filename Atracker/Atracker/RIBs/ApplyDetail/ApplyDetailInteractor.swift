@@ -139,7 +139,9 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     
     // MARK: 자식 RIBs으로 부터
     func didEditApplyStageProgress() {
-        
+        Log("[D] 에딧")
+        router?.detachEditApplyStageProgressRIB()
+        fetchApply(appyID: thisApply.applyID)
     }
     
     func didEditApplyOverall() {

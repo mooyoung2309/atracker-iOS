@@ -35,7 +35,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     let selfView = ApplyDetailView()
     
     private var stageProgresses: [StageProgress] = []
-    private let editTypes: [EditTypeItem] = EditTypeItem.list
+    private var editTypes: [EditTypeItem] = EditTypeItem.list
     
     private let tapEditTypeCellSubject = PublishSubject<EditTypeItem>()
     
@@ -49,8 +49,14 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     
     override func viewDidLoad() {
         super.viewDidLoad()
-           
-        refreshTableView(tableView: selfView.stageProgressTableView)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        setupNavigaionBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        editTypes = EditTypeItem.list
         refreshTableView(tableView: selfView.editTableView)
     }
     
@@ -85,8 +91,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         
         selfView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(Size.navigationBarHeight)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -108,8 +113,6 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
                 } else {
                     self?.selfView.hideEditTableView()
                 }
-                
-                self?.tabBarController?.tabBar.isHidden = bool
             }
             .disposed(by: disposeBag)
     }
@@ -118,7 +121,6 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         self.stageProgresses = apply.stageProgress
         setNavigaionBarTitle(apply.companyName)
         selfView.stageTitleCollectionView.reloadData()
-        selfView.stageProgressTableView.reloadData()
         refreshTableView(tableView: selfView.stageProgressTableView)
     }
 }

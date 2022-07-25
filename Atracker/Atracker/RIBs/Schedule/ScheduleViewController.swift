@@ -34,6 +34,7 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     private var currentDates: [Date]    = []
     private var nextDates: [Date]       = []
     
+    private var tmp: [Int] = [0, 1, 2, 3, 4, 5, 6]
     private var selectedCellIndexPath: IndexPath?
     private var canEdit: Bool = false
     
@@ -74,15 +75,15 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        selfView.bottomTableView.reloadData()
+
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//
-//        selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tmp = [0, 1, 2, 3, 4, 5, 6]
+    
+        selfView.bottomTableView.reloadData()
+    }
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
@@ -221,7 +222,7 @@ extension ScheduleViewController: UICollectionViewDelegateFlowLayout, UICollecti
 
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return tmp.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

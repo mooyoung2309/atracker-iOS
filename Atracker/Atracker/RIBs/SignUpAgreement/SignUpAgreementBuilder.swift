@@ -34,7 +34,8 @@ final class SignUpAgreementBuilder: Builder<SignUpAgreementDependency>, SignUpAg
         let viewController = SignUpAgreementViewController()
         let interactor = SignUpAgreementInteractor(presenter: viewController, idToken: idToken, sso: sso)
         let signUpNicknameBuilder = SignUpNicknameBuilder(dependency: component)
+        let signUpAgreementDetailBuilder = SignUpAgreementDetailBuilder(dependency: component)
         interactor.listener = listener
-        return SignUpAgreementRouter(interactor: interactor, viewController: viewController, signUpNicknameBuilder: signUpNicknameBuilder)
+        return SignUpAgreementRouter(interactor: interactor, viewController: viewController, signUpAgreementDetailBuilder: signUpAgreementDetailBuilder, signUpNicknameBuilder: signUpNicknameBuilder)
     }
 }

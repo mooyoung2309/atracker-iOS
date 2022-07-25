@@ -13,19 +13,52 @@ class ApplyTVC: BaseTVC {
     
     let companyLabel = UILabel()
     let positionLabel = UILabel()
-    let barChartView = ProgressBarView()
+    let progressBarView = UIView()
+    let dividerStackView = UIStackView()
+    var progressBar = UIView()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        companyLabel.text = ""
+        positionLabel.text = ""
+        progressBar.removeFromSuperview()
+        dividerStackView.subviews.forEach({ $0.removeFromSuperview() })
+    }
     
     func update(apply: Apply) {
+        let totalCount = apply.stageProgress.count
+        let failCount = apply.stageProgress.filter({ $0.status == ProgressStatus.fail.code }).count
+        let notStartedCount = apply.stageProgress.filter({ $0.status == ProgressStatus.notStarted.code }).count
+        let passCount = totalCount - failCount - notStartedCount
+        
         companyLabel.text = apply.companyName
         
         positionLabel.text = apply.jobPosition
         
-        let totalCount = apply.stageProgress.count
-        let failCount = apply.stageProgress.filter({ $0.status == ProgressStatus.fail.code }).count
-        let passCount = apply.stageProgress.filter({ $0.status == ProgressStatus.pass.code }).count
-        let notStartedCount = apply.stageProgress.filter({ $0.status == ProgressStatus.notStarted.code }).count
+        if failCount > 0 {
+            progressBar = BarChatView(axis: .horizontal, cornerRadius: 5, colors: UIColor.failColors)
+        } else {
+            progressBar = BarChatView(axis: .horizontal, cornerRadius: 5, colors: UIColor.passColors)
+        }
         
-        barChartView.update(total: totalCount, part: notStartedCount + passCount)
+        progressBarView.addSubview(progressBar)
+        progressBar.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(CGFloat(passCount) / CGFloat(totalCount))
+        }
+        
+        for i in 0...totalCount {
+            let divider = UIView()
+            
+            divider.backgroundColor = .backgroundGray
+            if i == 0 || i == totalCount {
+                divider.backgroundColor = .clear
+            }
+            divider.snp.makeConstraints {
+                $0.width.equalTo(1)
+            }
+            dividerStackView.addArrangedSubview(divider)
+        }
     }
     
     override func setupProperty() {
@@ -38,14 +71,18 @@ class ApplyTVC: BaseTVC {
         
         positionLabel.font = .systemFont(ofSize: 12, weight: .regular)
         positionLabel.textColor = .gray1
+        
+        progressBarView.backgroundColor = .backgroundGray
+        progressBarView.layer.cornerRadius = 5
+        
+        dividerStackView.axis = .horizontal
+        dividerStackView.distribution = .equalSpacing
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(companyLabel)
-        contentView.addSubview(positionLabel)
-        contentView.addSubview(barChartView)
+        contentView.addSubviews(companyLabel, positionLabel, progressBarView, dividerStackView)
     }
     
     override func setupLayout() {
@@ -60,12 +97,15 @@ class ApplyTVC: BaseTVC {
             $0.leading.equalTo(companyLabel.snp.trailing).inset(-8)
         }
         
-        barChartView.snp.makeConstraints {
-            $0.top.equalTo(companyLabel.snp.bottom).inset(-10)
-            $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().inset(24)
+        progressBarView.snp.makeConstraints {
+            $0.top.equalTo(companyLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(10)
             $0.bottom.equalToSuperview().inset(20)
+        }
+        
+        dividerStackView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalTo(progressBarView)
         }
     }
 }

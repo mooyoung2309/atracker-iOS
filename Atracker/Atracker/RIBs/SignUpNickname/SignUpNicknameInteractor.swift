@@ -68,4 +68,8 @@ final class SignUpNicknameInteractor: PresentableInteractor<SignUpNicknamePresen
     func didSignUp() {
         listener?.didSignUp()
     }
+    
+    func didTapBackButtonFromSignUpPositionRIB() {
+        router?.detachSignUpPositionRIB()
+    }
 }

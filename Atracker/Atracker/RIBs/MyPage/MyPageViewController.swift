@@ -83,6 +83,12 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
                 self?.listener?.tapSignOutButton()
             }
             .disposed(by: disposeBag)
+        
+        selfView.withDrawButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.tapSignOutButton()
+            }
+            .disposed(by: disposeBag)
     }
     
     func didUpdateMyPage(myPage: MyPageResponse) {

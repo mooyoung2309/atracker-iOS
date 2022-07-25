@@ -62,6 +62,9 @@ class EditApplyStageProgressView: BaseView {
         nextButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         nextButton.backgroundColor = .backgroundGray
         nextButton.addShadow(.top)
+        
+        // FIXME: MVP 버전 편집 기능 제거
+        statusButtonBar.editButton.isHidden = true
     }
     
     override func setupHierarchy() {
@@ -113,7 +116,7 @@ class EditApplyStageProgressView: BaseView {
         addButtonStackView.snp.makeConstraints {
             $0.top.equalTo(editProgressTableView.snp.bottom)
             $0.leading.trailing.equalTo(self).inset(16)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(Size.tabBarHeight)
         }
         
         nextButton.snp.makeConstraints {
