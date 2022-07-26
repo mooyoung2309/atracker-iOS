@@ -11,6 +11,7 @@ import RxCocoa
 import RxGesture
 import UIKit
 import SnapKit
+import Alamofire
 
 // MARK: - Presenter
 protocol WriteApplyOverallPresentableAction: AnyObject {
@@ -45,7 +46,7 @@ final class WriteApplyOverallViewController: BaseNavigationViewController, Write
     }
     
     var handler: WriteApplyOverallPresentableHandler?
-    
+
     let selfView = WriteApplyOverallView()
     
     private let tapAddCompanyButtonSubject = PublishSubject<String>()
@@ -234,7 +235,7 @@ extension WriteApplyOverallViewController: WriteApplyOverallPresentableAction {
     }
     
     var textPositionName: Observable<String> {
-        return selfView.positionUnderLineTextFieldView.textField.rx.text.orEmpty.asObservable()
+        return selfView.jobPositionUnderLineTextFieldView.textField.rx.text.orEmpty.asObservable()
     }
     
     var textJobTypeName: Observable<String> {

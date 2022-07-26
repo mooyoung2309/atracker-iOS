@@ -41,12 +41,14 @@ struct StageProgress: Codable {
     var status: String
     let order: Int
     var stageContents: [StageContent]
+    var eventAt: String?
     let stageID: Int
     let stageTitle: String
 
     enum CodingKeys: String, CodingKey {
         case id, status, order
         case stageContents = "stage_contents"
+        case eventAt = "event_at"
         case stageID = "stage_id"
         case stageTitle = "stage_title"
     }

@@ -25,6 +25,13 @@ final class SignUpAgreementDetailViewController: BaseNavigationViewController, S
         showNavigationBarBackButton()
     }
     
+    override func setupProperty() {
+        super.setupProperty()
+        webView.backgroundColor = .backgroundGray
+        webView.scrollView.backgroundColor = .backgroundGray
+        webView.isOpaque = false
+    }
+    
     override func setupHierarchy() {
         super.setupHierarchy()
         contentView.addSubview(webView)

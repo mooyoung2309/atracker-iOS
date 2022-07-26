@@ -37,7 +37,7 @@ final class TabBarViewController: UITabBarController, TabBarPresentable, TabBarV
     
     func setupTabBar(blogViewController: UIViewController, applyViewController: UIViewController, myPageViewController: UIViewController, scheduleViewController: UIViewController) {
         
-        blogViewController.tabBarItem = UITabBarItem(title: "탐색", image: UIImage(named: ImageName.search)?.withTintColor(.white), tag: 0)
+        blogViewController.tabBarItem = UITabBarItem(title: "블로그", image: UIImage(named: ImageName.search)?.withTintColor(.white), tag: 0)
         applyViewController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: ImageName.home)?.withTintColor(.white), tag: 1)
         myPageViewController.tabBarItem = UITabBarItem(title: "마이", image: UIImage(named: ImageName.user)?.withTintColor(.white), tag: 2)
         

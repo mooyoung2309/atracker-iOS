@@ -14,7 +14,7 @@ class WriteApplyOverallView: BaseView {
     let companyLabel = UILabel()
     let companyUnderLineTextFieldView = UnderLineTextFieldView(title: "회사명", placeholder: "회사명을 입력해주세요.")
     let companySearchTableView = UITableView()
-    let positionUnderLineTextFieldView = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
+    let jobPositionUnderLineTextFieldView = UnderLineTextFieldView(title: "포지션", placeholder: "포지션명을 입력해주세요.")
     let jobTypeUnderLineLabelView = UnderLineLabelView(title: "근무형태", placeholder: "근무형태를 선택해주세요.")
     let jobSearchTableView = UITableView()
     let progressLabel = UILabel()
@@ -68,7 +68,7 @@ class WriteApplyOverallView: BaseView {
         super.setupHierarchy()
         
         addSubview(companyUnderLineTextFieldView)
-        addSubview(positionUnderLineTextFieldView)
+        addSubview(jobPositionUnderLineTextFieldView)
         addSubview(jobTypeUnderLineLabelView)
         addSubview(progressLabel)
         addSubview(reloadButton)
@@ -92,13 +92,13 @@ class WriteApplyOverallView: BaseView {
             $0.height.equalTo(0)
         }
         
-        positionUnderLineTextFieldView.snp.makeConstraints {
+        jobPositionUnderLineTextFieldView.snp.makeConstraints {
             $0.top.equalTo(companyUnderLineTextFieldView.snp.bottom).inset(-34)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         
         jobTypeUnderLineLabelView.snp.makeConstraints {
-            $0.top.equalTo(positionUnderLineTextFieldView.snp.bottom).inset(-39)
+            $0.top.equalTo(jobPositionUnderLineTextFieldView.snp.bottom).inset(-39)
             $0.leading.trailing.equalToSuperview().inset(28)
         }
         

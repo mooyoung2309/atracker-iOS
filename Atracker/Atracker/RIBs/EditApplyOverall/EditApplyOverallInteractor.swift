@@ -134,7 +134,7 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
                 
                 var updateStages: [UpdateStage] = []
                 for (index, stageProgress) in stageProgresses.enumerated() {
-                    updateStages.append(UpdateStage(eventAt: Date().getISO8601String(), order: index, stageID: stageProgress.stageID))
+                    updateStages.append(UpdateStage(eventAt: stageProgress.eventAt, order: index, stageID: stageProgress.stageID))
                 }
                 this.applyUpdateRequest = ApplyUpdateRequest(applyID: this.apply.applyID, company: company, jobPosition: jobPosition, jobType: jobType.code, stages: updateStages)
             }

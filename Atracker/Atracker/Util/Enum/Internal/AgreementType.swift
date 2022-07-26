@@ -32,11 +32,11 @@ enum AgreementType {
         case .all:
             return nil
         case .service:
-            return "https://www.naver.com/"
+            return "https://atracker-web.netlify.app/terms/user"
         case .personal:
-            return "https://www.google.co.kr/"
+            return "https://atracker-web.netlify.app/terms/"
         case .marketing:
-            return "https://www.leagueoflegends.com/ko-kr/"
+            return "https://atracker-web.netlify.app/terms/user"
         }
     }
     

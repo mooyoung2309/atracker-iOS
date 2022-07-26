@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import RxGesture
 import RxKeyboard
 import UIKit
 
@@ -34,7 +35,7 @@ protocol EditApplyStageProgressPresentableHandler: AnyObject {
 }
 
 protocol EditApplyStageProgressPresentableListener: AnyObject {
-
+    
 }
 
 final class EditApplyStageProgressViewController: BaseNavigationViewController, EditApplyStageProgressPresentable, EditApplyStageProgressViewControllable {
@@ -101,6 +102,14 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
                     $0.bottom.equalToSuperview().inset(keyboardVisibleHeight)
                 }
             })
+            .disposed(by: disposeBag)
+        
+        selfView.scrollView.rx.tapGesture()
+            .bind { [weak self] tap in
+                if tap.state == .ended {
+                    self?.view.endEditing(true)
+                }
+            }
             .disposed(by: disposeBag)
         
         selfView.nextButton.rx.tap

@@ -20,16 +20,21 @@ final class BlogViewController: BaseNavigationViewController, BlogPresentable, B
 
     weak var listener: BlogPresentableListener?
     
-    let webView = WKWebView()
+    lazy var webView = WKWebView(frame: contentView.bounds)
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()
-        hideNavigationBar()
+        showNavigationBar()
+        setNavigaionBarTitle("블로그")
+        hideNavigationBarBackButton()
     }
     
     override func setupProperty() {
         super.setupProperty()
-        loadWebView(url: "https://www.youtube.com/watch?v=s716iQ0JCGg&ab_channel=JANNABI-Topic")
+        webView.backgroundColor = .backgroundGray
+        webView.scrollView.backgroundColor = .backgroundGray
+        webView.isOpaque = false
+        loadWebView(url: "https://atracker-web.netlify.app/")
     }
     
     override func setupHierarchy() {
