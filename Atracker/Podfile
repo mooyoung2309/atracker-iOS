@@ -7,12 +7,16 @@ target 'Atracker' do
 
   # Pods for Atracker
   pod 'RIBs', :git => 'https://github.com/uber/RIBs.git', :tag => '0.9.2'
+  pod 'ReactorKit'
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxGesture'
+  pod 'RxKeyboard'
+  pod 'RxDataSources'
   pod 'SnapKit'
   pod 'Then'
   pod 'Alamofire'
+  pod 'GoogleSignIn'
   target 'AtrackerTests' do
     inherit! :search_paths
     # Pods for testing
