@@ -9,12 +9,12 @@ import RIBs
 
 /// The dependencies needed from the parent scope of WriteApplyOverall to provide for the WriteApplySchedule scope.
 // TODO: Update WriteApplyOverallDependency protocol to inherit this protocol.
-protocol WriteApplyOverallDependencyWriteApplySchedule: Dependency {
+protocol ApplyWriteOverallDependencyWriteApplySchedule: Dependency {
     // TODO: Declare dependencies needed from the parent scope of WriteApplyOverall to provide dependencies
     // for the WriteApplySchedule scope.
 }
 
-extension WriteApplyOverallComponent: WriteApplyScheduleDependency {
+extension ApplyWriteOverallComponent: WriteApplyScheduleDependency {
 
     // TODO: Implement properties to provide for WriteApplySchedule scope.
 }

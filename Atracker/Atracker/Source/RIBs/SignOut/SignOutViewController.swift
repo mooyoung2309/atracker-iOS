@@ -91,6 +91,7 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
             user.authentication.do { [weak self] authentication, error in
                 guard error == nil else { Log("[D] 구글 로그인 에러 \(error)"); return }
                 guard let authentication = authentication else { return }
+                
                 self?.fetchIdTokenSubject.onNext((SSO.google, authentication.accessToken))
             }
         }

@@ -9,15 +9,13 @@ import Foundation
 import Alamofire
 
 protocol AuthRepositoryProtocol {
-    func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
-    func signout(completion: @escaping (Result<(Bool), Error>) -> Void)
-    func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
+    static func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
+    static func signout(completion: @escaping (Result<(Bool), Error>) -> Void)
+    static func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
 }
 
 class AuthRepository: AuthRepositoryProtocol {
-    static let shared = AuthRepository()
-    
-    func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
+    static func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
         AF.request(AuthAPI.sign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
             print(response.data)
             print(response.response)
@@ -38,7 +36,7 @@ class AuthRepository: AuthRepositoryProtocol {
         }
     }
     
-    func signout(completion: @escaping (Result<(Bool), Error>) -> Void) {
+    static func signout(completion: @escaping (Result<(Bool), Error>) -> Void) {
         AF.request(AuthAPI.signOut, interceptor: TokenInterceptor.shared.getInterceptor()).response { response in
             print(response.data)
             print(response.response)
@@ -56,7 +54,7 @@ class AuthRepository: AuthRepositoryProtocol {
         }
     }
     
-    func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
+    static func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
         AF.request(AuthAPI.testSign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
             switch response.result {
             case .success(let data):
@@ -70,6 +68,14 @@ class AuthRepository: AuthRepositoryProtocol {
     
     static func postTokenRefresh(request: TokenRefreshRequest, completion: @escaping (Result<TokenRefreshResponse, Error>) -> Void) {
         AF.request(AuthAPI.tokenRefresh(request)).responseDecodable { (response: AFDataResponse<TokenRefreshResponse>) in
+            print(response.data)
+            print(response.response)
+            print(response.result)
+            print(response.error)
+            print(response.request)
+            print(response.debugDescription)
+            print(response.description)
+            print(response.value)
             switch response.result {
             case .success(let data):
                 completion(.success(data))

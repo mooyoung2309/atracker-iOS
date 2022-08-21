@@ -1,8 +1,8 @@
 //
-//  MyPageRouter.swift
+//  NewMyPageRouter.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/29.
+//  Created by 송영모 on 2022/07/29.
 //
 
 import RIBs
@@ -12,7 +12,7 @@ protocol MyPageInteractable: Interactable {
     var listener: MyPageListener? { get set }
 }
 
-protocol MyPageViewControllable: NavigationViewControllable {
+protocol MyPageViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
@@ -22,10 +22,5 @@ final class MyPageRouter: ViewableRouter<MyPageInteractable, MyPageViewControlla
     override init(interactor: MyPageInteractable, viewController: MyPageViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
-    }
-    
-    func detachThisRIB() {
-        detachChild(self)
-        viewController.dismiss(nil, isTabBarShow: false)
     }
 }

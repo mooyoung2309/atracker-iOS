@@ -125,8 +125,6 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     override func setupProperty() {
         super.setupProperty()
-        
-        navigaionBar.backgroundColor = .backgroundGray
         navigaionBar.addShadow(.bottom)
         navigaionBar.title.textColor = .white
         navigaionBar.title.font = .systemFont(ofSize: 16, weight: .regular)
@@ -191,10 +189,14 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func showNavigationBar() {
         navigaionBar.alpha = 1
+        statusBar.backgroundColor = .backgroundLightGray
+        navigaionBar.backgroundColor = .backgroundLightGray
     }
     
     func hideNavigationBar() {
         navigaionBar.alpha = 0
+        statusBar.backgroundColor = .clear
+        navigaionBar.backgroundColor = .backgroundGray
     }
     
     func setNavigaionBarTitle(_ text: String) {

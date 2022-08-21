@@ -25,7 +25,6 @@ protocol TabBarPresentable: Presentable {
 }
 
 protocol TabBarListener: AnyObject {
-    func didSignOut()
     func detachSignInRIB()
 }
 
@@ -90,12 +89,6 @@ final class TabBarInteractor: PresentableInteractor<TabBarPresentable>, TabBarIn
     }
     
     // MARK: From Other RIBs
-    
-    func didSignOut() {
-        router?.detachMyPageRIB()
-//        router?.attachBlogRIB()
-        listener?.didSignOut()
-    }
     
     func detachSignInRIB() {
         listener?.detachSignInRIB()

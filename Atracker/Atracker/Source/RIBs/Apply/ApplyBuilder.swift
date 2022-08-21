@@ -41,11 +41,11 @@ final class ApplyBuilder: Builder<ApplyDependency>, ApplyBuildable {
         let component = ApplyComponent(dependency: dependency)
         let viewController = ApplyViewController()
         let interactor = ApplyInteractor(presenter: viewController, applyService: component.applyService, userService: component.userService)
-        let applyWriteBuilder = WriteApplyOverallBuilder(dependency: component)
+        let applyWriteOverallBuilder = ApplyWriteOverallBuilder(dependency: component)
         let applyDetailBuilder = ApplyDetailBuilder(dependency: component)
         
         interactor.listener = listener
         
-        return ApplyRouter(interactor: interactor, viewController: viewController, applyWriteBuilder: applyWriteBuilder, applyDetailBuilder: applyDetailBuilder)
+        return ApplyRouter(interactor: interactor, viewController: viewController, applyWriteOverallBuilder: applyWriteOverallBuilder, applyDetailBuilder: applyDetailBuilder)
     }
 }

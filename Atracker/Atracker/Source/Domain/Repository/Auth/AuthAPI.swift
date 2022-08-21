@@ -59,7 +59,7 @@ extension AuthAPI: BaseURLRequestConvertible {
             return nil
         case .testSign(let request):
             return .body(request)
-        case .testToken(let email, let id):
+        case .testToken(let email, _):
             // TODO: 여기 고쳐야 함 !
             return .query(email)
         case .tokenRefresh(let request):

@@ -17,7 +17,6 @@ protocol SignInRouting: Routing {
 
 protocol SignInListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func didSignOut()
     func detachSignInRIB()
 }
 
@@ -33,7 +32,6 @@ final class SignInInteractor: Interactor, SignInInteractable {
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
-        Log("[SIGNOUT] 탭바 RIB attach" )
         router?.attachTabBarRIB()
     }
 
@@ -42,11 +40,6 @@ final class SignInInteractor: Interactor, SignInInteractable {
 
         router?.cleanupViews()
         // TODO: Pause any business logic.
-    }
-    
-    func didSignOut() {
-        router?.detachTabBarRIB()
-        listener?.didSignOut()
     }
     
     func detachSignInRIB() {

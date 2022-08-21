@@ -17,7 +17,7 @@ class CompanyService: CompanyServiceProtocol {
     
     func search(title: String, page: Int, completion: @escaping (Result<CompanyResponse, Error>) -> Void) {
         
-        companyRepository.search(queryRequest: .init(page: page, size: 10), bodyRequest: .init(title: title, userDefined: true)) { result in
+        companyRepository.search(queryRequest: .init(page: page, size: 10), bodyRequest: .init(title: title, userDefined: false)) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

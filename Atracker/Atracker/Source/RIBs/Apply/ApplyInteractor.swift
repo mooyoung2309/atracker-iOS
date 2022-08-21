@@ -23,7 +23,7 @@ protocol ApplyPresentable: Presentable {
 }
 
 protocol ApplyListener: AnyObject {
-    func didSignOut()
+    
 }
 
 final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInteractable, ApplyPresentableListener {
@@ -81,10 +81,8 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         applyService.get(request: ApplyRequest(applyIds: nil, includeContent: true)) { [weak self] result in
             switch result {
             case .success(let data):
-                Log("[D] 지원 현황 가져오기 성공\n\(data.applies)")
                 self?.appliesRelay.accept(data.applies)
-            case .failure(_):
-                Log("[D] 지원 현황 가져오기 실패")
+            case .failure: break
             }
         }
     }
@@ -93,19 +91,13 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
         userService.myPage { [weak self] result in
             switch result {
             case .success(let data):
-                Log("[D] 마이페이지 가져오기 성공 \(data)")
                 self?.myPageRelay.accept(data)
-            case .failure(let error):
-                Log("[D] 마이페이지 가져오기 실패 \(error)")
+            case .failure: break
             }
         }
     }
     
     // MARK: From Child RIB
-    
-    func didSignOut() {
-        listener?.didSignOut()
-    }
     
     func didWriteApply() {
         router?.detachWriteApplyOverallRIB()
@@ -118,6 +110,10 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     }
     
     func didTapBackButtonFromWriteApplyOverallRIB() {
+        router?.detachWriteApplyOverallRIB()
+    }
+    
+    func detachApplyWriteOverallRIB() {
         router?.detachWriteApplyOverallRIB()
     }
 }

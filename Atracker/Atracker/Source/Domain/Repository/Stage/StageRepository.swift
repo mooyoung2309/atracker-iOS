@@ -24,14 +24,6 @@ class StageRepository {
     
     func post(request: StageCreateRequest, completion: @escaping(Result<StageCreateResponse, Error>) -> Void) {
         AF.request(StageAPI.post(request), interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<StageCreateResponse>) in
-            print(response.data)
-            print(response.response)
-            print(response.result)
-            print(response.error)
-            print(response.request)
-            print(response.debugDescription)
-            print(response.description)
-            print(response.value)
             switch response.result {
             case .success(let data):
                 Log("[D] 성공")

@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, MyPageListener, NewMyPageListener, ScheduleListener {
+protocol TabBarInteractable: Interactable, BlogListener, ApplyListener, MyPageListener, ScheduleListener {
     var router: TabBarRouting? { get set }
     var listener: TabBarListener? { get set }
 }
@@ -20,8 +20,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     
     private let blogBuilder: BlogBuildable
     private let applyBuilder: ApplyBuildable
-//    private let myPageBuilder: MyPageBuildable
-    private let myPageBuilder: NewMyPageBuildable
+    private let myPageBuilder: MyPageBuildable
     private let scheduleBuilder: ScheduleBuildable
     
     private var child: Routing?
@@ -32,7 +31,7 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
     
     private var viewControllers: [UIViewController] = []
     
-    init(interactor: TabBarInteractable, viewController: TabBarViewControllable, blogBuilder: BlogBuildable, applyBuilder: ApplyBuildable, myPageBuilder: NewMyPageBuildable, scheduleBuilder: ScheduleBuildable) {
+    init(interactor: TabBarInteractable, viewController: TabBarViewControllable, blogBuilder: BlogBuildable, applyBuilder: ApplyBuildable, myPageBuilder: MyPageBuildable, scheduleBuilder: ScheduleBuildable) {
         
         self.blogBuilder = blogBuilder
         self.applyBuilder = applyBuilder
@@ -105,51 +104,4 @@ final class TabBarRouter: ViewableRouter<TabBarInteractable, TabBarViewControlla
         viewController.dismiss(nil, isTabBarShow: false)
         child = nil
     }
-    
-    //    func attachApplyWriteRIB() {
-    //        let applyWrite = writeApplyOverallBuilder.build(withListener: interactor)
-    //
-    //        self.writeApplyOverall = applyWrite
-    //
-    //        detachChildRIB()
-    //        attachChild(applyWrite)
-    //        viewController.present(viewController: applyWrite.viewControllable)
-    //
-    //        child = applyWrite
-    //    }
-    
-    //    func attachApplyRIBfromOtherRIB() {
-    //        if let applyWrite = writeApplyOverall {
-    //            viewController.dismiss(viewController: applyWrite.viewControllable)
-    //        }
-    //
-    //        let apply = applyBuilder.build(withListener: interactor)
-    //        self.apply = apply
-    //
-    //        detachChildRIB()
-    //        attachChild(apply)
-    //
-    //        viewController.presentView(apply, transitionSubType: .fromLeft)
-    //
-    //        child = apply
-    //    }
-    
-    //    func attachWriteApplyOverallRIBfromOtherRIB() {
-    //        if let applyWrite = writeApplyOverall {
-    //            viewController.dismiss(viewController: applyWrite.viewControllable)
-    //        }
-    //        let writeApplyOverall = writeApplyOverallBuilder.build(withListener: interactor)
-    //
-    //        self.writeApplyOverall = writeApplyOverall
-    //
-    //        detachChildRIB()
-    //        attachChild(writeApplyOverall)
-    //
-    //        viewController.present(viewController: writeApplyOverall.viewControllable)
-    //        viewController.uiviewController.view.layoutIfNeeded()
-    //
-    //        child = writeApplyOverall
-    //
-    //        Log("2")
-    //    }
 }

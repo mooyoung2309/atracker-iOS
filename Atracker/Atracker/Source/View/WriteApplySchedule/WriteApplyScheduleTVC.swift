@@ -106,7 +106,7 @@ class WriteApplyScheduleTVC: BaseTVC {
         super.setupLayout()
 
         circle.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(20)
             $0.centerY.equalTo(titleLabel)
             $0.width.height.equalTo(6)
         }
@@ -123,7 +123,6 @@ class WriteApplyScheduleTVC: BaseTVC {
         }
         
         dateLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(111)
             $0.trailing.equalToSuperview().inset(40)
             $0.centerY.equalTo(titleLabel)
         }

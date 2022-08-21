@@ -1,8 +1,8 @@
 //
-//  MyPageBuilder.swift
+//  NewMyPageBuilder.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/29.
+//  Created by 송영모 on 2022/07/29.
 //
 
 import RIBs
@@ -35,7 +35,7 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     func build(withListener listener: MyPageListener) -> MyPageRouting {
         let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
-        let interactor = MyPageInteractor(initialState: .init(myPageResponse: nil), presenter: viewController, authService: component.authService, userService: component.userService)
+        let interactor = MyPageInteractor(presenter: viewController, authService: component.authService, userService: component.userService)
         interactor.listener = listener
         return MyPageRouter(interactor: interactor, viewController: viewController)
     }

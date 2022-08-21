@@ -16,7 +16,7 @@ protocol AuthServiceProtocol {
 
 class AuthService: AuthServiceProtocol {
     func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        AuthRepository.shared.sign(request: request) { result in
+        AuthRepository.sign(request: request) { result in
             switch result {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: UserDefaultKey.accessToken)
@@ -29,7 +29,7 @@ class AuthService: AuthServiceProtocol {
     }
     
     func signOut(completion: @escaping (Result<(Bool), Error>) -> Void) {
-        AuthRepository.shared.signout { [weak self] result in
+        AuthRepository.signout { [weak self] result in
             switch result {
             case .success(let data):
                 self?.logOut()
@@ -46,7 +46,7 @@ class AuthService: AuthServiceProtocol {
     }
     
     func testSignUp(email: String, gender: String, jobPosition: String, nickName: String, sso: String, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        AuthRepository.shared.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
+        AuthRepository.postTestSign(request: .init(email: email, gender: gender, jobPosition: jobPosition, nickName: nickName, sso: sso)) { result in
             switch result {
             case .success(let data):
                 UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
