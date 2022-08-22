@@ -9,14 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-protocol BaseViewProtocol {
-    func setupProperty()
-    func setupHierarchy()
-    func setupLayout()
-}
-
-class BaseView: UIView, BaseViewProtocol {
-    let disposeBag = DisposeBag()
+class BaseView: UIView {
+    var disposeBag = DisposeBag()
     
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
@@ -26,12 +20,15 @@ class BaseView: UIView, BaseViewProtocol {
         super.init(frame: frame)
         
         setupProperty()
+        setupDelegate()
         setupHierarchy()
         setupLayout()
         setupBind()
     }
     
     func setupProperty() { }
+    
+    func setupDelegate() { }
     
     func setupHierarchy() { }
     

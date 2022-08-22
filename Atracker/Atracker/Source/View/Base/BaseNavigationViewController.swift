@@ -13,9 +13,9 @@ import RxSwift
 import RxCocoa
 
 class NavigationBar: UIView {
-    var title           = UILabel()
-    var backButton      = UIButton()
-    var trailingButton  = UIButton()
+    var title = UILabel()
+    var backButton = UIButton()
+    var trailingButton = UIButton()
 }
 
 extension UITabBar {

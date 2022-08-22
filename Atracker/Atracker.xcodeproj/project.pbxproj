@@ -51,6 +51,9 @@
 		701012FA28B34F6600B38D64 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 701012F828B34F6600B38D64 /* debug.xcconfig */; };
 		701012FB28B34F6600B38D64 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 701012F928B34F6600B38D64 /* release.xcconfig */; };
 		701012FD28B3527E00B38D64 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701012FC28B3527E00B38D64 /* Enviroment.swift */; };
+		7010130128B35F8C00B38D64 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010130028B35F8C00B38D64 /* ResultTableViewCell.swift */; };
+		7010130328B3649100B38D64 /* ResultTableViewCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010130228B3649100B38D64 /* ResultTableViewCellReactor.swift */; };
+		7010130528B364CF00B38D64 /* ResultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7010130428B364CF00B38D64 /* ResultTextField.swift */; };
 		701312752886E8F800A5C588 /* SignUpAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312742886E8F800A5C588 /* SignUpAgreementView.swift */; };
 		7013127A2886E90B00A5C588 /* SignUpAgreementRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312762886E90B00A5C588 /* SignUpAgreementRouter.swift */; };
 		7013127B2886E90B00A5C588 /* SignUpAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312772886E90B00A5C588 /* SignUpAgreementViewController.swift */; };
@@ -136,7 +139,7 @@
 		70576DEF28641E6E000406DF /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DEE28641E6E000406DF /* CompanyRepository.swift */; };
 		70576DF128642181000406DF /* CompanyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF028642181000406DF /* CompanyResponse.swift */; };
 		70576DF32864222D000406DF /* CompanyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF22864222D000406DF /* CompanyService.swift */; };
-		70576DF528643638000406DF /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF428643638000406DF /* SearchTVC.swift */; };
+		70576DF528643638000406DF /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF428643638000406DF /* SearchTableViewCell.swift */; };
 		70576DF72864E09A000406DF /* JobType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF62864E099000406DF /* JobType.swift */; };
 		70576DF92864E9E9000406DF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DF82864E9E9000406DF /* Date+Ext.swift */; };
 		70576DFB2864EBB4000406DF /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576DFA2864EBB4000406DF /* Period.swift */; };
@@ -319,6 +322,9 @@
 		701012F828B34F6600B38D64 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		701012F928B34F6600B38D64 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		701012FC28B3527E00B38D64 /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
+		7010130028B35F8C00B38D64 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		7010130228B3649100B38D64 /* ResultTableViewCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCellReactor.swift; sourceTree = "<group>"; };
+		7010130428B364CF00B38D64 /* ResultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTextField.swift; sourceTree = "<group>"; };
 		701312742886E8F800A5C588 /* SignUpAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementView.swift; sourceTree = "<group>"; };
 		701312762886E90B00A5C588 /* SignUpAgreementRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementRouter.swift; sourceTree = "<group>"; };
 		701312772886E90B00A5C588 /* SignUpAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementViewController.swift; sourceTree = "<group>"; };
@@ -405,7 +411,7 @@
 		70576DEE28641E6E000406DF /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		70576DF028642181000406DF /* CompanyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyResponse.swift; sourceTree = "<group>"; };
 		70576DF22864222D000406DF /* CompanyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyService.swift; sourceTree = "<group>"; };
-		70576DF428643638000406DF /* SearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
+		70576DF428643638000406DF /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		70576DF62864E099000406DF /* JobType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobType.swift; sourceTree = "<group>"; };
 		70576DF82864E9E9000406DF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		70576DFA2864EBB4000406DF /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
@@ -708,7 +714,7 @@
 		700DEF252894184F008AAE26 /* ApplyWrite */ = {
 			isa = PBXGroup;
 			children = (
-				70CB068C285EF6C800BE89B7 /* WriteApplyOverall */,
+				70CB068C285EF6C800BE89B7 /* ApplyWriteOverall */,
 				7040963A286006FC003EBCE4 /* WriteApplySchedule */,
 			);
 			path = ApplyWrite;
@@ -751,6 +757,23 @@
 				701012FC28B3527E00B38D64 /* Enviroment.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		701012FE28B35B1300B38D64 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		701012FF28B35E6200B38D64 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70576DF428643638000406DF /* SearchTableViewCell.swift */,
+				7010130028B35F8C00B38D64 /* ResultTableViewCell.swift */,
+				7010130228B3649100B38D64 /* ResultTableViewCellReactor.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		7013126A2886E7DF00A5C588 /* SignUpAgreement */ = {
@@ -1016,6 +1039,7 @@
 		70443B2C28589996009EE223 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				701012FF28B35E6200B38D64 /* Cell */,
 				7027070928407DEC00BC8E41 /* CircleView.swift */,
 				708841442836350E0024135D /* HorizontalBarChartView.swift */,
 				7009C0F728475A8700140CB5 /* BarChatView.swift */,
@@ -1025,6 +1049,7 @@
 				700DBEC32868D1E500883A4F /* UnderLineLabelView.swift */,
 				700DBEBD2868C0BB00883A4F /* UnderLineTextFieldView.swift */,
 				700DBEBF2868C79200883A4F /* BottomNextButtonView.swift */,
+				7010130428B364CF00B38D64 /* ResultTextField.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1322,14 +1347,14 @@
 		70BDD356285F12A100E09821 /* WriteApplyOverall */ = {
 			isa = PBXGroup;
 			children = (
+				701012FE28B35B1300B38D64 /* Cell */,
 				70BDD357285F160D00E09821 /* WriteApplyOverallView.swift */,
 				7027D3932861921E00F9C913 /* WriteApplyOverallCVC.swift */,
-				70576DF428643638000406DF /* SearchTVC.swift */,
 			);
 			path = WriteApplyOverall;
 			sourceTree = "<group>";
 		};
-		70CB068C285EF6C800BE89B7 /* WriteApplyOverall */ = {
+		70CB068C285EF6C800BE89B7 /* ApplyWriteOverall */ = {
 			isa = PBXGroup;
 			children = (
 				70CB068F285EF70000BE89B7 /* ApplyWriteOverallBuilder.swift */,
@@ -1339,7 +1364,7 @@
 				70CB068E285EF70000BE89B7 /* ApplyWriteOverallViewController.swift */,
 				7040964328600A23003EBCE4 /* ApplyWriteOverallComponent+WriteApplySchedule.swift */,
 			);
-			path = WriteApplyOverall;
+			path = ApplyWriteOverall;
 			sourceTree = "<group>";
 		};
 		70D587C128854A5200872282 /* User */ = {
@@ -1863,10 +1888,12 @@
 				707F77E028886E7000F5EFB5 /* AgreementType.swift in Sources */,
 				70A88E742851A6880027D673 /* TabBarRouter.swift in Sources */,
 				70B91DE628867B3C00BDB7B9 /* ApplyUpdateRequest.swift in Sources */,
+				7010130128B35F8C00B38D64 /* ResultTableViewCell.swift in Sources */,
 				704096502860409A003EBCE4 /* ScheduleViewController.swift in Sources */,
 				70091BAD2873DC76005D2627 /* ApplyDetailComponent+EditApplyStageProgress.swift in Sources */,
 				7005C88E28449B550091B225 /* ApplyEditView.swift in Sources */,
 				70CB0692285EF70000BE89B7 /* ApplyWriteOverallViewController.swift in Sources */,
+				7010130528B364CF00B38D64 /* ResultTextField.swift in Sources */,
 				701CE22D2849D0F2009230CE /* RootViewController.swift in Sources */,
 				700DBEC02868C79200883A4F /* BottomNextButtonView.swift in Sources */,
 				70BDD35A285F237D00E09821 /* Divider.swift in Sources */,
@@ -1902,6 +1929,7 @@
 				70576E392865B54C000406DF /* SignOutInteractor.swift in Sources */,
 				702D86D828748947009682A4 /* StageResponse.swift in Sources */,
 				704096412860071D003EBCE4 /* WriteApplyScheduleBuilder.swift in Sources */,
+				7010130328B3649100B38D64 /* ResultTableViewCellReactor.swift in Sources */,
 				70576E2A2865B2AA000406DF /* SignUpPositionInteractor.swift in Sources */,
 				70660471286AC21D00A09427 /* ApplyAnalysisView.swift in Sources */,
 				70D587C328854A7800872282 /* UserAPI.swift in Sources */,
@@ -1920,7 +1948,7 @@
 				701312752886E8F800A5C588 /* SignUpAgreementView.swift in Sources */,
 				700F34FD285C523600F16DA6 /* AlertView.swift in Sources */,
 				7027D3B0286325C300F9C913 /* BaseURLRequestConvertible.swift in Sources */,
-				70576DF528643638000406DF /* SearchTVC.swift in Sources */,
+				70576DF528643638000406DF /* SearchTableViewCell.swift in Sources */,
 				70576E372865B54C000406DF /* SignOutViewController.swift in Sources */,
 				70B91DE4288552F800BDB7B9 /* TabBarComponent+MyPage.swift in Sources */,
 				702D86DD2874899A009682A4 /* StageAPI.swift in Sources */,

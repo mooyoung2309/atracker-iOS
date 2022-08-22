@@ -12,7 +12,6 @@ import RxCocoa
 
 class WriteApplyScheduleTVC: BaseTVC {
     static let id = "WriteApplyScheduleTVC"
-    var disposeBag = DisposeBag()
     
     let circle = UIView()
     let titleLabel = UILabel()

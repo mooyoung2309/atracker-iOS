@@ -8,10 +8,19 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
-class BaseCVC: UICollectionViewCell, BaseViewProtocol {
-    required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+class BaseCVC: UICollectionViewCell {
+    
+    // MARK: - Properties
+    
+    var disposeBag = DisposeBag()
+    
+    // MARK: - Initializer
+    
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override init(frame: CGRect) {
@@ -22,12 +31,20 @@ class BaseCVC: UICollectionViewCell, BaseViewProtocol {
         setupLayout()
     }
     
-    func update() { }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
+    
+    // MARK: - Setup Methods
     
     func setupProperty() { }
     
     func setupHierarchy() { }
     
     func setupLayout() { }
+    
+    func setupBind() { }
 }
 
