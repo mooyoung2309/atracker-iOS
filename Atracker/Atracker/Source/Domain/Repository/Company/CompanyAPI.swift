@@ -15,7 +15,7 @@ enum CompanyAPI{
 
 extension CompanyAPI: BaseURLRequestConvertible {
     var baseURL: String {
-        return Key.baseURL + "/company"
+        return Environment.url + "/company"
     }
     
     var method: HTTPMethod {

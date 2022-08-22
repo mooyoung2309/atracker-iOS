@@ -18,7 +18,7 @@ enum AuthAPI{
 
 extension AuthAPI: BaseURLRequestConvertible {
     var baseURL: String {
-        return Key.baseURL + "/auth"
+        return Environment.url + "/auth"
     }
     
     var method: HTTPMethod {

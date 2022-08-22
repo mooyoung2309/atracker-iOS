@@ -40,7 +40,7 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     private let fetchSSOSubject = PublishSubject<SSO>()
     private let tapAppleButtonSubject = PublishSubject<Void>()
     
-    private let googleSignInConfig = GIDConfiguration(clientID: Key.googleClientID)
+    private let googleSignInConfig = GIDConfiguration(clientID: Environment.googleClientID)
     
     override func setupNavigaionBar() {
         super.setupNavigaionBar()

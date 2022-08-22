@@ -15,7 +15,7 @@ enum StageAPI {
 
 extension StageAPI: BaseURLRequestConvertible {
     var baseURL: String {
-        return Key.baseURL + "/stage/"
+        return Environment.url + "/stage/"
     }
     
     var method: HTTPMethod {

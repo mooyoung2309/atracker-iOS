@@ -48,6 +48,9 @@
 		700DEF222893BE47008AAE26 /* MyPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DEF1E2893BE47008AAE26 /* MyPageInteractor.swift */; };
 		700DEF292894266D008AAE26 /* ApplyWriteOverallPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DEF282894266D008AAE26 /* ApplyWriteOverallPresentable.swift */; };
 		700F34FD285C523600F16DA6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F34FC285C523600F16DA6 /* AlertView.swift */; };
+		701012FA28B34F6600B38D64 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 701012F828B34F6600B38D64 /* debug.xcconfig */; };
+		701012FB28B34F6600B38D64 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 701012F928B34F6600B38D64 /* release.xcconfig */; };
+		701012FD28B3527E00B38D64 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701012FC28B3527E00B38D64 /* Enviroment.swift */; };
 		701312752886E8F800A5C588 /* SignUpAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312742886E8F800A5C588 /* SignUpAgreementView.swift */; };
 		7013127A2886E90B00A5C588 /* SignUpAgreementRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312762886E90B00A5C588 /* SignUpAgreementRouter.swift */; };
 		7013127B2886E90B00A5C588 /* SignUpAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701312772886E90B00A5C588 /* SignUpAgreementViewController.swift */; };
@@ -313,6 +316,9 @@
 		700DEF1E2893BE47008AAE26 /* MyPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInteractor.swift; sourceTree = "<group>"; };
 		700DEF282894266D008AAE26 /* ApplyWriteOverallPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyWriteOverallPresentable.swift; sourceTree = "<group>"; };
 		700F34FC285C523600F16DA6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		701012F828B34F6600B38D64 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		701012F928B34F6600B38D64 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		701012FC28B3527E00B38D64 /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		701312742886E8F800A5C588 /* SignUpAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementView.swift; sourceTree = "<group>"; };
 		701312762886E90B00A5C588 /* SignUpAgreementRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementRouter.swift; sourceTree = "<group>"; };
 		701312772886E90B00A5C588 /* SignUpAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreementViewController.swift; sourceTree = "<group>"; };
@@ -727,6 +733,24 @@
 				700DBEC52868D7FD00883A4F /* SignUpSuccess */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		701012F628B34F6600B38D64 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				701012F728B34F6600B38D64 /* Config */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		701012F728B34F6600B38D64 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				701012F828B34F6600B38D64 /* debug.xcconfig */,
+				701012F928B34F6600B38D64 /* release.xcconfig */,
+				701012FC28B3527E00B38D64 /* Enviroment.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		7013126A2886E7DF00A5C588 /* SignUpAgreement */ = {
@@ -1178,6 +1202,7 @@
 		70A2F67D2834BFCB00E6B95B /* Atracker */ = {
 			isa = PBXGroup;
 			children = (
+				701012F628B34F6600B38D64 /* Resource */,
 				701CE2242849CC36009230CE /* App */,
 				7027D3A12862D22C00F9C913 /* Secret */,
 				70D78539289266C300E96D1E /* Source */,
@@ -1561,7 +1586,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				701012FB28B34F6600B38D64 /* release.xcconfig in Resources */,
 				70A2F68B2834BFCB00E6B95B /* LaunchScreen.storyboard in Resources */,
+				701012FA28B34F6600B38D64 /* debug.xcconfig in Resources */,
 				70A2F6882834BFCB00E6B95B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1708,6 +1735,7 @@
 				70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */,
 				700DBECD2868D82D00883A4F /* SignUpSuccessInteractor.swift in Sources */,
 				7027D3962862B2A400F9C913 /* AuthService.swift in Sources */,
+				701012FD28B3527E00B38D64 /* Enviroment.swift in Sources */,
 				7027D3A02862D0C000F9C913 /* Key.swift in Sources */,
 				70A88E6C2851A4A90027D673 /* BlogViewController.swift in Sources */,
 				70A88E7D2851B94A0027D673 /* TabBarComponent+Apply.swift in Sources */,
@@ -2092,7 +2120,7 @@
 		};
 		70A2F6A62834BFCB00E6B95B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BD0E77B8459E7FF0DA55EFF /* Pods-Atracker.debug.xcconfig */;
+			baseConfigurationReference = 701012F828B34F6600B38D64 /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2124,7 +2152,7 @@
 		};
 		70A2F6A72834BFCB00E6B95B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C329C70774F6BCD8878370D0 /* Pods-Atracker.release.xcconfig */;
+			baseConfigurationReference = 701012F928B34F6600B38D64 /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

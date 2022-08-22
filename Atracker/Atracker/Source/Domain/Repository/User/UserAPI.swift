@@ -18,7 +18,7 @@ enum UserAPI{
 
 extension UserAPI: BaseURLRequestConvertible {
     var baseURL: String {
-        return Key.baseURL + "/user"
+        return Environment.url + "/user"
     }
     
     var method: HTTPMethod {
