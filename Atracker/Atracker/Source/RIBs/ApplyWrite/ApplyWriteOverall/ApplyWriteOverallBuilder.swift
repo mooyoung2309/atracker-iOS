@@ -39,7 +39,7 @@ final class ApplyWriteOverallBuilder: Builder<ApplyWriteOverallDependency>, Appl
     func build(withListener listener: ApplyWriteOverallListener) -> ApplyWriteOverallRouting {
         let component = ApplyWriteOverallComponent(dependency: dependency)
         let viewController = ApplyWriteOverallViewController()
-        let interactor = ApplyWriteOverallInteractor(presenter: viewController, applyService: component.applyService, companyService: component.companyService, stageService: component.stageService)
+        let interactor = ApplyWriteOverallInteractor(presenter: viewController)
         let applyWriteScheduleBuilder = WriteApplyScheduleBuilder(dependency: component)
         
         interactor.listener = listener

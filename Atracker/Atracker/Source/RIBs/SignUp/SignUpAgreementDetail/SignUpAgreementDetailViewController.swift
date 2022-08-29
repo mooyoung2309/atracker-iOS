@@ -20,8 +20,8 @@ final class SignUpAgreementDetailViewController: BaseNavigationViewController, S
     
     let webView = WKWebView()
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         showNavigationBarBackButton()
     }
     

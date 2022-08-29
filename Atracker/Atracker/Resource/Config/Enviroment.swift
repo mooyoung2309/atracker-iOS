@@ -12,4 +12,3 @@ struct Environment {
     
     static let googleClientID: String = Bundle.main.object(forInfoDictionaryKey: "GOOGLE_CLIENT_ID") as? String ?? ""
 }
-

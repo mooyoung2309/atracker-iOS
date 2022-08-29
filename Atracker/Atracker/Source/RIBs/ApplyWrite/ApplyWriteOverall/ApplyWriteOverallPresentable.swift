@@ -8,28 +8,34 @@
 import Foundation
 
 enum ApplyWriteOverallPresentableAction {
-    case viewWillAppear
-    case tapBackButton
-    case tapNextButton
-    case tapCompanyCell(Company)
-    case tapAddCompanyCell(String)
-    case tapJobTypeToggleButton
-    case tapJobTypeCell(JobType)
-    case tapStageCell(Stage)
-    case textCompanyName(String)
-    case textJobPosition(String)
+    case refresh
+    case textCompany(String)
+//    case viewWillAppear
+//    case tapBackButton
+//    case tapNextButton
+//    case tapCompanyCell(Company)
+//    case tapAddCompanyCell(String)
+//    case tapJobTypeToggleButton
+//    case tapJobTypeCell(JobType)
+//    case tapStageCell(Stage)
+//    case textCompanyName(String)
+//    case textJobPosition(String)
 }
 
+
 struct ApplyWriteOverallPresentableState {
-    var companies: [Company] = []
-    var jobTypes: [JobType] = JobType.list
-    var stages: [Stage] = []
-    
-    var updatedCompany: Company? = nil
-    var updatedJobPosition: String? = nil
-    var updatedJobType: JobType? = nil
-    var updatedStages: [Stage] = []
-    
-    var showCompanyTableView: Bool = false
-    var showJobTypeTableView: Bool = false
+    var companySections: [SearchSectionModel] = []
+    var jobPositionSections: [SearchSectionModel] = []
+    var jobTypeSections: [SearchSectionModel] = []
+//    var companies: [Company] = []
+//    var jobTypes: [JobType] = JobType.list
+//    var stages: [Stage] = []
+//
+//    var updatedCompany: Company? = nil
+//    var updatedJobPosition: String? = nil
+//    var updatedJobType: JobType? = nil
+//    var updatedStages: [Stage] = []
+//
+//    var showCompanyTableView: Bool = false
+//    var showJobTypeTableView: Bool = false
 }

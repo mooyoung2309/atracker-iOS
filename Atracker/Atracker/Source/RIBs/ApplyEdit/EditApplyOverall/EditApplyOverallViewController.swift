@@ -75,10 +75,10 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
         hideCompanyTableView()
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
-        setNavigaionBarTitle("지원 현황 편집")
+        setNavigationBarTitle("지원 현황 편집")
         showNavigationBarBackButton()
     }
     

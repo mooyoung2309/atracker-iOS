@@ -42,8 +42,8 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     
     private let googleSignInConfig = GIDConfiguration(clientID: Environment.googleClientID)
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         hideNavigationBar()
     }
     
