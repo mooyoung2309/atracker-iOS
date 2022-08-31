@@ -13,7 +13,7 @@ enum StageAPI {
     case post(StageCreateRequest)
 }
 
-extension StageAPI: BaseURLRequestConvertible {
+extension StageAPI: API {
     var baseURL: String {
         return Environment.url + "/stage/"
     }

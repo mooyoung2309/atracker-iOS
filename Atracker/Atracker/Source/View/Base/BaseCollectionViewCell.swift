@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 
-class BaseCVC: UICollectionViewCell {
+class BaseCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     

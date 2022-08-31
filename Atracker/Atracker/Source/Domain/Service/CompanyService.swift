@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import RxSwift
 
 protocol CompanyServiceProtocol {
     func search(title: String, page: Int, completion: @escaping (Result<CompanyResponse, Error>) -> Void)
@@ -16,7 +17,6 @@ class CompanyService: CompanyServiceProtocol {
     let companyRepository = CompanyRepository()
     
     func search(title: String, page: Int, completion: @escaping (Result<CompanyResponse, Error>) -> Void) {
-        
         companyRepository.search(queryRequest: .init(page: page, size: 10), bodyRequest: .init(title: title, userDefined: false)) { result in
             switch result {
             case .success(let data):

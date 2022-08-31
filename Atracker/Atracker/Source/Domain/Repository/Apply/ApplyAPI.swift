@@ -15,7 +15,7 @@ enum ApplyAPI {
     case delete(ApplyDeleteRequest)
 }
 
-extension ApplyAPI: BaseURLRequestConvertible {
+extension ApplyAPI: API {
     var baseURL: String {
         return Environment.url + "/apply/"
     }

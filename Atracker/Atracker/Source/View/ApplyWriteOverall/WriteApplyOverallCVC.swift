@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class WriteApplyOverallCVC: BaseCVC {
+class WriteApplyOverallCVC: BaseCollectionViewCell {
     static let id = "WriteApplyOverallCVC"
     
     let buttonView  = UIView()

@@ -27,8 +27,9 @@ protocol ApplyWriteOverallPresentableListener: AnyObject {
 final class ApplyWriteOverallViewController: BaseNavigationViewController, ApplyWriteOverallPresentable, ApplyWriteOverallViewControllable {
     weak var listener: ApplyWriteOverallPresentableListener?
     
-    typealias DataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>
-
+    typealias TableViewDataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>
+    typealias CollectionViewDataSource = RxCollectionViewSectionedReloadDataSource<StageSectionModel>
+    
     // MARK: - UI Components
     
     let companySearchTextField: SearchTextField = .init(type: .company)
@@ -41,7 +42,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
     
     // MARK: - Properties
     
-    private lazy var dataSource = DataSource { _, collectionView, indexPath, item -> UITableViewCell in
+    private lazy var companyDataSource = TableViewDataSource { _, collectionView, indexPath, item -> UITableViewCell in
+        switch item {
+        case let .result(reactor):
+            guard let cell = collectionView.dequeueReusableCell(withIdentifier: String(describing: ResultTableViewCell.self), for: indexPath) as? ResultTableViewCell else { return .init() }
+            
+            cell.reactor = reactor
+            return cell
+        }
+    }
+    
+    private lazy var jobTypeDataSource = TableViewDataSource { _, collectionView, indexPath, item -> UITableViewCell in
         switch item {
         case let .result(reactor):
             guard let cell = collectionView.dequeueReusableCell(withIdentifier: String(describing: ResultTableViewCell.self), for: indexPath) as? ResultTableViewCell else { return .init() }
@@ -95,6 +106,15 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
     
     override func setupBind() {
         super.setupBind()
+        
+        guard let listner = listener else { return }
+        
+        companySearchTextField.textField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
+            .map { .textCompany($0) }
+            .bind(to: listner.action)
+            .disposed(by: disposeBag)
 
     }
     

@@ -108,7 +108,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
         let nickname = nickname
         
         if jobPosition != "" {
-            authService.sign(request: SignRequest(accessToken: idToken, jobPosition: jobPosition, nickName: nickname, experienceType: experienceType, sso: sso)) { [weak self] result in
+            authService.sign(request: SignRequest(accessToken: idToken, jobPosition: jobPosition, nickName: nickname, primaryEmail: "", experienceType: experienceType, sso: sso)) { [weak self] result in
                 switch result {
                 case .success(let data):
                     Log("[D] 회원가입 성공 \(data)")

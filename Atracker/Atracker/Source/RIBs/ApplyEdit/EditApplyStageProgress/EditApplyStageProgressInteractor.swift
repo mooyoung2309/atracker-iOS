@@ -161,7 +161,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
             case .success(_):
                 completion()
                 return
-            case .failure(let error):
+            case .failure:
                 completion()
                 return
             }

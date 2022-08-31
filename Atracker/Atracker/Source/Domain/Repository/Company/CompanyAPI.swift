@@ -13,7 +13,7 @@ enum CompanyAPI{
     case search(CompanySearchQuery, CompanySearchCondition)
 }
 
-extension CompanyAPI: BaseURLRequestConvertible {
+extension CompanyAPI: API {
     var baseURL: String {
         return Environment.url + "/company"
     }

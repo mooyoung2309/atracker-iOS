@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ApplyResponse
 struct SignRequest: Codable {
-    let accessToken, jobPosition, nickName: String
+    let accessToken, jobPosition, nickName, primaryEmail: String
     let experienceType: ExperienceType
     let sso: SSO
 
@@ -18,6 +18,7 @@ struct SignRequest: Codable {
         case experienceType = "experience_type"
         case jobPosition = "job_position"
         case nickName = "nick_name"
+        case primaryEmail = "primary_email"
         case sso
     }
 }

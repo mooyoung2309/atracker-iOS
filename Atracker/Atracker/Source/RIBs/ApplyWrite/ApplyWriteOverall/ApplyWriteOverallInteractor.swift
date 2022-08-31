@@ -31,8 +31,8 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     
     enum Mutation {
         case setCompanySections([SearchSectionModel])
-        case setJobPositionSections([SearchSectionModel])
         case setJobTypeSections([SearchSectionModel])
+        case setStageSections([StageSectionModel])
 //        case fetchCompanies([Company])
 //        case fetchJobTypes([JobType])
 //        case fetchStages([Stage])
@@ -51,7 +51,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     weak var router: ApplyWriteOverallRouting?
     weak var listener: ApplyWriteOverallListener?
     
-    private let provider = ServiceProvider.shared
+    private let provider = Provider.shared
     
     override init(presenter: ApplyWriteOverallPresentable) {
         self.initialState = .init()
@@ -69,14 +69,35 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         super.willResignActive()
     }
     
-//    func mutate(action: ApplyWriteOverallPresentableAction) -> Observable<Mutation> {
-//        switch action {
-//        case .refresh:
-//            return .just()
-//        case let .textCompany(text):
-//            <#code#>
-//        }
-//    }
+    func mutate(action: Action) -> Observable<Mutation> {
+        switch action {
+        case .refresh:
+            return .empty()
+        case let .textCompany(text):
+            provider.api.company.search(queryRequest: .init(page: 1, size: 100), bodyRequest: .init(title: "삼", userDefined: true)).bind { i in
+                print(i)
+            }
+
+            return .empty()
+        }
+    }
+    
+    func reduce(state: State, mutation: Mutation) -> State {
+        var newState = state
+        
+        switch mutation {
+        case let .setCompanySections(sections):
+            newState.companySections = sections
+        case let .setJobTypeSections(sections):
+            newState.jobTypeSections = sections
+        case let .setStageSections(sections):
+            newState.stageSections = sections
+        case .attach: break
+        case .detach: break
+        }
+        
+        return newState
+    }
     
     private func makeSections(titles: [String]) -> [SearchSectionModel] {
         let searchItems = titles.map({ (title) -> SearchItem in
@@ -85,6 +106,15 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         let searchSectionModel = SearchSectionModel(model: .search(searchItems), items: searchItems)
         
         return [searchSectionModel]
+    }
+    
+    private func makeSections(stages: [Stage]) -> [StageSectionModel] {
+        let stageItems = stages.map({ (stage) -> StageItem in
+            StageItem.stage(StageCollectionViewCellReactor(state: .init(order: nil, stage: stage)))
+        })
+        let stageSectionModel = StageSectionModel(model: .stage(stageItems), items: stageItems)
+        
+        return [stageSectionModel]
     }
     
 //    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {

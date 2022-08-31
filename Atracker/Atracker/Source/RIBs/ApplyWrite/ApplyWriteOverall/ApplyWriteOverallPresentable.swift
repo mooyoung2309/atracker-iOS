@@ -25,8 +25,8 @@ enum ApplyWriteOverallPresentableAction {
 
 struct ApplyWriteOverallPresentableState {
     var companySections: [SearchSectionModel] = []
-    var jobPositionSections: [SearchSectionModel] = []
     var jobTypeSections: [SearchSectionModel] = []
+    var stageSections: [StageSectionModel] = []
 //    var companies: [Company] = []
 //    var jobTypes: [JobType] = JobType.list
 //    var stages: [Stage] = []

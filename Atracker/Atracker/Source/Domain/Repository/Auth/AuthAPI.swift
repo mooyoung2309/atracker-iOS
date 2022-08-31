@@ -16,7 +16,7 @@ enum AuthAPI{
     case tokenRefresh(TokenRefreshRequest)
 }
 
-extension AuthAPI: BaseURLRequestConvertible {
+extension AuthAPI: API {
     var baseURL: String {
         return Environment.url + "/auth"
     }
