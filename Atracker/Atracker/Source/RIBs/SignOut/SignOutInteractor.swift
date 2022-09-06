@@ -30,12 +30,12 @@ final class SignOutInteractor: PresentableInteractor<SignOutPresentable>, SignOu
     weak var router: SignOutRouting?
     weak var listener: SignOutListener?
     
-    private let authService: AuthService
+    private let authService: AuthServiceISOLDCODE
     
     private let idTokenRelay = PublishRelay<String>()
     private let ssoRelay = PublishRelay<SSO>()
 
-    init(presenter: SignOutPresentable, authService: AuthService) {
+    init(presenter: SignOutPresentable, authService: AuthServiceISOLDCODE) {
         self.authService = authService
         super.init(presenter: presenter)
         presenter.listener = self

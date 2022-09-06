@@ -29,7 +29,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     weak var router: SignUpPositionRouting?
     weak var listener: SignUpPositionListener?
     
-    private let authService: AuthServiceProtocol
+    private let authService: AuthServiceProtocolISOLDCODE
     private let idToken: String
     private let sso: SSO
     private let nickname: String
@@ -43,7 +43,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
 //    private var jobPosition: String?
 //    private var jobType: String?
 
-    init(presenter: SignUpPositionPresentable, authService: AuthServiceProtocol, idToken: String, sso: SSO, nickname: String) {
+    init(presenter: SignUpPositionPresentable, authService: AuthServiceProtocolISOLDCODE, idToken: String, sso: SSO, nickname: String) {
         self.authService = authService
         self.idToken = idToken
         self.sso = sso

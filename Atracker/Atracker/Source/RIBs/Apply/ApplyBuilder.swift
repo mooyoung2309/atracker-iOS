@@ -14,12 +14,12 @@ protocol ApplyDependency: Dependency {
 
 final class ApplyComponent: Component<ApplyDependency> {
 
-    var applyService: ApplyServiceProtocol {
-        return ApplyService()
+    var applyService: ApplyServiceProtocolISOLDCODE {
+        return ApplyServiceISOLDCODE()
     }
     
-    var userService: UserServiceProtocol {
-        return UserService()
+    var userService: UserServiceProtocolISOLDCODE {
+        return UserServiceISOLDCODE()
     }
     
 }

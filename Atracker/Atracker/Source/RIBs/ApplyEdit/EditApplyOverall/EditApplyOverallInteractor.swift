@@ -29,8 +29,8 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
     weak var router: EditApplyOverallRouting?
     weak var listener: EditApplyOverallListener?
     
-    private let applyService: ApplyServiceProtocol
-    private let companyService: CompanyServiceProtocol
+    private let applyService: ApplyServiceProtocolISOLDCODE
+    private let companyService: CompanyServiceProtocolISOLDCODE
     private let apply: Apply
     private var applyUpdateRequest: ApplyUpdateRequest?
     
@@ -47,7 +47,7 @@ final class EditApplyOverallInteractor: PresentableInteractor<EditApplyOverallPr
     private var prevCompanyName = ""
     private var searchCompanyPage = 1
     
-    init(presenter: EditApplyOverallPresentable, applyService: ApplyServiceProtocol, companyService: CompanyServiceProtocol, apply: Apply) {
+    init(presenter: EditApplyOverallPresentable, applyService: ApplyServiceProtocolISOLDCODE, companyService: CompanyServiceProtocolISOLDCODE, apply: Apply) {
         self.applyService = applyService
         self.companyService = companyService
         self.apply = apply

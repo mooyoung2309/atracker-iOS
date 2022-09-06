@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol UserServiceProtocol {
+protocol UserServiceProtocolISOLDCODE {
     func myPage(completion: @escaping (Result<MyPageResponse, Error>) -> Void)
 }
 
-class UserService: UserServiceProtocol {
+class UserServiceISOLDCODE: UserServiceProtocolISOLDCODE {
     func myPage(completion: @escaping (Result<MyPageResponse, Error>) -> Void) {
-        UserRepository.shared.myPage { result in
+        UserRepositoryISOLDCODE.shared.myPage { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

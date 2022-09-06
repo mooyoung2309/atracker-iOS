@@ -7,17 +7,18 @@
 
 import Foundation
 
-protocol ServiceProviderProtocol: AnyObject {
-    var applyService: ApplyServiceProtocol { get }
-    var companyService: CompanyServiceProtocol { get }
+protocol ServiceProvidable {
+    var applyService: ApplyServicable { get }
+    var companyService: CompanyServicable { get }
+    var stageService: StageServicable { get }
 }
 
-final class ServiceProvider: ServiceProviderProtocol {
+final class ServiceProvider: ServiceProvidable {
     static let shared = ServiceProvider()
     
-    let applyService: ApplyServiceProtocol = ApplyService()
-    let companyService: CompanyServiceProtocol = CompanyService()
-    let stageService: StageServiceProtocolISOLDCODE = StageServiceISOLDCODE()
+    let applyService: ApplyServicable = ApplyService()
+    let companyService: CompanyServicable = CompanyService()
+    let stageService: StageServicable = StageService()
     
     private init() { }
 }

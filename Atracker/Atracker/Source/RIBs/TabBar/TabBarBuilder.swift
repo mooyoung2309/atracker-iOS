@@ -15,8 +15,8 @@ protocol TabBarDependency: Dependency {
 final class TabBarComponent: Component<TabBarDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-    var userService: UserServiceProtocol {
-        return UserService()
+    var userService: UserServiceProtocolISOLDCODE {
+        return UserServiceISOLDCODE()
     }
 }
 

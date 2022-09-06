@@ -10,14 +10,14 @@ import RIBs
 protocol WriteApplyScheduleDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
-    var applyService: ApplyServiceProtocol { get }
+    var applyService: ApplyServiceProtocolISOLDCODE { get }
     
 }
 
 final class WriteApplyScheduleComponent: Component<WriteApplyScheduleDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB
-    var applyService: ApplyServiceProtocol {
+    var applyService: ApplyServiceProtocolISOLDCODE {
         return dependency.applyService
     }
 }

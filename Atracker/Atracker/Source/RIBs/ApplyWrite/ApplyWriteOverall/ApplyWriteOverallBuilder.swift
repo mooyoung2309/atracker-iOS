@@ -8,16 +8,16 @@
 import RIBs
 
 protocol ApplyWriteOverallDependency: Dependency {
-    var applyService: ApplyServiceProtocol { get }
+    var applyService: ApplyServiceProtocolISOLDCODE { get }
 }
 
 final class ApplyWriteOverallComponent: Component<ApplyWriteOverallDependency> {
-    var applyService: ApplyServiceProtocol {
+    var applyService: ApplyServiceProtocolISOLDCODE {
         return dependency.applyService
     }
     
-    var companyService: CompanyServiceProtocol {
-        return CompanyService()
+    var companyService: CompanyServiceProtocolISOLDCODE {
+        return CompanyServiceISOLDCODE()
     }
     
     var stageService: StageServiceProtocolISOLDCODE {

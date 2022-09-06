@@ -31,7 +31,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     weak var router: ApplyDetailRouting?
     weak var listener: ApplyDetailListener?
 
-    private let applyService: ApplyServiceProtocol
+    private let applyService: ApplyServiceProtocolISOLDCODE
     
     private var thisApply: Apply
     private var isShowEditTableView = false
@@ -40,7 +40,7 @@ final class ApplyDetailInteractor: PresentableInteractor<ApplyDetailPresentable>
     private lazy var stageContentsRelay = BehaviorRelay<[StageContent]>(value: [])
     private lazy var showEditTypeTableViewRelay = BehaviorRelay<Bool>(value: false)
     
-    init(presenter: ApplyDetailPresentable, applyService: ApplyServiceProtocol, apply: Apply) {
+    init(presenter: ApplyDetailPresentable, applyService: ApplyServiceProtocolISOLDCODE, apply: Apply) {
         self.applyService = applyService
         self.thisApply = apply
         

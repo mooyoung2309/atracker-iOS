@@ -36,10 +36,10 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
     weak var router: MyPageRouting?
     weak var listener: MyPageListener?
     
-    let authService: AuthServiceProtocol
-    let userService: UserServiceProtocol
+    let authService: AuthServiceProtocolISOLDCODE
+    let userService: UserServiceProtocolISOLDCODE
     
-    init(presenter: MyPagePresentable, authService: AuthServiceProtocol, userService: UserServiceProtocol) {
+    init(presenter: MyPagePresentable, authService: AuthServiceProtocolISOLDCODE, userService: UserServiceProtocolISOLDCODE) {
         self.authService = authService
         self.userService = userService
         

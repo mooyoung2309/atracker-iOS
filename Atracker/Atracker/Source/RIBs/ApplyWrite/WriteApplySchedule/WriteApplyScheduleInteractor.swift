@@ -30,7 +30,7 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
     weak var router: WriteApplyScheduleRouting?
     weak var listener: WriteApplyScheduleListener?
     
-    private let applyService: ApplyServiceProtocol
+    private let applyService: ApplyServiceProtocolISOLDCODE
     private let thisStages: [Stage]
     private var applyCreateRequest: ApplyCreateRequest
     
@@ -38,7 +38,7 @@ final class WriteApplyScheduleInteractor: PresentableInteractor<WriteApplySchedu
     private let dateRelay = BehaviorRelay(value: Date())
     private let applyCreateStagesRelay = BehaviorRelay<[ApplyCreateStage]>(value: [])
     
-    init(presenter: WriteApplySchedulePresentable, applyService: ApplyServiceProtocol, applyCreateRequest: ApplyCreateRequest, stages: [Stage]) {
+    init(presenter: WriteApplySchedulePresentable, applyService: ApplyServiceProtocolISOLDCODE, applyCreateRequest: ApplyCreateRequest, stages: [Stage]) {
         self.applyService = applyService
         self.applyCreateRequest = applyCreateRequest
         self.thisStages = stages

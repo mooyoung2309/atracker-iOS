@@ -30,9 +30,16 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     typealias State = ApplyWriteOverallPresentableState
     
     enum Mutation {
-        case setCompanySections([SearchSectionModel])
-        case setJobTypeSections([SearchSectionModel])
-        case setStageSections([StageSectionModel])
+        case setCompanySearchSections([CompanySearchSectionModel])
+        case setJobTypeSearchSections([JobTypeSearchSectionModel])
+        case setStageSearchSections([StageSearchSectionModel])
+        case updateCompanyText(String)
+        case updateJobPositionText(String)
+        case updateSelectedCompany(Company)
+        case updateSelectedJobType(JobType)
+        case updateSelectedStages(Stage)
+        case updateIsHiddenCompany(Bool)
+        case updateIsHiddenJobType(Bool)
 //        case fetchCompanies([Company])
 //        case fetchJobTypes([JobType])
 //        case fetchStages([Stage])
@@ -44,6 +51,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
 //        case showJobTypeTableView(Bool?)
         case detach
         case attach
+        case none
     }
     
     var initialState: ApplyWriteOverallPresentableState
@@ -51,7 +59,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     weak var router: ApplyWriteOverallRouting?
     weak var listener: ApplyWriteOverallListener?
     
-    private let provider = Provider.shared
+    private let provider = ServiceProvider.shared
     
     override init(presenter: ApplyWriteOverallPresentable) {
         self.initialState = .init()
@@ -72,13 +80,19 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return .empty()
+            return mutateRefresh()
         case let .textCompany(text):
-            provider.api.company.search(queryRequest: .init(page: 1, size: 100), bodyRequest: .init(title: "삼", userDefined: true)).bind { i in
-                print(i)
-            }
-
-            return .empty()
+            return mutateTextCompany(text)
+        case let .textJobPosition(text):
+            return mutateTextJobPosition(text)
+        case .toggleJobType:
+            return mutateToggleJobType()
+        case let .selectCompany(indexPath):
+            return mutateSelectCompany(indexPath)
+        case let .selectJobType(indexPath):
+            return mutateSelectJobType(indexPath)
+        case let .selectStage(indexPath):
+            return mutateSelectStage(indexPath)
         }
     }
     
@@ -86,35 +100,127 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         var newState = state
         
         switch mutation {
-        case let .setCompanySections(sections):
+        case let .setCompanySearchSections(sections):
             newState.companySections = sections
-        case let .setJobTypeSections(sections):
+        case let .setJobTypeSearchSections(sections):
             newState.jobTypeSections = sections
-        case let .setStageSections(sections):
+        case let .setStageSearchSections(sections):
             newState.stageSections = sections
+        case let .updateCompanyText(text):
+            newState.companyText = text
+        case let .updateJobPositionText(text):
+            newState.jobPositionText = text
+        case let .updateSelectedCompany(company):
+            newState.selectedCompany = company
+        case let .updateSelectedJobType(jobType):
+            newState.selectedJobType = jobType
+        case let .updateSelectedStages(stage):
+            if newState.selectedStages.contains(where: { $0.id == stage.id }) {
+                newState.selectedStages.removeElementByReference(stage)
+            } else {
+                newState.selectedStages.append(stage)
+            }
+        case let .updateIsHiddenCompany(bool):
+            newState.isHiddenCompany = bool
+        case let .updateIsHiddenJobType(bool):
+            newState.isHiddenJobType = bool
         case .attach: break
         case .detach: break
+        case .none: break
         }
         
         return newState
     }
     
-    private func makeSections(titles: [String]) -> [SearchSectionModel] {
-        let searchItems = titles.map({ (title) -> SearchItem in
-            SearchItem.result(ResultTableViewCellReator(state: .init(title: title, highlight: "")))
-        })
-        let searchSectionModel = SearchSectionModel(model: .search(searchItems), items: searchItems)
+    private func mutateRefresh() -> Observable<Mutation> {
+        let setJobTypeSections: Observable<Mutation> = .just(.setJobTypeSearchSections(makeSections(jobTypes: JobType.elements)))
+        let setStageSections: Observable<Mutation> = provider.stageService.get().map { [weak self] in
+            return .setStageSearchSections(self?.makeSections(stages: $0) ?? [])
+        }
         
-        return [searchSectionModel]
+        return .concat([setJobTypeSections, setStageSections])
     }
     
-    private func makeSections(stages: [Stage]) -> [StageSectionModel] {
-        let stageItems = stages.map({ (stage) -> StageItem in
-            StageItem.stage(StageCollectionViewCellReactor(state: .init(order: nil, stage: stage)))
-        })
-        let stageSectionModel = StageSectionModel(model: .stage(stageItems), items: stageItems)
+    private func mutateTextCompany(_ text: String) -> Observable<Mutation> {
+        let setCompanySections: Observable<Mutation> = provider.companyService.search(title: text, page: 1)
+            .map { [weak self] in
+                return .setCompanySearchSections(self?.makeSections(companyResponse: $0) ?? [])
+            }
+        let updateIsHiddenCompany: Observable<Mutation> = .just(.updateIsHiddenCompany(text.isEmpty))
+        let updateIsHiddenJobType: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
+        let updateCompanyText: Observable<Mutation> = .just(.updateCompanyText(text))
         
-        return [stageSectionModel]
+        return .concat([setCompanySections, updateIsHiddenCompany, updateIsHiddenJobType, updateCompanyText])
+    }
+    
+    private func mutateTextJobPosition(_ text: String) -> Observable<Mutation> {
+        let updateJobPositionText: Observable<Mutation> = .just(.updateJobPositionText(text))
+        let updateIsHiddenCompany: Observable<Mutation> = .just(.updateIsHiddenCompany(true))
+        let updateIsHiddenJobType: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
+        
+        return .concat([updateJobPositionText, updateIsHiddenCompany, updateIsHiddenJobType])
+    }
+    
+    private func mutateToggleJobType() -> Observable<Mutation> {
+        return .concat([.just(.updateIsHiddenJobType(!currentState.isHiddenJobType)),
+                        .just(.updateIsHiddenCompany(true))])
+    }
+    
+    private func mutateSelectCompany(_ indexPath: IndexPath) -> Observable<Mutation> {
+        guard case let .result(reactor) = currentState.companySections[indexPath.section].items[indexPath.row] else { return .empty() }
+        
+        if let company = reactor.currentState {
+            return .just(.updateSelectedCompany(company))
+        } else {
+            return provider.companyService.add(name: currentState.companyText).map {
+                if let company = $0.companies.first {
+                    return .updateSelectedCompany(company)
+                } else {
+                    return .none
+                }
+            }
+        }
+    }
+    
+    private func mutateSelectJobType(_ indexPath: IndexPath) -> Observable<Mutation> {
+        guard case let .result(reactor) = currentState.jobTypeSections[indexPath.section].items[indexPath.row] else { return .empty() }
+        
+        return .just(.updateSelectedJobType(reactor.currentState))
+    }
+    
+    private func mutateSelectStage(_ indexPath: IndexPath) -> Observable<Mutation> {
+        guard case let .result(reactor) = currentState.stageSections[indexPath.section].items[indexPath.row] else { return .empty() }
+        
+        return .just(.updateSelectedStages(reactor.currentState.stage))
+    }
+    
+    private func makeSections(jobTypes: [JobType]) -> [JobTypeSearchSectionModel] {
+        let items: [JobTypeSearchItem] = jobTypes.map({ (jobType) -> JobTypeSearchItem in
+            JobTypeSearchItem.result(JobTypeSearchTableViewCellReactor(jobType: jobType))
+        })
+        let section = JobTypeSearchSectionModel.init(model: .search(items), items: items)
+        
+        return [section]
+    }
+    
+    private func makeSections(companyResponse: CompanyResponse) -> [CompanySearchSectionModel] {
+        var items: [CompanySearchItem] = companyResponse.contents.map({ (company) -> CompanySearchItem in
+            CompanySearchItem.result(CompanySearchTableViewCellReactor(company: company))
+        })
+        items.append(CompanySearchItem.result(CompanySearchTableViewCellReactor(company: nil)))
+                     
+        let section = CompanySearchSectionModel.init(model: .search(items), items: items)
+        
+        return [section]
+    }
+    
+    private func makeSections(stages: [Stage]) -> [StageSearchSectionModel] {
+        let items = stages.map({ (stage) -> StageSearchItem in
+            StageSearchItem.result(StageSearchCollectionViewCellReactor(state: .init(order: nil, stage: stage)))
+        })
+        let section = StageSearchSectionModel.init(model: .search(items), items: items)
+        
+        return [section]
     }
     
 //    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {

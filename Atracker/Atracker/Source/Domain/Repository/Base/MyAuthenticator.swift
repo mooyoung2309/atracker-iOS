@@ -31,7 +31,7 @@ class MyAuthenticator: Authenticator {
         let refreshToken = UserDefaults.standard.string(forKey: UserDefaultKey.refreshToken) ?? ""
         let request = TokenRefreshRequest(refreshToken: refreshToken)
         
-        AuthRepository.postTokenRefresh(request: request) { response in
+        AuthRepositoryISOLDCODE.postTokenRefresh(request: request) { response in
             switch response {
             case .success(let data):
                 Log("[D] 토큰 리프레시 성공")

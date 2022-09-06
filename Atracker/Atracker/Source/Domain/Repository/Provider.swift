@@ -8,13 +8,13 @@
 import Foundation
 
 protocol APIRepositable {
-    var company: CompanyRepositable { get }
+    var company: CompanyRepositableISOLDCODE { get }
 }
 
 class APIRepository: APIRepositable {
-    let company: CompanyRepositable
+    let company: CompanyRepositableISOLDCODE
     
-    init(company: CompanyRepositable) {
+    init(company: CompanyRepositableISOLDCODE) {
         self.company = company
     }
 }
@@ -26,7 +26,7 @@ protocol Providable {
 final class Provider: Providable {
     static let shared = Provider()
     
-    let api: APIRepository = APIRepository(company: CompanyRepository())
+    let api: APIRepository = APIRepository(company: CompanyRepositoryISOLDCODE())
     
     private init() { }
 }

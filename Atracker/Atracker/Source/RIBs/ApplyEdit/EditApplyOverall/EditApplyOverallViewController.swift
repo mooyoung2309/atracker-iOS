@@ -58,7 +58,7 @@ final class EditApplyOverallViewController: BaseNavigationViewController, EditAp
     private let changedStageProgressesSubject = PublishSubject<[StageProgress]>()
     
     private var stageProgresses: [StageProgress] = []
-    private var jobTypes: [JobType] = JobType.list
+    private var jobTypes: [JobType] = JobType.elements
     private var companies: [Company] = []
     
     override func viewDidLoad() {
