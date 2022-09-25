@@ -17,6 +17,14 @@ extension Repository {
     func send<T: Codable>(api: API) -> Observable<T> {
         return Observable<T>.create { observer in
             AF.request(api, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<T>) in
+                print(response.data)
+                print(response.response)
+                print(response.result)
+                print(response.error)
+                print(response.request)
+                print(response.debugDescription)
+                print(response.description)
+                print(response.value)
                 switch response.result {
                 case let .success(data):
                     observer.onNext(data)

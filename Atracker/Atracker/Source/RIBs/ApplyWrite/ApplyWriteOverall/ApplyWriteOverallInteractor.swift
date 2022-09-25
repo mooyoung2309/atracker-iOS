@@ -134,10 +134,21 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     
     private func mutateRefresh() -> Observable<Mutation> {
         let setJobTypeSections: Observable<Mutation> = .just(.setJobTypeSearchSections(makeSections(jobTypes: JobType.elements)))
-        let setStageSections: Observable<Mutation> = provider.stageService.get().map { [weak self] in
-            return .setStageSearchSections(self?.makeSections(stages: $0) ?? [])
+        let setStageSections: Observable<Mutation> = Observable.create { [weak self] (observer) in
+            self?.provider.stageService.get()
+                .bind {
+                    observer.onNext(.setStageSearchSections(self?.makeSections(stages: $0) ?? []))
+                    observer.onCompleted()
+                }
+            return Disposables.create()
         }
-        
+//
+//        provider.stageService.get().bind { [weak self] in
+//
+//            return .setStageSearchSections(self?.makeSections(stages: $0) ?? [])
+//        }
+//            .disposeOnDeactivate(interactor: self)
+//
         return .concat([setJobTypeSections, setStageSections])
     }
     

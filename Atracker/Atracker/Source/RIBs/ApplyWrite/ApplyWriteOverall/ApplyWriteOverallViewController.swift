@@ -27,10 +27,9 @@ protocol ApplyWriteOverallPresentableListener: AnyObject {
 final class ApplyWriteOverallViewController: BaseNavigationViewController, ApplyWriteOverallPresentable, ApplyWriteOverallViewControllable {
     weak var listener: ApplyWriteOverallPresentableListener?
     
-//    typealias TableViewDataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>
     typealias CompanyDataSource = RxTableViewSectionedReloadDataSource<CompanySearchSectionModel>
     typealias JobTypeDataSource = RxTableViewSectionedReloadDataSource<JobTypeSearchSectionModel>
-    typealias CollectionViewDataSource = RxCollectionViewSectionedReloadDataSource<StageSectionModel>
+    typealias StageDataSource = RxCollectionViewSectionedReloadDataSource<StageSearchSectionModel>
     
     // MARK: - UI Components
     
@@ -66,6 +65,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         }
     }
     
+    private lazy var stageDataSource = StageDataSource {_, collectionView, indexPath, item -> UICollectionViewCell in
+        switch item {
+        case let .result(reactor):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: StageSearchCollectionViewCell.self), for: indexPath) as? StageSearchCollectionViewCell else { return .init() }
+            
+            cell.reactor = reactor
+            
+            return cell
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -91,9 +101,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         jobTypeSearchTableView.register(JobTypeSearchTableViewCell.self, forCellReuseIdentifier: String(describing: JobTypeSearchTableViewCell.self))
         jobTypeSearchTableView.rowHeight = 30
         
+        stageSearchCollectionView.backgroundColor = .clear
+        stageSearchCollectionView.register(StageSearchCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: StageSearchCollectionViewCell.self))
+        
         stageHeaderLabel.text = "지원 단계를 순서대로 눌러주세요."
         stageHeaderLabel.font = .systemFont(ofSize: 14, weight: .medium)
         stageHeaderLabel.textColor = .gray3
+        
+        nextButton.setTitle("다음", for: .normal)
+        nextButton.setTitleColor(.neonGreen, for: .normal)
+        nextButton.backgroundColor = .backgroundGray
+        nextButton.addShadow(.top)
     }
     
     override func setupHierarchy() {
@@ -140,6 +158,12 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         stageSearchCollectionView.snp.makeConstraints {
             $0.top.equalTo(stageHeaderLabel.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(200)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.height.equalTo(Size.tabBarHeight)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -181,6 +205,8 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: listner.action)
             .disposed(by: disposeBag)
         
+        stageSearchCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        
         listner.state.map(\.companySections)
             .bind(to: companySearchTableView.rx.items(dataSource: companyDataSource))
             .disposed(by: disposeBag)
@@ -196,11 +222,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: jobTypeSearchTableView.rx.items(dataSource: jobTypeDataSource))
             .disposed(by: disposeBag)
         
-        listner.state.map(\.jobTypeSections)
+        listner.state
+            .map(\.jobTypeSections)
             .bind { [weak self] _ in
                 guard let this = self else { return }
                 this.refreshTableView(tableView: this.jobTypeSearchTableView)
             }
+            .disposed(by: disposeBag)
+        
+        listner.state
+            .map(\.stageSections)
+            .bind(to: stageSearchCollectionView.rx.items(dataSource: stageDataSource))
             .disposed(by: disposeBag)
         
         listner.state.map(\.selectedCompany)
@@ -235,6 +267,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         spinner.startAnimating()
         
         return footerView
+    }
+}
+
+extension ApplyWriteOverallViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch stageDataSource[indexPath.section].items[indexPath.row] {
+        case let .result(reactor):
+            let text = reactor.currentState.stage.title
+            
+            return CGSize(width: text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 30, height: 32)
+        }
     }
 }
 

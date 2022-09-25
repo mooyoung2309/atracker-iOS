@@ -13,32 +13,23 @@ class StageSearchCollectionViewCell: BaseCollectionViewCell, View {
     
     // MARK: - UI Components
     
-    let stackView: UIStackView = .init()
     let titleLabel: UILabel = .init()
     let circleView: UIView = .init()
     let circleLabel: UILabel = .init()
     
     // MARK: - Setup Methods
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        stackView.subviews.forEach({ $0.removeFromSuperview() })
-        stackView.layer.borderColor = UIColor.clear.cgColor
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         
-        stackView.backgroundColor = .backgroundLightGray
-        stackView.roundCorners(.allCorners, radius: 15)
-        stackView.addBorders(for: [.all], width: 1, color: .clear)
+        contentView.backgroundColor = .backgroundLightGray
+        contentView.setupCornerRadius(15, maskedCorners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
 
-        titleLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        titleLabel.font = .systemFont(ofSize: 16, weight: .regular)
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         
-        circleView.backgroundColor     = .neonGreen
+        circleView.backgroundColor = .neonGreen
         circleView.roundCorners(.allCorners, radius: 6.5)
         
         circleLabel.textColor = .black
@@ -49,19 +40,20 @@ class StageSearchCollectionViewCell: BaseCollectionViewCell, View {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubviews([titleLabel, circleView])
+        contentView.addSubviews(titleLabel, circleView)
         circleView.addSubview(circleLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        stackView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview().inset(8)
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(15)
+            $0.centerY.equalToSuperview()
         }
         
         circleView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(15)
             $0.width.height.equalTo(13)
         }
         
