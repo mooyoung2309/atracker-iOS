@@ -40,7 +40,7 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
     let jobTypeSearchTableView: UITableView = .init()
     let stageHeaderLabel: UILabel = .init()
     let stageSearchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    let nextButton = UIButton(type: .system)
+    let nextButton: AtrackerButton = .init(type: .next)
     
     // MARK: - Properties
     
@@ -60,6 +60,7 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         case let .result(reactor):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: JobTypeSearchTableViewCell.self), for: indexPath) as? JobTypeSearchTableViewCell else { return .init() }
             
+            cell.selectionStyle = .none
             cell.reactor = reactor
             return cell
         }
@@ -71,7 +72,6 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: StageSearchCollectionViewCell.self), for: indexPath) as? StageSearchCollectionViewCell else { return .init() }
             
             cell.reactor = reactor
-            
             return cell
         }
     }
@@ -108,16 +108,16 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         stageHeaderLabel.font = .systemFont(ofSize: 14, weight: .medium)
         stageHeaderLabel.textColor = .gray3
         
-        nextButton.setTitle("다음", for: .normal)
-        nextButton.setTitleColor(.neonGreen, for: .normal)
-        nextButton.backgroundColor = .backgroundGray
-        nextButton.addShadow(.top)
+//        nextButton.setTitle("다음", for: .normal)
+//        nextButton.setTitleColor(.neonGreen, for: .normal)
+//        nextButton.backgroundColor = .backgroundGray
+//        nextButton.addShadow(.top)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubviews(companySearchTextField, jobPositionSearchTextField, jobTypeSearchTextField, stageHeaderLabel, nextButton, companySearchTableView, jobTypeSearchTableView, stageSearchCollectionView)
+        contentView.addSubviews(companySearchTextField, jobPositionSearchTextField, jobTypeSearchTextField, stageHeaderLabel, nextButton, stageSearchCollectionView, companySearchTableView, jobTypeSearchTableView)
     }
     
     override func setupLayout() {
@@ -207,6 +207,11 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         
         stageSearchCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         
+        stageSearchCollectionView.rx.itemSelected
+            .map { .selectStage($0) }
+            .bind(to: listner.action)
+            .disposed(by: disposeBag)
+        
         listner.state.map(\.companySections)
             .bind(to: companySearchTableView.rx.items(dataSource: companyDataSource))
             .disposed(by: disposeBag)
@@ -274,9 +279,11 @@ extension ApplyWriteOverallViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch stageDataSource[indexPath.section].items[indexPath.row] {
         case let .result(reactor):
-            let text = reactor.currentState.stage.title
-            
-            return CGSize(width: text.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 30, height: 32)
+            if let _ = reactor.currentState.order {
+                return CGSize(width: reactor.currentState.stage.title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 50, height: 32)
+            } else {
+                return CGSize(width: reactor.currentState.stage.title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 30, height: 32)
+            }
         }
     }
 }

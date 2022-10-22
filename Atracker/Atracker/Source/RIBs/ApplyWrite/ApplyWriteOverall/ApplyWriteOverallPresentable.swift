@@ -39,6 +39,7 @@ struct ApplyWriteOverallPresentableState {
     var selectedStages: [Stage] = []
     var isHiddenCompany: Bool = true
     var isHiddenJobType: Bool = true
+//    var isActiveNextButton: Bool = false
 //    var companies: [Company] = []
 //    var jobTypes: [JobType] = JobType.list
 //    var stages: [Stage] = []

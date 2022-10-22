@@ -284,6 +284,7 @@
 		70FBE52B28537A8000455A4B /* ApplyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */; };
 		70FBE52C28537A8000455A4B /* ApplyDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */; };
 		70FBE52D28537A8000455A4B /* ApplyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */; };
+		70FCF9A029042BA600C84B0E /* AtrackerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FCF99F29042BA600C84B0E /* AtrackerButton.swift */; };
 		70FD6DD028570EA10050ADB8 /* ApplyDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */; };
 		70FE71C8287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */; };
 /* End PBXBuildFile section */
@@ -588,6 +589,7 @@
 		70FBE52728537A8000455A4B /* ApplyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailViewController.swift; sourceTree = "<group>"; };
 		70FBE52828537A8000455A4B /* ApplyDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailBuilder.swift; sourceTree = "<group>"; };
 		70FBE52928537A8000455A4B /* ApplyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailInteractor.swift; sourceTree = "<group>"; };
+		70FCF99F29042BA600C84B0E /* AtrackerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtrackerButton.swift; sourceTree = "<group>"; };
 		70FD6DCF28570EA10050ADB8 /* ApplyDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyDetailTVC.swift; sourceTree = "<group>"; };
 		70FE71C7287DC8DF00E5ECB5 /* EditApplyStageProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditApplyStageProgressView.swift; sourceTree = "<group>"; };
 		71C1F406B5B563EF89E70B6C /* Pods_AtrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AtrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -876,6 +878,7 @@
 		701CE2232849CC24009230CE /* RIBs */ = {
 			isa = PBXGroup;
 			children = (
+				70FCF99D29042B7800C84B0E /* Reusable */,
 				701CE2272849D0E7009230CE /* Root */,
 				7066044B2869791200A09427 /* SignIn */,
 				70576E312865B53B000406DF /* SignOut */,
@@ -1574,6 +1577,22 @@
 			path = ApplyDetail;
 			sourceTree = "<group>";
 		};
+		70FCF99D29042B7800C84B0E /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				70FCF99E29042B8400C84B0E /* View */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		70FCF99E29042B8400C84B0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70FCF99F29042BA600C84B0E /* AtrackerButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		70FD6DD328577FDE0050ADB8 /* ApplyEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1866,6 +1885,7 @@
 				70FBE52A28537A8000455A4B /* ApplyDetailRouter.swift in Sources */,
 				702D86DF28748B93009682A4 /* StageRepositoryISOLDCODE.swift in Sources */,
 				70CB0691285EF70000BE89B7 /* ApplyWriteOverallRouter.swift in Sources */,
+				70FCF9A029042BA600C84B0E /* AtrackerButton.swift in Sources */,
 				70576DFD286595AE000406DF /* ScheduleTVC.swift in Sources */,
 				700DBECD2868D82D00883A4F /* SignUpSuccessInteractor.swift in Sources */,
 				7027D3962862B2A400F9C913 /* AuthServiceISOLDCODE.swift in Sources */,

@@ -33,11 +33,12 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         case setCompanySearchSections([CompanySearchSectionModel])
         case setJobTypeSearchSections([JobTypeSearchSectionModel])
         case setStageSearchSections([StageSearchSectionModel])
+        case updateStageSearchSection(IndexPath, StageSearchItem)
         case updateCompanyText(String)
         case updateJobPositionText(String)
         case updateSelectedCompany(Company)
         case updateSelectedJobType(JobType)
-        case updateSelectedStages(Stage)
+        case updateSelectedStages([Stage])
         case updateIsHiddenCompany(Bool)
         case updateIsHiddenJobType(Bool)
 //        case fetchCompanies([Company])
@@ -106,6 +107,8 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
             newState.jobTypeSections = sections
         case let .setStageSearchSections(sections):
             newState.stageSections = sections
+        case let .updateStageSearchSection(indexPath, stageSearchItem):
+            newState.stageSections[indexPath.section].items[indexPath.row] = stageSearchItem
         case let .updateCompanyText(text):
             newState.companyText = text
         case let .updateJobPositionText(text):
@@ -114,12 +117,8 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
             newState.selectedCompany = company
         case let .updateSelectedJobType(jobType):
             newState.selectedJobType = jobType
-        case let .updateSelectedStages(stage):
-            if newState.selectedStages.contains(where: { $0.id == stage.id }) {
-                newState.selectedStages.removeElementByReference(stage)
-            } else {
-                newState.selectedStages.append(stage)
-            }
+        case let .updateSelectedStages(stages):
+            newState.selectedStages = stages
         case let .updateIsHiddenCompany(bool):
             newState.isHiddenCompany = bool
         case let .updateIsHiddenJobType(bool):
@@ -134,21 +133,10 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     
     private func mutateRefresh() -> Observable<Mutation> {
         let setJobTypeSections: Observable<Mutation> = .just(.setJobTypeSearchSections(makeSections(jobTypes: JobType.elements)))
-        let setStageSections: Observable<Mutation> = Observable.create { [weak self] (observer) in
-            self?.provider.stageService.get()
-                .bind {
-                    observer.onNext(.setStageSearchSections(self?.makeSections(stages: $0) ?? []))
-                    observer.onCompleted()
-                }
-            return Disposables.create()
+        let setStageSections: Observable<Mutation> = provider.stageService.get().map { [weak self] stages in
+                .setStageSearchSections(self?.makeSections(stages: stages) ?? [])
         }
-//
-//        provider.stageService.get().bind { [weak self] in
-//
-//            return .setStageSearchSections(self?.makeSections(stages: $0) ?? [])
-//        }
-//            .disposeOnDeactivate(interactor: self)
-//
+        
         return .concat([setJobTypeSections, setStageSections])
     }
     
@@ -181,28 +169,45 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         guard case let .result(reactor) = currentState.companySections[indexPath.section].items[indexPath.row] else { return .empty() }
         
         if let company = reactor.currentState {
-            return .just(.updateSelectedCompany(company))
+            return .concat([.just(.updateSelectedCompany(company)), .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
         } else {
-            return provider.companyService.add(name: currentState.companyText).map {
+            let add: Observable<Mutation> = provider.companyService.add(name: currentState.companyText).map {
                 if let company = $0.companies.first {
                     return .updateSelectedCompany(company)
                 } else {
                     return .none
                 }
             }
+            
+            return .concat([add, .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
         }
     }
     
     private func mutateSelectJobType(_ indexPath: IndexPath) -> Observable<Mutation> {
         guard case let .result(reactor) = currentState.jobTypeSections[indexPath.section].items[indexPath.row] else { return .empty() }
         
-        return .just(.updateSelectedJobType(reactor.currentState))
+        return .concat([.just(.updateSelectedJobType(reactor.currentState)), .just(.updateIsHiddenJobType(true))])
     }
     
     private func mutateSelectStage(_ indexPath: IndexPath) -> Observable<Mutation> {
         guard case let .result(reactor) = currentState.stageSections[indexPath.section].items[indexPath.row] else { return .empty() }
+        var selectedStages: [Stage] = currentState.selectedStages
         
-        return .just(.updateSelectedStages(reactor.currentState.stage))
+        if selectedStages.contains(where: { $0.id == reactor.currentState.stage.id }) {
+            selectedStages.removeAll(where: { $0.id == reactor.currentState.stage.id })
+        } else {
+            selectedStages.append(reactor.currentState.stage)
+        }
+        
+        let items: [StageSearchItem] = currentState.stageSections.first?.items.map { (item) -> StageSearchItem in
+            guard case let .result(reactor) = item else { return item }
+            
+            return StageSearchItem.result(StageSearchCollectionViewCellReactor(state: .init(order: selectedStages.firstIndex(where: {$0.id == reactor.currentState.stage.id }), stage: reactor.currentState.stage)))
+        } ?? []
+        
+        let section: StageSearchSectionModel = .init(model: .search(items), items: items)
+        
+        return .concat([.just(.updateSelectedStages(selectedStages)), .just(.setStageSearchSections([section])), .just(.updateIsHiddenJobType(true)), .just(.updateIsHiddenCompany(true))])
     }
     
     private func makeSections(jobTypes: [JobType]) -> [JobTypeSearchSectionModel] {
