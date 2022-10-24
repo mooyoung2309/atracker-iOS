@@ -2,60 +2,35 @@
 //  ApplyService.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/28.
+//  Created by 송영모 on 2022/09/01.
 //
 
-import Foundation
+import Alamofire
+import RxSwift
 
-protocol ApplyServiceProtocol {
-    func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void)
-    func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void)
-    func put(request: ApplyUpdateRequest, completion: @escaping (Result<(Bool), Error>) -> Void)
-    func delete(request: ApplyDeleteRequest, completion: @escaping (Result<(Bool), Error>) -> Void)
+protocol ApplyServicable {
+    func get(request: ApplyRequest) -> Observable<ApplyResponse>
+    func post(request: ApplyCreateRequest) -> Observable<VoidModel>
+    func put(request: ApplyUpdateRequest) -> Observable<VoidModel>
+    func delete(request: ApplyDeleteRequest) -> Observable<VoidModel>
 }
 
-class ApplyService: ApplyServiceProtocol {
-    func get(request: ApplyRequest, completion: @escaping (Result<ApplyResponse, Error>) -> Void) {
-        ApplyRepository.shared.get(request: request) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+class ApplyService: ApplyServicable {
+    let repository: ApplyRepository = .init()
+    
+    func get(request: ApplyRequest) -> Observable<ApplyResponse> {
+        return repository.get(request: request)
     }
     
-    func post(request: ApplyCreateRequest, completion: @escaping (Result<Void, Error>) -> Void) {
-        ApplyRepository.shared.post(request: request) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func post(request: ApplyCreateRequest) -> Observable<VoidModel> {
+        return repository.post(request: request)
     }
     
-    func put(request: ApplyUpdateRequest, completion: @escaping (Result<(Bool), Error>) -> Void) {
-        ApplyRepository.shared.put(request: request) { result in
-            switch result {
-            case .success(let bool):
-                completion(.success(bool))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func put(request: ApplyUpdateRequest) -> Observable<VoidModel> {
+        return repository.put(request: request)
     }
     
-    func delete(request: ApplyDeleteRequest, completion: @escaping (Result<(Bool), Error>) -> Void) {
-        ApplyRepository.shared.delete(request: request) { result in
-            switch result {
-            case .success(let bool):
-                completion(.success(bool))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func delete(request: ApplyDeleteRequest) -> Observable<VoidModel> {
+        return repository.delete(request: request)
     }
 }

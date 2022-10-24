@@ -2,27 +2,20 @@
 //  StageProgressService.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/07/15.
+//  Created by 송영모 on 2022/09/01.
 //
 
-import Foundation
+import Alamofire
+import RxSwift
 
-protocol StageProgressServiceProtocol {
-    func put(request: StageProgressUpdateRequest, completion: @escaping (Result<(), Error>) -> Void)
+protocol StageProgressServicable {
+    func put(request: StageProgressUpdateRequest) -> Observable<VoidModel>
 }
 
-class StageProgressService: StageProgressServiceProtocol {
-    let stageProgressRepository = StageProgressRepository()
+class StageProgressService: StageProgressServicable {
+    let repository: StageProgressRepository = .init()
     
-    func put(request: StageProgressUpdateRequest, completion: @escaping (Result<(), Error>) -> Void) {
-        stageProgressRepository.put(request: request) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func put(request: StageProgressUpdateRequest) -> Observable<VoidModel> {
+        return repository.put(request: request)
     }
 }
-    

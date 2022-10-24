@@ -2,86 +2,33 @@
 //  AuthRepository.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/06/22.
+//  Created by 송영모 on 2022/09/01.
 //
 
-import Foundation
 import Alamofire
+import RxSwift
 
-protocol AuthRepositoryProtocol {
-    static func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
-    static func signout(completion: @escaping (Result<(Bool), Error>) -> Void)
-    static func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void)
+protocol AuthRepositable {
+    func sign(request: SignRequest) -> Observable<SignResponse>
+    func signout() -> Observable<VoidModel>
+    func postTestSign(request: TestUserRegistrationRequest) -> Observable<SignResponse>
+    func postTokenRefresh(request: TokenRefreshRequest) -> Observable<TokenRefreshResponse>
 }
 
-class AuthRepository: AuthRepositoryProtocol {
-    static func sign(request: SignRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        AF.request(AuthAPI.sign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
-            print(response.data)
-            print(response.response)
-            print(response.result)
-            print(response.error)
-            print(response.request)
-            print(response.debugDescription)
-            print(response.description)
-            print(response.value)
-            switch response.result {
-            case .success(let data):
-                Log("[D] 회원가입 성공 \(data)")
-                completion(.success(data))
-            case .failure(let error):
-                Log("[D] 회원가입 실패 \(error)")
-                completion(.failure(error))
-            }
-        }
+class AuthRepository: Repository, AuthRepositable {
+    func sign(request: SignRequest) -> Observable<SignResponse> {
+        return sendWithNoToken(api: AuthAPI.sign(request))
     }
     
-    static func signout(completion: @escaping (Result<(Bool), Error>) -> Void) {
-        AF.request(AuthAPI.signOut, interceptor: TokenInterceptor.shared.getInterceptor()).response { response in
-            print(response.data)
-            print(response.response)
-            print(response.result)
-            print(response.error)
-            print(response.request)
-            print(response.debugDescription)
-            print(response.description)
-            print(response.value)
-            if response.response?.statusCode == 200 {
-                completion(.success(true))
-            } else {
-                completion(.failure(response.error ?? AFError.explicitlyCancelled))
-            }
-        }
+    func signout() -> Observable<VoidModel> {
+        return send(api: AuthAPI.signOut)
     }
     
-    static func postTestSign(request: TestUserRegistrationRequest, completion: @escaping (Result<SignResponse, Error>) -> Void) {
-        AF.request(AuthAPI.testSign(request)).responseDecodable { (response: AFDataResponse<SignResponse>) in
-            switch response.result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                print(error)
-                completion(.failure(error))
-            }
-        }
+    func postTestSign(request: TestUserRegistrationRequest) -> Observable<SignResponse> {
+        return send(api: AuthAPI.testSign(request))
     }
     
-    static func postTokenRefresh(request: TokenRefreshRequest, completion: @escaping (Result<TokenRefreshResponse, Error>) -> Void) {
-        AF.request(AuthAPI.tokenRefresh(request)).responseDecodable { (response: AFDataResponse<TokenRefreshResponse>) in
-            print(response.data)
-            print(response.response)
-            print(response.result)
-            print(response.error)
-            print(response.request)
-            print(response.debugDescription)
-            print(response.description)
-            print(response.value)
-            switch response.result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func postTokenRefresh(request: TokenRefreshRequest) -> Observable<TokenRefreshResponse> {
+        return send(api: AuthAPI.tokenRefresh(request))
     }
 }

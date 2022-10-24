@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-protocol BaseURLRequestConvertible: URLRequestConvertible {
+protocol API: URLRequestConvertible {
     var baseURL: String { get }
     var method: HTTPMethod { get }
     var path: String { get }
     var parameters: RequestParams? { get }
 }
 
-extension BaseURLRequestConvertible {
+extension API {
     func asURLRequest() throws -> URLRequest {
         let url = try baseURL.asURL()
         

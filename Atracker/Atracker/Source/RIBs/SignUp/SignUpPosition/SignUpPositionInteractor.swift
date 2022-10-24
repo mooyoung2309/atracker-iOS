@@ -29,7 +29,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
     weak var router: SignUpPositionRouting?
     weak var listener: SignUpPositionListener?
     
-    private let authService: AuthServiceProtocol
+    private let authService: AuthServiceProtocolISOLDCODE
     private let idToken: String
     private let sso: SSO
     private let nickname: String
@@ -43,7 +43,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
 //    private var jobPosition: String?
 //    private var jobType: String?
 
-    init(presenter: SignUpPositionPresentable, authService: AuthServiceProtocol, idToken: String, sso: SSO, nickname: String) {
+    init(presenter: SignUpPositionPresentable, authService: AuthServiceProtocolISOLDCODE, idToken: String, sso: SSO, nickname: String) {
         self.authService = authService
         self.idToken = idToken
         self.sso = sso
@@ -108,7 +108,7 @@ final class SignUpPositionInteractor: PresentableInteractor<SignUpPositionPresen
         let nickname = nickname
         
         if jobPosition != "" {
-            authService.sign(request: SignRequest(accessToken: idToken, jobPosition: jobPosition, nickName: nickname, experienceType: experienceType, sso: sso)) { [weak self] result in
+            authService.sign(request: SignRequest(accessToken: idToken, jobPosition: jobPosition, nickName: nickname, primaryEmail: "", experienceType: experienceType, sso: sso)) { [weak self] result in
                 switch result {
                 case .success(let data):
                     Log("[D] 회원가입 성공 \(data)")

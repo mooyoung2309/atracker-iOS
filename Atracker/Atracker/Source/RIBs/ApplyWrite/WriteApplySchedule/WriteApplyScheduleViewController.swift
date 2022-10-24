@@ -89,8 +89,8 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
         selfView.scrollView.contentOffset.x = selfView.scrollView.frame.width
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
         showNavigationBar()
         showNavigationBarBackButton()
@@ -134,7 +134,7 @@ final class WriteApplyScheduleViewController: BaseNavigationViewController, Writ
         handler.date
             .bind { [weak self] date in
                 self?.reloadCalnedarCollectionView(date: date)
-                self?.setNavigaionBarTitle(date.getTitleOfMonth())
+                self?.setNavigationBarTitle(date.getTitleOfMonth())
             }
             .disposed(by: disposeBag)
         

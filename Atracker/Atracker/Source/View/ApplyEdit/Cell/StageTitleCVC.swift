@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class StageTitleCVC: BaseCVC {
+class StageTitleCVC: BaseCollectionViewCell {
     static let id = "StageTitleCVC"
     
     let titleLabel = UILabel()

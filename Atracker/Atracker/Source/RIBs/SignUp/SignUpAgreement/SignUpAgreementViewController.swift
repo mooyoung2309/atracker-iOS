@@ -63,8 +63,8 @@ final class SignUpAgreementViewController: BaseNavigationViewController, SignUpA
         Log("뷰 디드 어피얼 호출됨")
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         showNavigationBar()
         hideNavigationBarShadow()
     }

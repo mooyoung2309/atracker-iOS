@@ -31,13 +31,13 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     weak var router: ApplyRouting?
     weak var listener: ApplyListener?
     
-    private let applyService: ApplyServiceProtocol
-    private let userService: UserServiceProtocol
+    private let applyService: ApplyServiceProtocolISOLDCODE
+    private let userService: UserServiceProtocolISOLDCODE
     
     private let appliesRelay = BehaviorRelay<[Apply]>(value: [])
     private let myPageRelay = PublishRelay<MyPageResponse>()
 
-    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocol, userService: UserServiceProtocol) {
+    init(presenter: ApplyPresentable, applyService: ApplyServiceProtocolISOLDCODE, userService: UserServiceProtocolISOLDCODE) {
         self.applyService = applyService
         self.userService = userService
         

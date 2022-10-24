@@ -58,8 +58,8 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
     private var stageContents: [StageContent] = []
     private var currnetPageIndex: Int = 0
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
         showNavigationBarBackButton()
         showNavigationBar()
@@ -154,7 +154,7 @@ final class EditApplyStageProgressViewController: BaseNavigationViewController, 
         // 핸들러 바인딩
         handler.navigationTitle
             .bind { [weak self] navigationTitle in
-                self?.setNavigaionBarTitle(navigationTitle)
+                self?.setNavigationBarTitle(navigationTitle)
             }
             .disposed(by: disposeBag)
         

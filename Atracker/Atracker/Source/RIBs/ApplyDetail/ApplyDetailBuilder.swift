@@ -8,12 +8,12 @@
 import RIBs
 
 protocol ApplyDetailDependency: Dependency {
-    var applyService: ApplyServiceProtocol { get }
+    var applyService: ApplyServiceProtocolISOLDCODE { get }
 }
 
 final class ApplyDetailComponent: Component<ApplyDetailDependency> {
     
-    var applyService: ApplyServiceProtocol {
+    var applyService: ApplyServiceProtocolISOLDCODE {
         return dependency.applyService
     }
 }

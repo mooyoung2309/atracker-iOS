@@ -15,8 +15,8 @@ protocol EditApplyStageProgressDependency: Dependency {
 final class EditApplyStageProgressComponent: Component<EditApplyStageProgressDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-    var stageProgressService: StageProgressServiceProtocol {
-        return StageProgressService()
+    var stageProgressService: StageProgressServiceProtocolISOLDCODE {
+        return StageProgressServiceISOLDCODe()
     }
 }
 

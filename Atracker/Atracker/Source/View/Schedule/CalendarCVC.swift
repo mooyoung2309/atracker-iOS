@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class CalendarCVC: BaseCVC {
+class CalendarCVC: BaseCollectionViewCell {
     static let id = "CalendarCVC"
     
     let circleStackView = UIStackView()

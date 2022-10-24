@@ -8,16 +8,16 @@
 import RIBs
 
 protocol ApplyWriteOverallDependency: Dependency {
-    var applyService: ApplyServiceProtocol { get }
+    var applyService: ApplyServiceProtocolISOLDCODE { get }
 }
 
 final class ApplyWriteOverallComponent: Component<ApplyWriteOverallDependency> {
-    var applyService: ApplyServiceProtocol {
+    var applyService: ApplyServiceProtocolISOLDCODE {
         return dependency.applyService
     }
     
-    var companyService: CompanyServiceProtocol {
-        return CompanyService()
+    var companyService: CompanyServiceProtocolISOLDCODE {
+        return CompanyServiceISOLDCODE()
     }
     
     var stageService: StageServiceProtocolISOLDCODE {
@@ -39,7 +39,7 @@ final class ApplyWriteOverallBuilder: Builder<ApplyWriteOverallDependency>, Appl
     func build(withListener listener: ApplyWriteOverallListener) -> ApplyWriteOverallRouting {
         let component = ApplyWriteOverallComponent(dependency: dependency)
         let viewController = ApplyWriteOverallViewController()
-        let interactor = ApplyWriteOverallInteractor(presenter: viewController, applyService: component.applyService, companyService: component.companyService, stageService: component.stageService)
+        let interactor = ApplyWriteOverallInteractor(presenter: viewController)
         let applyWriteScheduleBuilder = WriteApplyScheduleBuilder(dependency: component)
         
         interactor.listener = listener

@@ -50,7 +50,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        setupNavigaionBar()
+        setupNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,8 +60,8 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
         refreshTableView(tableView: selfView.editTableView)
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
         showNavigationBar()
         showNavigationBarBackButton()
@@ -119,7 +119,7 @@ final class ApplyDetailViewController: BaseNavigationViewController, ApplyDetail
     
     func didUpdateApply(apply: Apply) {
         self.stageProgresses = apply.stageProgress
-        setNavigaionBarTitle(apply.companyName)
+        setNavigationBarTitle(apply.companyName)
         selfView.stageTitleCollectionView.reloadData()
         refreshTableView(tableView: selfView.stageProgressTableView)
     }

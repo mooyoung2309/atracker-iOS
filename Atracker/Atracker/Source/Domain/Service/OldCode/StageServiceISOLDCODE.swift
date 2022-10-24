@@ -13,7 +13,7 @@ protocol StageServiceProtocolISOLDCODE {
 }
 
 class StageServiceISOLDCODE: StageServiceProtocolISOLDCODE {
-    let stageRepository = StageRepository()
+    let stageRepository = StageRepositoryISOLDCODE()
     
     func get(completion: @escaping (Result<StageResponse, Error>) -> Void) {
         stageRepository.get { result in

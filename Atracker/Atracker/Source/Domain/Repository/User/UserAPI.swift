@@ -16,9 +16,9 @@ enum UserAPI{
     case pfratio
 }
 
-extension UserAPI: BaseURLRequestConvertible {
+extension UserAPI: API {
     var baseURL: String {
-        return Key.baseURL + "/user"
+        return Environment.url + "/user"
     }
     
     var method: HTTPMethod {

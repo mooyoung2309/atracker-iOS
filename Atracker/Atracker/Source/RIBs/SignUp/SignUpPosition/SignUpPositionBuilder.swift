@@ -17,8 +17,8 @@ final class SignUpPositionComponent: Component<SignUpPositionDependency> {
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     let nickname: String
     
-    var authService: AuthServiceProtocol {
-        return AuthService()
+    var authService: AuthServiceProtocolISOLDCODE {
+        return AuthServiceISOLDCODE()
     }
     
     init(dependency: SignUpPositionDependency, nickname: String) {

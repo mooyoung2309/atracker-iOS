@@ -6,12 +6,18 @@
 //
 
 import UIKit
-import RxSwift
+
 import RxCocoa
+import RxSwift
 
 public extension Reactive where Base: UIViewController {
-    public var viewWillAppear: Observable<Bool> {
-        return methodInvoked(#selector(UIViewController.viewWillAppear))
-           .map { $0.first as? Bool ?? false }
-      }
+    var viewDidLoad: ControlEvent<Void> {
+        let source = methodInvoked(#selector(Base.viewDidLoad)).map { _ in }
+        return ControlEvent(events: source)
+    }
+
+    var viewWillAppear: ControlEvent<Bool> {
+        let source = methodInvoked(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
+        return ControlEvent(events: source)
+    }
 }

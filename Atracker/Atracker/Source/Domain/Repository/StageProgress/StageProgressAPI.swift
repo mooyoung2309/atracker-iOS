@@ -13,9 +13,9 @@ enum StageProgressAPI {
     case delete(StageProgressDeleteRequest)
 }
 
-extension StageProgressAPI: BaseURLRequestConvertible {
+extension StageProgressAPI: API {
     var baseURL: String {
-        return Key.baseURL + "/stageProgress/"
+        return Environment.url + "/stageProgress/"
     }
     
     var method: HTTPMethod {

@@ -22,10 +22,10 @@ final class BlogViewController: BaseNavigationViewController, BlogPresentable, B
     
     lazy var webView = WKWebView(frame: contentView.bounds)
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         showNavigationBar()
-        setNavigaionBarTitle("블로그")
+        setNavigationBarTitle("블로그")
         hideNavigationBarBackButton()
     }
     

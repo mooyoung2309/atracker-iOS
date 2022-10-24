@@ -14,12 +14,12 @@ protocol EditApplyOverallDependency: Dependency {
 
 final class EditApplyOverallComponent: Component<EditApplyOverallDependency> {
 
-    var applyService: ApplyServiceProtocol {
-        return ApplyService()
+    var applyService: ApplyServiceProtocolISOLDCODE {
+        return ApplyServiceISOLDCODE()
     }
     
-    var companyService: CompanyServiceProtocol {
-        return CompanyService()
+    var companyService: CompanyServiceProtocolISOLDCODE {
+        return CompanyServiceISOLDCODE()
     }
 }
 

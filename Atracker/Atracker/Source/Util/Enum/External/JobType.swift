@@ -12,7 +12,7 @@ enum JobType {
     case temporary
     case intern
     
-    static var list: [JobType] = [JobType.permanent, JobType.temporary, JobType.intern]
+    static var elements: [JobType] = [JobType.permanent, JobType.temporary, JobType.intern]
     
     static func toJobType(title: String) -> JobType {
         switch title {
