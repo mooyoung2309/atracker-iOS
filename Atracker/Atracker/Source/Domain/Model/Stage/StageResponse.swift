@@ -11,6 +11,7 @@ import Foundation
 typealias StageResponse = [Stage]
 
 struct Stage: Codable {
+    let common: Bool
     let id: Int
     let title: String
 }

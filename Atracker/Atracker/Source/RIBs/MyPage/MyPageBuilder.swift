@@ -8,14 +8,14 @@
 import RIBs
 
 protocol MyPageDependency: Dependency {
-    var userService: UserServiceProtocol { get }
+    var userService: UserServiceProtocolISOLDCODE { get }
 }
 
 final class MyPageComponent: Component<MyPageDependency> {
-    var authService: AuthServiceProtocol {
-        return AuthService()
+    var authService: AuthServiceProtocolISOLDCODE {
+        return AuthServiceISOLDCODE()
     }
-    var userService: UserServiceProtocol {
+    var userService: UserServiceProtocolISOLDCODE {
         return dependency.userService
     }
 }

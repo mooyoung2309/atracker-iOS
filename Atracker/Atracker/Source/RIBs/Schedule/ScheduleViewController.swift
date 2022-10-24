@@ -53,7 +53,7 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
     }
     
     func updateNavigationTitle(title: String) {
-        setNavigaionBarTitle(title)
+        setNavigationBarTitle(title)
     }
     
     func switchBottomEditButton() -> Bool {
@@ -85,8 +85,8 @@ final class ScheduleViewController: BaseNavigationViewController, SchedulePresen
         selfView.bottomTableView.reloadData()
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
 
         hideNavigationBarBackButton()
     }

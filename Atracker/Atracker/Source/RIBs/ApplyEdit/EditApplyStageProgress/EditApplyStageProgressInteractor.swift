@@ -28,7 +28,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     weak var router: EditApplyStageProgressRouting?
     weak var listener: EditApplyStageProgressListener?
     
-    private let stageProgressService: StageProgressServiceProtocol
+    private let stageProgressService: StageProgressServiceProtocolISOLDCODE
     private let apply: Apply
     private var changedStageProgresses: [StageProgress]
     private var changedStageProgressUpdateRequest: StageProgressUpdateRequest
@@ -39,7 +39,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
     private let showStatusButtonBarRelay = PublishRelay<Void>()
     private let showDeleteButtonBarRelay = PublishRelay<Void>()
     
-    init(presenter: EditApplyStageProgressPresentable, stageProgressService: StageProgressServiceProtocol, apply: Apply) {
+    init(presenter: EditApplyStageProgressPresentable, stageProgressService: StageProgressServiceProtocolISOLDCODE, apply: Apply) {
         self.apply = apply
         self.stageProgressService = stageProgressService
         self.changedStageProgresses = apply.stageProgress
@@ -161,7 +161,7 @@ final class EditApplyStageProgressInteractor: PresentableInteractor<EditApplySta
             case .success(_):
                 completion()
                 return
-            case .failure(let error):
+            case .failure:
                 completion()
                 return
             }

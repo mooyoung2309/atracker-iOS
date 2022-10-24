@@ -37,10 +37,10 @@ final class ApplyViewController: BaseNavigationViewController, ApplyPresentable,
     
     private var applies: [Apply] = []
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
-        setNavigaionBarTitle("지원 현황")
+        setNavigationBarTitle("지원 현황")
         hideNavigationBarBackButton()
         hideNavigationBar()
     }

@@ -19,8 +19,8 @@ final class SignUpSuccessViewController: BaseNavigationViewController, SignUpSuc
     
     let selfView = SignUpSuccessView()
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
         hideNavigationBar()
     }

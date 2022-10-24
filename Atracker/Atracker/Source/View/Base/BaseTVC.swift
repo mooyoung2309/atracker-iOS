@@ -8,19 +8,37 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
-class BaseTVC: UITableViewCell, BaseViewProtocol {
-    required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+class BaseTVC: UITableViewCell {
+    
+    // MARK: - Properties
+    
+    var disposeBag = DisposeBag()
+    
+    // MARK: - Initializer
+    
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setupProperty()
         setupHierarchy()
         setupLayout()
         setupBind()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
+    
+    // MARK: - Setup Methods
     
     func setupProperty() { }
     

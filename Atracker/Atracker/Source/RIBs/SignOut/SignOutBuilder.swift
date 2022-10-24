@@ -15,8 +15,8 @@ protocol SignOutDependency: Dependency {
 final class SignOutComponent: Component<SignOutDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-    var authService: AuthService {
-        return AuthService()
+    var authService: AuthServiceISOLDCODE {
+        return AuthServiceISOLDCODE()
     }
 }
 

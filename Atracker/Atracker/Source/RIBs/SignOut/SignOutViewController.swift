@@ -40,10 +40,10 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
     private let fetchSSOSubject = PublishSubject<SSO>()
     private let tapAppleButtonSubject = PublishSubject<Void>()
     
-    private let googleSignInConfig = GIDConfiguration(clientID: Key.googleClientID)
+    private let googleSignInConfig = GIDConfiguration(clientID: Environment.googleClientID)
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         hideNavigationBar()
     }
     
@@ -89,7 +89,7 @@ final class SignOutViewController: BaseNavigationViewController, SignOutPresenta
             guard let user = user else { return }
             
             user.authentication.do { [weak self] authentication, error in
-                guard error == nil else { Log("[D] 구글 로그인 에러 \(error)"); return }
+                guard error == nil else { return }
                 guard let authentication = authentication else { return }
                 
                 self?.fetchIdTokenSubject.onNext((SSO.google, authentication.accessToken))
@@ -121,18 +121,12 @@ extension SignOutViewController: ASAuthorizationControllerDelegate, ASAuthorizat
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            if let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let authString = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:            
+            if let authorizationCode = appleIDCredential.authorizationCode, let identityToken = appleIDCredential.identityToken, let _ = String(data: authorizationCode, encoding: .utf8), let tokenString = String(data: identityToken, encoding: .utf8) {
                 
                 fetchIdTokenSubject.onNext((SSO.apple, tokenString))
             }
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
+        case _ as ASPasswordCredential: break
         default:
             break
         }

@@ -33,8 +33,8 @@ final class MyPageViewController: BaseNavigationViewController, MyPagePresentabl
         dismiss(animated: false, completion: nil)
     }
     
-    override func setupNavigaionBar() {
-        super.setupNavigaionBar()
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         hideNavigationBar()

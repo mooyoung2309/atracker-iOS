@@ -2,23 +2,18 @@
 //  UserRepository.swift
 //  Atracker
 //
-//  Created by 송영모 on 2022/07/18.
+//  Created by 송영모 on 2022/09/01.
 //
 
-import Foundation
 import Alamofire
+import RxSwift
 
-class UserRepository {
-    static let shared = UserRepository()
-    
-    func myPage(completion: @escaping(Result<MyPageResponse, Error>) -> Void) {
-        AF.request(UserAPI.myPage, interceptor: TokenInterceptor.shared.getInterceptor()).responseDecodable { (response: AFDataResponse<MyPageResponse>) in
-            switch response.result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+protocol UserRepositable {
+    func myPage() -> Observable<MyPageResponse>
+}
+
+class UserRepository: Repository, UserRepositable {
+    func myPage() -> Observable<MyPageResponse> {
+        return send(api: UserAPI.myPage)
     }
 }

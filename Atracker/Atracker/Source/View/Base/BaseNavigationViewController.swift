@@ -13,9 +13,9 @@ import RxSwift
 import RxCocoa
 
 class NavigationBar: UIView {
-    var title           = UILabel()
-    var backButton      = UIButton()
-    var trailingButton  = UIButton()
+    var title = UILabel()
+    var backButton = UIButton()
+    var trailingButton = UIButton()
 }
 
 extension UITabBar {
@@ -35,10 +35,10 @@ protocol BaseNavigationViewControllerProtocol: AnyObject {
     var navigaionBar: NavigationBar { get }
     var contentView: UIView { get }
     
-    func setupNavigaionBar()
+    func setupNavigationBar()
     func showNavigationBar()
     func hideNavigationBar()
-    func setNavigaionBarTitle(_ text: String)
+    func setNavigationBarTitle(_ text: String)
     func showNavigationBarBackButton()
     func hideNavigationBarBackButton()
     func showNavigationBarTrailingButton()
@@ -53,18 +53,10 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     var statusBar = UIView()
     var navigaionBar = NavigationBar()
     
-    var alertView = AlertView()
-    var blurView = UIView()
-    
-    var isAlertBack: ((Bool) -> Void)?
-    var isAlertNext: ((Bool) -> Void)?
-    
     func present(_ viewController: ViewControllable, isTabBarShow: Bool) {
-        Log("[D] 화면 전환됨")
         tabBarController?.tabBar.isHidden = !isTabBarShow
         tabBarController?.tabBar.layer.zPosition = isTabBarShow ? 0 : -1
         navigationController?.pushViewController(viewController.uiviewController, animated: true)
-        
     }
     
     func dismiss(_ rootViewController: ViewControllable? = nil, isTabBarShow: Bool) {
@@ -77,54 +69,19 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         }
     }
     
-    func showAlertView(style: AlertStyle) {
-        alertView.update(style: style)
-        
-        view.addSubview(alertView)
-        
-        alertView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        alertView.isAlertBack { [weak self] _ in
-            Log("[D] 경고창 왼쪽 버튼")
-            self?.isAlertBack?(true)
-        }
-        
-        alertView.isAlertNext { [weak self] _ in
-            Log("[D] 경고창 오른쪽 버튼")
-            self?.isAlertNext?(true)
-        }
-    }
-    
-    func hideAlertView() {
-        alertView.removeFromSuperview()
-    }
-    
-    func showBlurView() {
-        view.addSubview(blurView)
-        
-        blurView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
-    func hideBlurView() {
-        blurView.removeFromSuperview()
-    }
-    
     func hideNavigationBarShadow() {
         navigaionBar.addShadow(nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigaionBar()
+        
+        setupNavigationBar()
     }
     
     override func setupProperty() {
         super.setupProperty()
+        
         navigaionBar.addShadow(.bottom)
         navigaionBar.title.textColor = .white
         navigaionBar.title.font = .systemFont(ofSize: 16, weight: .regular)
@@ -156,7 +113,7 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         }
         
         contentView.snp.makeConstraints {
-            $0.top.equalTo(statusBar.snp.bottom)
+            $0.top.equalTo(navigaionBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -183,23 +140,32 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
         }
     }
     
-    func setupNavigaionBar() {
+    func setupNavigationBar() {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func showNavigationBar() {
-        navigaionBar.alpha = 1
+        navigaionBar.isHidden = false
         statusBar.backgroundColor = .backgroundLightGray
         navigaionBar.backgroundColor = .backgroundLightGray
+        
+        contentView.snp.remakeConstraints {
+            $0.top.equalTo(navigaionBar.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
     func hideNavigationBar() {
-        navigaionBar.alpha = 0
+        navigaionBar.isHidden = true
         statusBar.backgroundColor = .clear
-        navigaionBar.backgroundColor = .backgroundGray
+        
+        contentView.snp.remakeConstraints {
+            $0.top.equalTo(statusBar.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
-    func setNavigaionBarTitle(_ text: String) {
+    func setNavigationBarTitle(_ text: String) {
         navigaionBar.title.text = text
     }
     
@@ -225,13 +191,5 @@ class BaseNavigationViewController: BaseViewController, BaseNavigationViewContro
     
     func setNavigationBarTrailingButtonImage(_ image: UIImage?) {
         navigaionBar.trailingButton.setImage(image, for: .normal)
-    }
-    
-    func isAlertBack(completion: @escaping (Bool) -> Void) {
-        self.isAlertBack = completion
-    }
-    
-    func isAlertNext(completion: @escaping (Bool) -> Void) {
-        self.isAlertNext = completion
     }
 }
