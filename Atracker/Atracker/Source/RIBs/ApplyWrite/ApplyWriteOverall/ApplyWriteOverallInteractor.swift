@@ -41,15 +41,6 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         case updateSelectedStages([Stage])
         case updateIsHiddenCompany(Bool)
         case updateIsHiddenJobType(Bool)
-        //        case fetchCompanies([Company])
-        //        case fetchJobTypes([JobType])
-        //        case fetchStages([Stage])
-        //        case updateCompany(Company)
-        //        case updateStages(Stage)
-        //        case updateJobType(JobType)
-        //        case updateJobPosition(String)
-        //        case showCompanyTableView(Bool?)
-        //        case showJobTypeTableView(Bool?)
         case detach
         case attach
         case none
@@ -78,17 +69,40 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         super.willResignActive()
     }
     
+    func sendAction(_ action: Action) {
+        self.action.on(.next(action))
+    }
+}
+
+extension ApplyWriteOverallInteractor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .refresh: return mutateRefresh()
-        case let .textCompany(text): return mutateTextCompany(text)
-        case let .textJobPosition(text): return mutateTextJobPosition(text)
-        case .toggleJobType: return mutateToggleJobType()
-        case let .selectCompany(indexPath): return mutateSelectCompany(indexPath)
-        case let .selectJobType(indexPath): return mutateSelectJobType(indexPath)
-        case let .selectStage(indexPath): return mutateSelectStage(indexPath)
-        case .tapBackButton: return .just(.detach)
-        case .tapNextButton: return .just(.attach)
+        case .refresh:
+            return self.refreshMutation()
+            
+        case let .textCompany(text):
+            return self.textCompanyMutation(text)
+            
+        case let .textJobPosition(text):
+            return self.textJobPositionMutation(text)
+            
+        case .toggleJobType:
+            return self.toggleJobTypeMutation()
+            
+        case let .selectCompany(indexPath):
+            return self.selectCompanyMutation(indexPath)
+            
+        case let .selectJobType(indexPath):
+            return self.selectJobTypeMutation(indexPath)
+            
+        case let .selectStage(indexPath):
+            return selectStageMutation(indexPath)
+            
+        case .tapBackButton:
+            return .just(.detach)
+            
+        case .tapNextButton:
+            return .just(.attach)
         }
     }
     
@@ -110,76 +124,123 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         switch mutation {
         case let .setCompanySearchSections(sections):
             newState.companySections = sections
+            
         case let .setJobTypeSearchSections(sections):
             newState.jobTypeSections = sections
+            
         case let .setStageSearchSections(sections):
             newState.stageSections = sections
+            
         case let .updateStageSearchSection(indexPath, stageSearchItem):
             newState.stageSections[indexPath.section].items[indexPath.row] = stageSearchItem
+            
         case let .updateCompanyText(text):
             newState.companyText = text
+            
         case let .updateJobPositionText(text):
             newState.jobPositionText = text
+            
         case let .updateSelectedCompany(company):
             newState.selectedCompany = company
             newState.companyText = company.name
+            
         case let .updateSelectedJobType(jobType):
             newState.selectedJobType = jobType
+            
         case let .updateSelectedStages(stages):
             newState.selectedStages = stages
+            
         case let .updateIsHiddenCompany(bool):
             newState.isHiddenCompany = bool
+            
         case let .updateIsHiddenJobType(bool):
             newState.isHiddenJobType = bool
+            
         case .attach: break
+            
         case .detach: break
+            
         case .none: break
         }
         
         return newState
     }
     
-    private func mutateRefresh() -> Observable<Mutation> {
-        let setJobTypeSections: Observable<Mutation> = .just(.setJobTypeSearchSections(makeSections(jobTypes: JobType.elements)))
-        let setStageSections: Observable<Mutation> = provider.stageService.get().map { [weak self] stages in
-                .setStageSearchSections(self?.makeSections(stages: stages) ?? [])
+    private func refreshMutation() -> Observable<Mutation> {
+        let setJobTypeSectionsMutation: Observable<Mutation> = .just(.setJobTypeSearchSections(makeSections(jobTypes: JobType.elements)))
+        
+        var setStageSectionsMutation: Observable<Mutation> {
+            if currentState.stageSections.isEmpty {
+                return provider.stageService.get().map { [weak self] stages in
+                        .setStageSearchSections(self?.makeSections(stages: stages) ?? [])
+                }
+            } else {
+                return .empty()
+            }
         }
         
-        return .concat([setJobTypeSections, setStageSections])
+        let sequence: [Observable<Mutation>] = [
+            setJobTypeSectionsMutation,
+            setStageSectionsMutation
+        ]
+        
+        return .concat(sequence)
     }
     
-    private func mutateTextCompany(_ text: String) -> Observable<Mutation> {
-        let setCompanySections: Observable<Mutation> = provider.companyService.search(title: text, page: 1)
+    private func textCompanyMutation(_ text: String) -> Observable<Mutation> {
+        let setCompanySectionsMutation: Observable<Mutation> = provider.companyService.search(title: text, page: 1)
             .map { [weak self] in
                 return .setCompanySearchSections(self?.makeSections(companyResponse: $0) ?? [])
             }
-        let updateIsHiddenCompany: Observable<Mutation> = currentState.companyText == text ? .empty() : .just(.updateIsHiddenCompany(text.isEmpty))
-        let updateIsHiddenJobType: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
-        let updateCompanyText: Observable<Mutation> = .just(.updateCompanyText(text))
         
-        return .concat([setCompanySections, updateIsHiddenCompany, updateIsHiddenJobType, updateCompanyText])
-    }
-    
-    private func mutateTextJobPosition(_ text: String) -> Observable<Mutation> {
-        let updateJobPositionText: Observable<Mutation> = .just(.updateJobPositionText(text))
-        let updateIsHiddenCompany: Observable<Mutation> = .just(.updateIsHiddenCompany(true))
-        let updateIsHiddenJobType: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
+        let updateIsHiddenCompanyMutation: Observable<Mutation> = currentState.companyText == text ? .empty() : .just(.updateIsHiddenCompany(text.isEmpty))
         
-        return .concat([updateJobPositionText, updateIsHiddenCompany, updateIsHiddenJobType])
+        let updateIsHiddenJobTypeMutation: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
+        
+        let updateCompanyTextMutation: Observable<Mutation> = .just(.updateCompanyText(text))
+        
+        let sequence: [Observable<Mutation>] = [
+            setCompanySectionsMutation,
+            updateIsHiddenCompanyMutation,
+            updateIsHiddenJobTypeMutation,
+            updateCompanyTextMutation
+        ]
+        
+        return .concat(sequence)
     }
     
-    private func mutateToggleJobType() -> Observable<Mutation> {
-        return .concat([.just(.updateIsHiddenJobType(!currentState.isHiddenJobType)),
-                        .just(.updateIsHiddenCompany(true))])
+    private func textJobPositionMutation(_ text: String) -> Observable<Mutation> {
+        let sequence: [Observable<Mutation>] = [
+            .just(.updateJobPositionText(text)),
+            .just(.updateIsHiddenCompany(true)),
+            .just(.updateIsHiddenJobType(true))
+        ]
+        
+        return .concat(sequence)
     }
     
-    private func mutateSelectCompany(_ indexPath: IndexPath) -> Observable<Mutation> {
+    private func toggleJobTypeMutation() -> Observable<Mutation> {
+        let sequence: [Observable<Mutation>] = [
+            .just(.updateIsHiddenJobType(!currentState.isHiddenJobType)),
+            .just(.updateIsHiddenCompany(true))
+        ]
+        
+        return .concat(sequence)
+    }
+    
+    private func selectCompanyMutation(_ indexPath: IndexPath) -> Observable<Mutation> {
         guard case let .result(reactor) = currentState.companySections[indexPath.section].items[indexPath.row] else { return .empty() }
         
         if let company = reactor.currentState {
-            return .concat([.just(.updateSelectedCompany(company)), .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
+            let sequence: [Observable<Mutation>] = [
+                .just(.updateSelectedCompany(company)),
+                .just(.updateIsHiddenCompany(true)),
+                .just(.updateIsHiddenJobType(true))
+            ]
+            
+            return .concat(sequence)
         } else {
-            let add: Observable<Mutation> =
+            let updateSelectedCompanyMutation: Observable<Mutation> =
             provider.companyService.add(name: currentState.companyText).map {
                 if let company = $0.companies.first {
                     return .updateSelectedCompany(company)
@@ -187,17 +248,29 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
                     return .none
                 }
             }
-            return .concat([add, .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
+            
+            let sequence: [Observable<Mutation>] = [
+                updateSelectedCompanyMutation,
+                .just(.updateIsHiddenCompany(true)),
+                .just(.updateIsHiddenJobType(true))
+            ]
+            
+            return .concat(sequence)
         }
     }
     
-    private func mutateSelectJobType(_ indexPath: IndexPath) -> Observable<Mutation> {
+    private func selectJobTypeMutation(_ indexPath: IndexPath) -> Observable<Mutation> {
         guard case let .result(reactor) = currentState.jobTypeSections[indexPath.section].items[indexPath.row] else { return .empty() }
         
-        return .concat([.just(.updateSelectedJobType(reactor.currentState)), .just(.updateIsHiddenJobType(true))])
+        let sequence: [Observable<Mutation>] = [
+            .just(.updateSelectedJobType(reactor.currentState)),
+            .just(.updateIsHiddenJobType(true))
+        ]
+        
+        return .concat(sequence)
     }
     
-    private func mutateSelectStage(_ indexPath: IndexPath) -> Observable<Mutation> {
+    private func selectStageMutation(_ indexPath: IndexPath) -> Observable<Mutation> {
         guard case let .result(reactor) = currentState.stageSections[indexPath.section].items[indexPath.row] else { return .empty() }
         var selectedStages: [Stage] = currentState.selectedStages
         
@@ -215,7 +288,14 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         
         let section: StageSearchSectionModel = .init(model: .search(items), items: items)
         
-        return .concat([.just(.updateSelectedStages(selectedStages)), .just(.setStageSearchSections([section])), .just(.updateIsHiddenJobType(true)), .just(.updateIsHiddenCompany(true))])
+        let sequence: [Observable<Mutation>] = [
+            .just(.updateSelectedStages(selectedStages)),
+            .just(.setStageSearchSections([section])),
+            .just(.updateIsHiddenJobType(true)),
+            .just(.updateIsHiddenCompany(true))
+        ]
+        
+        return .concat(sequence)
     }
     
     private func makeApplyCreateRequest() -> ApplyCreateRequest? {
@@ -278,5 +358,6 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     // MARK: From Child RIBs
     func didTapBackButtonFromWriteApplyScheduleRIB() {
         router?.detachWriteApplyScheduleRIB()
+        sendAction(.refresh)
     }
 }

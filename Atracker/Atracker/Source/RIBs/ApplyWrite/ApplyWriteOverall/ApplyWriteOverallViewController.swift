@@ -15,61 +15,27 @@ import Alamofire
 import ReactorKit
 import RxDataSources
 
-enum ApplyWriteOverallPresentableAction {
-    case refresh
-    case textCompany(String)
-    case textJobPosition(String)
-    case toggleJobType
-    case selectCompany(IndexPath)
-    case selectJobType(IndexPath)
-    case selectStage(IndexPath)
-    case tapBackButton
-    case tapNextButton
-}
-
-struct ApplyWriteOverallPresentableState {
-    var companySections: [CompanySearchSectionModel] = []
-    var jobTypeSections: [JobTypeSearchSectionModel] = []
-    var stageSections: [StageSearchSectionModel] = []
-    var companyText: String = ""
-    var jobPositionText: String = ""
-    var selectedCompany: Company? = nil
-    var selectedJobType: JobType? = nil
-    var selectedStages: [Stage] = []
-    var isHiddenCompany: Bool = true
-    var isHiddenJobType: Bool = true
-    var isTapBackButton: Bool = false
-    var isTapNextButton: Bool = false
-}
-
 protocol ApplyWriteOverallPresentableListener: AnyObject {
     typealias Action = ApplyWriteOverallPresentableAction
     typealias State = ApplyWriteOverallPresentableState
 
-    var action: ActionSubject<Action> { get }
+//    var action: ActionSubject<Action> { get }
+    func sendAction(_ action: Action)
     var state: Observable<State> { get }
     var currentState: State { get }
 }
 
 final class ApplyWriteOverallViewController: BaseNavigationViewController, ApplyWriteOverallPresentable, ApplyWriteOverallViewControllable {
+    
+    // MARK: - Properties
+    
     weak var listener: ApplyWriteOverallPresentableListener?
     
     typealias CompanyDataSource = RxTableViewSectionedReloadDataSource<CompanySearchSectionModel>
     typealias JobTypeDataSource = RxTableViewSectionedReloadDataSource<JobTypeSearchSectionModel>
     typealias StageDataSource = RxCollectionViewSectionedReloadDataSource<StageSearchSectionModel>
     
-    // MARK: - UI Components
-    
-    let companySearchTextField: SearchTextField = .init(type: .company)
-    let companySearchTableView: UITableView = .init()
-    let jobPositionSearchTextField: SearchTextField = .init(type: .jobPosition)
-    let jobTypeSearchTextField: SearchTextField = .init(type: .jobType)
-    let jobTypeSearchTableView: UITableView = .init()
-    let stageHeaderLabel: UILabel = .init()
-    let stageSearchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    let nextButton: AtrackerButton = .init(type: .next)
-    
-    // MARK: - Properties
+    private let actionRelay = PublishRelay<ApplyWriteOverallPresentableListener.Action>()
     
     private lazy var companyDataSource = CompanyDataSource { _, tableView, indexPath, item -> UITableViewCell in
         switch item {
@@ -102,6 +68,17 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             return cell
         }
     }
+    
+    // MARK: - UI Components
+    
+    let companySearchTextField: SearchTextField = .init(type: .company)
+    let companySearchTableView: UITableView = .init()
+    let jobPositionSearchTextField: SearchTextField = .init(type: .jobPosition)
+    let jobTypeSearchTextField: SearchTextField = .init(type: .jobType)
+    let jobTypeSearchTableView: UITableView = .init()
+    let stageHeaderLabel: UILabel = .init()
+    let stageSearchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let nextButton: AtrackerButton = .init(type: .next)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,54 +176,60 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         
         guard let listner = listener else { return }
         
-        rx.viewWillAppear
+        self.actionRelay.asObservable()
+            .bind() { [weak self] action in
+                self?.listener?.sendAction(action)
+            }
+          .disposed(by: disposeBag)
+        
+        self.rx.viewWillAppear
             .map { _ in .refresh }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        navigaionBar.backButton.rx.tap
+        self.navigaionBar.backButton.rx.tap
             .map { .tapBackButton }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        companySearchTextField.textField.rx.text.orEmpty
+        self.companySearchTextField.textField.rx.text.orEmpty
             .distinctUntilChanged()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { .textCompany($0) }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        companySearchTableView.rx.itemSelected
+        self.companySearchTableView.rx.itemSelected
             .map { .selectCompany($0) }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        jobTypeSearchTextField.rx.tapGesture()
+        self.jobTypeSearchTextField.rx.tapGesture()
             .filter { $0.state == .ended }
             .map { _ in .toggleJobType }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        jobTypeSearchTextField.trailingButton.rx.tap
+        self.jobTypeSearchTextField.trailingButton.rx.tap
             .map{ .toggleJobType }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        jobTypeSearchTableView.rx.itemSelected
+        self.jobTypeSearchTableView.rx.itemSelected
             .map { .selectJobType($0) }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        stageSearchCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        self.stageSearchCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         
-        stageSearchCollectionView.rx.itemSelected
+        self.stageSearchCollectionView.rx.itemSelected
             .map { .selectStage($0) }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
-        nextButton.rx.tap
+        self.nextButton.rx.tap
             .map { .tapNextButton }
-            .bind(to: listner.action)
+            .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
         
         listner.state.map(\.companySections)
@@ -255,8 +238,8 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         
         listner.state.map(\.companySections)
             .bind { [weak self] _ in
-                guard let this = self else { return }
-                this.refreshTableView(tableView: this.companySearchTableView, maxHieght: 250)
+                guard let `self` = self else { return }
+                self.refreshTableView(tableView: self.companySearchTableView, maxHieght: 250)
             }
             .disposed(by: disposeBag)
         
@@ -267,8 +250,8 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
         listner.state
             .map(\.jobTypeSections)
             .bind { [weak self] _ in
-                guard let this = self else { return }
-                this.refreshTableView(tableView: this.jobTypeSearchTableView)
+                guard let `self` = self else { return }
+                self.refreshTableView(tableView: self.jobTypeSearchTableView)
             }
             .disposed(by: disposeBag)
         
@@ -297,17 +280,6 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: jobTypeSearchTableView.rx.isHidden)
             .disposed(by: disposeBag)
     }
-    
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        
-        return footerView
-    }
 }
 
 extension ApplyWriteOverallViewController: UICollectionViewDelegateFlowLayout {
@@ -322,232 +294,3 @@ extension ApplyWriteOverallViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
-
-//extension ApplyWriteOverallViewController {
-//    func bindActions() {
-//        guard let listner = listener else { return }
-//
-//        rx.viewWillAppear
-//            .map { _ in () }
-//            .map { .viewWillAppear }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//
-//        navigaionBar.backButton.rx.tap
-//            .map { .tapBackButton }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//
-//        selfView.nextButton.rx.tap
-//            .map { .tapNextButton }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//
-//        selfView.companyUnderLineTextFieldView.textField.rx.text.orEmpty
-//            .distinctUntilChanged()
-//            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
-//            .map { .textCompanyName($0) }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//
-//        selfView.jobPositionUnderLineTextFieldView.textField.rx.text.orEmpty
-//            .distinctUntilChanged()
-//            .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
-//            .map { .textJobPosition($0) }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//
-//        selfView.jobTypeUnderLineLabelView.contentLabel.rx.tapGesture()
-//            .map { tap -> () in if tap.state == .ended { () } }
-//            .map { .tapJobTypeToggleButton }
-//            .bind(to: listner.action)
-//            .disposed(by: disposeBag)
-//    }
-//}
-//
-//extension ApplyWriteOverallViewController {
-//    func bindStates() {
-//        guard let listener = listener else { return }
-//
-//        listener.state
-//            .map { $0.companies }
-//            .bind { [weak self] companies in
-//                self?.reloadCompanyTableView(companies: companies)
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.jobTypes }
-//            .bind { [weak self] jobTypes in
-//                self?.reloadJobTypeTableView(jobTypes: jobTypes)
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.stages }
-//            .bind { [weak self] stages in
-//                self?.reloadStageCollectionView(stages: stages)
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.updatedCompany }
-//            .bind { [weak self] company in
-//                if let company = company {
-//                    self?.updateCompanyTextField(company: company)
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.showCompanyTableView }
-//            .bind { [weak self] bool in
-//                if bool {
-//                    self?.showCompanyTableView()
-//                } else {
-//                    self?.hideCompanyTableView()
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.showJobTypeTableView }
-//            .bind { [weak self] bool in
-//                if bool {
-//                    self?.showJobTypeTableView()
-//                } else {
-//                    self?.hideJobTypeTableView()
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.updatedJobType }
-//            .bind { [weak self] jobType in
-//                if let jobType = jobType {
-//                    self?.selfView.jobTypeUnderLineLabelView.contentLabel.text = jobType.title
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//
-//        listener.state
-//            .map { $0.updatedStages }
-//            .bind { [weak self] stages in
-//                self?.updateStageCollectionView(stages: stages)
-//            }
-//            .disposed(by: disposeBag)
-//    }
-//}
-
-
-//extension ApplyWriteOverallViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return stages.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WriteApplyOverallCVC.id, for: indexPath) as? WriteApplyOverallCVC else { return UICollectionViewCell() }
-//
-//        cell.update(title: stages[indexPath.item].title)
-//
-//        for (index, updateStage) in updatedStages.enumerated() {
-//            if updateStage.id == stages[indexPath.item].id {
-//                cell.showHighlight(order: index + 1)
-//            }
-//        }
-//
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        listener?.action.onNext(.tapStageCell(stages[indexPath.item]))
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        if updatedStages.contains(where: { $0.id == stages[indexPath.item].id }) {
-//            return CGSize(width: stages[indexPath.item].title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 40,
-//                          height: 30)
-//        } else {
-//            return CGSize(width: stages[indexPath.item].title.size(withAttributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]).width + 25,
-//                          height: 30)
-//        }
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 10
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 10
-//    }
-//}
-//
-//extension ApplyWriteOverallViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        switch scrollView {
-//        case selfView.companySearchTableView:
-//            if scrollView.contentSize.height - scrollView.contentOffset.y < Size.companySearchTableViewMaxHeight * 0.8 {
-//            }
-//            return
-//
-//        default:
-//            return
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch tableView {
-//        case selfView.companySearchTableView:
-//            return companies.count + 1
-//        case selfView.jobSearchTableView:
-//            return jobTypes.count
-//        default:
-//            return 0
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch tableView {
-//        case selfView.companySearchTableView:
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
-//
-//            cell.selectionStyle = .none
-//
-//            if indexPath.item == companies.count {
-//                cell.update(title: plusCompany)
-//            } else {
-//                cell.update(title: companies[indexPath.item].name)
-//            }
-//
-//            return cell
-//        case selfView.jobSearchTableView:
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTVC.id, for: indexPath) as? SearchTVC else { return UITableViewCell() }
-//            cell.selectionStyle = .none
-//            cell.update(title: jobTypes[indexPath.item].title)
-//
-//            return cell
-//        default:
-//            return UITableViewCell()
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch tableView {
-//        case selfView.companySearchTableView:
-//            if indexPath.item == companies.count {
-//                if let text = selfView.companyUnderLineTextFieldView.textField.text {
-//                    listener?.action.onNext(.tapAddCompanyCell(text))
-//                }
-//            } else {
-//                listener?.action.onNext(.tapCompanyCell(companies[indexPath.item]))
-//            }
-//            return
-//        case selfView.jobSearchTableView:
-//            listener?.action.onNext(.tapJobTypeCell(jobTypes[indexPath.item]))
-//            return
-//        default:
-//            return
-//        }
-//    }
-//}
