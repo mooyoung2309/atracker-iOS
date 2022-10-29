@@ -15,6 +15,33 @@ import Alamofire
 import ReactorKit
 import RxDataSources
 
+enum ApplyWriteOverallPresentableAction {
+    case refresh
+    case textCompany(String)
+    case textJobPosition(String)
+    case toggleJobType
+    case selectCompany(IndexPath)
+    case selectJobType(IndexPath)
+    case selectStage(IndexPath)
+    case tapBackButton
+    case tapNextButton
+}
+
+struct ApplyWriteOverallPresentableState {
+    var companySections: [CompanySearchSectionModel] = []
+    var jobTypeSections: [JobTypeSearchSectionModel] = []
+    var stageSections: [StageSearchSectionModel] = []
+    var companyText: String = ""
+    var jobPositionText: String = ""
+    var selectedCompany: Company? = nil
+    var selectedJobType: JobType? = nil
+    var selectedStages: [Stage] = []
+    var isHiddenCompany: Bool = true
+    var isHiddenJobType: Bool = true
+    var isTapBackButton: Bool = false
+    var isTapNextButton: Bool = false
+}
+
 protocol ApplyWriteOverallPresentableListener: AnyObject {
     typealias Action = ApplyWriteOverallPresentableAction
     typealias State = ApplyWriteOverallPresentableState
@@ -177,6 +204,11 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: listner.action)
             .disposed(by: disposeBag)
         
+        navigaionBar.backButton.rx.tap
+            .map { .tapBackButton }
+            .bind(to: listner.action)
+            .disposed(by: disposeBag)
+        
         companySearchTextField.textField.rx.text.orEmpty
             .distinctUntilChanged()
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
@@ -212,6 +244,11 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: listner.action)
             .disposed(by: disposeBag)
         
+        nextButton.rx.tap
+            .map { .tapNextButton }
+            .bind(to: listner.action)
+            .disposed(by: disposeBag)
+        
         listner.state.map(\.companySections)
             .bind(to: companySearchTableView.rx.items(dataSource: companyDataSource))
             .disposed(by: disposeBag)
@@ -240,10 +277,8 @@ final class ApplyWriteOverallViewController: BaseNavigationViewController, Apply
             .bind(to: stageSearchCollectionView.rx.items(dataSource: stageDataSource))
             .disposed(by: disposeBag)
         
-        listner.state.map(\.selectedCompany)
-            .filter { $0 != nil }
-            .map { $0?.name }
-            .distinctUntilChanged()
+        listner.state
+            .compactMap(\.selectedCompany?.name)
             .bind(to: companySearchTextField.textField.rx.text)
             .disposed(by: disposeBag)
         

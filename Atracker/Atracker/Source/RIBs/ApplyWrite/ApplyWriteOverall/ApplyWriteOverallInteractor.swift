@@ -41,15 +41,15 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         case updateSelectedStages([Stage])
         case updateIsHiddenCompany(Bool)
         case updateIsHiddenJobType(Bool)
-//        case fetchCompanies([Company])
-//        case fetchJobTypes([JobType])
-//        case fetchStages([Stage])
-//        case updateCompany(Company)
-//        case updateStages(Stage)
-//        case updateJobType(JobType)
-//        case updateJobPosition(String)
-//        case showCompanyTableView(Bool?)
-//        case showJobTypeTableView(Bool?)
+        //        case fetchCompanies([Company])
+        //        case fetchJobTypes([JobType])
+        //        case fetchStages([Stage])
+        //        case updateCompany(Company)
+        //        case updateStages(Stage)
+        //        case updateJobType(JobType)
+        //        case updateJobPosition(String)
+        //        case showCompanyTableView(Bool?)
+        //        case showJobTypeTableView(Bool?)
         case detach
         case attach
         case none
@@ -80,23 +80,30 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .refresh:
-            return mutateRefresh()
-        case let .textCompany(text):
-            return mutateTextCompany(text)
-        case let .textJobPosition(text):
-            return mutateTextJobPosition(text)
-        case .toggleJobType:
-            return mutateToggleJobType()
-        case let .selectCompany(indexPath):
-            return mutateSelectCompany(indexPath)
-        case let .selectJobType(indexPath):
-            return mutateSelectJobType(indexPath)
-        case let .selectStage(indexPath):
-            return mutateSelectStage(indexPath)
+        case .refresh: return mutateRefresh()
+        case let .textCompany(text): return mutateTextCompany(text)
+        case let .textJobPosition(text): return mutateTextJobPosition(text)
+        case .toggleJobType: return mutateToggleJobType()
+        case let .selectCompany(indexPath): return mutateSelectCompany(indexPath)
+        case let .selectJobType(indexPath): return mutateSelectJobType(indexPath)
+        case let .selectStage(indexPath): return mutateSelectStage(indexPath)
+        case .tapBackButton: return .just(.detach)
+        case .tapNextButton: return .just(.attach)
         }
     }
     
+    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+        return mutation.flatMap { [weak self] mutation -> Observable<Mutation> in
+            guard let `self` = self else { return .empty() }
+            
+            switch mutation {
+            case .attach: return self.attachWriteApplyScheduleRIBTransform()
+            case .detach: return self.detachApplyWriteOverallRIBTransform()
+            default: return .just(mutation)
+            }
+        }
+    }
+
     func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
         
@@ -115,6 +122,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
             newState.jobPositionText = text
         case let .updateSelectedCompany(company):
             newState.selectedCompany = company
+            newState.companyText = company.name
         case let .updateSelectedJobType(jobType):
             newState.selectedJobType = jobType
         case let .updateSelectedStages(stages):
@@ -145,7 +153,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
             .map { [weak self] in
                 return .setCompanySearchSections(self?.makeSections(companyResponse: $0) ?? [])
             }
-        let updateIsHiddenCompany: Observable<Mutation> = .just(.updateIsHiddenCompany(text.isEmpty))
+        let updateIsHiddenCompany: Observable<Mutation> = currentState.companyText == text ? .empty() : .just(.updateIsHiddenCompany(text.isEmpty))
         let updateIsHiddenJobType: Observable<Mutation> = .just(.updateIsHiddenJobType(true))
         let updateCompanyText: Observable<Mutation> = .just(.updateCompanyText(text))
         
@@ -171,14 +179,14 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         if let company = reactor.currentState {
             return .concat([.just(.updateSelectedCompany(company)), .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
         } else {
-            let add: Observable<Mutation> = provider.companyService.add(name: currentState.companyText).map {
+            let add: Observable<Mutation> =
+            provider.companyService.add(name: currentState.companyText).map {
                 if let company = $0.companies.first {
                     return .updateSelectedCompany(company)
                 } else {
                     return .none
                 }
             }
-            
             return .concat([add, .just(.updateIsHiddenCompany(true)), .just(.updateIsHiddenJobType(true))])
         }
     }
@@ -210,6 +218,16 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         return .concat([.just(.updateSelectedStages(selectedStages)), .just(.setStageSearchSections([section])), .just(.updateIsHiddenJobType(true)), .just(.updateIsHiddenCompany(true))])
     }
     
+    private func makeApplyCreateRequest() -> ApplyCreateRequest? {
+        guard let company = currentState.selectedCompany, let jobType = currentState.selectedJobType?.title else { return nil }
+        let jobPosition = currentState.jobPositionText
+        let stages: [ApplyCreateStage] = currentState.selectedStages.enumerated().map { (index, stage) -> ApplyCreateStage in
+            return ApplyCreateStage(order: index, stageID: stage.id)
+        }
+        
+        return ApplyCreateRequest(company: company, jobPosition: jobPosition, jobType: jobType, stages: stages)
+    }
+    
     private func makeSections(jobTypes: [JobType]) -> [JobTypeSearchSectionModel] {
         let items: [JobTypeSearchItem] = jobTypes.map({ (jobType) -> JobTypeSearchItem in
             JobTypeSearchItem.result(JobTypeSearchTableViewCellReactor(jobType: jobType))
@@ -224,7 +242,7 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
             CompanySearchItem.result(CompanySearchTableViewCellReactor(company: company))
         })
         items.append(CompanySearchItem.result(CompanySearchTableViewCellReactor(company: nil)))
-                     
+        
         let section = CompanySearchSectionModel.init(model: .search(items), items: items)
         
         return [section]
@@ -239,127 +257,20 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         return [section]
     }
     
-//    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-//        return mutation
-//            .flatMap { [weak self] mutation -> Observable<Mutation> in
-//                guard let this = self else { return .empty() }
-//                switch mutation {
-//                case .detach:
-//                    return this.detachApplyWriteOverallRIBTransform()
-//                case .attach:
-//                    guard let company = this.currentState.updatedCompany else { break }
-//                    guard let jobPosition = this.currentState.updatedJobPosition else { break }
-//                    guard let jobType = this.currentState.updatedJobType else { break }
-//                    let stages = this.currentState.updatedStages
-//                    guard stages.count != 0  else { break }
-//                    let applyCreateStages = this.currentState.updatedStages.enumerated().map { (index, element) in return ApplyCreateStage(eventAt: nil, order: index, stageID: element.id)
-//                    }
-//                    let applyCreateRequest = ApplyCreateRequest(company: company, jobPosition: jobPosition, jobType: jobType.code, stages: applyCreateStages)
-//
-//                    return this.attachWriteApplyScheduleRIBTransform(applyCreateRequest: applyCreateRequest, stages: stages)
-//                default:
-//                    return .just(mutation)
-//                }
-//                return .empty()
-//            }
-//    }
-    
-//    func reduce(state: ApplyWriteOverallPresentableState, mutation: Mutation) -> ApplyWriteOverallPresentableState {
-//        var newState = state
-//        switch mutation {
-//        case .fetchCompanies(let companies):
-//            newState.companies = companies
-//        case .fetchStages(let stages):
-//            newState.stages = stages
-//        case .fetchJobTypes(let jobTypes):
-//            newState.jobTypes = jobTypes
-//        case .updateCompany(let company):
-//            newState.updatedCompany = company
-//        case .updateStages(let stage):
-//            if newState.updatedStages.contains(where: { $0.id == stage.id }) {
-//                newState.updatedStages.removeAll(where: { $0.id == stage.id })
-//            } else {
-//                newState.updatedStages.append(stage)
-//            }
-//        case .updateJobType(let jobType):
-//            newState.updatedJobType = jobType
-//        case .updateJobPosition(let jobPosition):
-//            newState.updatedJobPosition = jobPosition
-//        case .showCompanyTableView(let bool):
-//            if let bool = bool {
-//                newState.showCompanyTableView = bool
-//            } else {
-//                newState.showCompanyTableView.toggle()
-//            }
-//        case .showJobTypeTableView(let bool):
-//            if let bool = bool {
-//                newState.showJobTypeTableView = bool
-//            } else {
-//                newState.showJobTypeTableView.toggle()
-//            }
-//        case .detach: break
-//        case .attach: break
-//        }
-//        return newState
-//    }
-    
     private func detachApplyWriteOverallRIBTransform() -> Observable<Mutation> {
         listener?.detachApplyWriteOverallRIB()
+        
         return .empty()
     }
     
-    private func attachWriteApplyScheduleRIBTransform(applyCreateRequest: ApplyCreateRequest, stages: [Stage]) -> Observable<Mutation> {
-        router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest, stages: stages)
+    private func attachWriteApplyScheduleRIBTransform() -> Observable<Mutation> {
+        guard let applyCreateRequest = makeApplyCreateRequest() else { return .empty() }
+        
+        router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest, stages: currentState.selectedStages)
+        
         return .empty()
     }
-    
-//    func searchCompany(companyName: String) {
-//        if prevCompanyName == companyName {
-//            searchCompanyPage += 1
-//        } else {
-//            searchCompanyPage = 1
-//            tmpCompanies.removeAll()
-//        }
-//
-//        companyService.search(title: companyName, page: searchCompanyPage) { [weak self] result in
-//            guard let this = self else { return }
-//            switch result {
-//            case .success(let data):
-//                this.tmpCompanies.append(contentsOf: data.contents)
-//                this.companiesRelay.accept(this.tmpCompanies)
-//                return
-//            case  .failure(_):
-//                return
-//            }
-//        }
-//    }
-    
-//    func addCompany(companyName: String) {
-//        companyService.add(name: companyName) { [weak self] result in
-//            guard let this = self else { return }
-//            switch result {
-//            case .success(let data):
-//                Log("[D] 회사 추가 성공 \(data.companies)")
-//                return
-//            case .failure(let error):
-//                Log("[D] 회사 추가 실패 \(error)")
-//                return
-//            }
-//        }
-//    }
-    
-//    func fetchStages() {
-//        stageService.get { [weak self] result in
-//            switch result {
-    //            caseet d != nilata):
-//                self?.stagesRelay.accept(data)
-//                return
-//            case .failure(_):
-//                return
-//            }
-//        }
-//    }
-    
+
     func didWriteApply() {
         listener?.didWriteApply()
     }
@@ -369,21 +280,3 @@ final class ApplyWriteOverallInteractor: PresentableInteractor<ApplyWriteOverall
         router?.detachWriteApplyScheduleRIB()
     }
 }
-
-//extension ApplyWriteOverallInteractor: ApplyWriteOverallPresentableHandler {
-//    var companies: Observable<[Company]> {
-//        return companiesRelay.asObservable()
-//    }
-//
-//    var stages: Observable<[Stage]> {
-//        return stagesRelay.asObservable()
-//    }
-//
-//    var isShowCompanyTableView: Observable<Bool> {
-//        return isShowCompanyTableViewRelay.asObservable()
-//    }
-//
-//    var isShowJobTypeTableView: Observable<Bool> {
-//        return isShowJobTypeTableViewRelay.asObservable()
-//    }
-//}
