@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol ApplyWriteOverallInteractable: Interactable, WriteApplyScheduleListener {
+protocol ApplyWriteOverallInteractable: Interactable, ApplyWriteScheduleListener {
     var router: ApplyWriteOverallRouting? { get set }
     var listener: ApplyWriteOverallListener? { get set }
 }
@@ -17,14 +17,13 @@ protocol ApplyWriteOverallViewControllable: NavigationViewControllable {
 }
 
 final class ApplyWriteOverallRouter: ViewableRouter<ApplyWriteOverallInteractable, ApplyWriteOverallViewControllable>, ApplyWriteOverallRouting {
-    
-    private let applyWriteScheduleBuilder: WriteApplyScheduleBuildable
+    private let applyWriteScheduleBuilder: ApplyWriteScheduleBuildable
     
     private var writeApplySchedule: ViewableRouting?
     
     init(interactor: ApplyWriteOverallInteractable,
                   viewController: ApplyWriteOverallViewControllable,
-                  applyWriteScheduleBuilder: WriteApplyScheduleBuildable) {
+                  applyWriteScheduleBuilder: ApplyWriteScheduleBuildable) {
         self.applyWriteScheduleBuilder = applyWriteScheduleBuilder
         
         super.init(interactor: interactor, viewController: viewController)
@@ -32,15 +31,16 @@ final class ApplyWriteOverallRouter: ViewableRouter<ApplyWriteOverallInteractabl
         interactor.router = self
     }
     
-    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest, stages: [Stage]) {
-        let writeApplySchedule = applyWriteScheduleBuilder.build(withListener: interactor, applyCreateRequest: applyCreateRequest, stages: stages)
+    func attach(company: Company, jobPosition: String, jobType: JobType, stages: [Stage]) {
+        let writeApplySchedule = applyWriteScheduleBuilder.build(withListener: interactor, company: company, jobPosition: jobPosition, jobType: jobType, stages: stages)
+        
         self.writeApplySchedule = writeApplySchedule
 
         attachChild(writeApplySchedule)
         viewController.present(writeApplySchedule.viewControllable, isTabBarShow: false)
     }
     
-    func detachWriteApplyScheduleRIB() {
+    func detachChild() {
         if let writeApplySchedule = writeApplySchedule {
             detachChild(writeApplySchedule)
         }

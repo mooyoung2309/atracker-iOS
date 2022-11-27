@@ -14,7 +14,7 @@ protocol ApplyWriteOverallDependencyWriteApplySchedule: Dependency {
     // for the WriteApplySchedule scope.
 }
 
-extension ApplyWriteOverallComponent: WriteApplyScheduleDependency {
+extension ApplyWriteOverallComponent: ApplyWriteScheduleDependency {
 
     // TODO: Implement properties to provide for WriteApplySchedule scope.
 }

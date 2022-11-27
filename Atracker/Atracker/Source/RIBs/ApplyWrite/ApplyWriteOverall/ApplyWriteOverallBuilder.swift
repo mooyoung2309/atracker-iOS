@@ -40,7 +40,7 @@ final class ApplyWriteOverallBuilder: Builder<ApplyWriteOverallDependency>, Appl
         let component = ApplyWriteOverallComponent(dependency: dependency)
         let viewController = ApplyWriteOverallViewController()
         let interactor = ApplyWriteOverallInteractor(presenter: viewController)
-        let applyWriteScheduleBuilder = WriteApplyScheduleBuilder(dependency: component)
+        let applyWriteScheduleBuilder = ApplyWriteScheduleBuilder(dependency: component)
         
         interactor.listener = listener
         

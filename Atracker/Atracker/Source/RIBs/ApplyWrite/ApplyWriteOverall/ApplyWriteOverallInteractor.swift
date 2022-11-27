@@ -11,8 +11,8 @@ import RxCocoa
 import ReactorKit
 
 protocol ApplyWriteOverallRouting: ViewableRouting {
-    func attachWriteApplyScheduleRIB(applyCreateRequest: ApplyCreateRequest, stages: [Stage])
-    func detachWriteApplyScheduleRIB()
+    func attach(company: Company, jobPosition: String, jobType: JobType, stages: [Stage])
+    func detachChild()
 }
 
 protocol ApplyWriteOverallPresentable: Presentable {
@@ -20,7 +20,7 @@ protocol ApplyWriteOverallPresentable: Presentable {
 }
 
 protocol ApplyWriteOverallListener: AnyObject {
-    func didWriteApply()
+    func didApplyWrite()
     func detachApplyWriteOverallRIB()
 }
 
@@ -111,9 +111,14 @@ extension ApplyWriteOverallInteractor {
             guard let `self` = self else { return .empty() }
             
             switch mutation {
-            case .attach: return self.attachWriteApplyScheduleRIBTransform()
-            case .detach: return self.detachApplyWriteOverallRIBTransform()
-            default: return .just(mutation)
+            case .attach:
+                return self.attachWriteApplyScheduleRIBTransform()
+                
+            case .detach:
+                return self.detachApplyWriteOverallRIBTransform()
+                
+            default:
+                return .just(mutation)
             }
         }
     }
@@ -344,20 +349,21 @@ extension ApplyWriteOverallInteractor {
     }
     
     private func attachWriteApplyScheduleRIBTransform() -> Observable<Mutation> {
-        guard let applyCreateRequest = makeApplyCreateRequest() else { return .empty() }
+        guard let company = currentState.selectedCompany, let jobType = currentState.selectedJobType else { return .empty() }
+        if currentState.jobPositionText.isEmpty { return .empty() }
+        if currentState.selectedStages.isEmpty { return .empty() }
         
-        router?.attachWriteApplyScheduleRIB(applyCreateRequest: applyCreateRequest, stages: currentState.selectedStages)
-        
+        router?.attach(company: company, jobPosition: currentState.jobPositionText, jobType: jobType, stages: currentState.selectedStages)
         return .empty()
     }
 
-    func didWriteApply() {
-        listener?.didWriteApply()
+    func didApplyWrite() {
+        listener?.didApplyWrite()
     }
     
     // MARK: From Child RIBs
     func didTapBackButtonFromWriteApplyScheduleRIB() {
-        router?.detachWriteApplyScheduleRIB()
+        router?.detachChild()
         sendAction(.refresh)
     }
 }

@@ -19,7 +19,6 @@ protocol ApplyWriteOverallPresentableListener: AnyObject {
     typealias Action = ApplyWriteOverallPresentableAction
     typealias State = ApplyWriteOverallPresentableState
 
-//    var action: ActionSubject<Action> { get }
     func sendAction(_ action: Action)
     var state: Observable<State> { get }
     var currentState: State { get }

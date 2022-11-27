@@ -1,5 +1,5 @@
 //
-//  ApplyWriteDateView.swift
+//  CalendarCollectionView.swift
 //  Atracker
 //
 //  Created by 송영모 on 2022/06/19.
@@ -7,19 +7,54 @@
 
 import UIKit
 import SnapKit
+import ReactorKit
+import RxDataSources
 
-class WriteApplyScheduleView: BaseView {
+class CalendarCollectionView: BaseView {
     
-    let scrollView              = UIScrollView()
-    let weekStackView           = UIStackView()
-    let prevCollectionView      = UICollectionView(frame: .zero,
-                                                   collectionViewLayout: UICollectionViewFlowLayout())
-    let currentCollectionView   = UICollectionView(frame: .zero,
-                                                   collectionViewLayout: UICollectionViewFlowLayout())
-    let nextCollectionView      = UICollectionView(frame: .zero,
-                                                   collectionViewLayout: UICollectionViewFlowLayout())
-    let tableView   = UITableView()
-    let nextButton  = UIButton(type: .system)
+    // MARK: - Properties
+    
+    typealias PrevDataSource = RxCollectionViewSectionedReloadDataSource<CalendarSectionModel>
+    typealias currentDataSource = RxCollectionViewSectionedReloadDataSource<CalendarSectionModel>
+    typealias NextDataSource = RxCollectionViewSectionedReloadDataSource<CalendarSectionModel>
+    
+    private lazy var prevDataSource = PrevDataSource { _, collectionView, indexPath, item -> UICollectionViewCell in
+        switch item {
+        case let .calendar(reactor):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CalendarCollectionViewCell.self), for: indexPath) as? CalendarCollectionViewCell else { return .init() }
+            cell.reactor = reactor
+            return cell
+        }
+    }
+    
+    private lazy var currentDataSource = PrevDataSource { _, collectionView, indexPath, item -> UICollectionViewCell in
+        switch item {
+        case let .calendar(reactor):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CalendarCollectionViewCell.self), for: indexPath) as? CalendarCollectionViewCell else { return .init() }
+            cell.reactor = reactor
+            return cell
+        }
+    }
+    
+    private lazy var nextDataSource = PrevDataSource { _, collectionView, indexPath, item -> UICollectionViewCell in
+        switch item {
+        case let .calendar(reactor):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CalendarCollectionViewCell.self), for: indexPath) as? CalendarCollectionViewCell else { return .init() }
+            cell.reactor = reactor
+            return cell
+        }
+    }
+    
+    
+    // MARK: - UI Components
+    
+    let scrollView: UIScrollView = .init()
+    let weekStackView: UIStackView = .init()
+    let prevCollectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let currentCollectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let nextCollectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let tableView: UITableView = .init()
+    let nextButton: UIButton = .init(type: .system)
     
     override func setupProperty() {
         super.setupProperty()
@@ -37,7 +72,6 @@ class WriteApplyScheduleView: BaseView {
             }
             
             weekStackView.addArrangedSubview(label)
-            
         }
         
         weekStackView.addBorders(for: [.top, .bottom], width: 1, color: .gray7)
@@ -46,13 +80,13 @@ class WriteApplyScheduleView: BaseView {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         
-        prevCollectionView.register(CalendarCVC.self, forCellWithReuseIdentifier: CalendarCVC.id)
+        prevCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: CalendarCollectionViewCell.self))
         prevCollectionView.backgroundColor = .clear
         
-        currentCollectionView.register(CalendarCVC.self, forCellWithReuseIdentifier: CalendarCVC.id)
+        currentCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: CalendarCollectionViewCell.self))
         currentCollectionView.backgroundColor = .clear
         
-        nextCollectionView.register(CalendarCVC.self, forCellWithReuseIdentifier: CalendarCVC.id)
+        nextCollectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: CalendarCollectionViewCell.self))
         nextCollectionView.backgroundColor = .clear
         
         tableView.register(WriteApplyScheduleTVC.self, forCellReuseIdentifier: WriteApplyScheduleTVC.id)
@@ -65,8 +99,8 @@ class WriteApplyScheduleView: BaseView {
         
         nextButton.setTitle("완료", for: .normal)
         nextButton.setTitleColor(.neonGreen, for: .normal)
-        nextButton.titleLabel?.font     = .systemFont(ofSize: 16, weight: .regular)
-        nextButton.backgroundColor      = .backgroundGray
+        nextButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
+        nextButton.backgroundColor = .backgroundGray
         nextButton.addShadow(.top)
     }
     

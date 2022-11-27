@@ -99,7 +99,7 @@ final class ApplyInteractor: PresentableInteractor<ApplyPresentable>, ApplyInter
     
     // MARK: From Child RIB
     
-    func didWriteApply() {
+    func didApplyWrite() {
         router?.detachWriteApplyOverallRIB()
         fetchApplies()
     }
